@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from django.http import HttpResponse
 
-# Create your views here.
+
+def register(request):
+    """Display a temporary registration placeholder view."""
+    return HttpResponse("Register view placeholder")
+
+
+def dashboard(request):
+    """Display a temporary dashboard placeholder view."""
+    return HttpResponse("Dashboard view placeholder")
