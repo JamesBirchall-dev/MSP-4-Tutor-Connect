@@ -79,7 +79,7 @@ ROOT_URLCONF = 'tutor_connect_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -97,14 +97,19 @@ WSGI_APPLICATION = 'tutor_connect_project.wsgi.application'
 # Database
 # ---------------------------------------------------------------------
 
-# Uses DATABASE_URL in production, otherwise falls back to local SQLite.
-DATABASES = {
-    'default': dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-        conn_max_age=600,
-    )
-}
+database_url = config("DATABASE_URL", default="")
 
+if database_url:
+    DATABASES = {
+        "default": dj_database_url.parse(database_url, conn_max_age=600)
+    }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 # ---------------------------------------------------------------------
 # Password validation
 # ---------------------------------------------------------------------
