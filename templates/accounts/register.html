@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+<!-- Inherit the main layout from base.html -->
+ 
+{% block title %}
+Register | Tutor Connect
+{% endblock %}
+<!-- Sets the page title displayed in the browser tab -->
+
+{% block content %}
+<!-- Main page content starts here -->
+
+<section class="container narrow">
+    <h1>Create your account</h1>
+    <p>Register to book tutoring sessions or manage your tutor profile.</p>
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}
+                {% for error in field.errors %}<p class="form-error">{{ error }}</p>{% endfor %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Create Account</button>
+    </form>
+    <!-- Link for users who already have an account -->
+    <p>Already have an account? <a href="{% url 'login' %}">Log in here</a>.</p>
+</section>
+{% endblock %}

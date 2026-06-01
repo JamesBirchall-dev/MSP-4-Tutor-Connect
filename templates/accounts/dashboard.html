@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+<!-- Inherit the common site layout from base.html -->
+
+{% block title %}
+    Dashboard | GuitarTutorHub
+{% endblock %}
+<!-- Sets the page title displayed in the browser tab -->
+
+{% block content %}
+<!-- Main dashboard content begins -->
+
+<section class="container">
+    <!-- Main container for dashboard content -->
+
+    <h1>My Dashboard</h1>
+
+    <!-- Display a personalised welcome message using the logged-in user's username -->
+    <p>Welcome back, {{ user.username }}.</p>
+
+    <!-- Navigation buttons providing quick access to key features -->
+    <div class="button-row">
+
+        <!-- Link to view all available guitar tutors -->
+        <a class="btn btn-primary" href="{% url 'tutor_list' %}">
+            Browse Tutors
+        </a>
+
+        <!-- Link to view the user's lesson bookings -->
+        <a class="btn btn-outline" href="{% url 'booking_list' %}">
+            My Bookings
+        </a>
+
+        <!-- Link to create a new tutor profile -->
+        <a class="btn btn-secondary" href="{% url 'tutor_create' %}">
+            Create Tutor Profile
+        </a>
+
+    </div>
+</section>
+
+{% endblock %}
+<!-- End of main content block -->
