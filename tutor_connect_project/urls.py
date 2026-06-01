@@ -8,6 +8,8 @@ each Django app so their routes stay organised separately.
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     # Django admin dashboard.
@@ -27,3 +29,8 @@ urlpatterns = [
     path("bookings/", include("bookings.urls")),
     path("checkout/", include("checkout.urls")),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+    )
