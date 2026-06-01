@@ -576,6 +576,17 @@ updated_at
 
 ## Technologies Used
 
+### Dependencies
+
+Django Main web framework
+gunicorn Production server for Heroku
+whitenoise Serves static files on Heroku
+dj-database-url Reads Heroku DATABASE_URL easily
+psycopg2-binary PostgreSQL database adapter
+stripe Stripe payment integration
+python-decouple Environment variable handling
+coverage Test coverage reporting
+
 _List of main technologies, frameworks, and tools._
 
 ---
