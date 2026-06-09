@@ -595,7 +595,190 @@ _List of main technologies, frameworks, and tools._
 
 ### Manual Testing
 
-_Manual testing process and results._
+#### Feature - Accounts (local)
+
+<details>
+<summary><strong> Anonymous Access to Registration Page </strong></summary>
+
+Test:
+
+from django.test import TestCase
+from django.urls import reverse
+
+class AccountViewTests(TestCase):
+"""Tests for the account-related views."""
+
+    def test_register_page_loads_for_anonymous_user(self):
+        """Test that the registration page loads for anonymous users."""
+        response = self.client.get(reverse("register"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Register")
+
+Result:
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test accounts
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\core\handlers\base.py:62: UserWarning: No directory at: C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\staticfiles\
+ mw_instance = middleware(adapted_handler)
+.
+
+---
+
+Ran 1 test in 0.190s
+
+OK
+Destroying test database for alias 'default'...
+
+NOTE: Static file error showing due to not being configured yet, updated with deployment test following local test for the feature.
+
+_PASS_
+
+</details>
+
+<details>
+<summary><strong> Authenticated Users Redirect From the Registration Page </strong></summary>
+
+Import added:
+from django.contrib.auth.models import User
+
+Test:
+def test_register_page_redirects_for_authenticated_user(self):
+"""Test that authenticated users are redirected from the reg page.""" # Create and log in a test user
+User.objects.create_user(
+username="testuser",
+email="testuser@example.com",
+password="testpassword123!"
+)
+
+        self.client.login(username="testuser", password="testpassword123!")
+
+        response = self.client.get(reverse("register"))
+
+        self.assertRedirects(response, reverse("dashboard"))
+
+Result:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test accounts.tests.AccountViewTests.test_register_page_redirects_for_authenticated_user
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\core\handlers\base.py:62: UserWarning: No directory at: C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\staticfiles\
+ mw_instance = middleware(adapted_handler)
+.
+
+---
+
+Ran 1 test in 0.907s
+
+OK
+
+Destroying test database for alias 'default'...
+
+NOTE: Static file error showing due to not being configured yet, updated with deployment test following local test for the feature.
+
+_PASS_
+
+</details>
+
+<details>
+<summary><strong> Account dashboard page loads for autheticated users.</strong></summary>
+Test: 
+    def test_account_dashboard_page_loads_for_authenticated_user(self):
+        """Test that the account dashboard page loads for auth users."""
+        # Create and log in a test user
+        User.objects.create_user(
+            username="testuser",
+            email="testuser@example.com",
+            password="testpassword123!"
+        )
+
+        self.client.login(username="testuser", password="testpassword123!")
+        response = self.client.get(reverse("dashboard"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "accounts/dashboard.html")
+        self.assertContains(response, "Dashboarduser")
+
+# Result:
+
+FAIL: test_account_dashboard_page_loads_for_authenticated_user (accounts.tests.AccountViewTests.test_account_dashboard_page_loads_for_authenticated_user)
+Test that the account dashboard page loads for auth users.
+
+---
+
+Traceback (most recent call last):
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\accounts\tests.py", line 43, in test_account_dashboard_page_loads_for_authenticated_user
+self.assertContains(response, "Dashboarduser")
+AssertionError: False is not true : Couldn't find 'Dashboarduser' in the following response
+b'\n<!DOCTYPE html>\n<html lang="en">\n<head>\n <meta charset="UTF-8">\n <meta name="description" content="Tutor Connect helps students find, book, and pay for guitar lessons with trusted tutors.">\n <meta name="viewport" content="width=device-width, initial-scale=1.0">\n <title>\n Dashboard | GuitarTutorHub\n</title>\n <link rel="preconnect" href="https://fonts.googleapis.com">\n <link rel="stylesheet" href="/static/css/styles.css">\n</head>\n<body>\n <header class="site-header">\n <a class="site-logo" href="/">Tutor Connect</a>\n <nav class="site-nav" aria-label="Main navigation">\n <a href="/">Home</a>\n <a href="/tutors/">Tutors</a>\n \n <a href="/tutors/accounts/dashboard/">Dashboard</a>\n <a href="/bookings/">My Bookings</a>\n <form class="logout-form" action="/tutors/accounts/logout/" method="post">\n <input type="hidden" name="csrfmiddlewaretoken" value="XQZCcmAAc25aERtyzYDhtpWqxLWsCB7QcOOSxw4AZrTyjtaSiYUQ3ZGd15Y7ewXe">\n <button type="submit">Log out</button>\n </form>\n \n </nav>\n </header>\n\n \n\n <main class="site-main">\n \n<!-- Main dashboard content begins -->\n\n<section class="container">\n <!-- Main container for dashboard content -->\n\n <h1>My Dashboard</h1>\n\n <!-- Display a personalised welcome message using the logged-in user\'s username -->\n <p>Welcome back, testuser.</p>\n\n <!-- Navigation buttons providing quick access to key features -->\n <div class="button-row">\n\n <!-- Link to view all available guitar tutors -->\n <a class="btn btn-primary" href="/tutors/">\n Browse Tutors\n </a>\n\n <!-- Link to view the user\'s lesson bookings -->\n <a class="btn btn-outline" href="/bookings/">\n My Bookings\n </a>\n\n <!-- Link to create a new tutor profile -->\n <a class="btn btn-secondary" href="/tutors/create/">\n Create Tutor Profile\n </a>\n\n </div>\n</section>\n\n\n </main>\n\n <footer class="site-footer">\n <p>&copy; Tutor Connect. All rights reserved.</p>\n </footer>\n</body>\n</html>'
+
+---
+
+Ran 3 tests in 1.863s
+
+FAILED (failures=1)
+
+Issue: self.assertContains(response, "Dashboarduser") incorrect assertion on page.
+Fix: self.assertContains(response, "My Dashboard")
+
+Found 3 test(s).  
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\core\handlers\base.py:62: UserWarning: No directory at: C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\staticfiles\
+ mw_instance = middleware(adapted_handler)
+...
+
+---
+
+Ran 3 tests in 1.835s
+
+OK
+Destroying test database for alias 'default'...
+
+_PASS_
+
+NOTE: Static file error showing due to not being configured yet, updated with deployment test following local test for the feature.
+
+</details>
+
+<details>
+<summary><strong> Registration rejecting missmatched passwords</strong></summary>
+
+Test:
+
+    def test_registration_rejects_missmatched_passwords(self):
+        """Test that registration fails if passwords don't match."""
+        response = self.client.post(reverse("register"), {
+            "username": "baduser",
+            "email": "baduser@example.com",
+            "password1": "password123!",
+            "password2": "differentpassword456!"
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(User.objects.filter(username="baduser").exists())
+        self.assertContains(response, "The two password fields didn’t match.")
+
+Result:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test accounts.tests.AccountViewTests.test_registration_rejects_missmatched_passwords
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\core\handlers\base.py:62: UserWarning: No directory at: C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\staticfiles\
+ mw_instance = middleware(adapted_handler)
+.
+
+---
+
+Ran 1 test in 0.061s
+
+OK
+Destroying test database for alias 'default'...
+
+_PASS_
+NOTE: Static file error showing due to not being configured yet, updated with deployment test following local test for the feature.
+
+</details>
 
 ### Validator Testing
 
