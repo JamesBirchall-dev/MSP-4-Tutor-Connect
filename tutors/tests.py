@@ -110,3 +110,13 @@ class TutorProfileModelTest(TestCase):
         self.assertEqual(profiles[0], profile2)  # Alice
         self.assertEqual(profiles[1], profile3)  # Bob
         self.assertEqual(profiles[2], profile1)  # Charlie
+
+    def test_tutor_profile_string_representation(self):
+        profile = TutorProfile.objects.create(
+            user=self.user,
+            display_name="Test Tutor",
+            bio="Experienced tutor.",
+            experience="5 years.",
+            location="Online",
+        )
+        self.assertEqual(str(profile), "Test Tutor")

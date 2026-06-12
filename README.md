@@ -942,7 +942,7 @@ _PASS_
 </details>
 
 <details>
-<summary><strong> User Active Status</summary>
+<summary><strong> Profile Active Status</summary>
 
 Model:
 is_active = models.BooleanField(default=True)
@@ -974,6 +974,168 @@ OK
 Destroying test database for alias 'default'...
 
 _PASS_
+
+</details>
+
+<details>
+<summary><strong> Profile Timestamp</summary>
+
+Models:
+created_at = models.DateTimeField(auto_now_add=True)
+updated_at = models.DateTimeField(auto_now=True)
+
+Test:
+
+    def test_profile_has_timestamps(self):
+        """Test that created_at and updated_at fields are set."""
+        profile = TutorProfile.objects.create(
+            user=self.user,
+            display_name="Test Tutor",
+            bio="Experienced tutor in math and science.",
+            experience="5 years of tutoring experience.",
+            location="Online"
+        )
+        self.assertIsNotNone(profile.created_at)
+        self.assertIsNotNone(profile.updated_at)
+
+Results:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py makemigrations  
+It is impossible to add the field 'created_at' with 'auto_now_add=True' to tutorprofile without providing a default. This is because the database needs something to populate existing rows.
+
+1.  Provide a one-off default now which will be set on all existing rows
+2.  Quit and manually define a default value in models.py.
+    Select an option: 1
+    Please enter the default value as valid Python.
+    Accept the default 'timezone.now' by pressing 'Enter' or provide another value.
+    The datetime and django.utils.timezone modules are available, so it is possible to provide e.g. timezone.now as a value.
+    Type 'exit' to exit this prompt
+    [default: timezone.now] >>>
+    Migrations for 'tutors':
+    tutors\migrations\0004_tutorprofile_created_at_tutorprofile_updated_at.py + Add field created_at to tutorprofile + Add field updated_at to tutorprofile
+    (.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.tests.TutorProfileModelTest.test_profile_has_timestamps
+    Found 1 test(s).
+    Creating test database for alias 'default'...
+    System check identified no issues (0 silenced).
+    .
+
+---
+
+Ran 1 test in 0.626s
+
+OK
+Destroying test database for alias 'default'...
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect>
+
+_PASS_
+
+</details>
+
+<details>
+<summary><strong> Profile Meta (Ordering) </summary>
+
+Model:
+class Meta:
+ordering = ["display_name"]
+
+Test:
+
+    def test_profiles_are_ordered_by_display_name(self):
+        """Test that TutorProfiles are ordered by display_name."""
+
+        user1 = User.objects.create_user(
+            username="charlie",
+            password="testpassword123!",
+        )
+        user2 = User.objects.create_user(
+            username="alice",
+            password="testpassword123!",
+        )
+        user3 = User.objects.create_user(
+            username="bob",
+            password="testpassword123!",
+        )
+
+        profile1 = TutorProfile.objects.create(
+            user=user1,
+            display_name="Charlie",
+            bio="Tutor Charlie.",
+            experience="3 years of tutoring experience.",
+            location="Online"
+        )
+        profile2 = TutorProfile.objects.create(
+            user=user2,
+            display_name="Alice",
+            bio="Tutor Alice.",
+            experience="4 years of tutoring experience.",
+            location="Online"
+        )
+        profile3 = TutorProfile.objects.create(
+            user=user3,
+            display_name="Bob",
+            bio="Tutor Bob.",
+            experience="2 years of tutoring experience.",
+            location="Online"
+        )
+        profiles = TutorProfile.objects.all()
+        self.assertEqual(profiles[0], profile2)  # Alice
+        self.assertEqual(profiles[1], profile3)  # Bob
+        self.assertEqual(profiles[2], profile1)  # Charlie
+
+Result:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.tests.TutorProfileModelTest.test_profiles_are_ordered_by_display_name
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 2.335s
+
+OK
+Destroying test database for alias 'default'...
+
+_PASS_
+
+</details>
+
+<details>
+<summary><strong> Profile String Representation </summary>
+
+Model:
+
+    def __str__(self):
+        return self.display_name
+
+Test:
+def test_tutor_profile_string_representation(self):
+profile = TutorProfile.objects.create(
+user=self.user,
+display_name="Test Tutor",
+bio="Experienced tutor.",
+experience="5 years.",
+location="Online",
+)
+self.assertEqual(str(profile), "Test Tutor")
+
+Result:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.tests.TutorProfileModelTest.test_tutor_profile_string_representation
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.627s
+
+OK
+Destroying test database for alias 'default'...
+
+</details>
 
 ### Validator Testing
 
