@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Tutor Detail{% endblock %}
+
+{% block content %}
+
+<h1>{{ tutor.display_name }}</h1>
+
+<p>{{ tutor.bio|linebreaks }}</p>
+
+
+<ul>
+  <li><strong>Location:</strong> <p>{{ tutor.location|default:"Not specified" }}</p></li>
+  <li><strong>Experience:</strong> <p>{{ tutor.experience|default:"Not specified" }}</p></li>
+</ul>
+
+{% endblock %}
+
