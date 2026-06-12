@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from decimal import Decimal
 from django.test import TestCase
 from tutors.models import LessonType, TutorProfile
 
@@ -155,16 +156,18 @@ class LessonTypeModelTest(TestCase):
         lesson_type = LessonType.objects.create(
             tutor=self.tutor_profile,
             title="Beginner Science Tutoring",
+            subject="science",
             description="A lesson type for beginners in science.",
             duration_minutes=45,
             skill_level="beginner",
             price=30.00
         )
+        self.assertEqual(lesson_type.subject, "science")
         self.assertEqual(lesson_type.description,
                          "A lesson type for beginners in science.")
         self.assertEqual(lesson_type.duration_minutes, 45)
         self.assertEqual(lesson_type.skill_level, "beginner")
-        self.assertEqual(lesson_type.price, 30.00)
+        self.assertEqual(lesson_type.price, Decimal("30.00"))
 
     def test_availability_and_timestamps(self):
         """Test that is_available defaults to True and timestamps are set."""

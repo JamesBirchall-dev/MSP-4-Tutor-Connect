@@ -59,13 +59,11 @@ class LessonType(models.Model):
         ("other", "Other"),
     ]
 
-    SKILL_CHOICES = [
-        ("math", "Math"),
-        ("science", "Science"),
-        ("english", "English"),
-        ("history", "History"),
-        ("language", "Language"),
-        ("other", "Other"),
+    SKILL_LEVEL_CHOICES = [
+        ("beginner", "Beginner"),
+        ("intermediate", "Intermediate"),
+        ("advanced", "Advanced"),
+        ("all_levels", "All Levels"),
     ]
 
     tutor = models.ForeignKey(
@@ -74,15 +72,22 @@ class LessonType(models.Model):
         related_name="lesson_types"
     )
     title = models.CharField(max_length=100)
+    subject = models.CharField(
+        max_length=20,
+        choices=SUBJECT_CHOICES,
+        default="other"
+    )
     description = models.TextField(blank=True)
     duration_minutes = models.PositiveIntegerField(
         default=60,
         validators=[MinValueValidator(1)]
     )
 
-    skill_level = models.CharField(max_length=20,
-                                   choices=SKILL_CHOICES,
-                                   default="other")
+    skill_level = models.CharField(
+        max_length=20,
+        choices=SKILL_LEVEL_CHOICES,
+        default="all_levels"
+    )
     price = models.DecimalField(
         max_digits=7,
         decimal_places=2,
