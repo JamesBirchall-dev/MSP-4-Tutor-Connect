@@ -48,15 +48,30 @@ class LessonType(models.Model):
 
     This model allows tutors to specify the subjects or topics they can teach.
     """
+    SKILL_CHOICES = [
+        ("math", "Math"),
+        ("science", "Science"),
+        ("english", "English"),
+        ("history", "History"),
+        ("language", "Language"),
+        ("other", "Other"),
+    ]
+
     tutor = models.ForeignKey(
         TutorProfile,
         on_delete=models.CASCADE,
         related_name="lesson_types"
     )
     title = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    duration_minutes = models.PositiveIntegerField(default=60)
+    skill_level = models.CharField(max_length=20,
+                                   choices=SKILL_CHOICES,
+                                   default="other")
+    price = models.DecimalField(max_digits=7, decimal_places=2, default=0.00)
 
     class Meta:
         ordering = ["title"]
 
     def __str__(self):
-        return f"{self.title} (Tutor: {self.tutor.display_name})"
+        return f"{self.tutor.display_name} — {self.title}"

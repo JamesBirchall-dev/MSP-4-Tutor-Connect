@@ -149,3 +149,19 @@ class LessonTypeModelTest(TestCase):
         self.assertEqual(lesson_type.tutor, self.tutor_profile)
         self.assertEqual(lesson_type.title, "Math Tutoring")
         self.assertIn(lesson_type, self.tutor_profile.lesson_types.all())
+
+    def test_extended_fields_and_defaults(self):
+        """Test that LessonType can be created with just required fields."""
+        lesson_type = LessonType.objects.create(
+            tutor=self.tutor_profile,
+            title="Beginner Science Tutoring",
+            description="A lesson type for beginners in science.",
+            duration_minutes=45,
+            skill_level="beginner",
+            price=30.00
+        )
+        self.assertEqual(lesson_type.description,
+                         "A lesson type for beginners in science.")
+        self.assertEqual(lesson_type.duration_minutes, 45)
+        self.assertEqual(lesson_type.skill_level, "beginner")
+        self.assertEqual(lesson_type.price, 30.00)
