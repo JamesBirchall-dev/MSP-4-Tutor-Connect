@@ -56,3 +56,15 @@ class TutorProfileModelTest(TestCase):
             location="Online"
         )
         self.assertTrue(profile.is_active)
+
+    def test_profile_has_timestamps(self):
+        """Test that created_at and updated_at fields are set."""
+        profile = TutorProfile.objects.create(
+            user=self.user,
+            display_name="Test Tutor",
+            bio="Experienced tutor in math and science.",
+            experience="5 years of tutoring experience.",
+            location="Online"
+        )
+        self.assertIsNotNone(profile.created_at)
+        self.assertIsNotNone(profile.updated_at)
