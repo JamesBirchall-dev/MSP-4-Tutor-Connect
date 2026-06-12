@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
-from tutors.models import TutorProfile
+from tutors.models import LessonType, TutorProfile
 
 # Create your tests here.
 
@@ -120,3 +120,32 @@ class TutorProfileModelTest(TestCase):
             location="Online",
         )
         self.assertEqual(str(profile), "Test Tutor")
+
+
+class LessonTypeModelTest(TestCase):
+    """Tests for the LessonType model."""
+
+    def setUp(self):
+        """Set up a user and tutor profile for testing."""
+        self.user = User.objects.create_user(
+            username="testuser",
+            email="testuser@example.com",
+            password="testpassword123!"
+        )
+        self.tutor_profile = TutorProfile.objects.create(
+            user=self.user,
+            display_name="Test Tutor",
+            bio="Experienced tutor.",
+            experience="5 years.",
+            location="Online"
+        )
+
+    def test_lesson_type_saves_with_tutor_annd_title(self):
+        """Test that a LessonType can be created with a tutor and title."""
+        lesson_type = LessonType.objects.create(
+            tutor=self.tutor_profile,
+            title="Math Tutoring"
+        )
+        self.assertEqual(lesson_type.tutor, self.tutor_profile)
+        self.assertEqual(lesson_type.title, "Math Tutoring")
+        self.assertIn(lesson_type, self.tutor_profile.lesson_types.all())

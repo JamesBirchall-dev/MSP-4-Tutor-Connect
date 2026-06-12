@@ -40,3 +40,23 @@ class TutorProfile(models.Model):
 
     def __str__(self):
         return self.display_name
+
+
+class LessonType(models.Model):
+    """
+    Represents a type of lesson that a tutor can offer.
+
+    This model allows tutors to specify the subjects or topics they can teach.
+    """
+    tutor = models.ForeignKey(
+        TutorProfile,
+        on_delete=models.CASCADE,
+        related_name="lesson_types"
+    )
+    title = models.CharField(max_length=100)
+
+    class Meta:
+        ordering = ["title"]
+
+    def __str__(self):
+        return f"{self.title} (Tutor: {self.tutor.display_name})"

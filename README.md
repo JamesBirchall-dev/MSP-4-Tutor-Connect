@@ -783,7 +783,7 @@ NOTE: Static file error showing due to not being configured yet, updated with de
 #### Feature - Tutors (local)
 
 <details>
-<summary><strong> Create Profile</strong></summary>
+<summary><strong>Profile - Creation </strong></summary>
 
 Model:
 
@@ -847,7 +847,7 @@ _PASS_
 </details>
 
 <details>
-<summary><strong> Profile information storage</strong></summary>
+<summary><strong> Profile - information storage</strong></summary>
 
 model:
 
@@ -899,7 +899,7 @@ _PASS_
 </details>
 
 <details>
-<summary><strong> Profile image</summary>
+<summary><strong> Profile - image</summary>
 
 model update:
 
@@ -942,7 +942,7 @@ _PASS_
 </details>
 
 <details>
-<summary><strong> Profile Active Status</summary>
+<summary><strong> Profile - Active Status</summary>
 
 Model:
 is_active = models.BooleanField(default=True)
@@ -978,7 +978,7 @@ _PASS_
 </details>
 
 <details>
-<summary><strong> Profile Timestamp</summary>
+<summary><strong> Profile - Timestamp</summary>
 
 Models:
 created_at = models.DateTimeField(auto_now_add=True)
@@ -1032,7 +1032,7 @@ _PASS_
 </details>
 
 <details>
-<summary><strong> Profile Meta (Ordering) </summary>
+<summary><strong> Profile - Meta (Ordering) </summary>
 
 Model:
 class Meta:
@@ -1102,7 +1102,7 @@ _PASS_
 </details>
 
 <details>
-<summary><strong> Profile String Representation </summary>
+<summary><strong> Profile - String Representation </summary>
 
 Model:
 
@@ -1134,6 +1134,58 @@ Ran 1 test in 0.627s
 
 OK
 Destroying test database for alias 'default'...
+
+</details>
+
+<details>
+<summary><strong> Lesson Type - saves with tutor and title  </summary>
+
+Model:
+class LessonType(models.Model):
+"""
+Represents a type of lesson that a tutor can offer.
+
+    This model allows tutors to specify the subjects or topics they can teach.
+    """
+    tutor = models.ForeignKey(
+        TutorProfile,
+        on_delete=models.CASCADE,
+        related_name="lesson_types"
+    )
+    title = models.CharField(max_length=100)
+
+    class Meta:
+        ordering = ["title"]
+
+    def __str__(self):
+        return f"{self.title} (Tutor: {self.tutor.display_name})"
+
+Test:
+def test_lesson_type_saves_with_tutor_annd_title(self):
+"""Test that a LessonType can be created with a tutor and title."""
+lesson_type = LessonType.objects.create(
+tutor=self.tutor_profile,
+title="Math Tutoring"
+)
+self.assertEqual(lesson_type.tutor, self.tutor_profile)
+self.assertEqual(lesson_type.title, "Math Tutoring")
+self.assertIn(lesson_type, self.tutor_profile.lesson_types.all())
+
+Result:
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.tests.LessonTypeModelTest.test_lesson_type_saves_with_tutor_annd_title
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.838s
+
+OK
+Destroying test database for alias 'default'...
+
+_PASS_
 
 </details>
 
