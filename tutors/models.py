@@ -35,5 +35,8 @@ class TutorProfile(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ["display_name"]
+
     def __str__(self):
         return self.display_name

@@ -68,3 +68,45 @@ class TutorProfileModelTest(TestCase):
         )
         self.assertIsNotNone(profile.created_at)
         self.assertIsNotNone(profile.updated_at)
+
+    def test_profiles_are_ordered_by_display_name(self):
+        """Test that TutorProfiles are ordered by display_name."""
+
+        user1 = User.objects.create_user(
+            username="charlie",
+            password="testpassword123!",
+        )
+        user2 = User.objects.create_user(
+            username="alice",
+            password="testpassword123!",
+        )
+        user3 = User.objects.create_user(
+            username="bob",
+            password="testpassword123!",
+        )
+
+        profile1 = TutorProfile.objects.create(
+            user=user1,
+            display_name="Charlie",
+            bio="Tutor Charlie.",
+            experience="3 years of tutoring experience.",
+            location="Online"
+        )
+        profile2 = TutorProfile.objects.create(
+            user=user2,
+            display_name="Alice",
+            bio="Tutor Alice.",
+            experience="4 years of tutoring experience.",
+            location="Online"
+        )
+        profile3 = TutorProfile.objects.create(
+            user=user3,
+            display_name="Bob",
+            bio="Tutor Bob.",
+            experience="2 years of tutoring experience.",
+            location="Online"
+        )
+        profiles = TutorProfile.objects.all()
+        self.assertEqual(profiles[0], profile2)  # Alice
+        self.assertEqual(profiles[1], profile3)  # Bob
+        self.assertEqual(profiles[2], profile1)  # Charlie
