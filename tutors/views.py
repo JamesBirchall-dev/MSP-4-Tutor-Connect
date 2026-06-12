@@ -1,21 +1,17 @@
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
+from .models import TutorProfile
+
+"""
+Views for the tutors app.
+These functions handle the logic for displaying tutor profiles and details.
+"""
 
 
 def tutor_list(request):
-    """Display a temporary tutor list placeholder view."""
-    return HttpResponse("Tutor list placeholder")
+    tutors = TutorProfile.objects.filter(is_active=True)
+    return render(request, 'tutors/tutor_list.html', {'tutors': tutors})
 
 
 def tutor_detail(request, pk):
-    """Display a temporary tutor detail placeholder view."""
-    return HttpResponse(f"Tutor detail placeholder for tutor {pk}")
-
-
-def tutor_create(request):
-    """Display a temporary tutor create placeholder view."""
-    return HttpResponse("Tutor create placeholder")
-
-
-def tutor_update(request, pk):
-    """Display a temporary tutor update placeholder view."""
-    return HttpResponse(f"Tutor update placeholder for tutor {pk}")
+    tutor = get_object_or_404(TutorProfile, pk=pk, is_active=True)
+    return render(request, 'tutors/tutor_detail.html', {'tutor': tutor})
