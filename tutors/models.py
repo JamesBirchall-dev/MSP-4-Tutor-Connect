@@ -19,6 +19,10 @@ class TutorProfile(models.Model):
         on_delete=models.CASCADE,
         related_name="tutor_profile"
     )
+    display_name = models.CharField(max_length=100)
+    bio = models.TextField()
+    experience = models.TextField()
+    location = models.CharField(max_length=100)
 
     def __str__(self):
-        return str(self.user)
+        return self.display_name

@@ -780,6 +780,124 @@ NOTE: Static file error showing due to not being configured yet, updated with de
 
 </details>
 
+#### Feature - Tutors (local)
+
+<details>
+<summary><strong> Create Profile</strong></summary>
+
+Model:
+
+from django.conf import settings
+from django.db import models
+
+# Create your models here.
+
+class TutorProfile(models.Model):
+"""Model representing a tutor's profile."""
+
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="tutor_profile"
+    )
+
+    def __str__(self):
+        return str(self.user)
+
+Test:
+from django.contrib.auth.models import User
+from django.test import TestCase
+from tutors.models import TutorProfile
+
+# Create your tests here.
+
+class TutorProfileModelTest(TestCase):
+"""Tests for the TutorProfile model."""
+
+    def setUp(self):
+        """Set up a user for testing."""
+        self.user = User.objects.create_user(
+            username="testuser",
+            email="tutor@example.com",
+            password="testpassword123!",
+            )
+
+    def test_tutor_profile_creation(self):
+        """Test that a TutorProfile can be created for a user."""
+        profile = TutorProfile.objects.create(user=self.user)
+        self.assertEqual(profile.user, self.user)
+
+Result:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.664s
+
+OK
+Destroying test database for alias 'default'...
+
+_PASS_
+
+</details>
+
+<details>
+<summary><strong> Profile information storage</strong></summary>
+
+model:
+
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="tutor_profile"
+    )
+    display_name = models.CharField(max_length=100)
+    bio = models.TextField()
+    experience = models.TextField()
+    location = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.display_name
+
+Test:
+
+    def test_tutor_profile_stores_information(self):
+        """Test that TutorProfile can store and retrieve information."""
+        profile = TutorProfile.objects.create(
+            user=self.user,
+            display_name="Test Tutor",
+            bio="Experienced tutor in math and science.",
+            experience="5 years of tutoring experience.",
+            location="Online"
+        )
+        self.assertEqual(profile.display_name, "Test Tutor")
+        self.assertEqual(profile.bio, "Experienced tutor in math and science.")
+        self.assertEqual(profile.experience, "5 years of tutoring experience.")
+        self.assertEqual(profile.location, "Online")
+
+Result:
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors
+Found 2 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+..
+
+---
+
+Ran 2 tests in 1.249s
+
+OK
+Destroying test database for alias 'default'...
+
+_PASS_
+
+</details>
+
 ### Validator Testing
 
 _Automated validation and tools used._

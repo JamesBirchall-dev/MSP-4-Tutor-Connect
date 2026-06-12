@@ -20,3 +20,17 @@ class TutorProfileModelTest(TestCase):
         """Test that a TutorProfile can be created for a user."""
         profile = TutorProfile.objects.create(user=self.user)
         self.assertEqual(profile.user, self.user)
+
+    def test_tutor_profile_stores_information(self):
+        """Test that TutorProfile can store and retrieve information."""
+        profile = TutorProfile.objects.create(
+            user=self.user,
+            display_name="Test Tutor",
+            bio="Experienced tutor in math and science.",
+            experience="5 years of tutoring experience.",
+            location="Online"
+        )
+        self.assertEqual(profile.display_name, "Test Tutor")
+        self.assertEqual(profile.bio, "Experienced tutor in math and science.")
+        self.assertEqual(profile.experience, "5 years of tutoring experience.")
+        self.assertEqual(profile.location, "Online")
