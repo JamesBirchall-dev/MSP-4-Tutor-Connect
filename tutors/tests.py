@@ -165,3 +165,13 @@ class LessonTypeModelTest(TestCase):
         self.assertEqual(lesson_type.duration_minutes, 45)
         self.assertEqual(lesson_type.skill_level, "beginner")
         self.assertEqual(lesson_type.price, 30.00)
+
+    def test_availability_and_timestamps(self):
+        """Test that is_available defaults to True and timestamps are set."""
+        lesson_type = LessonType.objects.create(
+            tutor=self.tutor_profile,
+            title="English Tutoring"
+        )
+        self.assertTrue(lesson_type.is_available)
+        self.assertIsNotNone(lesson_type.created_at)
+        self.assertIsNotNone(lesson_type.updated_at)

@@ -1189,6 +1189,53 @@ _PASS_
 
 </details>
 
+<details>
+<summary><strong> Lesson Type - extended fields  </summary>
+
+Model:
+title = models.CharField(max_length=100)
+description = models.TextField(blank=True)
+duration_minutes = models.PositiveIntegerField(default=60)
+skill_level = models.CharField(max_length=20,
+choices=SKILL_CHOICES,
+default="other")
+price = models.DecimalField(max_digits=7, decimal_places=2, default=0.00)
+
+Test:
+
+    def test_extended_fields_and_defaults(self):
+        """Test that LessonType can be created with just required fields."""
+        lesson_type = LessonType.objects.create(
+            tutor=self.tutor_profile,
+            title="Beginner Science Tutoring",
+            description="A lesson type for beginners in science.",
+            duration_minutes=45,
+            skill_level="beginner",
+            price=30.00
+        )
+        self.assertEqual(lesson_type.description,
+                         "A lesson type for beginners in science.")
+        self.assertEqual(lesson_type.duration_minutes, 45)
+        self.assertEqual(lesson_type.skill_level, "beginner")
+        self.assertEqual(lesson_type.price, 30.00)
+
+Result:
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.tests.LessonTypeModelTest.test_extended_fields_and_defaults  
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.732s
+
+OK
+
+_PASS_
+
+</details>
+
 ### Validator Testing
 
 _Automated validation and tools used._
