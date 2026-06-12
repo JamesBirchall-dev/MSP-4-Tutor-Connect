@@ -898,6 +898,49 @@ _PASS_
 
 </details>
 
+<details>
+<summary><strong> Profile image can be left blank</summary>
+
+model update:
+
+    image = models.ImageField(
+        upload_to="tutor_profiles/",
+        blank=True,
+        null=True,
+    )
+
+test:
+
+    def test_image_field_is_optional(self):
+        """Test that the image field can be left blank."""
+        profile = TutorProfile.objects.create(
+            user=self.user,
+            display_name="Test Tutor",
+            bio="Experienced tutor in math and science.",
+            experience="5 years of tutoring experience.",
+            location="Online"
+        )
+        self.assertIsNone(profile.image)
+
+Result:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors
+Found 3 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+...
+
+---
+
+Ran 3 tests in 2.025s
+
+OK
+Destroying test database for alias 'default'...
+
+_PASS_
+
+</details>
+
 ### Validator Testing
 
 _Automated validation and tools used._

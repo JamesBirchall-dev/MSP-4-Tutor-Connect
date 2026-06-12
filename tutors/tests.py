@@ -34,3 +34,14 @@ class TutorProfileModelTest(TestCase):
         self.assertEqual(profile.bio, "Experienced tutor in math and science.")
         self.assertEqual(profile.experience, "5 years of tutoring experience.")
         self.assertEqual(profile.location, "Online")
+
+    def test_image_field_is_optional(self):
+        """Test that the image field can be left blank."""
+        profile = TutorProfile.objects.create(
+            user=self.user,
+            display_name="Test Tutor",
+            bio="Experienced tutor in math and science.",
+            experience="5 years of tutoring experience.",
+            location="Online"
+        )
+        self.assertFalse(profile.image)
