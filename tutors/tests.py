@@ -45,3 +45,14 @@ class TutorProfileModelTest(TestCase):
             location="Online"
         )
         self.assertFalse(profile.image)
+
+    def test_is_active_default(self):
+        """Test that the is_active field defaults to True."""
+        profile = TutorProfile.objects.create(
+            user=self.user,
+            display_name="Test Tutor",
+            bio="Experienced tutor in math and science.",
+            experience="5 years of tutoring experience.",
+            location="Online"
+        )
+        self.assertTrue(profile.is_active)

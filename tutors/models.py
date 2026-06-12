@@ -30,5 +30,7 @@ class TutorProfile(models.Model):
         null=True,
     )
 
+    is_active = models.BooleanField(default=True)
+
     def __str__(self):
         return self.display_name

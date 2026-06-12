@@ -899,7 +899,7 @@ _PASS_
 </details>
 
 <details>
-<summary><strong> Profile image can be left blank</summary>
+<summary><strong> Profile image</summary>
 
 model update:
 
@@ -940,6 +940,40 @@ Destroying test database for alias 'default'...
 _PASS_
 
 </details>
+
+<details>
+<summary><strong> User Active Status</summary>
+
+Model:
+is_active = models.BooleanField(default=True)
+
+Test:
+def test_is_active_default(self):
+"""Test that the is_active field defaults to True."""
+profile = TutorProfile.objects.create(
+user=self.user,
+display_name="Test Tutor",
+bio="Experienced tutor in math and science.",
+experience="5 years of tutoring experience.",
+location="Online"
+)
+self.assertTrue(profile.is_active)
+
+Result:
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.tests.TutorProfileModelTest.test_is_active_default
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.655s
+
+OK
+Destroying test database for alias 'default'...
+
+_PASS_
 
 ### Validator Testing
 
