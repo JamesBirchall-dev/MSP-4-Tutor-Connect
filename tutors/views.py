@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.models import User
-from .models import TutorProfile
+from .models import TutorProfile, LessonType
 
 """
 Views for the tutors app.
@@ -61,3 +61,31 @@ def tutor_delete(request, pk):
 
     return render(
         request, 'tutors/tutor_confirm_delete.html', {'tutor': tutor})
+
+
+def lesson_list(request, tutor_pk):
+    # This view lists all lesson types for a specific tutor.
+    tutor = get_object_or_404(TutorProfile, pk=tutor_pk)
+    lessons = LessonType.objects.filter(tutor=tutor)
+    return render(
+        request, 'tutors/lesson_list.html',
+        {'tutor': tutor, 'lessons': lessons})
+
+
+def lesson_create(request, tutor_pk):
+    # This view is for creating a new lesson type for a specific tutor.
+    tutor = get_object_or_404(TutorProfile, pk=tutor_pk)
+
+    if request.method == 'POST':
+        LessonType.objects.create(
+            tutor=tutor,
+            title=request.POST["title"],
+            subject=request.POST["subject"],
+            description=request.POST.get("description", ""),
+            duration_minutes=request.POST["duration_minutes"],
+            skill_level=request.POST["skill_level"],
+            price=request.POST["price"],
+        )
+        return redirect('tutors:lesson_list', tutor_pk=tutor.pk)
+
+    return render(request, 'tutors/lesson_form.html', {'tutor': tutor})
