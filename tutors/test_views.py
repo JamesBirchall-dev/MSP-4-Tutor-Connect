@@ -329,12 +329,12 @@ class LessonUpdateViewTests(TestCase):
             price=20.00,
         )
 
+        self.url = reverse(
+            "tutors:lesson_update",
+            args=[self.tutor.pk, self.lesson.pk]
+        )
+
     def test_lesson_update_view_returns_200(self):
         # Test that the lesson update view returns a 200 status code.
-        response = self.client.get(
-            reverse(
-                "tutors:lesson_update",
-                args=[self.tutor.pk, self.lesson.pk]
-            )
-        )
+        response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
