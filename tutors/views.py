@@ -109,3 +109,17 @@ def lesson_update(request, tutor_pk, pk):
     return render(
         request, 'tutors/lesson_form.html',
         {'tutor': tutor, 'lesson': lesson})
+
+
+def lesson_delete(request, tutor_pk, lesson_pk):
+    # This view is for deleting a lesson type for a specific tutor.
+    tutor = get_object_or_404(TutorProfile, pk=tutor_pk)
+    lesson = get_object_or_404(LessonType, pk=lesson_pk, tutor=tutor)
+
+    if request.method == 'POST':
+        lesson.delete()
+        return redirect('tutors:lesson_list', tutor_pk=tutor.pk)
+
+    return render(
+        request, 'tutors/lesson_confirm_delete.html',
+        {'tutor': tutor, 'lesson': lesson})
