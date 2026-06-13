@@ -97,5 +97,12 @@ class TutorDetailViewTests(TestCase):
 class TutorCreateViewTests(TestCase):
 
     def test_create_view_returns_200(self):
+        # Test that the tutor create view returns a 200 status code.
         response = self.client.get(reverse("tutors:tutor_create"))
         self.assertEqual(response.status_code, 200)
+
+    def test_create_view_shows_form_text(self):
+        # Test that the tutor create view contains the form text.
+        response = self.client.get(reverse("tutors:tutor_create"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Create Tutor")

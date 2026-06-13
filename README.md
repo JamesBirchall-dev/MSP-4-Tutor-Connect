@@ -1450,6 +1450,39 @@ Destroying test database for alias 'default'...
 
 </details>
 
+<details>
+<summary><strong> Tutor CRUD - View Test - Tutor create view contains form text (TEST ONLY) </summary>
+
+test:
+
+    def test_create_view_shows_form_text(self):
+        # Test that the tutor create view contains the form text.
+        response = self.client.get(reverse("tutors:tutor_create"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Create Tutor")
+
+result:
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.TutorCreateViewTests.test_create_view_shows_form_text
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.173s
+
+OK
+Destroying test database for alias 'default'...
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect>
+
+_PASS_
+
+</details>
+
+<details>
+<summary><strong> Tutor CRUD - View Test - Tutor create view contains form text (TEST ONLY) </summary>
+
 ### Validator Testing
 
 _Automated validation and tools used._
