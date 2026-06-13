@@ -50,3 +50,14 @@ def tutor_update(request, pk):
 
     return render(request, 'tutors/tutor_form.html', {'tutor': tutor})
 
+
+def tutor_delete(request, pk):
+    # This view is for deleting a tutor profile.
+    tutor = get_object_or_404(TutorProfile, pk=pk)
+
+    if request.method == 'POST':
+        tutor.delete()
+        return redirect('tutors:tutor_list')
+
+    return render(
+        request, 'tutors/tutor_confirm_delete.html', {'tutor': tutor})

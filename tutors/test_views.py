@@ -196,7 +196,8 @@ class TutorUpdateViewTests(TestCase):
         self.assertEqual(self.tutor.location, "New York")
 
     def test_update_tutor_post_redirects(self):
-        # Test that posting to the tutor update view redirects to the tutor detail page.
+        # Test that posting to the tutor update
+        # view redirects to the tutor detail page.
         response = self.client.post(
             reverse("tutors:tutor_update", args=[self.tutor.pk]),
             {

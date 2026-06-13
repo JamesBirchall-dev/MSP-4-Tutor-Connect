@@ -14,4 +14,5 @@ urlpatterns = [
     path('<int:pk>/', views.tutor_detail, name='tutor_detail'),
     path("create/", views.tutor_create, name="tutor_create"),
     path("<int:pk>/edit/", views.tutor_update, name="tutor_update"),
+    path("<int:pk>/delete/", views.tutor_delete, name="tutor_delete"),
 ]
