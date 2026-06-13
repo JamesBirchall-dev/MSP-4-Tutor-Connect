@@ -145,3 +145,69 @@ class TutorCreateViewTests(TestCase):
             response,
             reverse("tutors:tutor_detail", args=[tutor.pk])
         )
+
+
+class TutorUpdateViewTests(TestCase):
+    # Tests for the tutor update view.
+
+    def setUp(self):
+        self.user = User.objects.create_user(username="updateuser")
+
+        self.tutor = TutorProfile.objects.create(
+            user=self.user,
+            display_name="Update Tutor",
+            bio="Test bio",
+            experience="3 years",
+            location="London",
+            is_active=True,
+        )
+
+    def test_update_view_returns_200(self):
+        # Test that the tutor update view returns a 200 status code.
+        response = self.client.get(
+            reverse("tutors:tutor_update", args=[self.tutor.pk])
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_update_view_shows_form_text(self):
+        response = self.client.get(
+            reverse("tutors:tutor_update", args=[self.tutor.pk])
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Update Tutor")
+
+    def test_update_tutor_post_updates_tutor(self):
+        # Test that posting to the tutor update view updates the tutor profile.
+        response = self.client.post(
+            reverse("tutors:tutor_update", args=[self.tutor.pk]),
+            {
+                "display_name": "Updated Name",
+                "bio": "Updated bio",
+                "experience": "5 years",
+                "location": "New York",
+            },
+        )
+        self.assertEqual(response.status_code, 302)
+        self.tutor.refresh_from_db()
+
+        self.assertEqual(self.tutor.display_name, "Updated Name")
+        self.assertEqual(self.tutor.bio, "Updated bio")
+        self.assertEqual(self.tutor.experience, "5 years")
+        self.assertEqual(self.tutor.location, "New York")
+
+    def test_update_tutor_post_redirects(self):
+        # Test that posting to the tutor update view redirects to the tutor detail page.
+        response = self.client.post(
+            reverse("tutors:tutor_update", args=[self.tutor.pk]),
+            {
+                "display_name": "Redirected Name",
+                "bio": "Redirected bio",
+                "experience": "4 years",
+                "location": "Paris",
+            },
+        )
+
+        self.assertRedirects(
+            response,
+            reverse("tutors:tutor_detail", args=[self.tutor.pk]),
+        )

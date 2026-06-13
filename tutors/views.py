@@ -34,3 +34,19 @@ def tutor_create(request):
         return redirect('tutors:tutor_detail', pk=tutor.pk)
 
     return render(request, 'tutors/tutor_form.html')
+
+
+def tutor_update(request, pk):
+    # This view is for updating an existing tutor profile.
+    tutor = get_object_or_404(TutorProfile, pk=pk)
+
+    if request.method == 'POST':
+        tutor.display_name = request.POST["display_name"]
+        tutor.bio = request.POST["bio"]
+        tutor.experience = request.POST["experience"]
+        tutor.location = request.POST["location"]
+        tutor.save()
+        return redirect('tutors:tutor_detail', pk=tutor.pk)
+
+    return render(request, 'tutors/tutor_form.html', {'tutor': tutor})
+

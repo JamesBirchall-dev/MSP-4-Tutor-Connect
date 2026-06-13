@@ -1373,7 +1373,7 @@ Destroying test database for alias 'default'...
 </details>
 
 <details>
-<summary><strong> Tutor CRUD - View Test - active/inactive status return (TEST ONLY)  </summary>
+<summary><strong> Tutor CRUD - Create - Test - active/inactive status return (TEST ONLY)  </summary>
 Tests:
 
     def test_tutor_detail_status_code(self):
@@ -1427,7 +1427,7 @@ _PASS_
 </details>
 
 <details>
-<summary><strong> Tutor CRUD - View Test - Tutor create (TEST ONLY) </summary>
+<summary><strong> Tutor CRUD - Create - Test - Tutor create (TEST ONLY) </summary>
 
 Test:
 def tutor_create(request): # Placeholder for tutor creation logic
@@ -1451,7 +1451,7 @@ Destroying test database for alias 'default'...
 </details>
 
 <details>
-<summary><strong> Tutor CRUD - View Test - Tutor create view contains form text (TEST ONLY) </summary>
+<summary><strong> Tutor CRUD - Create - Test - Tutor create view contains form text (TEST ONLY) </summary>
 
 test:
 
@@ -1481,7 +1481,7 @@ _PASS_
 </details>
 
 <details>
-<summary><strong> Tutor CRUD - View Test - Checking post creates new tutor (TEST ONLY) </summary>
+<summary><strong> Tutor CRUD - Create - Test - Checking post creates new tutor (TEST ONLY) </summary>
 
 test:
 def test_create_tutor_post_creates_tutor(self): # Test that posting to the tutor create view creates a new tutor profile.
@@ -1566,7 +1566,7 @@ _PASS_
 </detiails>
 
 <details>
-<summary><strong> Tutor CRUD - View - Implement Redirect </summary>
+<summary><strong> Tutor CRUD - Create - Implement Redirect </summary>
 
 Views:
 
@@ -1623,6 +1623,159 @@ Ran 1 test in 0.283s
 OK
 Destroying test database for alias 'default'...
 (.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect>
+
+_PASS_
+
+</details>
+
+<details>
+<summary><strong> Tutor CRUD - Update - View returns 200 (VIEW AND TEST) </summary>
+
+View:
+
+def tutor_update(request, pk): # This view is for updating an existing tutor profile.
+tutor = get_object_or_404(TutorProfile, pk=pk)
+
+    if request.method == 'POST':
+        tutor.display_name = request.POST["display_name"]
+        tutor.bio = request.POST["bio"]
+        tutor.experience = request.POST["experience"]
+        tutor.location = request.POST["location"]
+        tutor.save()
+        return redirect('tutors:tutor_detail', pk=tutor.pk)
+
+    return render(request, 'tutors/tutor_form.html', {'tutor': tutor})
+
+Test:
+
+    def test_update_view_returns_200(self):
+        # Test that the tutor update view returns a 200 status code.
+        response = self.client.get(
+            reverse("tutors:tutor_update", args=[self.tutor.pk])
+        )
+        self.assertEqual(response.status_code, 200)
+
+Result:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.TutorUpdateViewTests.test_update_view_returns_200  
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.230s
+
+OK
+Destroying test database for alias 'default'...
+
+_PASS_
+
+</details>
+
+<details>
+<summary><strong> Tutor CRUD - Update - View shows form text (TEST ONLY)</summary>
+
+test:
+def test_update_view_shows_form_text(self):
+response = self.client.get(
+reverse("tutors:tutor_update", args=[self.tutor.pk])
+)
+self.assertEqual(response.status_code, 200)
+self.assertContains(response, "Update Tutor")
+
+results:
+
+Destroying test database for alias 'default'...
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.TutorUpdateViewTests.test_update_view_shows_form_text
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.249s
+
+OK
+Destroying test database for alias 'default'...
+
+_PASS_
+
+</details>
+
+<details>
+<summary><strong> Tutor CRUD - Update - View updates tutor profile (TEST ONLY)</summary>
+
+Test:
+
+    def test_update_tutor_post_updates_tutor(self):
+        response = self.client.post(
+            reverse("tutors:tutor_update", args=[self.tutor.pk]),
+            {
+                "display_name": "Updated Name",
+                "bio": "Updated bio",
+                "experience": "5 years",
+                "location": "New York",
+            },
+        )
+        self.assertEqual(response.status_code, 302)
+        self.tutor.refresh_from_db()
+
+        self.assertEqual(self.tutor.display_name, "Updated Name")
+        self.assertEqual(self.tutor.bio, "Updated bio")
+        self.assertEqual(self.tutor.experience, "5 years")
+        self.assertEqual(self.tutor.location, "New York")
+
+Result:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.TutorUpdateViewTests.test_update_tutor_post_updates_tutor
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.275s
+
+OK
+Destroying test database for alias 'default'...
+
+_PASS_
+
+</details>
+
+<details>
+<summary><strong> Tutor CRUD - Update - View posting update view redirects to tutor detail (TEST ONLY)</summary>
+
+Test:
+def test_update_tutor_post_redirects(self): # Test that posting to the tutor update view redirects to the tutor detail page.
+response = self.client.post(
+reverse("tutors:tutor_update", args=[self.tutor.pk]),
+{
+"display_name": "Redirected Name",
+"bio": "Redirected bio",
+"experience": "4 years",
+"location": "Paris",
+},
+)
+
+Result:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.TutorUpdateViewTests.test_update_tutor_post_redirects  
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.285s
+
+OK
+Destroying test database for alias 'default'...
 
 _PASS_
 
