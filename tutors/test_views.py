@@ -303,3 +303,38 @@ class LessonListViewTests(TestCase):
             response,
             "tutors/lesson_list.html",
         )
+
+
+class LessonUpdateViewTests(TestCase):
+
+    def setUp(self):
+        self.user = User.objects.create_user(username="lessonuser")
+
+        self.tutor = TutorProfile.objects.create(
+            user=self.user,
+            display_name="Lesson Tutor",
+            bio="Test bio",
+            experience="3 years",
+            location="London",
+            is_active=True,
+        )
+
+        self.lesson = LessonType.objects.create(
+            tutor=self.tutor,
+            title="Math Lesson",
+            subject="math",
+            description="Algebra",
+            duration_minutes=60,
+            skill_level="beginner",
+            price=20.00,
+        )
+
+    def test_lesson_update_view_returns_200(self):
+        # Test that the lesson update view returns a 200 status code.
+        response = self.client.get(
+            reverse(
+                "tutors:lesson_update",
+                args=[self.tutor.pk, self.lesson.pk]
+            )
+        )
+        self.assertEqual(response.status_code, 200)

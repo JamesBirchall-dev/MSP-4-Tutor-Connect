@@ -89,3 +89,23 @@ def lesson_create(request, tutor_pk):
         return redirect('tutors:lesson_list', tutor_pk=tutor.pk)
 
     return render(request, 'tutors/lesson_form.html', {'tutor': tutor})
+
+
+def lesson_update(request, tutor_pk, lesson_pk):
+    # This view is for updating an existing lesson type for a specific tutor.
+    tutor = get_object_or_404(TutorProfile, pk=tutor_pk)
+    lesson = get_object_or_404(LessonType, pk=lesson_pk, tutor=tutor)
+
+    if request.method == 'POST':
+        lesson.title = request.POST["title"]
+        lesson.subject = request.POST["subject"]
+        lesson.description = request.POST.get("description", "")
+        lesson.duration_minutes = request.POST["duration_minutes"]
+        lesson.skill_level = request.POST["skill_level"]
+        lesson.price = request.POST["price"]
+        lesson.save()
+        return redirect('tutors:lesson_list', tutor_pk=tutor.pk)
+
+    return render(
+        request, 'tutors/lesson_form.html',
+        {'tutor': tutor, 'lesson': lesson})
