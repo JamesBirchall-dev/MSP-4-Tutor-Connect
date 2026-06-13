@@ -14,7 +14,7 @@
         <a class="site-logo" href="{% url 'home' %}">Tutor Connect</a>
         <nav class="site-nav" aria-label="Main navigation">
             <a href="{% url 'home' %}">Home</a>
-            <a href="{% url 'tutor_list' %}">Tutors</a>
+            <a href="{% url 'tutors:tutor_list' %}">Tutors</a>
             {% if user.is_authenticated %}
                 <a href="{% url 'dashboard' %}">Dashboard</a>
                 <a href="{% url 'booking_list' %}">My Bookings</a>

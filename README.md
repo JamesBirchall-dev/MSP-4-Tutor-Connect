@@ -1236,6 +1236,196 @@ _PASS_
 
 </details>
 
+<details>
+<summary><strong> Lesson Type - availabilityh and timestamps  </summary>
+
+Model:
+
+is_available = models.BooleanField(default=True)
+created_at = models.DateTimeField(auto_now_add=True)
+updated_at = models.DateTimeField(auto_now=True)
+
+Test: def test_availability_and_timestamps(self):
+"""Test that is_available defaults to True and timestamps are set."""
+lesson_type = LessonType.objects.create(
+tutor=self.tutor_profile,
+title="English Tutoring"
+)
+self.assertTrue(lesson_type.is_available)
+self.assertIsNotNone(lesson_type.created_at)
+self.assertIsNotNone(lesson_type.updated_at)
+
+Result:
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.tests.LessonTypeModelTest.test_availability_and_timestamps
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.629s
+
+OK
+Destroying test database for alias 'default'...
+
+</details>
+
+<details>
+<summary><strong> Tutor Profile Views - List and Detail  </summary>
+
+views:
+
+def tutor_list(request):
+tutors = TutorProfile.objects.filter(is_active=True)
+return render(request, 'tutors/tutor_list.html', {'tutors': tutors})
+
+def tutor_detail(request, pk):
+tutor = get_object_or_404(TutorProfile, pk=pk, is_active=True)
+return render(request, 'tutors/tutor_detail.html', {'tutor': tutor})
+
+tests:
+
+class TutorListViewTest(TestCase):
+"""Tests for the views in the tutors app."""
+
+    def setUp(self):
+        """Set up a user and tutor profile for testing."""
+        self.user = User.objects.create_user(
+            username="testuser",
+        )
+
+        self.active_tutor = TutorProfile.objects.create(
+            user=self.user,
+            display_name="Active Tutor",
+            bio="Experienced tutor in math and science.",
+            experience="5 years of tutoring experience.",
+            location="Online",
+            is_active=True
+        )
+
+        self.inactive_tutor = TutorProfile.objects.create(
+            user=User.objects.create(username="inactiveuser"),
+            display_name="Inactive Tutor",
+            bio="Experienced tutor in math and science.",
+            experience="5 years of tutoring experience.",
+            location="Online",
+            is_active=False
+        )
+
+    def test_tutor_list_status_code(self):
+        """Test that the tutor list view returns a 200 status code."""
+        response = self.client.get(reverse('tutors:tutor_list'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_only_active_tutors_in_list(self):
+        """Test that only active tutors are displayed in the tutor list."""
+        response = self.client.get(reverse("tutors:tutor_list"))
+        self.assertContains(response, "Active Tutor")
+        self.assertNotContains(response, "Inactive Tutor")
+
+    def test_correct_template_used(self):
+        response = self.client.get(reverse("tutors:tutor_list"))
+        self.assertTemplateUsed(response, "tutors/tutor_list.html")
+
+Results:
+#1
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.TutorListViewTest.test_tutor_list_status_code
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.287s
+
+OK
+
+#2
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.TutorListViewTest.test_only_active_tutors_in_list
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.310s
+
+OK
+Destroying test database for alias 'default'...
+
+#3
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.TutorListViewTest.test_correct_template_used  
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.302s
+
+OK
+Destroying test database for alias 'default'...
+
+</details>
+
+<details>
+<summary><strong> Tutor CRUD - View Test - active/inactive status return (TEST ONLY)  </summary>
+Tests:
+
+    def test_tutor_detail_status_code(self):
+        """Test that the tutor detail view returns
+        a 200 status code for an active tutor."""
+        response = self.client.get(reverse("tutors:tutor_detail",
+                                           args=[self.active_tutor.pk]))
+        self.assertEqual(response.status_code, 200)
+
+    def test_inactive_tutor_detail_returns_404(self):
+        """Test that the tutor detail view returns
+        a 404 status code for an inactive tutor."""
+        response = self.client.get(reverse("tutors:tutor_detail",
+                                           args=[self.inactive_tutor.pk]))
+        self.assertEqual(response.status_code, 404)
+
+    def test_correct_template_used(self):
+        response = self.client.get(reverse("tutors:tutor_detail",
+                                           args=[self.active_tutor.pk]))
+        self.assertTemplateUsed(response, "tutors/tutor_detail.html")
+
+Results:
+
+Fail:
+
+Corrections made to urls and base.html:
+
+urls.py
+
+- path('<int:pk>/', views.tutor_detail, name='tutor_detail'), updated from int:id
+  base.py
+
+- {% url 'tutors:tutor_list' %} now used
+
+re:Test:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.TutorDetailViewTests
+Found 3 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+...
+
+---
+
+Ran 3 tests in 0.738s
+
+OK
+Destroying test database for alias 'default'...
+_PASS_
+
+</details>
+
 ### Validator Testing
 
 _Automated validation and tools used._
