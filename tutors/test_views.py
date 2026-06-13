@@ -92,3 +92,10 @@ class TutorDetailViewTests(TestCase):
         response = self.client.get(reverse("tutors:tutor_detail",
                                            args=[self.active_tutor.pk]))
         self.assertTemplateUsed(response, "tutors/tutor_detail.html")
+
+
+class TutorCreateViewTests(TestCase):
+
+    def test_create_view_returns_200(self):
+        response = self.client.get(reverse("tutors:tutor_create"))
+        self.assertEqual(response.status_code, 200)

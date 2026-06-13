@@ -1426,6 +1426,30 @@ _PASS_
 
 </details>
 
+<details>
+<summary><strong> Tutor CRUD - View Test - Tutor create (TEST ONLY) </summary>
+
+Test:
+def tutor_create(request): # Placeholder for tutor creation logic
+return render(request, 'tutors/tutor_form.html', {})
+
+Result:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.TutorCreateViewTests
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.188s
+
+OK
+Destroying test database for alias 'default'...
+
+</details>
+
 ### Validator Testing
 
 _Automated validation and tools used._
