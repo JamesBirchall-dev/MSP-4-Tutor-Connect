@@ -1565,6 +1565,69 @@ _PASS_
 
 </detiails>
 
+<details>
+<summary><strong> Tutor CRUD - View - Implement Redirect </summary>
+
+Views:
+
+def tutor_create(request): # This view is for creating a new tutor profile.
+if request.method == 'POST':
+user = get_object_or_404(User, id=request.POST["user"])
+
+        tutor = TutorProfile.objects.create(
+            user=user,
+            display_name=request.POST["display_name"],
+            bio=request.POST["bio"],
+            experience=request.POST["experience"],
+            location=request.POST["location"],
+            is_active=True,
+        )
+        return redirect('tutors:tutor_detail', pk=tutor.pk)
+
+    return render(request, 'tutors/tutor_form.html')
+
+Test:
+
+    def test_create_tutor_post_redirects(self):
+        # Test that posting to the tutor create
+        # view redirects to the tutor detail page.
+        user = User.objects.create_user(username="newuser")
+
+        response = self.client.post(reverse("tutors:tutor_create"), {
+            "user": user.id,
+            "display_name": "Redirect Tutor",
+            "bio": "Test bio",
+            "experience": "3 years",
+            "location": "London",
+            "is_active": True
+        })
+
+        tutor = TutorProfile.objects.get(display_name="Redirect Tutor")
+        self.assertRedirects(
+            response,
+            reverse("tutors:tutor_detail", args=[tutor.pk])
+        )
+
+Results:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.TutorCreateViewTests.test_create_tutor_post_redirects
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.283s
+
+OK
+Destroying test database for alias 'default'...
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect>
+
+_PASS_
+
+</details>
+
 ### Validator Testing
 
 _Automated validation and tools used._

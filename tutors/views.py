@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.models import User
 from .models import TutorProfile
 
@@ -31,6 +31,6 @@ def tutor_create(request):
             location=request.POST["location"],
             is_active=True,
         )
-        return render(request, 'tutors/tutor_detail.html', {'tutor': tutor})
+        return redirect('tutors:tutor_detail', pk=tutor.pk)
 
     return render(request, 'tutors/tutor_form.html')

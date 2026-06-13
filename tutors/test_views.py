@@ -125,3 +125,23 @@ class TutorCreateViewTests(TestCase):
 
         tutor = TutorProfile.objects.first()
         self.assertEqual(tutor.display_name, "New Tutor")
+
+    def test_create_tutor_post_redirects(self):
+        # Test that posting to the tutor create
+        # view redirects to the tutor detail page.
+        user = User.objects.create_user(username="newuser")
+
+        response = self.client.post(reverse("tutors:tutor_create"), {
+            "user": user.id,
+            "display_name": "Redirect Tutor",
+            "bio": "Test bio",
+            "experience": "3 years",
+            "location": "London",
+            "is_active": True
+        })
+
+        tutor = TutorProfile.objects.get(display_name="Redirect Tutor")
+        self.assertRedirects(
+            response,
+            reverse("tutors:tutor_detail", args=[tutor.pk])
+        )
