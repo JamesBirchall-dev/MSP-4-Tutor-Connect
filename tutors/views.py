@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.models import User
 from .models import TutorProfile
 
 """
@@ -18,5 +19,18 @@ def tutor_detail(request, pk):
 
 
 def tutor_create(request):
-    # Placeholder for tutor creation logic
-    return render(request, 'tutors/tutor_form.html', {})
+    # This view is for creating a new tutor profile.
+    if request.method == 'POST':
+        user = get_object_or_404(User, id=request.POST["user"])
+
+        tutor = TutorProfile.objects.create(
+            user=user,
+            display_name=request.POST["display_name"],
+            bio=request.POST["bio"],
+            experience=request.POST["experience"],
+            location=request.POST["location"],
+            is_active=True,
+        )
+        return render(request, 'tutors/tutor_detail.html', {'tutor': tutor})
+
+    return render(request, 'tutors/tutor_form.html')

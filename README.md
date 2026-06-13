@@ -1481,7 +1481,89 @@ _PASS_
 </details>
 
 <details>
-<summary><strong> Tutor CRUD - View Test - Tutor create view contains form text (TEST ONLY) </summary>
+<summary><strong> Tutor CRUD - View Test - Checking post creates new tutor (TEST ONLY) </summary>
+
+test:
+def test_create_tutor_post_creates_tutor(self): # Test that posting to the tutor create view creates a new tutor profile.
+user = User.objects.create_user(username="newuser")
+
+        response = self.client.post(reverse("tutors:tutor_create"), {
+            "user": user.id,
+            "display_name": "New Tutor",
+            "bio": "Test bio",
+            "experience": "3 years",
+            "location": "London",
+            "is_active": True
+        })
+
+        self.assertEqual(TutorProfile.objects.count(), 1)
+
+        tutor = TutorProfile.objects.first()
+        self.assertEqual(tutor.display_name, "New Tutor")
+
+Result:
+
+2 files changed, 40 insertions(+)
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.TutorCreateViewTests.test_create_tutor_post_creates_tutor
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+F
+======================================================================
+FAIL: test_create_tutor_post_creates_tutor (tutors.test_views.TutorCreateViewTests.test_create_tutor_post_creates_tutor)
+
+---
+
+Traceback (most recent call last):
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\tutors\test_views.py", line 122, in test_create_tutor_post_creates_tutor
+self.assertEqual(TutorProfile.objects.count(), 1)
+AssertionError: 0 != 1
+
+---
+
+Ran 1 test in 0.232s
+
+FAILED (failures=1)
+Destroying test database for alias 'default'..
+
+_PASS - Expected as POST Handling not created _
+
+- Implemented Create Logic
+
+View:
+def tutor_create(request): # This view is for creating a new tutor profile.
+if request.method == 'POST':
+user = get_object_or_404(User, id=request.POST["user"])
+
+        tutor = TutorProfile.objects.create(
+            user=user,
+            display_name=request.POST["display_name"],
+            bio=request.POST["bio"],
+            experience=request.POST["experience"],
+            location=request.POST["location"],
+            is_active=True,
+        )
+        return render(request, 'tutors/tutor_detail.html', {'tutor': tutor})
+
+    return render(request, 'tutors/tutor_form.html')
+
+Result:
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.TutorCreateViewTests.test_create_tutor_post_creates_tutor  
+Found 1 test(s).  
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.282s
+
+OK
+Destroying test database for alias 'default'...
+
+_PASS_
+
+</detiails>
 
 ### Validator Testing
 

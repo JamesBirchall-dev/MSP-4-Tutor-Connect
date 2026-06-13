@@ -106,3 +106,22 @@ class TutorCreateViewTests(TestCase):
         response = self.client.get(reverse("tutors:tutor_create"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Create Tutor")
+
+    def test_create_tutor_post_creates_tutor(self):
+        # Test that posting to the tutory
+        # create view creates a new tutor profile.
+        user = User.objects.create_user(username="newuser")
+
+        self.client.post(reverse("tutors:tutor_create"), {
+            "user": user.id,
+            "display_name": "New Tutor",
+            "bio": "Test bio",
+            "experience": "3 years",
+            "location": "London",
+            "is_active": True
+        })
+
+        self.assertEqual(TutorProfile.objects.count(), 1)
+
+        tutor = TutorProfile.objects.first()
+        self.assertEqual(tutor.display_name, "New Tutor")
