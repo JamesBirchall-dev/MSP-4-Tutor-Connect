@@ -1,0 +1,13 @@
+{extends "base.html"}
+
+{% block title %}Confirm Delete Tutor{% endblock %}
+
+{% block content %}
+    <h1>Confirm Delete Tutor</h1>
+    <p>Are you sure you want to delete the tutor "{{ tutor.display_name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, Delete</button>
+        <a href="{% url 'tutors:tutor_detail' tutor.pk %}">Cancel</a>
+    </form>
+{% endblock %}
