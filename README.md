@@ -2082,6 +2082,85 @@ _PASS_
 
 </details>
 
+<details>
+<summary><strong> Tutor - Lesson CRUD - Update - Test posting to lesson updates object</summary>
+
+Test:
+
+    def test_lesson_update_updates_object(self):
+        # Test that posting to the lesson
+        # update view updates the lesson object.
+        self.client.post(self.url, {
+            "title": "Updated Math Lesson",
+            "subject": "math",
+            "description": "Updated Algebra",
+            "duration_minutes": 90,
+            "skill_level": "intermediate",
+            "price": 30.00,
+        })
+
+        self.lesson.refresh_from_db()
+        self.assertEqual(self.lesson.title, "Updated Math Lesson")
+        self.assertEqual(self.lesson.description, "Updated Algebra")
+        self.assertEqual(self.lesson.duration_minutes, 90)
+        self.assertEqual(self.lesson.skill_level, "intermediate")
+        self.assertEqual(float(self.lesson.price), 30.00)
+
+Result:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.LessonUpdateViewTests.test_lesson_update_updates_object
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.310s
+
+OK
+Destroying test database for alias 'default'...
+
+_PASS_
+
+</details>
+
+<details>
+<summary><strong> Tutor - Lesson CRUD - Update - Test update redirects</summary>
+
+test:
+def test_lesson_update_redirects(self): # Test that posting to the lesson update # view redirects to the lesson list.
+response = self.client.post(self.url, {
+"title": "Updated Math Lesson",
+"subject": "math",
+"description": "Updated Algebra",
+"duration_minutes": 90,
+"skill_level": "intermediate",
+"price": 30.00,
+})
+
+        self.assertRedirects(
+            response,
+            reverse("tutors:lesson_list", args=[self.tutor.pk])
+        )
+
+result:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.LessonUpdateViewTests.test_lesson_update_redirects  
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.347s
+
+OK
+Destroying test database for alias 'default'...
+
+</details>
+
 ### Validator Testing
 
 _Automated validation and tools used._

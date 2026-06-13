@@ -362,3 +362,20 @@ class LessonUpdateViewTests(TestCase):
         self.assertEqual(self.lesson.duration_minutes, 90)
         self.assertEqual(self.lesson.skill_level, "intermediate")
         self.assertEqual(float(self.lesson.price), 30.00)
+
+    def test_lesson_update_redirects(self):
+        # Test that posting to the lesson update
+        # view redirects to the lesson list.
+        response = self.client.post(self.url, {
+            "title": "Updated Math Lesson",
+            "subject": "math",
+            "description": "Updated Algebra",
+            "duration_minutes": 90,
+            "skill_level": "intermediate",
+            "price": 30.00,
+        })
+
+        self.assertRedirects(
+            response,
+            reverse("tutors:lesson_list", args=[self.tutor.pk])
+        )
