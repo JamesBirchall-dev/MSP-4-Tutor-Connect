@@ -212,3 +212,41 @@ class TutorUpdateViewTests(TestCase):
             response,
             reverse("tutors:tutor_detail", args=[self.tutor.pk]),
         )
+
+
+class TutorDeleteViewTests(TestCase):
+
+    def setUp(self):
+        self.user = User.objects.create_user(username="deleteuser")
+
+        self.tutor = TutorProfile.objects.create(
+            user=self.user,
+            display_name="Delete Tutor",
+            bio="Test bio",
+            experience="3 years",
+            location="London",
+            is_active=True,
+        )
+
+    def test_delete_view_returns_200(self):
+        # Test that the tutor delete view returns a 200 status code.
+        response = self.client.get(
+            reverse("tutors:tutor_delete", args=[self.tutor.pk])
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_delete_tutor_removes_object(self):
+        # Test that posting to the tutor delete view removes the tutor profile.
+        response = self.client.post(
+            reverse("tutors:tutor_delete", args=[self.tutor.pk])
+        )
+        self.assertEqual(TutorProfile.objects.count(), 0)
+        self.assertEqual(response.status_code, 302)
+
+    def test_delete_tutor_post_redirects(self):
+        # Test that posting to the tutor delete view
+        # redirects to the tutor list page.
+        response = self.client.post(
+            reverse("tutors:tutor_delete", args=[self.tutor.pk])
+        )
+        self.assertRedirects(response, reverse("tutors:tutor_list"))

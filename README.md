@@ -1781,6 +1781,109 @@ _PASS_
 
 </details>
 
+<details>
+<summary><strong> Tutor CRUD - Delete - delete view returns 200 status</summary>
+Test:
+
+class TutorDeleteViewTests(TestCase):
+
+    def setUp(self):
+        self.user = User.objects.create_user(username="deleteuser")
+
+        self.tutor = TutorProfile.objects.create(
+            user=self.user,
+            display_name="Delete Tutor",
+            bio="Test bio",
+            experience="3 years",
+            location="London",
+            is_active=True,
+        )
+
+    def test_delete_view_returns_200(self):
+        # Test that the tutor delete view returns a 200 status code.
+        response = self.client.get(
+            reverse("tutors:tutor_delete", args=[self.tutor.pk])
+        )
+        self.assertEqual(response.status_code, 200)
+
+Result:
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.TutorDeleteViewTests.test_delete_view_returns_200
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.260s
+
+OK
+Destroying test database for alias 'default'...
+
+_PASS_
+
+</details>
+
+<details>
+<summary><strong> Tutor CRUD - Delete - delete tutor removes object</summary>
+Test:
+
+    def test_delete_tutor_removes_object(self):
+        # Test that posting to the tutor delete view removes the tutor profile.
+        response = self.client.post(
+            reverse("tutors:tutor_delete", args=[self.tutor.pk])
+        )
+        self.assertEqual(TutorProfile.objects.count(), 0)
+        self.assertEqual(response.status_code, 302)
+
+Result:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.TutorDeleteViewTests.test_delete_tutor_removes_object
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.290s
+
+OK
+Destroying test database for alias 'default'...
+
+_PASS_
+
+</details>
+
+<details>
+<summary><strong> Tutor CRUD - Delete - delete tutor redirects</summary>
+Test:
+
+    def test_delete_tutor_post_redirects(self):
+        # Test that posting to the tutor delete view
+        # redirects to the tutor list page.
+        response = self.client.post(
+            reverse("tutors:tutor_delete", args=[self.tutor.pk])
+        )
+        self.assertRedirects(response, reverse("tutors:tutor_list"))
+
+Result:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.TutorDeleteViewTests.test_delete_tutor_post_redirects
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.315s
+
+OK
+Destroying test database for alias 'default'...
+
+</details>
+
 ### Validator Testing
 
 _Automated validation and tools used._
