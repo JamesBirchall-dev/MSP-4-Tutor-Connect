@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.urls import reverse
-from tutors.models import TutorProfile
+from tutors.models import LessonType, TutorProfile
 
 
 class TutorListViewTests(TestCase):
@@ -250,3 +250,35 @@ class TutorDeleteViewTests(TestCase):
             reverse("tutors:tutor_delete", args=[self.tutor.pk])
         )
         self.assertRedirects(response, reverse("tutors:tutor_list"))
+
+
+class LessonListViewTests(TestCase):
+    # Tests for the lesson list view.
+    def setUp(self):
+        self.user = User.objects.create_user(username="lessonuser")
+
+        self.tutor = TutorProfile.objects.create(
+            user=self.user,
+            display_name="Lesson Tutor",
+            bio="Test bio",
+            experience="3 years",
+            location="London",
+            is_active=True,
+        )
+
+        self.lesson = LessonType.objects.create(
+            tutor=self.tutor,
+            title="Math Lesson",
+            subject="math",
+            description="Algebra",
+            duration_minutes=60,
+            skill_level="beginner",
+            price=20.00,
+        )
+
+    def test_lesson_list_view_returns_200(self):
+        # Test that the lesson list view returns a 200 status code.
+        response = self.client.get(
+            reverse("tutors:lesson_list", args=[self.tutor.pk])
+        )
+        self.assertEqual(response.status_code, 200)
