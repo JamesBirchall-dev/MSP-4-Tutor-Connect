@@ -67,9 +67,36 @@ def lesson_list(request, tutor_pk):
     # This view lists all lesson types for a specific tutor.
     tutor = get_object_or_404(TutorProfile, pk=tutor_pk)
     lessons = LessonType.objects.filter(tutor=tutor)
+
+    # GET parameters for filtering lessons
+    query = request.GET.get('q', '')
+    subject = request.GET.get('subject', '')
+    skill = request.GET.get('skill', '')
+
+    # search (title and description)
+    if query:
+        lessons = lessons.filter(
+            title__icontains=query) | lessons.filter(
+            description__icontains=query)
+    # filter by subject
+    if subject:
+        lessons = lessons.filter(subject=subject)
+
+    # filter by skill level
+    if skill:
+        lessons = lessons.filter(skill_level=skill)
+
     return render(
-        request, 'tutors/lesson_list.html',
-        {'tutor': tutor, 'lessons': lessons})
+        request,
+        "tutors/lesson_list.html",
+        {
+            "tutor": tutor,
+            "lessons": lessons,
+            "query": query,
+            "subject": subject,
+            "skill": skill,
+        }
+    )
 
 
 def lesson_create(request, tutor_pk):
