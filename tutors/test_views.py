@@ -343,3 +343,22 @@ class LessonUpdateViewTests(TestCase):
         # Test that the lesson update view contains the form text.
         response = self.client.get(self.url)
         self.assertContains(response, "Math Lesson")
+
+    def test_lesson_update_updates_object(self):
+        # Test that posting to the lesson
+        # update view updates the lesson object.
+        self.client.post(self.url, {
+            "title": "Updated Math Lesson",
+            "subject": "math",
+            "description": "Updated Algebra",
+            "duration_minutes": 90,
+            "skill_level": "intermediate",
+            "price": 30.00,
+        })
+
+        self.lesson.refresh_from_db()
+        self.assertEqual(self.lesson.title, "Updated Math Lesson")
+        self.assertEqual(self.lesson.description, "Updated Algebra")
+        self.assertEqual(self.lesson.duration_minutes, 90)
+        self.assertEqual(self.lesson.skill_level, "intermediate")
+        self.assertEqual(float(self.lesson.price), 30.00)
