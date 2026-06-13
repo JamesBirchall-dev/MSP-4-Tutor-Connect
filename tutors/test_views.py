@@ -338,3 +338,8 @@ class LessonUpdateViewTests(TestCase):
         # Test that the lesson update view returns a 200 status code.
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
+
+    def test_lesson_update_view_shows_form(self):
+        # Test that the lesson update view contains the form text.
+        response = self.client.get(self.url)
+        self.assertContains(response, "Math Lesson")

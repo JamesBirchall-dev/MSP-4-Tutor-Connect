@@ -2010,6 +2010,78 @@ Destroying test database for alias 'default'...
 
 </details>
 
+<details>
+<summary><strong> Tutor - Lesson CRUD - Update - Test that the lesson update view returns a 200 status code</summary>
+
+view:
+
+def lesson_update(request, tutor_pk, pk): # This view is for updating an existing lesson type for a specific tutor.
+tutor = get_object_or_404(TutorProfile, pk=tutor_pk)
+lesson = get_object_or_404(LessonType, pk=pk, tutor=tutor)
+
+    if request.method == 'POST':
+        lesson.title = request.POST["title"]
+        lesson.subject = request.POST["subject"]
+        lesson.description = request.POST.get("description", "")
+        lesson.duration_minutes = request.POST["duration_minutes"]
+        lesson.skill_level = request.POST["skill_level"]
+        lesson.price = request.POST["price"]
+        lesson.save()
+        return redirect('tutors:lesson_list', tutor_pk=tutor.pk)
+
+    return render(
+        request, 'tutors/lesson_form.html',
+        {'tutor': tutor, 'lesson': lesson})
+
+Test:
+def test_lesson_update_view_returns_200(self): # Test that the lesson update view returns a 200 status code.
+response = self.client.get(self.url)
+self.assertEqual(response.status_code, 200)
+
+Result:
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.LessonUpdateViewTests.test_lesson_update_view_returns_200
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.314s
+
+OK
+Destroying test database for alias 'default'...
+_PASS_
+
+</details>
+
+<details>
+<summary><strong> Tutor - Lesson CRUD - Update - Test that the lesson update view contains form text</summary>
+
+test:
+def test_lesson_update_view_shows_form(self): # Test that the lesson update view contains the form text.
+response = self.client.get(self.url)
+self.assertContains(response, "Math Lesson")
+
+result:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.LessonUpdateViewTests.test_lesson_update_view_shows_form
+
+> > Found 1 test(s).
+> > Creating test database for alias 'default'...
+> > System check identified no issues (0 silenced).
+
+## .
+
+Ran 1 test in 0.304s
+
+OK
+Destroying test database for alias 'default'...
+
+_PASS_
+
+</details>
+
 ### Validator Testing
 
 _Automated validation and tools used._
