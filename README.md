@@ -2160,7 +2160,33 @@ OK
 Destroying test database for alias 'default'...
 
 </details>
+<details>
+<summary><strong> Tutor - Lesson CRUD - Delete - Test delete view returns 200 status code</summary>
 
+Test:
+
+    def test_lesson_delete_view_returns_200(self):
+        # Test that the lesson delete view returns a 200 status code.
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+
+Result:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.LessonDeleteViewTests.test_lesson_delete_view_returns_200
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.321s
+
+OK
+Destroying test database for alias 'default'...
+_PASS_
+
+</details>
 ### Validator Testing
 
 _Automated validation and tools used._
