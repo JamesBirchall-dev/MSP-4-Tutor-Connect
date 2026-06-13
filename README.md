@@ -1883,6 +1883,132 @@ OK
 Destroying test database for alias 'default'...
 
 </details>
+<details>
+<summary><strong> Tutor - Lesson CRUD - Read - Test Lesson List returns 200</summary
+view:
+
+def lesson_list(request, tutor_pk): # This view lists all lesson types for a specific tutor.
+tutor = get_object_or_404(TutorProfile, pk=tutor_pk)
+lessons = LessonType.objects.filter(tutor=tutor)
+return render(
+request, 'tutors/lesson_list.html',
+{'tutor': tutor, 'lessons': lessons})
+
+Test:
+
+class LessonListViewTests(TestCase): # Tests for the lesson list view.
+def setUp(self):
+self.user = User.objects.create_user(username="lessonuser")
+
+        self.tutor = TutorProfile.objects.create(
+            user=self.user,
+            display_name="Lesson Tutor",
+            bio="Test bio",
+            experience="3 years",
+            location="London",
+            is_active=True,
+        )
+
+        self.lesson = LessonType.objects.create(
+            tutor=self.tutor,
+            title="Math Lesson",
+            subject="math",
+            description="Algebra",
+            duration_minutes=60,
+            skill_level="beginner",
+            price=20.00,
+        )
+
+    def test_lesson_list_view_returns_200(self):
+        # Test that the lesson list view returns a 200 status code.
+        response = self.client.get(
+            reverse("tutors:lesson_list", args=[self.tutor.pk])
+        )
+        self.assertEqual(response.status_code, 200)
+
+Result:
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.LessonListViewTests.test_lesson_list_view_returns_200
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.291s
+
+OK
+Destroying test database for alias 'default'...
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect>
+
+_PASS_
+
+</details>
+<details>
+<summary><strong> Tutor - Lesson CRUD - Read - Test Lesson List uses correct template</summary>
+
+Test:
+
+    def test_lesson_list_uses_correct_template(self):
+        # Test that the lesson list view uses the correct template.
+        response = self.client.get(
+            reverse("tutors:lesson_list", args=[self.tutor.pk])
+        )
+        self.assertTemplateUsed(response, "tutors/lesson_list.html")
+
+Result:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.LessonListViewTests.test_lesson_list_uses_correct_template  
+Found 1 test(s).  
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.300s
+
+OK
+Destroying test database for alias 'default'...
+
+_PASS_
+
+</details>
+<details>
+<summary><strong> Tutor - Lesson CRUD - Read - Test Lesson List displays Title</summary>
+
+Test:
+
+    def test_lesson_title_displayed_in_list(self):
+        # Test that the lesson title is displayed in the lesson list view.
+        response = self.client.get(
+            reverse(
+                "tutors:lesson_list",
+                args=[self.tutor.pk],
+            )
+        )
+
+        self.assertTemplateUsed(
+            response,
+            "tutors/lesson_list.html",
+        )
+
+Result:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.LessonListViewTests.test_lesson_title_displayed_in_list  
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.292s
+
+OK
+Destroying test database for alias 'default'...
+
+</details>
 
 ### Validator Testing
 

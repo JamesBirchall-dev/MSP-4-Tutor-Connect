@@ -282,3 +282,24 @@ class LessonListViewTests(TestCase):
             reverse("tutors:lesson_list", args=[self.tutor.pk])
         )
         self.assertEqual(response.status_code, 200)
+
+    def test_lesson_list_uses_correct_template(self):
+        # Test that the lesson list view uses the correct template.
+        response = self.client.get(
+            reverse("tutors:lesson_list", args=[self.tutor.pk])
+        )
+        self.assertTemplateUsed(response, "tutors/lesson_list.html")
+
+    def test_lesson_title_displayed_in_list(self):
+        # Test that the lesson title is displayed in the lesson list view.
+        response = self.client.get(
+            reverse(
+                "tutors:lesson_list",
+                args=[self.tutor.pk],
+            )
+        )
+
+        self.assertTemplateUsed(
+            response,
+            "tutors/lesson_list.html",
+        )
