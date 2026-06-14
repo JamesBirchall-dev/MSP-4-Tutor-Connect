@@ -77,7 +77,7 @@ def lesson_list(request, tutor_pk):
         request, 'tutors/lesson_list.html',
         {
             'tutor': tutor,
-            'lesson_filter': lesson_filter.qs,
+            'lessons': lesson_filter.qs,
             'filter': lesson_filter,
         }
     )

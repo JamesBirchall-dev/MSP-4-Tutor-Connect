@@ -323,7 +323,7 @@ class LessonListViewTests(TestCase):
         # Test that filtering lessons by skill level works.
         response = self.client.get(
             reverse("tutors:lesson_list", args=[self.tutor.pk])
-            + "?skill=beginner"
+            + "?skill_level=beginner"
         )
         self.assertContains(response, "Math Lesson")
 

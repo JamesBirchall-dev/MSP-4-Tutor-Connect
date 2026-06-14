@@ -2309,6 +2309,130 @@ Destroying test database for alias 'default'...
 _PASS_
 
 </details>
+<details>
+<summary><strong> Tutor - Search & Filter - Test Django configuration re-test filters-  </summary>
+
+Updated template:
+
+{% extends "base.html" %}
+
+{% block title %}Lesson List{% endblock %}
+
+{% block content %}
+
+<h1>{{ tutor.display_name }}'s Lessons</h1>
+
+<form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Filter</button>
+</form>
+
+{% for lesson in lessons %}
+<div>
+<h3>{{ lesson.title }}</h3>
+<p>{{ lesson.subject }} | {{ lesson.skill_level }}</p>
+<p>{{ lesson.description }}</p>
+<p>£{{ lesson.price }}</p>
+</div>
+{% empty %}
+<p>No lessons found.</p>
+{% endfor %}
+{% endblock %}
+
+Updated view:
+def lesson_list(request, tutor_pk): # This view lists all lesson types for a specific tutor.
+tutor = get_object_or_404(TutorProfile, pk=tutor_pk)
+
+    queryset = LessonType.objects.filter(tutor=tutor)
+
+    lesson_filter = LessonFilter(request.GET, queryset=queryset)
+
+    return render(
+        request, 'tutors/lesson_list.html',
+        {
+            'tutor': tutor,
+            'lessons': lesson_filter.qs,
+            'filter': lesson_filter,
+        }
+    )
+
+Tests:
+
+    def test_search_filters_lessons_by_title(self):
+        # Test that the search functionality filters lessons by title.
+        response = self.client.get(
+            reverse("tutors:lesson_list", args=[self.tutor.pk]) + "?q=Math"
+        )
+        self.assertContains(response, "Math Lesson")
+
+    def test_subject_filter_works(self):
+        # Test that filtering lessons by subject works.
+        response = self.client.get(
+            reverse("tutors:lesson_list", args=[self.tutor.pk])
+            + "?subject=math"
+        )
+        self.assertContains(response, "Math Lesson")
+
+    def test_skill_filter_works(self):
+        # Test that filtering lessons by skill level works.
+        response = self.client.get(
+            reverse("tutors:lesson_list", args=[self.tutor.pk])
+            + "?skill_level=beginner"
+        )
+        self.assertContains(response, "Math Lesson")
+
+Results:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.LessonListViewTests.test_skill_filter_works
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.297s
+
+OK
+Destroying test database for alias 'default'...
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.LessonListViewTests.test_search_filters_lessons_by_title  
+Found 1 test(s).  
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.323s
+
+OK
+Destroying test database for alias 'default'...
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.LessonListViewTests.test_subject_filter_works  
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.298s
+
+OK
+Destroying test database for alias 'default'...
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.LessonListViewTests.test_skill_filter_works  
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.562s
+
+OK
+Destroying test database for alias 'default'...
+
+_PASS_
 
 ### Validator Testing
 
