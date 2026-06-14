@@ -360,13 +360,69 @@ The following wireframes were created during the planning and design phase of th
 
 ## Features
 
-### Existing Features
+### Existing Features/Apps
 
-_Description of existing features goes here._
+#### Tutors
 
-### Future Features
+The **Tutors** feature allows users to browse tutor profiles and explore available lesson types using built-in search and filtering functionality. It serves as the core discovery layer of the platform, helping students find suitable tutors and lessons before booking.
 
-_Planned features and improvements._
+---
+
+###### Tutor Directory
+
+- Displays a list of all active tutors
+- Each tutor has a public profile including:
+  - Display name
+  - Bio
+  - Experience level
+  - Location
+- Individual tutor detail pages provide deeper information and available lessons
+
+---
+
+###### Lesson Types per Tutor
+
+Each tutor can create multiple lesson types.
+
+Each lesson includes:
+
+- Title
+- Subject (e.g. Math, Science, English)
+- Skill level (Beginner, Intermediate, Advanced)
+- Description
+- Duration
+- Price
+
+Lessons are displayed on a tutor-specific lesson list page.
+
+---
+
+###### Search Functionality
+
+- Users can search lessons by title using keyword search
+- Case-insensitive matching ensures flexible search behavior
+- Example: searching `"math"` returns “Math Lesson”
+
+---
+
+###### Filtering System (django-filter)
+
+Built using **django-filter** for clean and scalable filtering.
+
+Users can filter lessons by:
+
+- Subject
+- Skill level
+
+Filters can be combined with search queries for more precise results.
+
+---
+
+###### Pagination Support
+
+- Lesson lists are paginated for performance and usability
+- Results are split into manageable pages
+- Prevents long scrolling when tutors have many lessons
 
 ---
 
@@ -382,6 +438,48 @@ The application uses Django's built-in 'User' model and four custom models:
 This structure supports the main user journeys in the application: registering or logging in, browsing tutors, viewing tutor details, creating and editing tutor information, booking lessons, managing bookings, and completing payments through Stripe.
 
 ---
+
+### Data Access Rules
+
+- Lessons are always scoped to a specific tutor
+- Users cannot view lessons outside the selected tutor context
+- Only active tutor profiles are intended for public visibility
+
+---
+
+## Technical Implementation
+
+- Django class-based filtering via `FilterSet`
+- Queryset filtering layered on top of tutor-specific queryset
+- Django template rendering using:
+  - `{{ filter.form.as_p }}`
+  - Iteration over filtered/paginated results
+- Server-side pagination using Django `Paginator`
+- URL-driven filtering using GET parameters
+
+---
+
+## Testing Coverage
+
+The Tutors feature is covered by automated tests ensuring:
+
+- Tutor lesson list loads successfully
+- Correct template rendering
+- Search returns expected lesson results
+- Subject filtering works correctly
+- Skill level filtering works correctly
+- Filtered querysets correctly update displayed results
+
+---
+
+## Example User Flow
+
+1. User visits a tutor profile
+2. User navigates to **“View Lessons”**
+3. User searches for `"Math"`
+4. User filters by `"Beginner"`
+5. User browses paginated results
+6. User selects a lesson to proceed to booking (future feature)
 
 ## Data Tables
 
@@ -2328,6 +2426,7 @@ Updated template:
 </form>
 
 {% for lesson in lessons %}
+
 <div>
 <h3>{{ lesson.title }}</h3>
 <p>{{ lesson.subject }} | {{ lesson.skill_level }}</p>
@@ -2431,6 +2530,116 @@ Ran 1 test in 0.562s
 
 OK
 Destroying test database for alias 'default'...
+
+_PASS_
+
+</details>
+<details>
+<summary><strong> Bookings - Data Model - Test booking can be created with correct default status-  </summary>
+
+ModeL:
+
+class Booking(models.Model):
+"""
+Represents a booking made by a student for a lesson type.
+"""
+STATUS_CHOICES = [
+("pending", "Pending"),
+("confirmed", "Confirmed"),
+("cancelled", "Cancelled"),
+]
+
+    student = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="bookings",
+    )
+
+    lesson_type = models.ForeignKey(
+        LessonType,
+        on_delete=models.CASCADE,
+        related_name="bookings",
+    )
+
+    booking_date = models.DateField()
+    booking_time = models.TimeField()
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="pending",
+    )
+
+    notes = models.TextField(blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return (
+            f"{self.student} - "
+            f"{self.lesson_type} on "
+            f"{self.booking_date} at "
+            f"{self.booking_time}"
+        )
+
+Test:
+
+class BookingModelTest(TestCase):
+def setUp(self):
+self.user = User.objects.create_user(
+username="testuserstudent")
+self.tutor = TutorProfile.objects.create(
+user=self.user,
+display_name="Test Tutor",
+bio="Experienced tutor in math and science.",
+experience="5 years of tutoring experience.",
+location="Online",
+is_active=True,
+)
+
+        self.lesson_type = LessonType.objects.create(
+            tutor=self.tutor,
+            title="Math Tutoring",
+            subject="math",
+            skill_level="beginner",
+            duration_minutes=60,
+            price=50.00,
+        )
+
+    def test_booking_creation(self):
+        """
+        Test that a Booking can be created and has the correct default status.
+        """
+        booking = Booking.objects.create(
+            student=self.user,
+            lesson_type=self.lesson_type,
+            booking_date="2024-06-15",
+            booking_time="14:00:00",
+        )
+
+        self.assertEqual(booking.status, "pending")
+
+        self.assertEqual(
+            str(booking),
+            f"{self.user} - {self.lesson_type} on 2024-06-15 at 14:00:00"
+        )
+
+Result:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test bookings.tests.BookingModelTest.test_booking_creation
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.256s
+
+OK
+Destroying test database for alias 'default'...
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect>
 
 _PASS_
 
