@@ -2188,7 +2188,7 @@ _PASS_
 
 </details>
 <details>
-<summary><strong> Tutor - Search & Filter - Update lesson_list template with filters and results, test filter by title</summary>
+<summary><strong> Tutor - Search & Filter - test filter by title</summary>
 
 Template:
 
@@ -2220,6 +2220,7 @@ Template:
 </form>
 
 {% for lesson in lessons %}
+
 <div>
 <h3>{{ lesson.title }}</h3>
 <p>{{ lesson.subject }} | {{ lesson.skill_level }}</p>
@@ -2258,7 +2259,56 @@ _PASS_
 
 </details>
 <details>
-<summary><strong> Tutor - Search & Filter - Update lesson_list template with filters and results, test filter by title</summary>
+<summary><strong> Tutor - Search & Filter - Test subject and skill filters </summary>
+
+Test:
+
+    def test_subject_filter_works(self):
+        # Test that filtering lessons by subject works.
+        response = self.client.get(
+            reverse("tutors:lesson_list", args=[self.tutor.pk])
+            + "?subject=math"
+        )
+        self.assertContains(response, "Math Lesson")
+
+    def test_skill_filter_works(self):
+        # Test that filtering lessons by skill level works.
+        response = self.client.get(
+            reverse("tutors:lesson_list", args=[self.tutor.pk])
+            + "?skill=beginner"
+        )
+        self.assertContains(response, "Math Lesson")
+
+Results:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.LessonListViewTests.test_subject_filter_works  
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.299s
+
+OK
+Destroying test database for alias 'default'...
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.LessonListViewTests.test_skill_filter_works  
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.286s
+
+OK
+Destroying test database for alias 'default'...
+
+_PASS_
+
+</details>
 
 ### Validator Testing
 

@@ -311,6 +311,22 @@ class LessonListViewTests(TestCase):
         )
         self.assertContains(response, "Math Lesson")
 
+    def test_subject_filter_works(self):
+        # Test that filtering lessons by subject works.
+        response = self.client.get(
+            reverse("tutors:lesson_list", args=[self.tutor.pk])
+            + "?subject=math"
+        )
+        self.assertContains(response, "Math Lesson")
+
+    def test_skill_filter_works(self):
+        # Test that filtering lessons by skill level works.
+        response = self.client.get(
+            reverse("tutors:lesson_list", args=[self.tutor.pk])
+            + "?skill=beginner"
+        )
+        self.assertContains(response, "Math Lesson")
+
 
 class LessonUpdateViewTests(TestCase):
 
