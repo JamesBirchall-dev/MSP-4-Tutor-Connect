@@ -1,5 +1,11 @@
-{% if tutor %}
-    <h1>Update Tutor</h1>
-{% else %}
-    <h1>Create Tutor</h1>
-{% endif %}
+<h1>
+    {% if tutor %}Update Tutor{% else %}Create Tutor{% endif %}
+</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">
+        {% if tutor %}Update{% else %}Create{% endif %}
+    </button>
+</form>

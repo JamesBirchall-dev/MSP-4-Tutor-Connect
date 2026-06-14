@@ -1,9 +1,9 @@
 from django.shortcuts import redirect, render, get_object_or_404
-from django.contrib.auth.models import User
 from .models import TutorProfile, LessonType
 from .filters import LessonFilter
 from django.core.paginator import Paginator
 from decimal import Decimal
+from .forms import TutorProfileForm
 
 """
 Views for the tutors app.
@@ -22,36 +22,32 @@ def tutor_detail(request, pk):
 
 
 def tutor_create(request):
-    # This view is for creating a new tutor profile.
-    if request.method == 'POST':
-        user = get_object_or_404(User, id=request.POST.get("user"))
+    if request.method == "POST":
+        form = TutorProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            tutor = form.save()
+            return redirect("tutors:tutor_detail", pk=tutor.pk)
+    else:
+        form = TutorProfileForm()
 
-        tutor = TutorProfile.objects.create(
-            user=user,
-            display_name=request.POST.get("display_name"),
-            bio=request.POST.get("bio"),
-            experience=request.POST.get("experience"),
-            location=request.POST.get("location"),
-            is_active=True,
-        )
-        return redirect('tutors:tutor_detail', pk=tutor.pk)
-
-    return render(request, 'tutors/tutor_form.html')
+    return render(request, "tutors/tutor_form.html", {"form": form})
 
 
 def tutor_update(request, pk):
-    # This view is for updating an existing tutor profile.
     tutor = get_object_or_404(TutorProfile, pk=pk)
 
-    if request.method == 'POST':
-        tutor.display_name = request.POST.get("display_name")
-        tutor.bio = request.POST.get("bio")
-        tutor.experience = request.POST.get("experience")
-        tutor.location = request.POST.get("location")
-        tutor.save()
-        return redirect('tutors:tutor_detail', pk=tutor.pk)
+    if request.method == "POST":
+        form = TutorProfileForm(request.POST, request.FILES, instance=tutor)
+        if form.is_valid():
+            form.save()
+            return redirect("tutors:tutor_detail", pk=tutor.pk)
+    else:
+        form = TutorProfileForm(instance=tutor)
 
-    return render(request, 'tutors/tutor_form.html', {'tutor': tutor})
+    return render(request, "tutors/tutor_form.html", {
+        "form": form,
+        "tutor": tutor
+    })
 
 
 def tutor_delete(request, pk):
