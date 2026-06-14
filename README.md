@@ -2643,6 +2643,64 @@ Destroying test database for alias 'default'...
 
 _PASS_
 
+</details>
+<details>
+<summary><strong> Bookings - Data Form - Test booking form is valid with correct data-  </summary>
+
+Form:
+class BookingForm(forms.ModelForm):
+"""
+Form for creating and updating Booking instances.
+
+    Uses Django's ModelForm to automatically generate form fields
+    based on the Booking model and apply model validation.
+    """
+    class Meta:
+        """
+        Meta configuration for the BookingForm.
+        """
+        model = Booking
+        fields = [
+            "booking_date",
+            "booking_time",
+            "notes",
+        ]
+
+Test:
+
+class BookingFormTest(TestCase):
+
+    def test_valid_booking_form(self):
+        """
+        Test that a Booking form is valid with correct data.
+        """
+        def test_valid_booking_form(self):
+            form = BookingForm(data={
+                "booking_date": "2024-06-15",
+                "booking_time": "14:00:00",
+                "notes": "Hello, I would like to book a lesson."
+            })
+
+            self.assertTrue(form.is_valid())
+
+Result:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test bookings.tests.BookingFormTest.test_valid_booking_form  
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.153s
+
+OK
+Destroying test database for alias 'default'...
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect>
+
+_PASS_
+
 ### Validator Testing
 
 _Automated validation and tools used._

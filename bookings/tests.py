@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from bookings.forms import BookingForm
 from tutors.models import TutorProfile, LessonType
 from bookings.models import Booking
 
@@ -50,3 +51,19 @@ class BookingModelTest(TestCase):
             str(booking),
             f"{self.user} - {self.lesson_type} on 2024-06-15 at 14:00:00"
         )
+
+
+class BookingFormTest(TestCase):
+
+    def test_valid_booking_form(self):
+        """
+        Test that a Booking form is valid with correct data.
+        """
+        def test_valid_booking_form(self):
+            form = BookingForm(data={
+                "booking_date": "2024-06-15",
+                "booking_time": "14:00:00",
+                "notes": "Hello, I would like to book a lesson."
+            })
+
+            self.assertTrue(form.is_valid())
