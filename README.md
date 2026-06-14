@@ -2852,6 +2852,44 @@ Destroying test database for alias 'default'...
 
 _PASS_
 
+</details>
+
+<details>
+<summary><strong> Bookings - Booking view tests -  user can delete/cancel booking </summary>
+
+Test:
+def test_user_can_delete_booking(self):
+self.client.login(username="student", password="pass")
+
+        booking = Booking.objects.create(
+            student=self.user,
+            lesson_type=self.lesson_type,
+            booking_date="2024-06-15",
+            booking_time="14:00:00",
+        )
+
+        self.client.post(
+            reverse("bookings:booking_delete", args=[booking.id])
+        )
+
+        booking.refresh_from_db()
+        self.assertEqual(booking.status, "cancelled")
+
+Result:
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test bookings.tests.BookingViewTests.test_user_can_delete_booking  
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 1.512s
+
+OK
+Destroying test database for alias 'default'...
+
 ### Validator Testing
 
 _Automated validation and tools used._

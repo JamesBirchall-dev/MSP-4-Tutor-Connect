@@ -59,29 +59,72 @@ class BookingFormTest(TestCase):
     def test_valid_booking_form(self):
         """
         Test that a Booking form is valid with correct data.
-        """
-        def test_valid_booking_form(self):
-            form = BookingForm(data={
-                "booking_date": "2024-06-15",
-                "booking_time": "14:00:00",
-                "notes": "Hello, I would like to book a lesson."
-            })
+    """
+        form = BookingForm(data={
+            "booking_date": "2024-06-15",
+            "booking_time": "14:00:00",
+            "notes": "Hello, I would like to book a lesson."
+        })
 
-            self.assertTrue(form.is_valid())
+        self.assertTrue(form.is_valid())
 
 
 class BookingViewTests(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username="student",
+            password="pass",
+        )
+
+        self.tutor = TutorProfile.objects.create(
+            user=self.user,
+            display_name="Test Tutor",
+            bio="Experienced tutor",
+            experience="5 years",
+            location="Online",
+            is_active=True,
+        )
+
+        self.lesson_type = LessonType.objects.create(
+            tutor=self.tutor,
+            title="Math Tutoring",
+            subject="math",
+            skill_level="beginner",
+            duration_minutes=60,
+            price=50.00,
+        )
 
     def test_login_required_for_booking(self):
         response = self.client.get(
-            reverse("bookings:booking_create", args=[1]))
+            reverse("bookings:booking_create", args=[1])
+        )
         self.assertNotEqual(response.status_code, 200)
 
     def test_booking_page_loads_for_logged_in_user(self):
         self.client.login(username="student", password="pass")
+
         response = self.client.get(
-            reverse("bookings:booking_create", args=[1]))
+            reverse("bookings:booking_create", args=[1])
+        )
+
         self.assertRedirects(
             response,
             "/accounts/login/?next=/bookings/create/1/"
         )
+
+    def test_user_can_delete_booking(self):
+        self.client.login(username="student", password="pass")
+
+        booking = Booking.objects.create(
+            student=self.user,
+            lesson_type=self.lesson_type,
+            booking_date="2024-06-15",
+            booking_time="14:00:00",
+        )
+
+        self.client.post(
+            reverse("bookings:booking_delete", args=[booking.id])
+        )
+
+        booking.refresh_from_db()
+        self.assertEqual(booking.status, "cancelled")
