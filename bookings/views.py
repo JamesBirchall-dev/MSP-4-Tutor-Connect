@@ -63,11 +63,16 @@ def booking_update(request, pk):
         })
 
 
+@login_required
 def booking_delete(request, pk):
     """Display a temporary booking delete placeholder view."""
-    booking = get_object_or_404(Booking, id=pk)
-    if request.method == 'POST':
-        booking.delete()
-        return redirect('bookings:booking_list')
-    return render(request, 'bookings/booking_confirm_delete.html', {
-        'booking': booking})
+    booking = get_object_or_404(Booking, pk=pk, student=request.user)
+
+    if request.method == "POST":
+        booking.status = "cancelled"
+        booking.save()
+        return redirect("bookings:booking_list")
+
+    return render(request, "bookings/confirm_cancel.html", {
+        "booking": booking
+    })
