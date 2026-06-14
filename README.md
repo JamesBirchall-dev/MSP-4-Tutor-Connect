@@ -2187,6 +2187,79 @@ Destroying test database for alias 'default'...
 _PASS_
 
 </details>
+<details>
+<summary><strong> Tutor - Search & Filter - Update lesson_list template with filters and results, test filter by title</summary>
+
+Template:
+
+{% extends "base.html" %}
+
+{% block title %}Lesson List{% endblock %}
+
+{% block content %}
+
+<h1>{{ tutor.display_name }}'s Lessons</h1>
+
+<form method="get">
+    <input type="text" name="q" placeholder="Search lessons..." value="{{ request.GET.q }}">
+    <select name="subject">
+        <option value="">All Subjects</option>
+        <option value="math">Math</option>
+        <option value="science">Science</option>
+        <option value="english">English</option>
+    </select>
+
+    <select name="skill_level">
+        <option value="">All Skill Levels</option>
+        <option value="beginner">Beginner</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="advanced">Advanced</option>
+    </select>
+    <button type="submit">Filter</button>
+
+</form>
+
+{% for lesson in lessons %}
+<div>
+<h3>{{ lesson.title }}</h3>
+<p>{{ lesson.subject }} | {{ lesson.skill_level }}</p>
+<p>{{ lesson.description }}</p>
+<p>£{{ lesson.price }}</p>
+</div>
+{% empty %}
+<p>No lessons found.</p>
+{% endfor %}
+{% endblock %}
+
+Test:
+
+    def test_search_filters_lessons_by_title(self):
+        # Test that the search functionality filters lessons by title.
+        response = self.client.get(
+            reverse("tutors:lesson_list", args=[self.tutor.pk]) + "?q=Math"
+        )
+        self.assertContains(response, "Math Lesson")
+
+Result:
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.LessonListViewTests.test_search_filters_lessons_by_title
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.329s
+
+OK
+Destroying test database for alias 'default'...
+
+_PASS_
+
+</details>
+<details>
+<summary><strong> Tutor - Search & Filter - Update lesson_list template with filters and results, test filter by title</summary>
+
 ### Validator Testing
 
 _Automated validation and tools used._

@@ -304,6 +304,13 @@ class LessonListViewTests(TestCase):
             "tutors/lesson_list.html",
         )
 
+    def test_search_filters_lessons_by_title(self):
+        # Test that the search functionality filters lessons by title.
+        response = self.client.get(
+            reverse("tutors:lesson_list", args=[self.tutor.pk]) + "?q=Math"
+        )
+        self.assertContains(response, "Math Lesson")
+
 
 class LessonUpdateViewTests(TestCase):
 
