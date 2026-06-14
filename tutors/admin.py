@@ -1,6 +1,21 @@
 from django.contrib import admin
 from tutors.models import LessonType, TutorProfile
 
+"""
+ADMIN CONFIGURATION FOR TUTORS APP
+
+This module customises the Django admin interface for:
+- Tutor profiles
+- Lesson types
+
+Provides filtering, searching, ordering, and optimised query
+performance for admin users.
+"""
+
+# =========================
+# TUTOR PROFILE ADMIN
+# =========================
+
 
 @admin.register(TutorProfile)
 class TutorProfileAdmin(admin.ModelAdmin):
@@ -30,10 +45,28 @@ class TutorProfileAdmin(admin.ModelAdmin):
     # Display profiles alphabetically by display name
     ordering = ("display_name",)
 
+    # Auto-managed timestamps are read-only in the admin interface
+    readonly_fields = (
+        "created_at",
+        "updated_at",
+    )
+
+
+# =========================
+# LESSON TYPE ADMIN
+# =========================
 
 @admin.register(LessonType)
 class LessonTypeAdmin(admin.ModelAdmin):
-    """Admin configuration for the LessonType model."""
+    """
+    Admin configuration for LessonType.
+
+    Features:
+    - Search by lesson details and tutor
+    - Filter by subject, skill level, and availability
+    - Optimised tutor lookup using select_related
+    - Read-only audit timestamps
+    """
 
     list_display = (
         "title",
@@ -62,3 +95,12 @@ class LessonTypeAdmin(admin.ModelAdmin):
 
     # Present lessons alphabetically.
     ordering = ("title",)
+
+    # optimised tutor lookup to reduce database queries in the admin list view.
+    list_select_related = ("tutor",)
+
+    # auto-managed timestamps are read-only in the admin interface
+    readonly_fields = (
+        "created_at",
+        "updated_at",
+    )
