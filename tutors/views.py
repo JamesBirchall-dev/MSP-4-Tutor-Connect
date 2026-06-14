@@ -1,6 +1,8 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.models import User
 from .models import TutorProfile, LessonType
+from .filters import LessonFilter
+
 
 """
 Views for the tutors app.
@@ -66,35 +68,17 @@ def tutor_delete(request, pk):
 def lesson_list(request, tutor_pk):
     # This view lists all lesson types for a specific tutor.
     tutor = get_object_or_404(TutorProfile, pk=tutor_pk)
-    lessons = LessonType.objects.filter(tutor=tutor)
 
-    # GET parameters for filtering lessons
-    query = request.GET.get('q', '')
-    subject = request.GET.get('subject', '')
-    skill = request.GET.get('skill', '')
+    queryset = LessonType.objects.filter(tutor=tutor)
 
-    # search (title and description)
-    if query:
-        lessons = lessons.filter(
-            title__icontains=query) | lessons.filter(
-            description__icontains=query)
-    # filter by subject
-    if subject:
-        lessons = lessons.filter(subject=subject)
-
-    # filter by skill level
-    if skill:
-        lessons = lessons.filter(skill_level=skill)
+    lesson_filter = LessonFilter(request.GET, queryset=queryset)
 
     return render(
-        request,
-        "tutors/lesson_list.html",
+        request, 'tutors/lesson_list.html',
         {
-            "tutor": tutor,
-            "lessons": lessons,
-            "query": query,
-            "subject": subject,
-            "skill": skill,
+            'tutor': tutor,
+            'lesson_filter': lesson_filter.qs,
+            'filter': lesson_filter,
         }
     )
 
