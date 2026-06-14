@@ -6,12 +6,14 @@
 
 <h1>{{ tutor.display_name }}'s Lessons</h1>
 
+<!--Filter Form-->
+
 <form method="get">
     {{ filter.form.as_p }}
     <button type="submit">Filter</button>
 </form>
 
-{% for lesson in lessons %}
+{% for lesson in page_obj %}
     <div>
         <h3>{{ lesson.title }}</h3>
         <p>{{ lesson.subject }} | {{ lesson.skill_level }}</p>
@@ -21,4 +23,20 @@
 {% empty %}
     <p>No lessons found.</p>
 {% endfor %}
+
+<!--Pagination-->
+
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">&laquo; Previous</a>
+    {% endif %}
+
+    <span>
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </span>
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>
+    {% endif %}
+</div>
+
 {% endblock %}
