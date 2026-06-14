@@ -2701,6 +2701,10 @@ Destroying test database for alias 'default'...
 
 _PASS_
 
+</details>
+<details>
+<summary><strong> Bookings - Data Form - Test booking create-  </summary>
+
 ### Validator Testing
 
 _Automated validation and tools used._

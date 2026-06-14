@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from django.urls import reverse
 from bookings.forms import BookingForm
 from tutors.models import TutorProfile, LessonType
 from bookings.models import Booking
@@ -67,3 +68,17 @@ class BookingFormTest(TestCase):
             })
 
             self.assertTrue(form.is_valid())
+
+
+class BookingViewTests(TestCase):
+
+    def test_login_required_for_booking(self):
+        response = self.client.get(
+            reverse("bookings:create_booking", args=[1]))
+        self.assertNotEqual(response.status_code, 200)
+
+    def test_booking_page_loads_for_logged_in_user(self):
+        self.client.login(username="student", password="pass")
+        response = self.client.get(
+            reverse("bookings:create_booking", args=[1]))
+        self.assertEqual(response.status_code, 200)
