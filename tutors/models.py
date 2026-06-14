@@ -2,17 +2,37 @@ from django.conf import settings
 from django.db import models
 from decimal import Decimal
 from django.core.validators import MinValueValidator
-# Create your models here.
+
+
+"""
+MODELS FOR TUTORS APP
+This module contains the data models for the tutors app, including:
+- TutorProfile: Extended profile information for tutors.
+- LessonType: Represents the types of lessons a tutor can offer.
+
+Relationships:
+- One User to One TutorProfile, allowing user to have a unique tutor profile.
+- One TutorProfile to many LessonTypes, allowing tutors to offer multiple
+lessons.
+The models include fields for storing relevant information, such as display
+names, bios, experience, lesson subjects, durations, skill levels, and pricing.
+"""
+# =========================
+# TUTOR PROFILE MODEL
+# =========================
 
 
 class TutorProfile(models.Model):
     """
-    Stores extended profile information for a tutor account.
+    Represents extended profile information for a tutor.
 
-    This model is separate from the user model to:
-    - Keep authentication-related fields in the user model.
-    - Allow for future expansion of tutor-specific fields without affecting
-    the user model.
+    This model extends the base user account with tutor-specific data
+    such as biography, experience, and profile image.
+
+    Design decisions:
+    - Uses OneToOneField with AUTH_USER_MODEL for flexibility
+    - Separates authentication data from profile data
+    - Allows future expansion without modifying the User model
     """
 
     user = models.OneToOneField(
@@ -41,6 +61,20 @@ class TutorProfile(models.Model):
 
     def __str__(self):
         return self.display_name
+
+# =========================
+# LESSON TYPE MODEL
+# =========================
+    """
+    Represents a type of lesson offered by a tutor.
+
+    Each lesson defines:
+    - Subject category
+    - Skill level
+    - Duration
+    - Pricing
+    - Availability status
+    """
 
 
 class LessonType(models.Model):
@@ -99,7 +133,13 @@ class LessonType(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        """
+        Meta config for LessonType model.
+        """
         ordering = ["title"]
 
     def __str__(self):
+        """
+        String representation of the LessonType instance.
+        """
         return f"{self.tutor.display_name} — {self.title}"

@@ -1,10 +1,23 @@
 import django_filters
 from .models import LessonType
 
+"""
+FILTERS FOR TUTORS APP
+
+This module contains custom filter classes used to refine
+lesson search results based on user-selected criteria.
+"""
+
 
 class LessonFilter(django_filters.FilterSet):
-    """A filter class for filtering LessonType
-    instances based on their attributes."""
+    """
+    Provides filtering functionality for LessonType querysets.
+
+    Available filters:
+    - q: Search lesson titles
+    - subject: Filter by subject category
+    - skill_level: Filter by skill level
+    """
 
     q = django_filters.CharFilter(method="filter_title")
 
@@ -19,9 +32,23 @@ class LessonFilter(django_filters.FilterSet):
     )
 
     class Meta:
+        """
+        Configure the model and fields available for filtering.
+        """
+
         model = LessonType
         fields = ["q", "subject", "skill_level"]
 
     def filter_title(self, queryset, name, value):
-        """Filter the queryset based on the title of the lesson type."""
+        """
+        Perform a case-insensitive partial match against lesson titles.
+
+        Args:
+            queryset: The queryset being filtered.
+            name: The filter field name.
+            value: The search term entered by the user.
+
+        Returns:
+            QuerySet: Filtered lessons matching the supplied title text.
+        """
         return queryset.filter(title__icontains=value)
