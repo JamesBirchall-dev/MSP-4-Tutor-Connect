@@ -1,0 +1,11 @@
+<h1>My Bookings</h1>
+
+{% for booking in bookings %}
+    <div>
+        <h3>{{ booking.lesson.title }}</h3>
+        <p>{{ booking.booking_date }} at {{ booking.booking_time }}</p>
+        <p>Status: {{ booking.status }}</p>
+    </div>
+{% empty %}
+    <p>No bookings yet.</p>
+{% endfor %}
