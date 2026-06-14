@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.models import User
 from .models import TutorProfile, LessonType
 from .filters import LessonFilter
+from django.core.paginator import Paginator
 
 
 """
@@ -73,12 +74,17 @@ def lesson_list(request, tutor_pk):
 
     lesson_filter = LessonFilter(request.GET, queryset=queryset)
 
+    paginator = Paginator(lesson_filter.qs, 10)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     return render(
         request, 'tutors/lesson_list.html',
         {
-            'tutor': tutor,
-            'lessons': lesson_filter.qs,
-            'filter': lesson_filter,
+            "tutor": tutor,
+            "page_obj": page_obj,
+            "filter": lesson_filter,
         }
     )
 
