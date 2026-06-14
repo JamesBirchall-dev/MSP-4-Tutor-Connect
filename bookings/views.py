@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from tutors.models import LessonType
 from .forms import BookingForm
 from .models import Booking
@@ -46,21 +47,41 @@ def booking_list(request):
         })
 
 
+@login_required
 def booking_update(request, pk):
-    """Display a temporary booking update placeholder view."""
-    booking = get_object_or_404(Booking, id=pk)
-    if request.method == 'POST':
-        form = BookingForm(request.POST, instance=booking)
-        if form.is_valid():
-            form.save()
-            return redirect('bookings:booking_list')
-    else:
-        form = BookingForm(instance=booking)
+    """Update an existing booking for the logged-in user.
+    Args:
+        pk (int): Primary key of the booking to update
+        Returns:
+        HttpResponse: The HTTP response for the booking update view
+    """
 
-    return render(request, 'bookings/booking_form.html', {
-        'form': form,
-        'lesson': booking.lesson_type,
-        })
+    booking = get_object_or_404(
+        Booking,
+        pk=pk,
+        student=request.user
+        )
+    if booking.status != "pending":
+        messages.error(request, "You cannot edit this booking")
+        return redirect("bookings:booking_detail", pk=booking.pk)
+
+    form = BookingForm(request.POST or None, instance=booking)
+
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Booking updated successfully")
+        return redirect("bookings:booking_detail", pk=booking.pk)
+
+    form = BookingForm(request.POST or None, instance=booking)
+
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Booking updated successfully")
+        return redirect("bookings:booking_detail", pk=booking.pk)
+    return render(request, "bookings/booking_form.html", {
+        "form": form,
+        "booking": booking,
+    })
 
 
 @login_required
