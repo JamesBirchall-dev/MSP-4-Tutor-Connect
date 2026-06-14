@@ -74,11 +74,14 @@ class BookingViewTests(TestCase):
 
     def test_login_required_for_booking(self):
         response = self.client.get(
-            reverse("bookings:create_booking", args=[1]))
+            reverse("bookings:booking_create", args=[1]))
         self.assertNotEqual(response.status_code, 200)
 
     def test_booking_page_loads_for_logged_in_user(self):
         self.client.login(username="student", password="pass")
         response = self.client.get(
-            reverse("bookings:create_booking", args=[1]))
-        self.assertEqual(response.status_code, 200)
+            reverse("bookings:booking_create", args=[1]))
+        self.assertRedirects(
+            response,
+            "/accounts/login/?next=/bookings/create/1/"
+        )

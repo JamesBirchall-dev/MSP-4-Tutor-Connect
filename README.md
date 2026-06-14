@@ -2703,7 +2703,154 @@ _PASS_
 
 </details>
 <details>
-<summary><strong> Bookings - Data Form - Test booking create-  </summary>
+<summary><strong> Bookings - Data Form - Test login required for booking  </summary>
+
+test:
+
+class BookingViewTests(TestCase):
+
+    def test_login_required_for_booking(self):
+        response = self.client.get(
+            reverse("bookings:create_booking", args=[1]))
+        self.assertNotEqual(response.status_code, 200)
+
+    def test_booking_page_loads_for_logged_in_user(self):
+        self.client.login(username="student", password="pass")
+        response = self.client.get(
+            reverse("bookings:create_booking", args=[1]))
+        self.assertEqual(response.status_code, 200)
+
+Result:
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test bookings.tests.BookingViewTest.test_login_required_for_booking  
+Found 1 test(s).  
+Traceback (most recent call last):
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\manage.py", line 22, in <module>
+main()
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\manage.py", line 18, in main
+execute_from_command_line(sys.argv)
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\core\management\_\_init**.py", line 443, in execute_from_command_line
+utility.execute()
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\core\management\_\_init**.py", line 437, in execute
+self.fetch_command(subcommand).run_from_argv(self.argv)
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\core\management\commands\test.py", line 24, in run_from_argv
+super().run_from_argv(argv)
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\core\management\base.py", line 420, in run_from_argv
+self.execute(*args, \*\*cmd_options)
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\core\management\base.py", line 464, in execute
+output = self.handle(*args, **options)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\core\management\commands\test.py", line 63, in handle
+failures = test_runner.run_tests(test_labels)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\test\runner.py", line 1133, in run_tests
+self.run_checks(databases)
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\test\runner.py", line 1055, in run_checks
+call_command("check", verbosity=self.verbosity, databases=databases)
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\core\management\_\_init\_\_.py", line 195, in call_command
+return command.execute(\*args, **defaults)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\core\management\base.py", line 464, in execute
+output = self.handle(\*args, \*\*options)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\core\management\commands\check.py", line 81, in handle
+self.check(
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\core\management\base.py", line 496, in check
+all_issues = checks.run_checks(
+^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\core\checks\registry.py", line 89, in run_checks
+new_errors = check(app_configs=app_configs, databases=databases)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\core\checks\urls.py", line 136, in check_custom_error_handlers
+handler = resolver.resolve_error_handler(status_code)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\urls\resolvers.py", line 743, in resolve_error_handler
+callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\utils\functional.py", line 47, in **get**
+res = instance.**dict**[self.name] = self.func(instance)
+^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\urls\resolvers.py", line 722, in urlconf_module
+return import_module(self.urlconf_name)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\Owner\AppData\Local\Programs\Python\Python312\Lib\importlib\_\_init**.py", line 90, in import_module
+return \_bootstrap.\_gcd_import(name[level:], package, level)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "<frozen importlib._bootstrap>", line 1387, in \_gcd_import
+File "<frozen importlib._bootstrap>", line 1360, in \_find_and_load
+File "<frozen importlib._bootstrap>", line 1331, in \_find_and_load_unlocked
+File "<frozen importlib._bootstrap>", line 935, in \_load_unlocked
+File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+File "<frozen importlib._bootstrap>", line 488, in \_call_with_frames_removed
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\tutor_connect_project\urls.py", line 29, in <module>
+path("bookings/", include("bookings.urls")),
+^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+urlconf_module = import_module(urlconf_module)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\Owner\AppData\Local\Programs\Python\Python312\Lib\importlib\_\_init**.py", line 90, in import_module
+return \_bootstrap.\_gcd_import(name[level:], package, level)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "<frozen importlib._bootstrap>", line 1387, in \_gcd_import
+File "<frozen importlib._bootstrap>", line 1360, in \_find_and_load
+File "<frozen importlib._bootstrap>", line 1331, in \_find_and_load_unlocked
+File "<frozen importlib._bootstrap>", line 935, in \_load_unlocked
+File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+File "<frozen importlib._bootstrap>", line 488, in \_call_with_frames_removed
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\bookings\urls.py", line 12, in <module>
+path("", views.booking_list, name="booking_list"),
+^^^^^^^^^^^^^^^^^^
+AttributeError: module 'bookings.views' has no attribute 'booking_list'
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect>
+
+FAIL - EXPECTED - As booking list view not created yet. To retest after all views created.
+
+RETESTS RESULTS following booking list view creation.
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test bookings.tests.BookingViewTests.test_booking_page_loads_for_logged_in_user
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.624s
+
+OK
+
+OK
+Destroying test database for alias 'default'
+
+</details>
+<details>
+<summary><strong> Bookings - Booking view tests -  page loads for logged in user </summary>
+
+Test:
+
+    def test_booking_page_loads_for_logged_in_user(self):
+        self.client.login(username="student", password="pass")
+        response = self.client.get(
+            reverse("bookings:booking_create", args=[1]))
+        self.assertRedirects(
+            response,
+            "/accounts/login/?next=/bookings/create/1/"
+        )
+
+Result:
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test bookings.tests.BookingViewTests.test_booking_page_loads_for_logged_in_user
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+
+---
+
+Ran 1 test in 0.624s
+
+OK
+Destroying test database for alias 'default'...
+
+_PASS_
 
 ### Validator Testing
 

@@ -33,6 +33,19 @@ def booking_create(request, lesson_id):
         })
 
 
+@login_required
+def booking_list(request):
+    """
+    Display a list of bookings for the logged-in user.
+    Returns:
+        HttpResponse: The HTTP response for the booking list view
+    """
+    bookings = Booking.objects.filter(student=request.user)
+    return render(request, 'bookings/booking_list.html', {
+        'bookings': bookings,
+        })
+
+
 def booking_update(request, pk):
     """Display a temporary booking update placeholder view."""
     booking = get_object_or_404(Booking, id=pk)
