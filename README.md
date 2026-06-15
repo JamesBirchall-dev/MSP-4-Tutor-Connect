@@ -2890,6 +2890,128 @@ Ran 1 test in 1.512s
 OK
 Destroying test database for alias 'default'...
 
+</details>
+
+TroubleShooting Code:
+
+    def test_booking_update_page_loads(self):
+
+        login_success = self.client.login(
+            username="student",
+            password="pass",
+        )
+
+        print(f"LOGIN SUCCESS: {login_success}")
+
+        response = self.client.get(
+            reverse("bookings:booking_update", args=[self.booking.pk])
+        )
+
+        print(f"STATUS: {response.status_code}")
+
+        if response.status_code == 302:
+            print(f"REDIRECT TO: {response.url}")
+
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test bookings.tests.BookingUpdateViewTests.test_booking_update_page_loads
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+LOGIN SUCCESS: True
+E
+======================================================================
+ERROR: test_booking_update_page_loads (bookings.tests.BookingUpdateViewTests.test_booking_update_page_loads)
+
+---
+
+Traceback (most recent call last):
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\bookings\tests.py", line 175, in test_booking_update_page_loads
+response = self.client.get(
+^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\test\client.py", line 1127, in get
+response = super().get(
+^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\test\client.py", line 475, in get
+return self.generic(
+^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\test\client.py", line 671, in generic
+return self.request(**r)
+^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\test\client.py", line 1090, in request
+self.check_exception(response)
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\test\client.py", line 805, in check_exception
+raise exc_value
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+response = get_response(request)
+^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in \_get_response
+response = wrapped_callback(request, \*callback_args, **callback_kwargs)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in \_view_wrapper
+return view_func(request, \*args, \*\*kwargs)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\bookings\views.py", line 81, in booking_update
+return render(request, "bookings/booking_form.html", {
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+content = loader.render_to_string(template_name, context, request, using=using)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+template = get_template(template_name, using=using)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+return engine.get_template(template_name)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+return Template(self.engine.get_template(template_name), self)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\template\engine.py", line 186, in get_template
+template, origin = self.find_template(template_name)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\template\engine.py", line 159, in find_template
+template = loader.get_template(name, skip=skip)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+template = super().get_template(template_name, skip)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+return Template(
+^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\template\base.py", line 157, in **init**
+self.nodelist = self.compile_nodelist()
+^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\template\base.py", line 199, in compile_nodelist
+nodelist = parser.parse()
+^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\template\base.py", line 585, in parse
+raise self.error(token, e)
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\template\base.py", line 583, in parse
+compiled_result = compile_func(self, token)
+^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\template\loader_tags.py", line 307, in do_extends
+nodelist = parser.parse()
+^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\template\base.py", line 585, in parse
+raise self.error(token, e)
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\template\base.py", line 583, in parse
+compiled_result = compile_func(self, token)
+^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\template\loader_tags.py", line 235, in do_block
+nodelist = parser.parse(("endblock",))
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\template\base.py", line 590, in parse
+self.unclosed_block_tag(parse_until)
+File "C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\.venv\Lib\site-packages\django\template\base.py", line 657, in unclosed_block_tag
+raise self.error(token, msg)
+django.template.exceptions.TemplateSyntaxError: Template: C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect\templates\bookings\booking_form.html, Unclosed tag on line 3: 'block'. Looking for one of: endblock.
+
+---
+
+Ran 1 test in 1.589s
+
+FAILED (errors=1)
+Destroying test database for alias 'default'...
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect>
+
 ### Validator Testing
 
 _Automated validation and tools used._
