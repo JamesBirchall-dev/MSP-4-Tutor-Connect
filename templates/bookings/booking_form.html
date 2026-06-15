@@ -1,7 +1,19 @@
-<h1>Book: {{ lesson.title }}</h1>
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{% if lesson %}
+    Book: {{ lesson.title }}
+{% else %}
+    Update Booking
+{% endif %}</h1>
 
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Book Lesson</button>
+    <button type="submit">
+        {% if booking %}Update Booking
+        {% else %}Book Lesson
+        {% endif %}
+    </button>
 </form>
