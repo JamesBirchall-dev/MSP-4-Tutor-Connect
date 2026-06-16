@@ -97,3 +97,15 @@ def booking_delete(request, pk):
     return render(request, "bookings/confirm_cancel.html", {
         "booking": booking
     })
+
+
+@login_required
+def booking_detail(request, pk):
+    """Display the details of a specific booking for the logged-in user.
+    Args:
+        pk (int): Primary key of the booking to view
+    """
+    booking = get_object_or_404(Booking, pk=pk, student=request.user)
+    return render(request, "bookings/booking_detail.html", {
+        "booking": booking
+    })
