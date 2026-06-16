@@ -5,6 +5,18 @@
         <h3>{{ booking.lesson.title }}</h3>
         <p>{{ booking.booking_date }} at {{ booking.booking_time }}</p>
         <p>Status: {{ booking.status }}</p>
+
+        <a href="{% url 'bookings:booking_detail' booking.pk %}">
+            View
+        </a>
+
+        <a href="{% url 'bookings:booking_update' booking.pk %}">
+            Edit
+        </a>
+
+        <a href="{% url 'bookings:booking_delete' booking.pk %}">
+            Cancel
+        </a>
     </div>
 {% empty %}
     <p>No bookings yet.</p>
