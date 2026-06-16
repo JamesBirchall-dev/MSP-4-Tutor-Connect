@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Booking Details</h1>
+    <p>Date: {{ booking.booking_date }}</p>
+    <p>Time: {{ booking.booking_time }}</p>
+    <p>Status: {{ booking.status }}</p>
+    <p>Notes: {{ booking.notes }}</p>
+
+    <a href="{% url 'bookings:booking_update' booking.pk %}">
+    Edit Booking
+</a>
+
+<a href="{% url 'bookings:booking_list' %}">
+    Back to Bookings
+</a>
+{% endblock %}
