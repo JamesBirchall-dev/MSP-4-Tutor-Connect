@@ -164,6 +164,8 @@ class BookingUpdateViewTests(TestCase):
         )
 
     def test_booking_update_page_loads(self):
+        """Test that the booking update page loads correctly
+        for the logged-in user."""
         self.client.login(username="testuserstudent", password="pass")
 
         response = self.client.get(
@@ -173,3 +175,115 @@ class BookingUpdateViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Update Booking")
         self.assertEqual(response.status_code, 200)
+
+    def test_booking_can_be_updated(self):
+        """Test that a booking can be updated successfully."""
+        self.client.login(
+            username="testuserstudent",
+            password="pass",
+        )
+
+        self.client.post(
+            reverse(
+                "bookings:booking_update",
+                args=[self.booking.pk]
+            ),
+            {
+                "booking_date": "2026-08-01",
+                "booking_time": "15:00",
+                "notes": "Updated notes",
+            }
+        )
+
+        self.booking.refresh_from_db()
+
+        self.assertEqual(
+            str(self.booking.booking_date),
+            "2026-08-01"
+        )
+
+        self.assertEqual(
+            str(self.booking.booking_time),
+            "15:00:00"
+        )
+
+        self.assertEqual(
+            self.booking.notes,
+            "Updated notes"
+        )
+
+
+class BookingDetailViewTests(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username="testuserstudent",
+            password="pass",
+        )
+
+        self.tutor = TutorProfile.objects.create(
+            user=self.user,
+            display_name="Test Tutor",
+            bio="Experienced tutor",
+            experience="5 years",
+            location="Online",
+            is_active=True,
+        )
+
+        self.lesson_type = LessonType.objects.create(
+            tutor=self.tutor,
+            title="Math Tutoring",
+            subject="math",
+            skill_level="beginner",
+            duration_minutes=60,
+            price=50.00,
+        )
+
+        self.booking = Booking.objects.create(
+            student=self.user,
+            lesson_type=self.lesson_type,
+            booking_date="2024-06-15",
+            booking_time="14:00:00",
+        )
+
+    def test_booking_detail_page_loads(self):
+        """Test that the booking detail page loads
+        correctly for the logged-in user.
+        """
+        self.client.login(username="testuserstudent", password="pass")
+
+        response = self.client.get(
+            reverse("bookings:booking_detail", args=[self.booking.pk])
+        )
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_booking_detail_requires_login(self):
+        response = self.client.get(
+            reverse(
+                "bookings:booking_detail",
+                args=[self.booking.pk]
+            )
+        )
+
+        self.assertEqual(response.status_code, 302)
+
+    def test_user_cannot_view_another_users_booking(self):
+        """Test that a user cannot view another user's booking detail page.
+        """
+        User.objects.create_user(
+            username="otheruser",
+            password="pass",
+        )
+        self.client.login(
+            username="otheruser",
+            password="pass",
+        )
+
+        response = self.client.get(
+            reverse(
+                "bookings:booking_detail",
+                args=[self.booking.pk]
+            )
+        )
+
+        self.assertEqual(response.status_code, 404)
