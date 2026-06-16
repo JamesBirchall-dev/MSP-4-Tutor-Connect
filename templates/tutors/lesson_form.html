@@ -1,5 +1,15 @@
 {% if lesson %}
-<h1>Update Lesson - {{ lesson.title }}</h1>
+    <h1>Update Lesson - {{ lesson.title }}</h1>
 {% else %}
-<h1>Create Lesson</h1>
+    <h1>Create Lesson</h1>
 {% endif %}
+
+<form method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+        {% if lesson %}Update Lesson{% else %}Create Lesson{% endif %}
+    </button>
+</form>

@@ -49,33 +49,44 @@ def booking_list(request):
 
 @login_required
 def booking_update(request, pk):
-    """Update an existing booking for the logged-in user.
-    Args:
-        pk (int): Primary key of the booking to update
-        Returns:
-        HttpResponse: The HTTP response for the booking update view
-    """
-
+    """ Update an existing booking for the logged-in user."""
     booking = get_object_or_404(
         Booking,
         pk=pk,
         student=request.user
-        )
+    )
+
     if booking.status != "pending":
         messages.error(request, "You cannot edit this booking")
-        return redirect("bookings:booking_detail", pk=booking.pk)
+        return redirect(
+            "bookings:booking_detail",
+            pk=booking.pk
+        )
 
-    form = BookingForm(request.POST or None, instance=booking)
+    form = BookingForm(
+        request.POST or None,
+        instance=booking
+    )
 
     if request.method == "POST" and form.is_valid():
         form.save()
-        messages.success(request, "Booking updated successfully")
-        return redirect("bookings:booking_detail", pk=booking.pk)
+        messages.success(
+            request,
+            "Booking updated successfully"
+        )
+        return redirect(
+            "bookings:booking_detail",
+            pk=booking.pk
+        )
 
-    return render(request, "bookings/booking_form.html", {
-        "form": form,
-        "booking": booking,
-    })
+    return render(
+        request,
+        "bookings/booking_form.html",
+        {
+            "form": form,
+            "booking": booking,
+        }
+    )
 
 
 @login_required
