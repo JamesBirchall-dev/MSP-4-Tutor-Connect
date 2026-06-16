@@ -67,17 +67,11 @@ def booking_update(request, pk):
 
     form = BookingForm(request.POST or None, instance=booking)
 
-    if form.is_valid():
+    if request.method == "POST" and form.is_valid():
         form.save()
         messages.success(request, "Booking updated successfully")
         return redirect("bookings:booking_detail", pk=booking.pk)
 
-    form = BookingForm(request.POST or None, instance=booking)
-
-    if form.is_valid():
-        form.save()
-        messages.success(request, "Booking updated successfully")
-        return redirect("bookings:booking_detail", pk=booking.pk)
     return render(request, "bookings/booking_form.html", {
         "form": form,
         "booking": booking,
