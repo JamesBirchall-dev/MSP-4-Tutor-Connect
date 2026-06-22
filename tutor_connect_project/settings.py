@@ -142,6 +142,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# ---------------------------------------------------------------------
+# Stripe
+# ---------------------------------------------------------------------
+
+STRIPE_PUBLIC_KEY = config("STRIPE_PUBLIC_KEY", default="")
+STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY", default="")
+STRIPE_WEBHOOK_SECRET = config("STRIPE_WEBHOOK_SECRET", default="")
 
 # ---------------------------------------------------------------------
 # Internationalization
