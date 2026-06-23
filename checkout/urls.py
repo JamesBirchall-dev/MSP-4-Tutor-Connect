@@ -29,4 +29,8 @@ urlpatterns = [
         "cancelled/",
         views.checkout_cancelled,
         name="checkout_cancelled"),
+    path(
+        "webhook/",
+        views.stripe_webhook,
+        name="stripe_webhook"),
 ]
