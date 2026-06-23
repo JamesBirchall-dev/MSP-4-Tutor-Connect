@@ -497,3 +497,50 @@ select:focus {
         flex-direction: column;
     }
 }
+
+/* BOOKING CARDS STYLING */
+
+.booking-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.booking-card h2 {
+    margin: 0;
+}
+/* Booking meta information styling */
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    background-color: var(--color-border);
+    color: var(--color-text);
+}
+/* Status badge for pending bookings */
+.status-pending {
+    background-color: #FBBF24; /* Amber */
+    color: #78350F; /* Dark Amber */
+}
+/* Status badge for confirmed bookings */
+.status-confirmed {
+    background-color: #DCFCE7;
+    color: var(--color-success);
+}
+/* Status badge for cancelled bookings */
+.status-cancelled {
+    background-color: #FEE2E2;
+    color: var(--color-error);
+}
+/* Danger button styling */
+.btn-danger {
+    background-color: var(--color-error);
+    color: var(--color-surface);
+}
+/* Hover effect for danger buttons */
+.btn-danger:hover {
+    background-color: #991B1B;
+    text-decoration: none;
+}
