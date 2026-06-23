@@ -307,17 +307,52 @@ errorlist li {
         grid-template-columns: 1fr;
     }
 }
+/* End of homepage styling */
 
-/* reusable utility classes 
-.container
-.section
-.card
-.grid
-.btn
-.btn-primary
-.btn-secondary
-.btn-danger
-.form-card
-.status-bridge
-
-*/
+/*FORMS STYLING*/
+/* Form card styling */
+.form-card {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+}
+/* Form heading styling */
+.form-card h1 {
+    margin-top: 0;
+    margin-bottom: 1.5rem,
+}
+/* Form group styling */
+.form-group {
+    margin-bottom: 1rem;
+}
+/*  Form label styling */
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+/* Form input styling */
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    font-family: var(--font-body);
+}
+/* Focus state for form inputs */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(31, 111, 91, 0.2);
+}
+/* Form actions styling */
+.form-actions {
+    margin-top: 1.5rem;
+}
