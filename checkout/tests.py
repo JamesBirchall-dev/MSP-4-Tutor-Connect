@@ -264,3 +264,26 @@ class CheckoutSuccessViewTests(TestCase):
             response,
             "Thank you for your payment. Your booking has been confirmed.",
         )
+
+
+class CheckoutCancelledViewTests(TestCase):
+    """Tests for the checkout cancelled view."""
+
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username="testuser",
+            password="testpassword",
+        )
+
+    def test_checkout_cancelled_view(self):
+        """Test that the checkout cancelled view loads correctly."""
+        self.client.login(username="testuser", password="testpassword")
+
+        response = self.client.get(reverse("checkout:checkout_cancelled"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Payment Cancelled")
+        self.assertContains(
+            response,
+            "Your payment was not successful."
+        )
