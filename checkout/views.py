@@ -1,7 +1,12 @@
+from django.urls import reverse
+import stripe
+
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from bookings.models import Booking
+from .models import Payment
 
 
 def checkout(request, booking_pk):
@@ -9,10 +14,53 @@ def checkout(request, booking_pk):
     return HttpResponse(f"Checkout placeholder for booking {booking_pk}")
 
 
+@login_required
 def create_checkout_session(request, booking_pk):
-    """Display a temporary Stripe checkout session placeholder view."""
-    msg = f"Checkout session placeholder for booking {booking_pk}"
-    return HttpResponse(msg)
+    """Create a Stripe Checkout session for the booking."""
+    booking = get_object_or_404(
+        Booking,
+        pk=booking_pk,
+        student=request.user,
+    )
+
+    payment, created = Payment.objects.get_or_create(
+        booking=booking,
+        user=request.user,
+        defaults={"amount": booking.lesson_type.price},
+    )
+
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+
+    session = stripe.checkout.Session.create(
+        payment_method_types=["card"],
+        line_items=[
+            {
+                "price_data": {
+                    "currency": "gbp",
+                    "product_data": {
+                        "name": booking.lesson_type.title,
+                    },
+                    "unit_amount": int(booking.lesson_type.price * 100),
+                },
+                "quantity": 1,
+            }
+        ],
+        metadata={
+            "booking_id": booking.id,
+            "payment_id": payment.id,
+        },
+        success_url=request.build_absolute_uri(
+            reverse("checkout_success")
+        ),
+        cancel_url=request.build_absolute_uri(
+            reverse("checkout_cancelled")
+        ),
+    )
+
+    payment.stripe_checkout_id = session.id
+    payment.stripe_payment_status = session.payment_status
+
+    return redirect(session.url, permanent=False)
 
 
 @login_required
