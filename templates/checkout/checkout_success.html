@@ -1,0 +1,10 @@
+{%extends "base.html"}
+
+{% block title %} Payment Successful {% endblock %}
+
+{% block content %}
+    <h1>Payment Successful</h1>
+    <p>Thank you for your payment. Your booking has been confirmed.</p>
+
+    <a href="{% url 'bookings:booking_list' %}">View My Bookings</a>
+{% endblock %}
