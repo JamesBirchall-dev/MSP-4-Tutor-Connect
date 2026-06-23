@@ -15,6 +15,11 @@ urlpatterns = [
         views.create_checkout_session,
         name="create_checkout_session",
     ),
+    path(
+        "booking/<int:booking_pk>/",
+        views.checkout_review,
+        name="checkout_review",
+         ),
     path("success/", views.checkout_success, name="checkout_success"),
     path("cancelled/", views.checkout_cancelled, name="checkout_cancelled"),
 ]
