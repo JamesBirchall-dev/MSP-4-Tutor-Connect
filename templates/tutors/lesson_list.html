@@ -17,48 +17,58 @@
     <button class="btn btn-primary" type="submit">Filter</button>
 </form>
 
+<!-- Lesson Grid -->
+    <div class="grid two-column">
+    {% for lesson in page_obj %}
+        <article class="card lesson-card">
+            <h2>{{ lesson.title }}</h2>
+                    <p class="lesson-meta">
+                        {{ lesson.subject|title }} | {{ lesson.skill_level|title }}
+                    </p>
 
-<div class="grid two-column">
-{% for lesson in page_obj %}
-    <article class="card lesson-card">
-        <h2>{{ lesson.title }}</h2>
-                <p class="lesson-meta">
-                    {{ lesson.subject|title }} | {{ lesson.skill_level|title }}
-                </p>
+                    <p>{{ lesson.description}}</p>
 
-                <p>{{ lesson.description}}</p>
+                    <p class="lesson-price">
+                        £{{ lesson.price }}
+                    </p>
 
-                <p class="lesson-price">
-                    £{{ lesson.price }}
-                </p>
+            <a class="btn btn-primary" href="{% url 'bookings:booking_create' lesson.pk %}">
+                Book Lesson
+            </a>
+        </article>
+    {% empty %}
+        <article class="card">
+            <p>No lessons found.</p>
+        </article>
+    {% endfor %}
 
-        <a class="btn btn-primary" href="{% url 'bookings:booking_create' lesson.pk %}">
-            Book Lesson
-        </a>
-    </article>
-
-    
-{% empty %}
-    <p>No lessons found.</p>
-{% endfor %}
-
+</div>
 <!--Pagination-->
 
-<div class="pagination">
-    {% if page_obj.has_previous %}
-        <a href="?{{ request.GET.urlencode }}&page={{ page_obj.previous_page_number }}">
-            &laquo; Previous
-        </a>
-    {% endif %}
+    {% if page_obj.paginator.num_pages > 1 %}
+        <nav class="pagination" aria-label="Lesson pagination">
+            {% if page_obj.has_previous %}
+                <a
+                    class="btn btn-outline"
+                    href="?{{ request.GET.urlencode }}&page={{ page_obj.previous_page_number }}"
+                >
+                    Previous
+                </a>
+            {% endif %}
 
-    <span>
-        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-    </span>
-        {% if page_obj.has_next %}
-        <a href="?{{ request.GET.urlencode }}&page={{ page_obj.next_page_number }}">
-            Next &raquo;
-        </a>
+            <span>
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a
+                    class="btn btn-outline"
+                    href="?{{ request.GET.urlencode }}&page={{ page_obj.next_page_number }}"
+                >
+                    Next
+                </a>
+            {% endif %}
+        </nav>
     {% endif %}
 </div>
-
 {% endblock %}
