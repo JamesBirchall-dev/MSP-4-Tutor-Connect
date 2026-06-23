@@ -8,10 +8,21 @@
     <title>{% block title %}Tutor Connect{% endblock %}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link
+    rel="icon"
+    type="image/x-icon"
+    href="{% static 'images/favicon.ico' %}"
+    >
 </head>
 <body>
     <header class="site-header">
-        <a class="site-logo" href="{% url 'home' %}">Tutor Connect</a>
+        <a class="site-logo" href="{% url 'home' %}">
+    <img
+        src="{% static 'images/logo400x100.webp' %}"
+        alt="Tutor Connect"
+        height="100"
+    >
+        </a>
         <nav class="site-nav" aria-label="Main navigation">
             <a href="{% url 'home' %}">Home</a>
             <a href="{% url 'tutors:tutor_list' %}">Tutors</a>
