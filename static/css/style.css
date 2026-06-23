@@ -283,8 +283,30 @@ errorlist li {
     grid-template-columns: repeat(3, 1fr);
 }
 
+/* Card styling */
 
+/* Card heading styling */
+.card h3 {
+    margin-top: 0;
+    font-size: 1.5rem;
+}
+/* Card paragraph styling */
+.card p {
+    color: var(--color-muted);
+    font-size: 1rem;
+}
 
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    /* Adjust hero section padding for smaller screens */
+    .hero {
+        padding: 3em 0;
+    }
+    /* Adjust hero heading font size for smaller screens */
+    .three-column {
+        grid-template-columns: 1fr;
+    }
+}
 
 /* reusable utility classes 
 .container
