@@ -64,3 +64,32 @@ button:hover,
     border-radius: 0.75rem;
     padding: 1.5rem;
 }
+
+/* Layout */
+
+.site-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    min-height: 70vh; /* Ensure main content takes up at least 70% of the viewport height */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* reusable utility classes 
+.container
+.section
+.card
+.grid
+.btn
+.btn-primary
+.btn-secondary
+.btn-danger
+.form-card
+.status-bridge
+
+*/
