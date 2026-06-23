@@ -9,7 +9,7 @@ Log in | Tutor Connect
 {% block content %}
 <!-- Main page content starts here -->
 
-<section class="container narrow">
+<section class="form-card">
     <!-- Container used to limit page width and improve readability -->
 
     <h1>Log in to your account</h1>
@@ -21,7 +21,7 @@ Log in | Tutor Connect
         <!-- CSRF token -->
         {% csrf_token %}
 
-        <! -- Display form-wide validation errors-->
+        <!-- Display form-wide validation errors -->
     
         {% if form.non_field_errors %}
             {% for error in form.non_field_errors %}
