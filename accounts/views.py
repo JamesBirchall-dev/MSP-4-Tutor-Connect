@@ -5,6 +5,8 @@ from django.shortcuts import render, redirect
 
 from .forms import RegisterForm
 
+from tutors.models import TutorProfile
+
 
 def register(request):
     """ Allow anyone to create a new account. """
@@ -26,5 +28,15 @@ def register(request):
 
 @login_required
 def dashboard(request):
-    """ A simple dashboard page for logged-in users. """
-    return render(request, "accounts/dashboard.html")
+    """ Display the dashboard for logged-in users. """
+    tutor_profile = TutorProfile.objects.filter(
+        user=request.user
+    ).first()
+
+    return render(
+        request,
+        "accounts/dashboard.html",
+        {
+            "tutor_profile": tutor_profile,
+        },
+    )
