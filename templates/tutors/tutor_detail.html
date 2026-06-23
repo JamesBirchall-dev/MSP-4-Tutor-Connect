@@ -6,7 +6,7 @@
 {% block content %}
 
 <!-- Tutor Detail -->
-<section class="container">
+<div class="container">
   <article class="card tutor-detail">
     {% if tutor.image %}
     <!-- Display the tutor's image if available -->
@@ -19,7 +19,9 @@
     <!-- Tutor Details -->
     <div class="tutor-detail-content">
       <h1>{{ tutor.display_name }}</h1>
-      <p>{{ tutor.bio|linebreaks }}</p>
+      <div class="tutor-bio">
+          {{ tutor.bio|linebreaks }}
+      </div>
 
       <div class="profile-meta">
         <p><strong>Location:</strong> {{ tutor.location|default:"Not specified" }}</p>
@@ -31,7 +33,7 @@
       </a>
     </div>
   </article>
-</section> 
+</div>
   
 {% endblock %}
 
