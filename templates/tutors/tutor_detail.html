@@ -26,7 +26,7 @@
         <p><strong>Experience:</strong> {{ tutor.experience|default:"Not specified" }}</p>
       </div>
       <!-- Book Lesson Button -->
-      <a class="btn btn-primary" href="{% url 'bookings:booking_create' tutor.pk %}">
+      <a class="btn btn-primary" href="{% url 'tutors:lesson_list' tutor.pk %}">
         View Lessons
       </a>
     </div>
