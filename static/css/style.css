@@ -131,6 +131,16 @@ button:hover,
     text-decoration: none;
 }
 
+/* logout form styling */
+
+.logout-form {
+    margin: 0;
+}
+
+.logout-form button {
+    padding: 0.6rem 1rem;
+    border-radius: 999px;
+}
 
 /* reusable utility classes 
 .container
