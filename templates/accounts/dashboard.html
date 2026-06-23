@@ -31,9 +31,19 @@ Dashboard | Tutor Connect
         </article>
 
         <article class="card dashboard-card">
-            <h2>Create Tutor Profile</h2>
-            <p>Share your teaching expertise and connect with students.</p>
-            <a class="btn btn-secondary" href="{% url 'tutors:tutor_create' %}">Create Profile</a>
+            <h2>Tutor Profile</h2>
+
+            {% if tutor_profile %}
+                <p>Manage your tutor profile and connect with students.</p>
+                <a class="btn btn-secondary" href="{% url 'tutors:tutor_update' tutor_profile.pk %}">
+                    Edit Profile
+                </a>
+            {% else %}
+                <p>Create your tutor profile to connect with students.</p>
+                <a class="btn btn-secondary" href="{% url 'tutors:tutor_create' %}">
+                    Create Profile
+                </a>
+            {% endif %}
         </article>        
     </div>
 </section>
