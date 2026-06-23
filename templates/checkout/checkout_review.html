@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+<!-- Review Booking -->
+{% block title %}Review Booking{% endblock %}
+
+{% block content %}
+    <h1>Review Your Booking</h1>
+    <!-- Display booking details -->
+    <p><strong>Lesson:</strong> {{ booking.lesson_type.title }}</p>
+    <p><strong>Tutor:</strong> {{ booking.lesson_type.tutor.display_name }}</p>
+    <p><strong>Date:</strong> {{ booking.booking_date }}</p>
+    <p><strong>Time:</strong> {{ booking.booking_time }}</p>
+    <p><strong>Duration:</strong> {{ booking.lesson_type.duration }} minutes</p>
+    <p><strong>Price:</strong> ${{ booking.lesson_type.price }}</p>
+
+    <!--Edit booking option before proceed to checkout-->
+<a href="{% url 'bookings:booking_update' booking.pk %}">Edit Booking</a>
+
+{% endblock %}
