@@ -439,3 +439,61 @@ select:focus {
     }
 }
 
+/* LESSON LIST PAGE STYLING */
+
+/* Lesson list layout styling */
+.two-column {
+    grid-template-columns: repeat(2, 1fr);
+}
+/* Lesson list card styling */
+.filter-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+/* Lesson card styling */
+.lesson-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+/* Lesson card heading styling */
+.lesson-card h2 {
+    margin: 0;
+}
+/* Lesson meta information styling */
+.lesson-meta {
+    color: var(--color-muted);
+    font-weight: 600;
+}
+/* Lesson price styling */
+.lesson-price {
+    color: var(--color-secondary);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+/* Lesson card button styling */
+.lesson-card .btn {
+    margin-top: auto;
+    align-self: flex-start;
+}
+/* Pagination styling */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .two-column {
+        grid-template-columns: 1fr;
+    }
+
+    .pagination {
+        flex-direction: column;
+    }
+}
