@@ -1,0 +1,66 @@
+/* Root variables for colors and fonts */
+
+:root {
+    --color-primary: #1F6F5B;
+    --color-secondary: #D97706;
+    --color-background: #FAFAF7;
+    --color-surface: #FFFFFF;
+    --color-text: #1F2933;
+    --color-muted: #6B7280;
+    --color-border: #E5E7EB;
+    --color-success: #15803D;
+    --color-error: #B91C1C;
+
+    --font-heading: "Playfair Display", Georgia, serif;
+    --font-body: "Inter", Arial, sans-serif;
+}
+
+/* Base styles for the entire site */
+
+body {
+    margin: 0;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-heading);
+    color: var(--color-text);
+    line-height: 1.2;
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button,
+.btn {
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+    border: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-family: var(--font-body);
+}
+
+button:hover,
+.btn:hover {
+    background-color: #185947;
+}
+
+.card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+}
