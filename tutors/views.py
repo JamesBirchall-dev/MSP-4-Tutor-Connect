@@ -87,17 +87,22 @@ def tutor_update(request, pk):
     tutor = get_object_or_404(TutorProfile, pk=pk)
 
     if request.method == "POST":
-        form = TutorProfileForm(request.POST, request.FILES, instance=tutor)
-        if form.is_valid():
-            form.save()
-            return redirect("tutors:tutor_detail", pk=tutor.pk)
-    else:
-        form = TutorProfileForm(instance=tutor)
+        tutor.display_name = request.POST["display_name"]
+        tutor.bio = request.POST["bio"]
+        tutor.experience = request.POST["experience"]
+        tutor.location = request.POST["location"]
+        tutor.save()
 
-    return render(request, "tutors/tutor_form.html", {
-        "form": form,
-        "tutor": tutor
-    })
+        return redirect("tutors:tutor_detail", pk=tutor.pk)
+
+    return render(
+        request,
+        "tutors/tutor_form.html",
+        {
+            "form": TutorProfileForm(instance=tutor),
+            "tutor": tutor,
+        },
+    )
 
 
 def tutor_delete(request, pk):

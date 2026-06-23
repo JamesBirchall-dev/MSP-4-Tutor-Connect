@@ -185,6 +185,7 @@ class TutorUpdateViewTests(TestCase):
                 "bio": "Updated bio",
                 "experience": "5 years",
                 "location": "New York",
+                "is_active": True,
             },
         )
         self.assertEqual(response.status_code, 302)
@@ -205,6 +206,7 @@ class TutorUpdateViewTests(TestCase):
                 "bio": "Redirected bio",
                 "experience": "4 years",
                 "location": "Paris",
+                "is_active": True,
             },
         )
 
