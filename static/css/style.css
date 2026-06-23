@@ -221,7 +221,7 @@ errorlist li {
 }
 
 /* HOMEPAGE STYLING */
-
+/* Hero section styling */
 .hero {
     background: linear-gradient(
         135deg,
@@ -231,41 +231,56 @@ errorlist li {
     border-bottom: 1px solid var(--color-border);
     padding: 4rem 0;
 }
-
+/* Hero heading styling */
 .hero h1 {
     max-width: 700px;
     font-size: clamp(2.25rem, 5vw, 4rem);
     margin-bottom: 1rem;
 }
-
+/* Hero paragraph styling */
 .hero p {
     max-width: 600px;
     color: var(--color-muted);
     font-size: 1.2rem;
     margin-bottom: 2rem;
 }
-
+/* Button row styling */
 .button-row {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
 }
-
+/* Button styles for primary and outline buttons */
 .btn-primary {
     background-color: var(--color-primary);
     color: var(--color-surface);
 }
-
+/* Hover effect for primary buttons */
 .btn-outline {
     background-color: transparent;
     color: var(--color-primary);
     border: 2px solid var(--color-primary);
 }
-
+/* Hover effect for outline buttons */
 .btn-outline:hover {
     background-color: var(--color-primary);
     color: var(--color-surface);
     text-decoration: none;
+}
+/* Section styling */
+.section {
+    padding: 3rem 0;
+}
+
+/* Grid layout for sections */
+.grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+/* Three-column grid layout for larger screens */
+.three-column {
+    grid-template-columns: repeat(3, 1fr);
 }
 
 
