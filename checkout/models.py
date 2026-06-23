@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 
-from bookings.admin import Booking
+from bookings.models import Booking
 
 
 class Payment(models.Model):
