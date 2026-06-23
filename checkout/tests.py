@@ -1,6 +1,9 @@
+from unittest.mock import Mock, patch
+
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+from bookings.tests import User
 from tutors.models import TutorProfile, LessonType
 from bookings.models import Booking
 from checkout.models import Payment
@@ -135,3 +138,106 @@ class CheckoutReviewTests(TestCase):
 
         self.assertEqual(response.status_code, 404)
         # Not found for other users
+
+
+class CheckoutSessionTests(TestCase):
+    """Tests for creating Stripe Checkout sessions."""
+
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username="testuser",
+            password="testpassword",
+            email="student@example.com",
+        )
+
+        self.tutor_user = User.objects.create_user(
+            username="tutoruser",
+            password="tutorpassword",
+        )
+
+        self.tutor_profile = TutorProfile.objects.create(
+            user=self.tutor_user,
+            display_name="Test Tutor",
+            bio="This is a test tutor.",
+            experience="5 years of teaching experience.",
+            location="online",
+            is_active=True,
+        )
+
+        self.lesson_type = LessonType.objects.create(
+            tutor=self.tutor_profile,
+            title="Test Lesson",
+            subject="math",
+            skill_level="beginner",
+            duration_minutes=60,
+            price=50.00,
+        )
+
+        self.booking = Booking.objects.create(
+            student=self.user,
+            lesson_type=self.lesson_type,
+            booking_date="2023-10-01",
+            booking_time="10:00:00",
+        )
+
+    @patch("checkout.views.stripe.checkout.Session.create")
+    def test_create_checkout_session(self, mock_stripe_session_create):
+        """Test that a Stripe Checkout session is created."""
+        self.client.login(
+            username="testuser",
+            password="testpassword",
+        )
+
+        mock_stripe_session_create.return_value = Mock(
+            id="cs_test_123",
+            payment_status="unpaid",
+            url="https://checkout.stripe.com/test_session",
+        )
+
+        response = self.client.post(
+            reverse(
+                "checkout:create_checkout_session",
+                args=[self.booking.pk],
+            )
+        )
+
+        payment = Payment.objects.get(
+            booking=self.booking,
+            user=self.user,
+        )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(
+            response.url,
+            "https://checkout.stripe.com/test_session",
+        )
+
+        self.assertEqual(payment.stripe_checkout_id, "cs_test_123")
+        self.assertEqual(payment.stripe_payment_status, "unpaid")
+        self.assertFalse(payment.paid)
+
+        call_kwargs = mock_stripe_session_create.call_args.kwargs
+
+        self.assertEqual(call_kwargs["mode"], "payment")
+        self.assertEqual(call_kwargs["payment_method_types"], ["card"])
+        self.assertEqual(call_kwargs["line_items"][0]["quantity"], 1)
+        self.assertEqual(
+            call_kwargs["line_items"][0]["price_data"]["currency"],
+            "gbp",
+        )
+        self.assertEqual(
+            call_kwargs["line_items"][0]["price_data"]["product_data"]["name"],
+            self.lesson_type.title,
+        )
+        self.assertEqual(
+            call_kwargs["line_items"][0]["price_data"]["unit_amount"],
+            5000,
+        )
+        self.assertEqual(
+            call_kwargs["metadata"]["booking_id"],
+            self.booking.pk,
+        )
+        self.assertEqual(
+            call_kwargs["metadata"]["payment_id"],
+            payment.pk,
+        )

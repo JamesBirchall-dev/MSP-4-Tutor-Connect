@@ -1,6 +1,6 @@
-from django.urls import reverse
 import stripe
 
+from django.urls import reverse
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -31,7 +31,16 @@ def create_checkout_session(request, booking_pk):
 
     stripe.api_key = settings.STRIPE_SECRET_KEY
 
+    success_url = request.build_absolute_uri(
+        reverse("checkout:checkout_success")
+    )
+
+    cancel_url = request.build_absolute_uri(
+        reverse("checkout:checkout_cancelled")
+    )
+
     session = stripe.checkout.Session.create(
+        mode="payment",
         payment_method_types=["card"],
         line_items=[
             {
@@ -49,18 +58,14 @@ def create_checkout_session(request, booking_pk):
             "booking_id": booking.id,
             "payment_id": payment.id,
         },
-        success_url=request.build_absolute_uri(
-            reverse("checkout_success")
-        ),
-        cancel_url=request.build_absolute_uri(
-            reverse("checkout_cancelled")
-        ),
+        success_url=success_url,
+        cancel_url=cancel_url,
     )
 
     payment.stripe_checkout_id = session.id
     payment.stripe_payment_status = session.payment_status
-
-    return redirect(session.url, permanent=False)
+    payment.save()
+    return redirect(session.url)
 
 
 @login_required
