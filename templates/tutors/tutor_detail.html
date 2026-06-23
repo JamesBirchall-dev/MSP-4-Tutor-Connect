@@ -1,18 +1,37 @@
 {% extends "base.html" %}
 
-{% block title %}Tutor Detail{% endblock %}
+{% block title %}{{ tutor.display_name }} | Tutor Connect
+{% endblock %}
 
 {% block content %}
 
-<h1>{{ tutor.display_name }}</h1>
+<!-- Tutor Detail -->
+<section class="container">
+  <article class="card tutor-detail">
+    {% if tutor.image %}
+    <!-- Display the tutor's image if available -->
+      <img
+        class="tutor-detail-image"
+        src="{{ tutor.image.url }}"
+        alt="{{ tutor.display_name }}"
+      >
+    {% endif %}
+    <!-- Tutor Details -->
+    <div class="tutor-detail-content">
+      <h1>{{ tutor.display_name }}</h1>
+      <p>{{ tutor.bio|linebreaks }}</p>
 
-<p>{{ tutor.bio|linebreaks }}</p>
-
-
-<ul>
-  <li><strong>Location:</strong> <p>{{ tutor.location|default:"Not specified" }}</p></li>
-  <li><strong>Experience:</strong> <p>{{ tutor.experience|default:"Not specified" }}</p></li>
-</ul>
-
+      <div class="profile-meta">
+        <p><strong>Location:</strong> {{ tutor.location|default:"Not specified" }}</p>
+        <p><strong>Experience:</strong> {{ tutor.experience|default:"Not specified" }}</p>
+      </div>
+      <!-- Book Lesson Button -->
+      <a class="btn btn-primary" href="{% url 'bookings:booking_create' tutor.pk %}">
+        View Lessons
+      </a>
+    </div>
+  </article>
+</section> 
+  
 {% endblock %}
 

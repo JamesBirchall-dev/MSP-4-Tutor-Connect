@@ -401,6 +401,7 @@ select:focus {
 }
 
 .tutor-card-image {
+    display: block;
     width: 100%;
     height: 220px;
     border-radius: 0.75rem;
