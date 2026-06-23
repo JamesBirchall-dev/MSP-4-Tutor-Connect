@@ -1,23 +1,68 @@
-<h1>My Bookings</h1>
+{% extends "base.html" %}
 
-{% for booking in bookings %}
-    <div>
-        <h3>{{ booking.lesson.title }}</h3>
-        <p>{{ booking.booking_date }} at {{ booking.booking_time }}</p>
-        <p>Status: {{ booking.status }}</p>
+{% block title %}My Bookings | Tutor Connect{% endblock %}
 
-        <a href="{% url 'bookings:booking_detail' booking.pk %}">
-            View
-        </a>
-
-        <a href="{% url 'bookings:booking_update' booking.pk %}">
-            Edit
-        </a>
-
-        <a href="{% url 'bookings:booking_delete' booking.pk %}">
-            Cancel
-        </a>
+{% block content %}
+<!-- Main content for the booking list page -->
+<div class="container">
+    <div class="page-header">
+        <h1>My Bookings</h1>
+        <p>View and manage your upcoming tutoring sessions.</p>
     </div>
-{% empty %}
-    <p>No bookings yet.</p>
-{% endfor %}
+<!-- Booking List -->
+    <div class="grid two-column">
+        {% for booking in bookings %}
+            <article class="card booking-card">
+                <h2>{{ booking.lesson_type.title }}</h2>
+
+                <p>
+                    <strong>Tutor:</strong>
+                    {{ booking.lesson_type.tutor.display_name }}
+                </p>
+
+                <p>
+                    <strong>Date:</strong>
+                    {{ booking.booking_date }}
+                </p>
+
+                <p>
+                    <strong>Time:</strong>
+                    {{ booking.booking_time }}
+                </p>
+
+                <p>
+                    <strong>Status:</strong>
+                    <span class="status-badge status-{{ booking.status }}">
+                        {{ booking.status|title }}
+                    </span>
+                </p>
+                <!-- Buttons for booking actions -->
+                <div class="button-row">
+                    <a href="{% url 'bookings:booking_detail' booking.pk %}" class="btn btn-primary">View Details</a>
+                    <a href="{% url 'bookings:booking_update' booking.pk %}" class="btn btn-secondary">Edit</a>
+                    <a href="{% url 'bookings:booking_delete' booking.pk %}" class="btn btn-danger">Cancel</a>
+                    <!-- Conditional button for checkout if the booking status is pending -->
+                    {% if booking.status == 'pending' %}
+                        <a class="btn btn-primary" href="{% url 'checkout:checkout_review' booking.pk %}">
+                            Checkout
+                        </a>
+                    {% endif %}
+                    {% if booking.status == 'pending' %}
+                        <a class="btn btn-primary" href="{% url 'checkout:checkout_review' booking.pk %}">
+                            Checkout
+                        </a>
+                    {% endif %}
+                </div>
+            </article>
+                {% empty %}
+                <!-- Display a message if no bookings are available -->
+            <article class="card">
+                <p>No bookings yet.</p>
+                <a class="btn btn-primary" href="{% url 'tutors:tutor_list' %}">
+                    Browse Tutors
+                </a>
+            </article>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
