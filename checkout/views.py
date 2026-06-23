@@ -7,6 +7,8 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from bookings.models import Booking
 from .models import Payment
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 
 
 def checkout(request, booking_pk):
@@ -95,3 +97,42 @@ def checkout_cancelled(request):
         request,
         "checkout/checkout_cancelled.html",
     )
+
+
+@csrf_exempt
+def stripe_webhook(request):
+    """Handle Stripe webhook events.
+    This view listens for events from Stripe,
+    such as payment success or failure,
+    and updates the corresponding Payment object in the database.
+    """
+    payload = request.body
+    sig_header = request.META.get("HTTP_STRIPE_SIGNATURE")
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, settings.STRIPE_WEBHOOK_SECRET
+        )
+    except ValueError:
+        # Invalid payload
+        return JsonResponse({"status": "invalid payload"}, status=400)
+    except stripe.error.SignatureVerificationError:
+        # Invalid signature
+        return JsonResponse({"status": "invalid signature"}, status=400)
+    if event["type"] == "checkout.session.completed":
+        session = event["data"]["object"]
+        payment_id = session["metadata"]["payment_id"]
+
+        if payment_id:
+            payment = get_object_or_404(Payment, pk=payment_id)
+            payment.stripe_payment_status = session.get(
+                "payment_status",
+                "paid",
+            )
+            payment.paid = True
+            payment.save()
+
+            booking = payment.booking
+            booking.status = "confirmed"
+            booking.save()
+
+    return JsonResponse({"status": "success"})
