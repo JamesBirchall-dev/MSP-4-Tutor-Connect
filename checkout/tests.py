@@ -241,3 +241,26 @@ class CheckoutSessionTests(TestCase):
             call_kwargs["metadata"]["payment_id"],
             payment.pk,
         )
+
+
+class CheckoutSuccessViewTests(TestCase):
+    """Tests for the checkout success view."""
+
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username="testuser",
+            password="testpassword",
+        )
+
+    def test_checkout_success_view(self):
+        """Test that the checkout success view loads correctly."""
+        self.client.login(username="testuser", password="testpassword")
+
+        response = self.client.get(reverse("checkout:checkout_success"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Payment Successful")
+        self.assertContains(
+            response,
+            "Thank you for your payment. Your booking has been confirmed.",
+        )
