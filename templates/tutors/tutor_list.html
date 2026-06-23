@@ -14,6 +14,13 @@
     <div class="grid three-column">
         {% for tutor in tutors %}
             <article class="card tutor-card">
+                {% if tutor.image %}
+                    <img
+                        class="tutor-card-image"
+                        src="{{ tutor.image.url }}"
+                        alt="{{ tutor.display_name }}"
+                    >
+                {% endif %}
                 <h2>{{ tutor.display_name }}</h2>
                 <p>{{ tutor.bio|truncatewords:20 }}</p>
                 <p><strong>Location:</strong> {{ tutor.location }}</p>
