@@ -9,7 +9,8 @@ Register | Tutor Connect
 {% block content %}
 <!-- Main page content starts here -->
 
-<section class="container narrow">
+<!--registration form-->
+<section class="form-card">
     <h1>Create your account</h1>
     <p>Register to book tutoring sessions or manage your tutor profile.</p>
 
@@ -19,7 +20,9 @@ Register | Tutor Connect
             <div class="form-group">
                 <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                 {{ field }}
-                {% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}
+                {% if field.help_text %}
+                    <div class="helptext">{{ field.help_text }}</div>
+                    {% endif %}
                 {% for error in field.errors %}<p class="form-error">{{ error }}</p>{% endfor %}
             </div>
         {% endfor %}
