@@ -1,25 +1,43 @@
 {% extends "base.html" %}
 
-{% block title %}Lesson List{% endblock %}
+{% block title %}Lessons | Tutor Connect{% endblock %}
 
 {% block content %}
 
-<h1>{{ tutor.display_name }}'s Lessons</h1>
+<div class="container">
+    <div class="page-header">
+        <h1>{{ tutor.display_name }}'s Lessons</h1>
+        <p>Browse available lessons offered by {{ tutor.display_name }}.</p>
+    </div>
 
 <!--Filter Form-->
 
-<form method="get">
+<form class="filter-card" method="get">
     {{ filter.form.as_p }}
-    <button type="submit">Filter</button>
+    <button class="btn btn-primary" type="submit">Filter</button>
 </form>
 
+
+<div class="grid two-column">
 {% for lesson in page_obj %}
-    <div>
-        <h3>{{ lesson.title }}</h3>
-        <p>{{ lesson.subject }} | {{ lesson.skill_level }}</p>
-        <p>{{ lesson.description }}</p>
-        <p>£{{ lesson.price }}</p>
-    </div>
+    <article class="card lesson-card">
+        <h2>{{ lesson.title }}</h2>
+                <p class="lesson-meta">
+                    {{ lesson.subject|title }} | {{ lesson.skill_level|title }}
+                </p>
+
+                <p>{{ lesson.description}}</p>
+
+                <p class="lesson-price">
+                    £{{ lesson.price }}
+                </p>
+
+        <a class="btn btn-primary" href="{% url 'bookings:booking_create' lesson.pk %}">
+            Book Lesson
+        </a>
+    </article>
+
+    
 {% empty %}
     <p>No lessons found.</p>
 {% endfor %}
