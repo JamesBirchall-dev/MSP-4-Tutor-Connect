@@ -1,3 +1,4 @@
+import json
 from unittest.mock import Mock, patch
 
 from django.test import TestCase
@@ -287,3 +288,86 @@ class CheckoutCancelledViewTests(TestCase):
             response,
             "Your payment was not successful."
         )
+
+
+class StripeWebhookViewTests(TestCase):
+    """Tests for the Stripe webhook view."""
+
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username="testuser",
+            password="testpassword",
+        )
+
+        self.tutror_user = User.objects.create_user(
+            username="tutoruser",
+            password="tutorpassword",
+        )
+
+        self.tutor_profile = TutorProfile.objects.create(
+            user=self.tutror_user,
+            display_name="Test Tutor",
+            bio="This is a test tutor.",
+            experience="5 years of teaching experience.",
+            location="online",
+            is_active=True,
+        )
+
+        self.lesson_type = LessonType.objects.create(
+            tutor=self.tutor_profile,
+            title="Test Lesson",
+            subject="math",
+            skill_level="beginner",
+            duration_minutes=60,
+            price=50.00,
+        )
+
+        self.booking = Booking.objects.create(
+            student=self.user,
+            lesson_type=self.lesson_type,
+            booking_date="2023-10-01",
+            booking_time="10:00:00",
+            status="pending",
+        )
+
+        self.payment = Payment.objects.create(
+            booking=self.booking,
+            user=self.user,
+            amount=50.00,
+            stripe_checkout_id="cs_test_123",
+            stripe_payment_status="unpaid",
+            paid=False,
+        )
+
+    @patch("checkout.views.stripe.Webhook.construct_event")
+    def test_checkout_session_completed_marks_as_paid(
+        self,
+        mock_construct_event,
+    ):
+        mock_construct_event.return_value = {
+            "type": "checkout.session.completed",
+            "data": {
+                "object": {
+                    "id": "cs_test_123",
+                    "metadata": {
+                        "payment_id": str(self.payment.pk),
+                    },
+                    "payment_status": "paid",
+                }
+            },
+        }
+
+        response = self.client.post(
+            reverse("checkout:stripe_webhook"),
+            data=json.dumps({}),
+            content_type="application/json",
+            HTTP_X_STRIPE_SIGNATURE="test_signature",
+        )
+
+        self.payment.refresh_from_db()
+        self.booking.refresh_from_db()
+
+        self .assertEqual(response.status_code, 200)
+        self.assertTrue(self.payment.paid)
+        self.assertEqual(self.payment.stripe_payment_status, "paid")
+        self.assertEqual(self.booking.status, "confirmed")
