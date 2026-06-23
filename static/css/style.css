@@ -201,6 +201,26 @@ errorlist li {
     margin-top: 3rem;
 }
 
+/* Responsive Header Design */
+
+@media (max-width: 768px) {
+    .site-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .site-nav {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .site-logo img {
+        max-width: 180px;
+    }
+}
+
+
 
 
 /* reusable utility classes 
