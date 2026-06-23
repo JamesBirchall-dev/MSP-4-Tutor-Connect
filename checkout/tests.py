@@ -111,7 +111,7 @@ class CheckoutReviewTests(TestCase):
     def test_checkout_review_requires_login(self):
         """Test that the checkout review view requires login."""
         response = self.client.get(
-            reverse("checkout_review", args=[self.booking.pk])
+            reverse("checkout:checkout_review", args=[self.booking.pk])
         )
         self.assertEqual(response.status_code, 302)  # Redirect to login
 
@@ -121,7 +121,7 @@ class CheckoutReviewTests(TestCase):
         self.client.login(username="testuser", password="testpassword")
 
         response = self.client.get(
-            reverse("checkout_review", args=[self.booking.pk])
+            reverse("checkout:checkout_review", args=[self.booking.pk])
         )
 
         self.assertEqual(response.status_code, 200)
@@ -134,7 +134,7 @@ class CheckoutReviewTests(TestCase):
         self.client.login(username="otheruser", password="otherpassword")
 
         response = self.client.get(
-            reverse("checkout_review", args=[self.booking.pk])
+            reverse("checkout:checkout_review", args=[self.booking.pk])
         )
 
         self.assertEqual(response.status_code, 404)
