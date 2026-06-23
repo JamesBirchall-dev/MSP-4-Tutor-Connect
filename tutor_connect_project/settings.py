@@ -166,7 +166,7 @@ USE_TZ = True
 # Static files
 # ---------------------------------------------------------------------
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 
 # Local static files used during development.
 STATICFILES_DIRS = [BASE_DIR / "static"]
