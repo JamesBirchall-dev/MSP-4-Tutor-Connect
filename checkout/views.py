@@ -80,8 +80,8 @@ def checkout_review(request, booking_pk):
 
 
 def checkout_success(request):
-    """Display a temporary checkout success placeholder view."""
-    return HttpResponse("Checkout success placeholder")
+    """Display a payment success page after a successful checkout."""
+    return render(request, "checkout/checkout_success.html")
 
 
 def checkout_cancelled(request):
