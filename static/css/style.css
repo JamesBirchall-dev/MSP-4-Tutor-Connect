@@ -387,5 +387,15 @@ select:focus {
 
 .dashboard-card .btn {
     margin-top: auto;
-    aliggn-self: flex-start;
+    align-self: flex-start;
+}
+
+.btn-secondary {
+    background-color: var(--color-secondary);
+    color: var(--color-surface);
+}
+
+.btn-secondary:hover {
+    background-color: #B45309;
+    text-decoration: none;
 }
