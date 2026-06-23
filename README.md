@@ -208,47 +208,47 @@ The visual design is calm, modern, and easy to navigate. The colour palette uses
 ![Colours and Typography](https://github.com/JamesBirchall-dev/imagehost/blob/main/readme-design-styles-colorsandfonts.png?raw=true)
 
 Primary colour:
-#1F6F5B
+# 1F6F5B
 Deep green
 Used for main buttons, navigation highlights, and important links.
 
 Secondary colour:
-#D97706
+# D97706
 Warm amber
 Used for accents, prices, icons, and selected states.
 
 Background:
-#FAFAF7
+# FAFAF7
 Warm off-white
 Used as the main page background.
 
 Surface:
-#FFFFFF
+# FFFFFF
 White
 Used for cards, forms, and content sections.
 
 Main text:
-#1F2933
+# 1F2933
 Dark charcoal
 Used for headings and body text.
 
 Muted text:
-#6B7280
+# 6B7280
 Grey
 Used for helper text, dates, descriptions, and secondary labels.
 
 Border:
-#E5E7EB
+# E5E7EB
 Light grey
 Used for form fields, cards, and dividers.
 
 Success:
-#15803D
+# 15803D
 Green
 Used for successful bookings and payments.
 
 Error:
-#B91C1C
+# B91C1C
 Red
 Used for validation errors and failed payments.
 
@@ -668,7 +668,7 @@ updated_at
 
 ## Project Management
 
-(https://github.com/users/JamesBirchall-dev/projects/7)
+(<https://github.com/users/JamesBirchall-dev/projects/7>)
 
 ---
 
@@ -693,7 +693,9 @@ _List of main technologies, frameworks, and tools._
 
 ### Manual Testing
 
-#### Feature - Accounts (local)
+### Automated Testing
+
+#### Feature - Accounts
 
 <details>
 <summary><strong> Anonymous Access to Registration Page </strong></summary>
@@ -745,7 +747,7 @@ def test_register_page_redirects_for_authenticated_user(self):
 """Test that authenticated users are redirected from the reg page.""" # Create and log in a test user
 User.objects.create_user(
 username="testuser",
-email="testuser@example.com",
+email="<testuser@example.com>",
 password="testpassword123!"
 )
 
@@ -781,7 +783,7 @@ _PASS_
 
 <details>
 <summary><strong> Account dashboard page loads for autheticated users.</strong></summary>
-Test: 
+Test:
     def test_account_dashboard_page_loads_for_authenticated_user(self):
         """Test that the account dashboard page loads for auth users."""
         # Create and log in a test user
@@ -797,7 +799,7 @@ Test:
         self.assertTemplateUsed(response, "accounts/dashboard.html")
         self.assertContains(response, "Dashboarduser")
 
-# Result:
+# Result
 
 FAIL: test_account_dashboard_page_loads_for_authenticated_user (accounts.tests.AccountViewTests.test_account_dashboard_page_loads_for_authenticated_user)
 Test that the account dashboard page loads for auth users.
@@ -888,7 +890,7 @@ Model:
 from django.conf import settings
 from django.db import models
 
-# Create your models here.
+# Create your models here
 
 class TutorProfile(models.Model):
 """Model representing a tutor's profile."""
@@ -907,7 +909,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from tutors.models import TutorProfile
 
-# Create your tests here.
+# Create your tests here
 
 class TutorProfileModelTest(TestCase):
 """Tests for the TutorProfile model."""
@@ -1101,8 +1103,8 @@ Results:
 (.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py makemigrations  
 It is impossible to add the field 'created_at' with 'auto_now_add=True' to tutorprofile without providing a default. This is because the database needs something to populate existing rows.
 
-1.  Provide a one-off default now which will be set on all existing rows
-2.  Quit and manually define a default value in models.py.
+1. Provide a one-off default now which will be set on all existing rows
+2. Quit and manually define a default value in models.py.
     Select an option: 1
     Please enter the default value as valid Python.
     Accept the default 'timezone.now' by pressing 'Enter' or provide another value.
@@ -1427,7 +1429,7 @@ class TutorListViewTest(TestCase):
         self.assertTemplateUsed(response, "tutors/tutor_list.html")
 
 Results:
-#1
+# 1
 (.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.TutorListViewTest.test_tutor_list_status_code
 Found 1 test(s).
 Creating test database for alias 'default'...
@@ -1440,7 +1442,7 @@ Ran 1 test in 0.287s
 
 OK
 
-#2
+# 2
 (.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.TutorListViewTest.test_only_active_tutors_in_list
 Found 1 test(s).
 Creating test database for alias 'default'...
@@ -1454,7 +1456,7 @@ Ran 1 test in 0.310s
 OK
 Destroying test database for alias 'default'...
 
-#3
+# 3
 (.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.TutorListViewTest.test_correct_template_used  
 Found 1 test(s).
 Creating test database for alias 'default'...
@@ -1608,6 +1610,7 @@ Creating test database for alias 'default'...
 System check identified no issues (0 silenced).
 F
 ======================================================================
+
 FAIL: test_create_tutor_post_creates_tutor (tutors.test_views.TutorCreateViewTests.test_create_tutor_post_creates_tutor)
 
 ---
@@ -1624,7 +1627,7 @@ Ran 1 test in 0.232s
 FAILED (failures=1)
 Destroying test database for alias 'default'..
 
-_PASS - Expected as POST Handling not created _
+_PASS - Expected as POST Handling not created_
 
 - Implemented Create Logic
 
@@ -2169,7 +2172,7 @@ result:
 > > Creating test database for alias 'default'...
 > > System check identified no issues (0 silenced).
 
-## .
+## 
 
 Ran 1 test in 0.304s
 
@@ -2825,8 +2828,7 @@ Destroying test database for alias 'default'
 <details>
 <summary><strong> Bookings - Booking view tests -  page loads for logged in user </summary>
 
-Test:
-
+''' Python test:
     def test_booking_page_loads_for_logged_in_user(self):
         self.client.login(username="student", password="pass")
         response = self.client.get(
@@ -2857,8 +2859,7 @@ _PASS_
 <details>
 <summary><strong> Bookings - Booking view tests -  user can delete/cancel booking </summary>
 
-Test:
-def test_user_can_delete_booking(self):
+''' Python test:def test_user_can_delete_booking(self):
 self.client.login(username="student", password="pass")
 
         booking = Booking.objects.create(
@@ -2894,6 +2895,7 @@ Destroying test database for alias 'default'...
 <details>
 <summary><strong> Bookings - Booking update tests -  page loads correctly </summary>
 
+''' Python test
     def test_booking_update_page_loads(self):
         # Test that the booking update page loads correctly for a logged-in user.
         self.client.login(username="testuserstudent", password="pass")
@@ -2905,8 +2907,9 @@ Destroying test database for alias 'default'...
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Update Booking")
         self.assertEqual(response.status_code, 200)
+'''
 
-Result:
+''' Result:
 
 (.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test bookings.tests.BookingUpdateViewTests.test_booking_update_page_loads
 Found 1 test(s).
@@ -2922,6 +2925,7 @@ OK
 Destroying test database for alias 'default'...
 
 ---
+'''
 
 Ran 1 test in 1.589s
 
@@ -3083,9 +3087,38 @@ OK
 Destroying test database for alias 'default'...
 (.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect>
 
-_PASS_
+Outcome: PASS
 
 </details>
+
+<details>
+
+<summary><strong> Checkout - Checkout Review Requires Login </summary>
+
+Test:
+
+    def test_checkout_review_requires_login(self):
+        """Test that the checkout review view requires login."""
+        response = self.client.get(
+            reverse("checkout_review", args=[self.booking.pk])
+        )
+        self.assertEqual(response.status_code, 302)  # Redirect to login
+
+
+Results: 
+(.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test checkout.tests.CheckoutReviewTests.test_checkout_review_requires_login    
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+----------------------------------------------------------------------
+Ran 1 test in 1.145s
+
+OK
+Destroying test database for alias 'default'...
+
+Outcome: PASS
+
 
 ### Validator Testing
 

@@ -18,7 +18,7 @@ def create_checkout_session(request, booking_pk):
 @login_required
 def checkout_review(request, booking_pk):
     """Display a review page for the booking before proceeding to payment."""
-    booking = get_object_or_404(Booking, pk=booking_pk, user=request.user)
+    booking = get_object_or_404(Booking, pk=booking_pk, student=request.user)
     return render(
         request,
         "checkout/checkout_review.html",

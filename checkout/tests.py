@@ -67,6 +67,7 @@ class PaymentModelTestCase(TestCase):
             f"{self.user} - {self.booking} - £{payment.amount}",
         )
 
+
 class CheckoutReviewTests(TestCase):
     def setUp(self):
         self.user = user.objects.create_user(
@@ -109,3 +110,28 @@ class CheckoutReviewTests(TestCase):
             reverse("checkout_review", args=[self.booking.pk])
         )
         self.assertEqual(response.status_code, 302)  # Redirect to login
+
+    def test_checkout_review_page_loads(self):
+        """Test that the checkout review page
+        loads correctly for the booking owner."""
+        self.client.login(username="testuser", password="testpassword")
+
+        response = self.client.get(
+            reverse("checkout_review", args=[self.booking.pk])
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Review Booking")
+        self.assertContains(response, "Test Lesson")
+        self.assertContains(response, "Test Tutor")
+        self.assertContains(response, "£50.00")
+
+    def test_checkout_review_forbidden_for_other_users(self):
+        self.client.login(username="otheruser", password="otherpassword")
+
+        response = self.client.get(
+            reverse("checkout_review", args=[self.booking.pk])
+        )
+
+        self.assertEqual(response.status_code, 404)
+        # Not found for other users
