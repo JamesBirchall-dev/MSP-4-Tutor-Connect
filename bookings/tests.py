@@ -96,7 +96,7 @@ class BookingViewTests(TestCase):
 
     def test_login_required_for_booking(self):
         response = self.client.get(
-            reverse("bookings:booking_create", args=[1])
+            reverse("bookings:booking_create", args=[self.lesson_type.pk])
         )
         self.assertNotEqual(response.status_code, 200)
 
@@ -104,7 +104,7 @@ class BookingViewTests(TestCase):
         self.client.login(username="student", password="pass")
 
         response = self.client.get(
-            reverse("bookings:booking_create", args=[1])
+            reverse("bookings:booking_create", args=[self.lesson_type.pk])
         )
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Book")
