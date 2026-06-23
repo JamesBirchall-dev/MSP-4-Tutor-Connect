@@ -7,16 +7,16 @@ from .models import Booking
 
 
 @login_required
-def booking_create(request, lesson_id):
+def booking_create(request, lesson_pk):
     """
     Create a new booking for a specific lesson.
     Args:
-        lesson_id (int): ID of the lesson to book
+        lesson_pk (int): Primary key of the lesson to book
     Returns:
         HttpResponse: The HTTP response for the booking creation view
     """
 
-    lesson = get_object_or_404(LessonType, id=lesson_id)
+    lesson = get_object_or_404(LessonType, id=lesson_pk)
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():

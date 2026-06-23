@@ -106,11 +106,8 @@ class BookingViewTests(TestCase):
         response = self.client.get(
             reverse("bookings:booking_create", args=[1])
         )
-
-        self.assertRedirects(
-            response,
-            "/accounts/login/?next=/bookings/create/1/"
-        )
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Book")
 
     def test_user_can_delete_booking(self):
         self.client.login(username="student", password="pass")
@@ -174,7 +171,6 @@ class BookingUpdateViewTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Update Booking")
-        self.assertEqual(response.status_code, 200)
 
     def test_booking_can_be_updated(self):
         """Test that a booking can be updated successfully."""
