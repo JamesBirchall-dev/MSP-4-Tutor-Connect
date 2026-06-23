@@ -1,44 +1,66 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Tutor Connect helps students find, book, and pay for guitar lessons with trusted tutors.">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Tutor Connect{% endblock %}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com"
-    >
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin
-    >
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-        rel="stylesheet"
-    >
+<head>
+    <!-- character encoding and responsive viewport -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <!-- Meta description for SEO -->
+    <meta name="description" content="Tutor Connect helps students find, book, and pay for guitar lessons with trusted tutors.">
+  
+    <title>{% block title %}Tutor Connect{% endblock %}</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+    <!-- Main Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet">
+
+    <!-- Stylesheet -->
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    <!-- Favicon -->
     <link
         rel="icon"
         type="image/x-icon"
         href="{% static 'images/favicon.ico' %}"
     >
 </head>
+
 <body>
+    <!-- Site header and primary navigation -->
     <header class="site-header">
         <a class="site-logo" href="{% url 'home' %}">
-    <img
-        src="{% static 'images/logo400x100.webp' %}"
-        alt="Tutor Connect"
-        height="100"
-    >
+            <img
+                src="{% static 'images/logo400x100.webp' %}"
+                alt="Tutor Connect"
+                width="400"
+                height="100"
+            >
         </a>
+
+
         <nav class="site-nav" aria-label="Main navigation">
             <a href="{% url 'home' %}">Home</a>
             <a href="{% url 'tutors:tutor_list' %}">Tutors</a>
+
+
             {% if user.is_authenticated %}
                 <a href="{% url 'dashboard' %}">Dashboard</a>
                 <a href="{% url "bookings:booking_list" %}">My Bookings</a>
-                <form class="logout-form" action="{% url 'logout' %}" method="post">
+                
+                
+                <form 
+                class="logout-form" 
+                action="{% url 'logout' %}" 
+                method="post"
+                >
                     {% csrf_token %}
                     <button type="submit">Log out</button>
                 </form>
@@ -49,21 +71,28 @@
         </nav>
     </header>
 
+    <!--django messages-->    
     {% if messages %}
-    <section class="messages" aria-label="Site messages">
-        {% for message in messages %}
-            <p class="message message-{{ message.tags }}">{{ message }}</p>
-        {% endfor %}
-    </section>
+        <section class="messages" aria-label="Site messages">
+            {% for message in messages %}
+                <p class="message message-{{ message.tags }}">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        </section>
     {% endif %}
+
+    <!-- Main content area where page-specific content will be injected -->
 
     <main class="site-main">
         {% block content %}
         {% endblock %}
     </main>
 
+    <!-- Site footer -->
     <footer class="site-footer">
-        <p>&copy; {{ current_year }} Tutor Connect. All rights reserved.</p>
+        <p>&copy; {% now "Y" %} Tutor Connect. All rights reserved.</p>
     </footer>
 </body>
+
 </html>
