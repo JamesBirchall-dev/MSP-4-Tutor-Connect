@@ -115,7 +115,7 @@ def stripe_webhook(request):
     except ValueError:
         # Invalid payload
         return JsonResponse({"status": "invalid payload"}, status=400)
-    except stripe.error.SignatureVerificationError:
+    except stripe.SignatureVerificationError:
         # Invalid signature
         return JsonResponse({"status": "invalid signature"}, status=400)
     if event["type"] == "checkout.session.completed":
