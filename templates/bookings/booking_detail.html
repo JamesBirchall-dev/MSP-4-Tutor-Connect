@@ -45,12 +45,31 @@
                 </p>
             {% endif %}
         </div>
+        <!-- Button Row -->
+        <div class="button-row">
+            {% if booking.status == "pending" %}
+                <a
+                    class="btn btn-primary"
+                    href="{% url 'checkout:checkout_review' booking.pk %}"
+                >
+                    Continue to Checkout
+                </a>
 
-    <a href="{% url 'bookings:booking_update' booking.pk %}">
-    Edit Booking
-</a>
+                <a
+                    class="btn btn-secondary"
+                    href="{% url 'bookings:booking_update' booking.pk %}"
+                >
+                    Edit Booking
+                </a>
+            {% endif %}
 
-<a href="{% url 'bookings:booking_list' %}">
-    Back to Bookings
-</a>
+            <a
+                class="btn btn-outline"
+                href="{% url 'bookings:booking_list' %}"
+            >
+                Back to Bookings
+            </a>
+        </div>
+    </article>
+</div>
 {% endblock %}
