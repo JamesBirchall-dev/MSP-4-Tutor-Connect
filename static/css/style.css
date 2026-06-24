@@ -551,3 +551,7 @@ select:focus {
     max-width: 800px;
     margin: 0 auto;
 }
+
+.booking-summary {
+    margin: 2rem 0;
+}
