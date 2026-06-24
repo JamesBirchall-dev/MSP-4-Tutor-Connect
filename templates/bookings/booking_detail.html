@@ -1,11 +1,50 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Booking Details</h1>
-    <p>Date: {{ booking.booking_date }}</p>
-    <p>Time: {{ booking.booking_time }}</p>
-    <p>Status: {{ booking.status }}</p>
-    <p>Notes: {{ booking.notes }}</p>
+<!-- Booking Details -->
+<div class ="container">
+    <!-- Booking Summary -->
+    <article  class="card booking-detail-card">
+        <div class = "page-header">
+            <h1>Booking Details</h1>
+            <p>Review your lesson booking information and payment status below.</p>
+        </div>
+
+        <div class="booking-summary">
+            <p>
+                <strong>Lesson:</strong>
+                {{ booking.lesson_type.title }}
+            </p>
+
+            <p>
+                <strong>Tutor:</strong>
+                {{ booking.lesson_type.tutor.display_name }}
+            </p>
+
+            <p>
+                <strong>Date:</strong>
+                {{ booking.booking_date }}
+            </p>
+
+            <p>
+                <strong>Time:</strong>
+                {{ booking.booking_time }}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                <span class="status-badge status-{{ booking.status }}">
+                    {{ booking.status|title }}
+                </span>
+            </p>
+
+            {% if booking.notes %}
+                <p>
+                    <strong>Notes:</strong>
+                    {{ booking.notes }}
+                </p>
+            {% endif %}
+        </div>
 
     <a href="{% url 'bookings:booking_update' booking.pk %}">
     Edit Booking
