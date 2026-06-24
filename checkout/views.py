@@ -1,3 +1,4 @@
+from requests import session
 import stripe
 
 from django.urls import reverse
@@ -124,10 +125,7 @@ def stripe_webhook(request):
 
         if payment_id:
             payment = get_object_or_404(Payment, pk=payment_id)
-            payment.stripe_payment_status = session.get(
-                "payment_status",
-                "paid",
-            )
+            payment.stripe_payment_status = session["payment_status"]
             payment.paid = True
             payment.save()
 
