@@ -544,3 +544,10 @@ select:focus {
     background-color: #991B1B;
     text-decoration: none;
 }
+
+/* BOOKING DETAIL PAGE STYLING */
+
+.booking-detail-card {
+    max-width: 800px;
+    margin: 0 auto;
+}
