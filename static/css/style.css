@@ -546,12 +546,17 @@ select:focus {
 }
 
 /* BOOKING DETAIL PAGE STYLING */
-
+/* Booking detail card styling */
 .booking-detail-card {
     max-width: 800px;
     margin: 0 auto;
 }
-
+/* Booking summary styling */
 .booking-summary {
     margin: 2rem 0;
+}
+/* Booking summary paragraph styling */
+.booking-summary p {
+    border-bottom: 1px solid var(--color-border);
+    padding: 0.5rem;
 }
