@@ -1,4 +1,3 @@
-from requests import session
 import stripe
 
 from django.urls import reverse
@@ -42,7 +41,7 @@ def create_checkout_session(request, booking_pk):
         reverse("checkout:checkout_cancelled")
     )
 
-    session = stripe.checkout.Session.create(
+    checkout_session = stripe.checkout.Session.create(
         mode="payment",
         payment_method_types=["card"],
         line_items=[
@@ -65,10 +64,10 @@ def create_checkout_session(request, booking_pk):
         cancel_url=cancel_url,
     )
 
-    payment.stripe_checkout_id = session.id
-    payment.stripe_payment_status = session.payment_status
+    payment.stripe_checkout_id = checkout_session.id
+    payment.stripe_payment_status = checkout_session.payment_status
     payment.save()
-    return redirect(session.url)
+    return redirect(checkout_session.url)
 
 
 @login_required
@@ -120,12 +119,13 @@ def stripe_webhook(request):
         # Invalid signature
         return JsonResponse({"status": "invalid signature"}, status=400)
     if event["type"] == "checkout.session.completed":
-        session = event["data"]["object"]
-        payment_id = session["metadata"]["payment_id"]
+        checkout_session = event["data"]["object"]
+        payment_id = checkout_session["metadata"]["payment_id"]
 
         if payment_id:
             payment = get_object_or_404(Payment, pk=payment_id)
-            payment.stripe_payment_status = session["payment_status"]
+            payment.stripe_payment_status = checkout_session["payment_status"]
+            payment.paid = True
             payment.paid = True
             payment.save()
 
