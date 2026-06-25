@@ -26,18 +26,43 @@
             {% endif %}
 
             {% for field in form %}
-                <div class="form-group">
-                    <label for="{{ field.id_for_label }}">
-                        {{ field.label }}
-                    </label>
-            
-                    {{ field }}
+            <div class="form-group">
 
-                    {% if field.help_text %}
-                        <div class="helptext">
-                            {{ field.help_text }}
-                        </div>
-                    {% endif %}
+                <label for="{{ field.id_for_label }}">
+                    {{ field.label }}
+                </label>
 
-    </section>  
-</div>
+                {{ field }}
+
+                {% if field.help_text %}
+                    <div class="helptext">
+                        {{ field.help_text }}
+                    </div>
+                {% endif %}
+
+                {% for error in field.errors %}
+                    <p class="form-error">{{ error }}</p>
+                {% endfor %}
+
+            </div>
+        {% endfor %}
+
+        <div class="button-row">
+            <button class="btn btn-primary" type="submit">
+                {% if tutor %}
+                    Update Profile
+                {% else %}
+                    Create Profile
+                {% endif %}
+            </button>
+
+            <a class="btn btn-outline" href="{% url 'dashboard' %}">
+                Cancel
+            </a>
+        </div>
+
+        </form>
+
+        </section>
+        </div>
+        {% endblock %}
