@@ -325,7 +325,7 @@ class LessonListViewTests(TestCase):
         # Test that filtering lessons by subject works.
         response = self.client.get(
             reverse("tutors:lesson_list", args=[self.tutor.pk])
-            + "?subject=math"
+            + "?subject=mathematics"
         )
         self.assertContains(response, "Math Lesson")
 
@@ -385,11 +385,15 @@ class LessonUpdateViewTests(TestCase):
         # update view updates the lesson object.
         self.client.post(self.url, {
             "title": "Updated Math Lesson",
-            "subject": "math",
+            "category": "academic",
+            "subject": "mathematics",
             "description": "Updated Algebra",
+            "lesson_date": self.lesson.lesson_date,
+            "lesson_time": self.lesson.lesson_time,
             "duration_minutes": 90,
             "skill_level": "intermediate",
-            "price": 30.00,
+            "price": "30.00",
+            "is_available": "on",
         })
 
         self.lesson.refresh_from_db()
@@ -404,13 +408,16 @@ class LessonUpdateViewTests(TestCase):
         # view redirects to the lesson list.
         response = self.client.post(self.url, {
             "title": "Updated Math Lesson",
-            "subject": "math",
+            "category": "academic",
+            "subject": "mathematics",
             "description": "Updated Algebra",
+            "lesson_date": self.lesson.lesson_date,
+            "lesson_time": self.lesson.lesson_time,
             "duration_minutes": 90,
             "skill_level": "intermediate",
-            "price": 30.00,
+            "price": "30.00",
+            "is_available": "on",
         })
-
         self.assertRedirects(
             response,
             reverse("tutors:lesson_list", args=[self.tutor.pk])

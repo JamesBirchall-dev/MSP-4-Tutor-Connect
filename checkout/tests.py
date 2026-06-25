@@ -136,9 +136,9 @@ class CheckoutReviewTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Review Booking")
-        self.assertContains(response, "Test Lesson")
+        self.assertContains(response, "Math Lesson")
         self.assertContains(response, "Test Tutor")
-        self.assertContains(response, "£50.00")
+        self.assertContains(response, "£20.00")
 
     def test_checkout_review_forbidden_for_other_users(self):
         self.client.login(username="otheruser", password="otherpassword")
@@ -246,7 +246,7 @@ class CheckoutSessionTests(TestCase):
         )
         self.assertEqual(
             call_kwargs["line_items"][0]["price_data"]["unit_amount"],
-            5000,
+            2000,
         )
         self.assertEqual(
             call_kwargs["metadata"]["booking_id"],
