@@ -15,7 +15,14 @@ class BookingForm(forms.ModelForm):
         """
         model = Booking
         fields = [
-            "booking_date",
-            "booking_time",
             "notes",
         ]
+
+        widgets = {
+            "notes": forms.Textarea(
+                attrs={
+                    "rows": 4,
+                    "placeholder": "Add any notes for the tutor, if needed.",
+                }
+            ),
+        }
