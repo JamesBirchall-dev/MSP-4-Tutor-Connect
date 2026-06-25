@@ -2,8 +2,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from .models import TutorProfile, LessonType
 from .filters import LessonFilter
 from django.core.paginator import Paginator
-from decimal import Decimal
-from .forms import TutorProfileForm
+from .forms import TutorProfileForm, LessonTypeForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -178,45 +177,49 @@ def lesson_create(request, tutor_pk):
 
     tutor = get_object_or_404(TutorProfile, pk=tutor_pk)
 
-    if request.method == 'POST':
-        LessonType.objects.create(
-            tutor=tutor,
-            title=request.POST.get("title"),
-            subject=request.POST.get("subject"),
-            description=request.POST.get("description", ""),
-            duration_minutes=int(request.POST.get("duration_minutes")),
-            skill_level=request.POST.get("skill_level"),
-            price=Decimal(request.POST.get("price")),
-        )
-        return redirect('tutors:lesson_list', tutor_pk=tutor.pk)
+    if request.method == "POST":
+        form = LessonTypeForm(request.POST)
 
-    return render(request, 'tutors/lesson_form.html', {'tutor': tutor})
+        if form.is_valid():
+            lesson = form.save(commit=False)
+            lesson.tutor = tutor
+            lesson.save()
+            return redirect("tutors:lesson_list", tutor_pk=tutor.pk)
+    else:
+        form = LessonTypeForm()
+
+    return render(
+        request,
+        "tutors/lesson_form.html",
+        {
+            "form": form,
+            "tutor": tutor,
+        },
+    )
 
 
 def lesson_update(request, tutor_pk, pk):
-    """
-    Update an existing lesson for a tutor.
-
-    Args:
-        tutor_pk (int): Tutor ID
-        pk (int): Lesson ID
-    """
     tutor = get_object_or_404(TutorProfile, pk=tutor_pk)
     lesson = get_object_or_404(LessonType, pk=pk, tutor=tutor)
 
-    if request.method == 'POST':
-        lesson.title = request.POST.get("title")
-        lesson.subject = request.POST.get("subject")
-        lesson.description = request.POST.get("description", "")
-        lesson.duration_minutes = int(request.POST.get("duration_minutes"))
-        lesson.skill_level = request.POST.get("skill_level")
-        lesson.price = Decimal(request.POST.get("price"))
-        lesson.save()
-        return redirect('tutors:lesson_list', tutor_pk=tutor.pk)
+    if request.method == "POST":
+        form = LessonTypeForm(request.POST, instance=lesson)
+
+        if form.is_valid():
+            form.save()
+            return redirect("tutors:lesson_list", tutor_pk=tutor.pk)
+    else:
+        form = LessonTypeForm(instance=lesson)
 
     return render(
-        request, 'tutors/lesson_form.html',
-        {'tutor': tutor, 'lesson': lesson})
+        request,
+        "tutors/lesson_form.html",
+        {
+            "form": form,
+            "tutor": tutor,
+            "lesson": lesson,
+        },
+    )
 
 
 def lesson_delete(request, tutor_pk, lesson_pk):
