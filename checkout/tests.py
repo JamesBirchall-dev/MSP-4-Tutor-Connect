@@ -8,6 +8,8 @@ from bookings.tests import User
 from tutors.models import TutorProfile, LessonType
 from bookings.models import Booking
 from checkout.models import Payment
+from datetime import time, timedelta
+from django.utils import timezone
 
 user = get_user_model()
 
@@ -31,13 +33,17 @@ class PaymentModelTestCase(TestCase):
             is_active=True,
         )
 
-        self.lesson_type = LessonType.objects.create(
-            tutor=self.tutor_profile,
-            title="Test Lesson",
-            subject="math",
-            skill_level="beginner",
+        self.lesson = LessonType.objects.create(
+            tutor=self.tutor,
+            title="Math Lesson",
+            category="academic",
+            subject="mathematics",
+            description="Algebra",
             duration_minutes=60,
-            price=50.00,
+            skill_level="beginner",
+            price=20,
+            lesson_date=timezone.now().date() + timedelta(days=7),
+            lesson_time=time(14, 0),
         )
 
         self.booking = Booking.objects.create(
@@ -92,13 +98,17 @@ class CheckoutReviewTests(TestCase):
             is_active=True,
         )
 
-        self.lesson_type = LessonType.objects.create(
-            tutor=self.tutor_profile,
-            title="Test Lesson",
-            subject="math",
-            skill_level="beginner",
+        self.lesson = LessonType.objects.create(
+            tutor=self.tutor,
+            title="Math Lesson",
+            category="academic",
+            subject="mathematics",
+            description="Algebra",
             duration_minutes=60,
-            price=50.00,
+            skill_level="beginner",
+            price=20,
+            lesson_date=timezone.now().date() + timedelta(days=7),
+            lesson_time=time(14, 0),
         )
 
         self.booking = Booking.objects.create(
@@ -165,13 +175,17 @@ class CheckoutSessionTests(TestCase):
             is_active=True,
         )
 
-        self.lesson_type = LessonType.objects.create(
-            tutor=self.tutor_profile,
-            title="Test Lesson",
-            subject="math",
-            skill_level="beginner",
+        self.lesson = LessonType.objects.create(
+            tutor=self.tutor,
+            title="Math Lesson",
+            category="academic",
+            subject="mathematics",
+            description="Algebra",
             duration_minutes=60,
-            price=50.00,
+            skill_level="beginner",
+            price=20,
+            lesson_date=timezone.now().date() + timedelta(days=7),
+            lesson_time=time(14, 0),
         )
 
         self.booking = Booking.objects.create(
@@ -313,13 +327,17 @@ class StripeWebhookViewTests(TestCase):
             is_active=True,
         )
 
-        self.lesson_type = LessonType.objects.create(
-            tutor=self.tutor_profile,
-            title="Test Lesson",
-            subject="math",
-            skill_level="beginner",
+        self.lesson = LessonType.objects.create(
+            tutor=self.tutor,
+            title="Math Lesson",
+            category="academic",
+            subject="mathematics",
+            description="Algebra",
             duration_minutes=60,
-            price=50.00,
+            skill_level="beginner",
+            price=20,
+            lesson_date=timezone.now().date() + timedelta(days=7),
+            lesson_time=time(14, 0),
         )
 
         self.booking = Booking.objects.create(

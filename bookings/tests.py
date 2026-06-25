@@ -4,6 +4,9 @@ from django.urls import reverse
 from bookings.forms import BookingForm
 from tutors.models import TutorProfile, LessonType
 from bookings.models import Booking
+from datetime import timedelta, time
+from django.utils import timezone
+
 
 User = get_user_model()
 
@@ -28,11 +31,15 @@ class BookingModelTest(TestCase):
 
         self.lesson_type = LessonType.objects.create(
             tutor=self.tutor,
-            title="Math Tutoring",
-            subject="math",
-            skill_level="beginner",
+            title="Math Lesson",
+            category="academic",
+            subject="mathematics",
+            description="Algebra",
             duration_minutes=60,
-            price=50.00,
+            skill_level="beginner",
+            price=20,
+            lesson_date=timezone.now().date() + timedelta(days=7),
+            lesson_time=time(14, 0),
         )
 
     def test_booking_creation(self):
@@ -61,11 +68,8 @@ class BookingFormTest(TestCase):
         Test that a Booking form is valid with correct data.
     """
         form = BookingForm(data={
-            "booking_date": "2024-06-15",
-            "booking_time": "14:00:00",
             "notes": "Hello, I would like to book a lesson."
         })
-
         self.assertTrue(form.is_valid())
 
 
@@ -87,11 +91,15 @@ class BookingViewTests(TestCase):
 
         self.lesson_type = LessonType.objects.create(
             tutor=self.tutor,
-            title="Math Tutoring",
-            subject="math",
-            skill_level="beginner",
+            title="Math Lesson",
+            category="academic",
+            subject="mathematics",
+            description="Algebra",
             duration_minutes=60,
-            price=50.00,
+            skill_level="beginner",
+            price=20,
+            lesson_date=timezone.now().date() + timedelta(days=7),
+            lesson_time=time(14, 0),
         )
 
     def test_login_required_for_booking(self):
@@ -127,88 +135,6 @@ class BookingViewTests(TestCase):
         self.assertEqual(booking.status, "cancelled")
 
 
-class BookingUpdateViewTests(TestCase):
-
-    def setUp(self):
-        self.user = User.objects.create_user(
-            username="testuserstudent",
-            password="pass",
-        )
-
-        self.tutor = TutorProfile.objects.create(
-            user=self.user,
-            display_name="Test Tutor",
-            bio="Experienced tutor",
-            experience="5 years",
-            location="Online",
-            is_active=True,
-        )
-
-        self.lesson_type = LessonType.objects.create(
-            tutor=self.tutor,
-            title="Math Tutoring",
-            subject="math",
-            skill_level="beginner",
-            duration_minutes=60,
-            price=50.00,
-        )
-
-        self.booking = Booking.objects.create(
-            student=self.user,
-            lesson_type=self.lesson_type,
-            booking_date="2024-06-15",
-            booking_time="14:00:00",
-        )
-
-    def test_booking_update_page_loads(self):
-        """Test that the booking update page loads correctly
-        for the logged-in user."""
-        self.client.login(username="testuserstudent", password="pass")
-
-        response = self.client.get(
-            reverse("bookings:booking_update", args=[self.booking.pk])
-        )
-
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Update Booking")
-
-    def test_booking_can_be_updated(self):
-        """Test that a booking can be updated successfully."""
-        self.client.login(
-            username="testuserstudent",
-            password="pass",
-        )
-
-        self.client.post(
-            reverse(
-                "bookings:booking_update",
-                args=[self.booking.pk]
-            ),
-            {
-                "booking_date": "2026-08-01",
-                "booking_time": "15:00",
-                "notes": "Updated notes",
-            }
-        )
-
-        self.booking.refresh_from_db()
-
-        self.assertEqual(
-            str(self.booking.booking_date),
-            "2026-08-01"
-        )
-
-        self.assertEqual(
-            str(self.booking.booking_time),
-            "15:00:00"
-        )
-
-        self.assertEqual(
-            self.booking.notes,
-            "Updated notes"
-        )
-
-
 class BookingDetailViewTests(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(
@@ -227,11 +153,15 @@ class BookingDetailViewTests(TestCase):
 
         self.lesson_type = LessonType.objects.create(
             tutor=self.tutor,
-            title="Math Tutoring",
-            subject="math",
-            skill_level="beginner",
+            title="Math Lesson",
+            category="academic",
+            subject="mathematics",
+            description="Algebra",
             duration_minutes=60,
-            price=50.00,
+            skill_level="beginner",
+            price=20,
+            lesson_date=timezone.now().date() + timedelta(days=7),
+            lesson_time=time(14, 0),
         )
 
         self.booking = Booking.objects.create(

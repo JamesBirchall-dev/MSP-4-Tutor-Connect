@@ -2,6 +2,8 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django.urls import reverse
 from tutors.models import LessonType, TutorProfile
+from datetime import time, timedelta
+from django.utils import timezone
 
 
 class TutorListViewTests(TestCase):
@@ -274,11 +276,14 @@ class LessonListViewTests(TestCase):
         self.lesson = LessonType.objects.create(
             tutor=self.tutor,
             title="Math Lesson",
-            subject="math",
+            category="academic",
+            subject="mathematics",
             description="Algebra",
             duration_minutes=60,
             skill_level="beginner",
-            price=20.00,
+            price=20,
+            lesson_date=timezone.now().date() + timedelta(days=7),
+            lesson_time=time(14, 0),
         )
 
     def test_lesson_list_view_returns_200(self):
@@ -350,11 +355,14 @@ class LessonUpdateViewTests(TestCase):
         self.lesson = LessonType.objects.create(
             tutor=self.tutor,
             title="Math Lesson",
-            subject="math",
+            category="academic",
+            subject="mathematics",
             description="Algebra",
             duration_minutes=60,
             skill_level="beginner",
-            price=20.00,
+            price=20,
+            lesson_date=timezone.now().date() + timedelta(days=7),
+            lesson_time=time(14, 0),
         )
 
         self.url = reverse(
@@ -427,11 +435,14 @@ class LessonDeleteViewTests(TestCase):
         self.lesson = LessonType.objects.create(
             tutor=self.tutor,
             title="Math Lesson",
-            subject="math",
+            category="academic",
+            subject="mathematics",
             description="Algebra",
             duration_minutes=60,
             skill_level="beginner",
-            price=20.00,
+            price=20,
+            lesson_date=timezone.now().date() + timedelta(days=7),
+            lesson_time=time(14, 0),
         )
 
         self.url = reverse(
