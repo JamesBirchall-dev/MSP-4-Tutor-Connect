@@ -1,21 +1,30 @@
 {% extends 'base.html' %}
 
+<!-- Block for the page title -->
+{% block title %}
+<!-- same form for both update and create -->
+    {% if booking %}Update Booking{% else %}Book Lesson{% endif %} | Tutor Connect
+{% endblock %}
+
 {% block content %}
+<!-- Form for booking creation or update -->
+<div class ="container">
+    <section class="form-card">
+        <h1>{% if booking %}
+            Update Booking
+            {% else %}
+            Book Lesson{% endif %}
+        </h1>
 
-<h1>{% if lesson %}
-    Book: {{ lesson.title }}
-{% else %}
-    Update Booking
-{% endif %}</h1>
-
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">
-        {% if booking %}Update Booking
-        {% else %}Book Lesson
+        {% if lesson %}
+            <p>
+                Choose your preferred date and time for this lesson.
+                Your booking will remain pending until payment is complete.
+            </p>
+        {% else %}
+            <p>Update your requested lesson date, time, or notes.</p>
         {% endif %}
-    </button>
-</form>
 
+    </section>
+</div>
 {% endblock %}
