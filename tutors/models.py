@@ -84,13 +84,57 @@ class LessonType(models.Model):
     This model allows tutors to specify the subjects or topics they can teach.
     """
 
+    CATEGORY_CHOICES = [
+        ("academic", "Academic"),
+        ("creative", "Creative Arts"),
+        ("languages", "Languages"),
+        ("music", "Music"),
+        ("technology", "Technology"),
+        ("skills", "Study & Life Skills"),
+    ]
+
     SUBJECT_CHOICES = [
-        ("math", "Math"),
-        ("science", "Science"),
+        ("mathematics", "Mathematics"),
         ("english", "English"),
+        ("science", "General Science"),
+        ("biology", "Biology"),
+        ("chemistry", "Chemistry"),
+        ("physics", "Physics"),
+        ("computer_science", "Computer Science"),
         ("history", "History"),
-        ("language", "Language"),
-        ("other", "Other"),
+        ("geography", "Geography"),
+        ("business_studies", "Business Studies"),
+        ("psychology", "Psychology"),
+
+        ("art", "Art"),
+        ("design", "Design"),
+        ("drama", "Drama"),
+        ("photography", "Photography"),
+
+        ("french", "French"),
+        ("spanish", "Spanish"),
+        ("german", "German"),
+        ("italian", "Italian"),
+        ("mandarin", "Mandarin Chinese"),
+        ("japanese", "Japanese"),
+        ("arabic", "Arabic"),
+
+        ("music_theory", "Music Theory"),
+        ("piano", "Piano"),
+        ("keyboard", "Keyboard"),
+        ("guitar_acoustic", "Acoustic Guitar"),
+        ("guitar_electric", "Electric Guitar"),
+        ("bass_guitar", "Bass Guitar"),
+        ("drums", "Drums"),
+        ("violin", "Violin"),
+        ("voice", "Singing / Vocals"),
+
+        ("coding", "Programming"),
+        ("web_development", "Web Development"),
+        ("data_science", "Data Science"),
+
+        ("study_skills", "Study Skills"),
+        ("exam_preparation", "Exam Preparation"),
     ]
 
     SKILL_LEVEL_CHOICES = [
@@ -106,10 +150,15 @@ class LessonType(models.Model):
         related_name="lesson_types"
     )
     title = models.CharField(max_length=100)
+    category = models.CharField(
+        max_length=50,
+        choices=CATEGORY_CHOICES,
+        default="academic",
+    )
+
     subject = models.CharField(
-        max_length=20,
+        max_length=50,
         choices=SUBJECT_CHOICES,
-        default="other"
     )
     description = models.TextField(blank=True)
     duration_minutes = models.PositiveIntegerField(
