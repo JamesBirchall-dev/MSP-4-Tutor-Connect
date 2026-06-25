@@ -24,12 +24,12 @@ class PaymentModelTestCase(TestCase):
             password="testpassword",
         )
 
-        self.tutor_profile = TutorProfile.objects.create(
+        self.tutor = TutorProfile.objects.create(
             user=self.user,
             display_name="Test Tutor",
-            bio="This is a test tutor.",
-            experience="5 years of teaching experience.",
-            location="online",
+            bio="Test bio",
+            experience="5 years",
+            location="Online",
             is_active=True,
         )
 
@@ -89,12 +89,12 @@ class CheckoutReviewTests(TestCase):
             password="otherpassword",
         )
 
-        self.tutor_profile = TutorProfile.objects.create(
-            user=self.other_user,
+        self.tutor = TutorProfile.objects.create(
+            user=self.user,
             display_name="Test Tutor",
-            bio="This is a test tutor.",
-            experience="5 years of teaching experience.",
-            location="online",
+            bio="Test bio",
+            experience="5 years",
+            location="Online",
             is_active=True,
         )
 
@@ -166,12 +166,12 @@ class CheckoutSessionTests(TestCase):
             password="tutorpassword",
         )
 
-        self.tutor_profile = TutorProfile.objects.create(
-            user=self.tutor_user,
+        self.tutor = TutorProfile.objects.create(
+            user=self.user,
             display_name="Test Tutor",
-            bio="This is a test tutor.",
-            experience="5 years of teaching experience.",
-            location="online",
+            bio="Test bio",
+            experience="5 years",
+            location="Online",
             is_active=True,
         )
 
@@ -318,12 +318,12 @@ class StripeWebhookViewTests(TestCase):
             password="tutorpassword",
         )
 
-        self.tutor_profile = TutorProfile.objects.create(
-            user=self.tutror_user,
+        self.tutor = TutorProfile.objects.create(
+            user=self.user,
             display_name="Test Tutor",
-            bio="This is a test tutor.",
-            experience="5 years of teaching experience.",
-            location="online",
+            bio="Test bio",
+            experience="5 years",
+            location="Online",
             is_active=True,
         )
 

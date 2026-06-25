@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from decimal import Decimal
 from django.test import TestCase
 from tutors.models import LessonType, TutorProfile
+from datetime import time, timedelta
+from django.utils import timezone
 
 # Create your tests here.
 
@@ -145,7 +147,11 @@ class LessonTypeModelTest(TestCase):
         """Test that a LessonType can be created with a tutor and title."""
         lesson_type = LessonType.objects.create(
             tutor=self.tutor_profile,
-            title="Math Tutoring"
+            title="Math Tutoring",
+            category="academic",
+            subject="mathematics",
+            lesson_date=timezone.now().date() + timedelta(days=7),
+            lesson_time=time(14, 0),
         )
         self.assertEqual(lesson_type.tutor, self.tutor_profile)
         self.assertEqual(lesson_type.title, "Math Tutoring")
@@ -156,11 +162,14 @@ class LessonTypeModelTest(TestCase):
         lesson_type = LessonType.objects.create(
             tutor=self.tutor_profile,
             title="Beginner Science Tutoring",
+            category="academic",
             subject="science",
             description="A lesson type for beginners in science.",
             duration_minutes=45,
             skill_level="beginner",
-            price=30.00
+            price=30.00,
+            lesson_date=timezone.now().date() + timedelta(days=7),
+            lesson_time=time(14, 0),
         )
         self.assertEqual(lesson_type.subject, "science")
         self.assertEqual(lesson_type.description,
@@ -173,7 +182,11 @@ class LessonTypeModelTest(TestCase):
         """Test that is_available defaults to True and timestamps are set."""
         lesson_type = LessonType.objects.create(
             tutor=self.tutor_profile,
-            title="English Tutoring"
+            title="English Tutoring",
+            category="academic",
+            subject="english",
+            lesson_date=timezone.now().date() + timedelta(days=7),
+            lesson_time=time(14, 0),
         )
         self.assertTrue(lesson_type.is_available)
         self.assertIsNotNone(lesson_type.created_at)
