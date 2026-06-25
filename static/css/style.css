@@ -65,7 +65,7 @@ button:hover,
     padding: 1.5rem;
 }
 
-/* Layout */
+/* MAIN LAYOUT */
 
 .site-main {
     max-width: 1200px;
@@ -80,7 +80,7 @@ button:hover,
     padding: 0 1rem;
 }
 
-/* Header and Navigation */
+/* HEADER AND NAVIGATION */
 
 .site-header {
     background-color: var(--color-surface);
@@ -91,41 +91,41 @@ button:hover,
     align-items: center;
     gap: 1rem;
 }
-
+/* Logo styling */
 .site-logo {
     display: inline-flex;
     align-items: center;
 }
-
+/* Logo image styling */
 .site-logo img {
     max-width: 220px;
     height: auto;
     display: block;
 }
-
+/* Navigation styling */
 .site-nav {
     display: flex;
     align-items: center;
     gap: 1rem;
     flex-wrap: wrap;
 }
-
+/* Navigation link styling */
 .site-nav a {
     color: var(--color-text);
     font-weight: 600;
 }
-
+/* Hover effect for navigation links */
 .site-nav a:hover {
     color: var(--color-primary);
 }
-
+/*  Navigation call-to-action button styling */
 .nav-cta {
     background-color: var(--color-primary);
     color: var(--color-surface) !important;
     padding: 0.6rem 1rem;
     border-radius: 999px;
 }
-
+/* Hover effect for navigation call-to-action buttons */
 .nav-cta:hover {
     background-color: #185947;
     text-decoration: none;
@@ -149,7 +149,7 @@ button:hover,
     margin: 1rem auto 0;
     padding: 0 1rem; 
 }
-
+/* Message box styling */
 .message {
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
@@ -157,11 +157,11 @@ button:hover,
     border-radius: 0.5rem;
     padding: 0.75rem 1rem; 
 }
-
+/* Success message styling */
 .message-success {
     border-left-color: var(--color-success);
 }
-
+/* Error message styling */
 .message-error {
     border-left-color: var(--color-error);
 }
@@ -177,23 +177,23 @@ button:hover,
     list-style-position: inside;
 }
 
-errorlist li {
+.errorlist li {
     margin: 0.25rem 0;
 }
-
+/* Help text styling for form fields */
 .helptext {
     display: block;
     margin-top: 0.4rem;
     font-size: 0.9rem;
-    color: var(--color-muted)
+    color: var(--color-muted);
 }
-
+/* Styling for invalid feedback and form errors */
 .invalid-feedback,
 .form-error {
     color: var(--color-error);
 }
 
-
+/* Checkbox styling */
 .checkbox-label {
     display: flex;
     align-items: center;
@@ -201,7 +201,7 @@ errorlist li {
     cursor: pointer;
     font-weight: 500;
 }
-
+/* Styling for checkbox inputs within the checkbox-label class */
 .checkbox-label input[type="checkbox"] {
     width: auto;
     margin: 0;
@@ -211,7 +211,7 @@ errorlist li {
     width: auto;
     margin-right: 0.5rem;
 }
-
+/* Styling for the clear_id label in form groups */
 .form-group label[for$="-clear_id"] {
     display: inline-flex;
     align-items: center;
@@ -253,7 +253,7 @@ errorlist li {
 .hero {
     background: linear-gradient(
         135deg,
-        var(--color-surface)
+        var(--color-surface),
         var(--color-background)
     );
     border-bottom: 1px solid var(--color-border);
@@ -350,7 +350,7 @@ errorlist li {
 /* Form heading styling */
 .form-card h1 {
     margin-top: 0;
-    margin-bottom: 1.5rem,
+    margin-bottom: 1.5rem;
 }
 /* Form group styling */
 .form-group {
