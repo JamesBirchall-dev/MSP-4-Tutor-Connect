@@ -66,18 +66,37 @@ Dashboard | Tutor Connect
     </article>
 
     <div class="grid three-column">
-        <article class="card dashboard-card">
-            <h2>Find a Tutor</h2>
-            <p>Browse our list of qualified tutors and find the right one for your needs.</p>
-            <a class="btn btn-secondary" href="{% url 'tutors:tutor_list' %}">Browse Tutors</a>
-        </article>
+    <article class="card dashboard-card">
+        <h2>Find a Tutor</h2>
+        <p>Browse our list of qualified tutors and find the right one for your needs.</p>
+        <a class="btn btn-secondary" href="{% url 'tutors:tutor_list' %}">Browse Tutors</a>
+    </article>
 
-        <article class="card dashboard-card">
-            <h2>My Bookings</h2>
-            <p>View and manage your upcoming tutoring sessions.</p>
-            <a class="btn btn-secondary" href="{% url 'bookings:booking_list' %}">View Bookings</a>
-        </article>
-    
+    <article class="card dashboard-card">
+        <h2>My Bookings</h2>
+        <p>View and manage your upcoming tutoring sessions.</p>
+        <a class="btn btn-secondary" href="{% url 'bookings:booking_list' %}">View Bookings</a>
+    </article>
+    {% if tutor_profile %}
+    <article class="card dashboard-card">
+    <h2>Create Lesson</h2>
+    <p>Add a new lesson for students to view and book.</p>
+    <a
+        class="btn btn-secondary"
+        href="{% url 'tutors:lesson_create' tutor_profile.pk %}"
+    >
+        Create Lesson
+    </a>
+    </article>
+    {% endif %}
+
+    <article class="card dashboard-card">
+        <h2>All Lessons</h2>
+        <p>Browse available lessons from all tutors.</p>
+        <a class="btn btn-secondary" href="#">
+            View Lessons
+        </a>
+    </article>
     </div>
 </section>
 
