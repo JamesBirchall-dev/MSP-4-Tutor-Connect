@@ -1,13 +1,35 @@
-{extends "base.html"}
+{% extends "base.html" %}
 
-{% block title %}Confirm Delete Tutor{% endblock %}
+{% block title %}Delete Tutor Profile | Tutor Connect{% endblock %}
 
 {% block content %}
-    <h1>Confirm Delete Tutor</h1>
-    <p>Are you sure you want to delete the tutor "{{ tutor.display_name }}"?</p>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Yes, Delete</button>
-        <a href="{% url 'tutors:tutor_detail' tutor.pk %}">Cancel</a>
-    </form>
+<div class="container">
+    <section class="card confirmation-card">
+        <h1>Delete Tutor Profile</h1>
+
+        <p>
+            Are you sure you want to delete your tutor profile?
+            This will remove your profile from the tutor listings.
+        </p>
+
+        <div class="booking-summary">
+            <p><strong>Name:</strong> {{ tutor.display_name }}</p>
+            <p><strong>Location:</strong> {{ tutor.location }}</p>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="button-row">
+                <button class="btn btn-danger" type="submit">
+                    Yes, Delete Profile
+                </button>
+
+                <a class="btn btn-outline" href="{% url 'dashboard' %}">
+                    Back to Dashboard
+                </a>
+            </div>
+        </form>
+    </section>
+</div>
 {% endblock %}
