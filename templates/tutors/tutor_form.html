@@ -56,21 +56,30 @@
         {% endfor %}
 
     </div>
-{% endfor %}
+    {% endfor %}
 
-            <div class="button-row">
-                <button class="btn btn-primary" type="submit">
-                    {% if tutor %}
-                        Update Profile
-                    {% else %}
-                        Create Profile
-                    {% endif %}
-                </button>
+    <div class="button-row">
+        <button class="btn btn-primary" type="submit">
+            {% if tutor %}
+                Update Profile
+            {% else %}
+                Create Profile
+            {% endif %}
+        </button>
 
-                <a class="btn btn-outline" href="{% url 'dashboard' %}">
-                    Cancel
-                </a>
-            </div>
+        <a class="btn btn-outline" href="{% url 'dashboard' %}">
+            Cancel
+        </a>
+
+        {% if tutor %}
+            <a
+                class="btn btn-danger"
+                href="{% url 'tutors:tutor_delete' tutor.pk %}"
+            >
+                Delete Profile
+            </a>
+        {% endif %}
+    </div>
 
         </form>
 
