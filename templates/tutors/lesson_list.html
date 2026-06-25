@@ -22,15 +22,27 @@
     {% for lesson in page_obj %}
         <article class="card lesson-card">
             <h2>{{ lesson.title }}</h2>
-                    <p class="lesson-meta">
-                        {{ lesson.subject|title }} | {{ lesson.skill_level|title }}
-                    </p>
+            <p class="lesson-meta">
+                {{ lesson.get_category_display }} |
+                {{ lesson.get_subject_display }} |
+                {{ lesson.get_skill_level_display }}
+            </p>
 
-                    <p>{{ lesson.description}}</p>
+            <p>
+                <strong>Date:</strong> {{ lesson.lesson_date }}
+            </p>
 
-                    <p class="lesson-price">
-                        £{{ lesson.price }}
-                    </p>
+            <p>
+                <strong>Time:</strong> {{ lesson.lesson_time }}
+            </p>
+
+            <p>
+                <strong>Duration:</strong> {{ lesson.duration_minutes }} minutes
+            </p>
+
+            <p class="lesson-price">
+                £{{ lesson.price }}
+            </p>
 
             <a class="btn btn-primary" href="{% url 'bookings:booking_create' lesson.pk %}">
                 Book Lesson
