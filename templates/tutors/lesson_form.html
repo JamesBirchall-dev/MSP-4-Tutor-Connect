@@ -17,7 +17,11 @@
         </h1>
 
         <p>
-            Add the lesson details students will see before booking.
+            {% if lesson %}
+                Update the lesson slot students can book.
+            {% else %}
+                Create a fixed lesson slot for students to book.
+            {% endif %}
         </p>
 
         <!-- Form for lesson creation or update -->
