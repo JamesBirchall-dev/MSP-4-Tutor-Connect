@@ -437,6 +437,33 @@ select:focus {
     margin-bottom: 1rem;
 }
 
+.dashboard-profile-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.dashboard-profile-image {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 1rem;
+    flex-shrink: 0;
+}
+
+.dashboard-profile-content h2,
+.dashboard-profile-content p {
+    margin-top: 0;
+}
+
+@media (max-width: 768px) {
+    .dashboard-profile-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
 /* TUTOR DETAIL PAGE STYLING */
 /* Tutor detail layout styling */
 .tutor-detail {

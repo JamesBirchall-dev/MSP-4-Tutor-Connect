@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load static %}
+
 <!-- Inherit the common site layout from base.html -->
 
 {% block title %}
@@ -17,6 +19,52 @@ Dashboard | Tutor Connect
         <p>Welcome back, {{ user.username }}. Manage your learning journey from here!</p>
     </div>
 
+        <article class="card dashboard-profile-card">
+        {% if tutor_profile %}
+            {% if tutor_profile.image %}
+                <img
+                    class="dashboard-profile-image"
+                    src="{{ tutor_profile.image.url }}"
+                    alt="{{ tutor_profile.display_name }}"
+                >
+            {% else %}
+                <img
+                    class="dashboard-profile-image"
+                    src="{% static 'images/tutorconnect-tutor-profiledefault.webp' %}"
+                    alt="Default tutor profile image"
+                >
+            {% endif %}
+
+            <div class="dashboard-profile-content">
+                <h2>{{ tutor_profile.display_name }}</h2>
+                <p>{{ tutor_profile.location }}</p>
+                <p>{{ tutor_profile.bio|truncatewords:20 }}</p>
+
+                <a
+                    class="btn btn-secondary"
+                    href="{% url 'tutors:tutor_update' tutor_profile.pk %}"
+                >
+                    Edit Tutor Profile
+                </a>
+            </div>
+        {% else %}
+            <img
+                class="dashboard-profile-image"
+                src="{% static 'images/tutorconnect-tutor-profiledefault.webp' %}"
+                alt="Default tutor profile image"
+            >
+
+            <div class="dashboard-profile-content">
+                <h2>{{ user.username }}</h2>
+                <p>You have not created a tutor profile yet.</p>
+
+                <a class="btn btn-secondary" href="{% url 'tutors:tutor_create' %}">
+                    Create Tutor Profile
+                </a>
+            </div>
+        {% endif %}
+    </article>
+
     <div class="grid three-column">
         <article class="card dashboard-card">
             <h2>Find a Tutor</h2>
@@ -29,22 +77,7 @@ Dashboard | Tutor Connect
             <p>View and manage your upcoming tutoring sessions.</p>
             <a class="btn btn-secondary" href="{% url 'bookings:booking_list' %}">View Bookings</a>
         </article>
-
-        <article class="card dashboard-card">
-            <h2>Tutor Profile</h2>
-
-            {% if tutor_profile %}
-                <p>Manage your tutor profile and connect with students.</p>
-                <a class="btn btn-secondary" href="{% url 'tutors:tutor_update' tutor_profile.pk %}">
-                    Edit Profile
-                </a>
-            {% else %}
-                <p>Create your tutor profile to connect with students.</p>
-                <a class="btn btn-secondary" href="{% url 'tutors:tutor_create' %}">
-                    Create Profile
-                </a>
-            {% endif %}
-        </article>        
+    
     </div>
 </section>
 
