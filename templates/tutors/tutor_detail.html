@@ -8,13 +8,20 @@
 <!-- Tutor Detail -->
 <div class="container">
   <article class="card tutor-detail">
+{% load static %}
+
     {% if tutor.image %}
-    <!-- Display the tutor's image if available -->
-      <img
-        class="tutor-detail-image"
-        src="{{ tutor.image.url }}"
-        alt="{{ tutor.display_name }}"
-      >
+        <img
+            class="tutor-detail-image"
+            src="{{ tutor.image.url }}"
+            alt="{{ tutor.display_name }}"
+        >
+    {% else %}
+        <img
+            class="tutor-detail-image"
+            src="{% static 'images/tutorconnect-tutor-profiledefault.webp' %}"
+            alt="Default tutor profile image"
+        >
     {% endif %}
     <!-- Tutor Details -->
     <div class="tutor-detail-content">
