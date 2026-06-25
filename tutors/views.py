@@ -4,6 +4,7 @@ from .filters import LessonFilter
 from django.core.paginator import Paginator
 from decimal import Decimal
 from .forms import TutorProfileForm
+from django.contrib.auth.decorators import login_required
 
 """
 TUTORS APP VIEWS
@@ -50,6 +51,7 @@ def tutor_detail(request, pk):
     return render(request, 'tutors/tutor_detail.html', {'tutor': tutor})
 
 
+@login_required
 def tutor_create(request):
     """Create a new tutor profile using TutorProfileForm."""
     if request.method == "POST":
