@@ -1,10 +1,27 @@
-{%extends "base.html"}
+{% extends "base.html" %}
 
-{% block title %} Payment Successful {% endblock %}
+{% block title %} Payment Successful | Tutor Connect{% endblock %}
 
 {% block content %}
-    <h1>Payment Successful</h1>
-    <p>Thank you for your payment. Your booking has been confirmed.</p>
+<!-- Success Message -->
+<div class="container">
+    <section class="card confirmation-card success-card">
+        <h1>Payment Successful</h1>
 
-    <a href="{% url 'bookings:booking_list' %}">View My Bookings</a>
-{% endblock %}
+        <p>
+            Thank you for your payment. Your booking has been confirmed.
+        </p>
+
+    
+        <div class="button-row">
+            <a class="btn btn-primary" href="{% url 'bookings:booking_list' %}">
+                View My Bookings
+            </a>
+
+            <a class="btn btn-outline" href="{% url 'tutors:tutor_list' %}">
+                Browse More Tutors
+            </a>
+        </div>
+    </section>
+</div>
+{% endblock %}    
