@@ -16,7 +16,28 @@
                 Tell students about your teaching experience, location and expertise.
             {% endif %}
         </p>
+        <!-- Form -->
+        <form method="post" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <p class="form-error">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
 
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+            
+                    {{ field }}
+
+                    {% if field.help_text %}
+                        <div class="helptext">
+                            {{ field.help_text }}
+                        </div>
+                    {% endif %}
 
     </section>  
 </div>
