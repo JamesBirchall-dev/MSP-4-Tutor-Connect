@@ -182,13 +182,41 @@ errorlist li {
 }
 
 .helptext {
-    color: var(--color-muted);
+    display: block;
+    margin-top: 0.4rem;
     font-size: 0.9rem;
+    color: var(--color-muted)
 }
 
 .invalid-feedback,
 .form-error {
     color: var(--color-error);
+}
+
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+/* Form group styling for checkboxes */
+.form-group input[type="checkbox"] {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+.form-group label[for$="-clear_id"] {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
 }
 
 /* Footer styling */

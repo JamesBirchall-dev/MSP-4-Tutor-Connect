@@ -22,7 +22,6 @@ class TutorProfileForm(forms.ModelForm):
         """
         model = TutorProfile
         fields = [
-            "user",
             "display_name",
             "bio",
             "experience",
@@ -88,9 +87,10 @@ class TutorProfileForm(forms.ModelForm):
         """
         image = self.cleaned_data.get("image")
 
-        if image and image.size > 5 * 1024 * 1024:
-            raise forms.ValidationError(
-                "Image must be 5 MB or smaller."
-            )
+        if image and hasattr(image, "size"):
+            if image.size > 5 * 1024 * 1024:
+                raise forms.ValidationError(
+                    "Image must be 5 MB or smaller."
+                )
 
         return image

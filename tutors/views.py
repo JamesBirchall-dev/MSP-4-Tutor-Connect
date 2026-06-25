@@ -51,55 +51,49 @@ def tutor_detail(request, pk):
 
 
 def tutor_create(request):
-    """
-    Create a new tutor profile using TutorProfileForm.
-
-    - Handles GET (empty form)
-    - Handles POST (form submission + validation)
-
-    Template:
-        tutors/tutor_form.html
-    """
+    """Create a new tutor profile using TutorProfileForm."""
     if request.method == "POST":
         form = TutorProfileForm(request.POST, request.FILES)
+
         if form.is_valid():
-            tutor = form.save()
-            return redirect("tutors:tutor_detail", pk=tutor.pk)
+            tutor = form.save(commit=False)
+            tutor.user = request.user
+            tutor.save()
+            return redirect("dashboard")
     else:
         form = TutorProfileForm()
-
-    return render(request, "tutors/tutor_form.html", {"form": form})
-
-
-def tutor_update(request, pk):
-    """
-    Update an existing tutor profile.
-
-    Args:
-        pk (int): Primary key of the tutor profile to update.
-
-    - Pre-fills form with existing tutor data
-    - Saves changes on valid POST submission
-
-    Template:
-        tutors/tutor_form.html
-    """
-    tutor = get_object_or_404(TutorProfile, pk=pk)
-
-    if request.method == "POST":
-        tutor.display_name = request.POST["display_name"]
-        tutor.bio = request.POST["bio"]
-        tutor.experience = request.POST["experience"]
-        tutor.location = request.POST["location"]
-        tutor.save()
-
-        return redirect("tutors:tutor_detail", pk=tutor.pk)
 
     return render(
         request,
         "tutors/tutor_form.html",
         {
-            "form": TutorProfileForm(instance=tutor),
+            "form": form,
+        },
+    )
+
+
+def tutor_update(request, pk):
+    """Update an existing tutor profile."""
+    tutor = get_object_or_404(TutorProfile, pk=pk)
+
+    if request.method == "POST":
+        form = TutorProfileForm(
+            request.POST,
+            request.FILES,
+            instance=tutor,
+        )
+
+        if form.is_valid():
+            form.save()
+            return redirect("dashboard")
+    else:
+        form = TutorProfileForm(instance=tutor)
+
+    return render(
+        request,
+        "tutors/tutor_form.html",
+        {
+            "form": form,
             "tutor": tutor,
         },
     )

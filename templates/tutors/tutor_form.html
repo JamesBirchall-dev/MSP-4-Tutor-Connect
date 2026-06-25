@@ -25,44 +25,55 @@
                 {% endfor %}
             {% endif %}
 
-            {% for field in form %}
-            <div class="form-group">
+{% for field in form %}
+    <div class="form-group">
 
-                <label for="{{ field.id_for_label }}">
-                    {{ field.label }}
-                </label>
+        {% if field.field.widget.input_type == "checkbox" %}
 
+            <label class="checkbox-label" for="{{ field.id_for_label }}">
                 {{ field }}
+                {{ field.label }}
+            </label>
 
-                {% if field.help_text %}
-                    <div class="helptext">
-                        {{ field.help_text }}
-                    </div>
-                {% endif %}
+        {% else %}
 
-                {% for error in field.errors %}
-                    <p class="form-error">{{ error }}</p>
-                {% endfor %}
+            <label for="{{ field.id_for_label }}">
+                {{ field.label }}
+            </label>
 
+            {{ field }}
+
+        {% endif %}
+
+        {% if field.help_text %}
+            <div class="helptext">
+                {{ field.help_text }}
             </div>
+        {% endif %}
+
+        {% for error in field.errors %}
+            <p class="form-error">{{ error }}</p>
         {% endfor %}
 
-        <div class="button-row">
-            <button class="btn btn-primary" type="submit">
-                {% if tutor %}
-                    Update Profile
-                {% else %}
-                    Create Profile
-                {% endif %}
-            </button>
+    </div>
+{% endfor %}
 
-            <a class="btn btn-outline" href="{% url 'dashboard' %}">
-                Cancel
-            </a>
-        </div>
+            <div class="button-row">
+                <button class="btn btn-primary" type="submit">
+                    {% if tutor %}
+                        Update Profile
+                    {% else %}
+                        Create Profile
+                    {% endif %}
+                </button>
+
+                <a class="btn btn-outline" href="{% url 'dashboard' %}">
+                    Cancel
+                </a>
+            </div>
 
         </form>
 
-        </section>
-        </div>
-        {% endblock %}
+    </section>
+</div>
+{% endblock %}
