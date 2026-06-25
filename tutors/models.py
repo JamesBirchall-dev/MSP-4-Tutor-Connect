@@ -177,15 +177,18 @@ class LessonType(models.Model):
         default=Decimal('0.00'),
         validators=[MinValueValidator(0)]
     )
+    is_available = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     lesson_date = models.DateField()
     lesson_time = models.TimeField()
-    is_available = models.BooleanField(default=True)
+
 
     class Meta:
         """
         Meta config for LessonType model.
         """
-        ordering = ["title"]
+        ordering = ["lesson_date", "lesson_time"]
 
     def __str__(self):
         """
