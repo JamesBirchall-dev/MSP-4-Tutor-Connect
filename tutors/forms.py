@@ -1,5 +1,6 @@
 from django import forms
 from .models import TutorProfile
+from models import LessonType
 
 """
 FORMS FOR TUTORS APP
@@ -94,3 +95,48 @@ class TutorProfileForm(forms.ModelForm):
                 )
 
         return image
+
+
+class LessonTypeForm(forms.ModelForm):
+    """
+    Form for creating and updating LessonType instances.
+
+    Uses Django's ModelForm to automatically generate form fields
+    based on the LessonType model and apply model validation.
+    """
+
+    class Meta:
+        """
+        Meta configuration for the LessonTypeForm.
+        """
+        model = LessonType
+        fields = [
+            "title",
+            "category",
+            "subject",
+            "description",
+            "lesson_date",
+            "lesson_time",
+            "duration_minutes",
+            "skill_level",
+            "price",
+            "is_available",
+        ]
+
+        widgets = {
+            "lesson_date": forms.DateInput(attrs={
+                "type": "date",
+            }),
+            "lesson_time": forms.TimeInput(attrs={
+                "type": "time",
+            }),
+            "description": forms.Textarea(attrs={
+                "rows": 5,
+            }),
+        }
+        help_texts = {
+            "lesson_date": "Choose the date this lesson will take place.",
+            "lesson_time": "Choose the start time for this lesson.",
+            "is_available": "Untick this if you want to hide this"
+            "lesson from students.",
+            }
