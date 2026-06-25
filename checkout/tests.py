@@ -33,7 +33,7 @@ class PaymentModelTestCase(TestCase):
             is_active=True,
         )
 
-        self.lesson = LessonType.objects.create(
+        self.lesson_type = LessonType.objects.create(
             tutor=self.tutor,
             title="Math Lesson",
             category="academic",
@@ -98,7 +98,7 @@ class CheckoutReviewTests(TestCase):
             is_active=True,
         )
 
-        self.lesson = LessonType.objects.create(
+        self.lesson_type = LessonType.objects.create(
             tutor=self.tutor,
             title="Math Lesson",
             category="academic",
@@ -175,7 +175,7 @@ class CheckoutSessionTests(TestCase):
             is_active=True,
         )
 
-        self.lesson = LessonType.objects.create(
+        self.lesson_type = LessonType.objects.create(
             tutor=self.tutor,
             title="Math Lesson",
             category="academic",
@@ -327,7 +327,7 @@ class StripeWebhookViewTests(TestCase):
             is_active=True,
         )
 
-        self.lesson = LessonType.objects.create(
+        self.lesson_type = LessonType.objects.create(
             tutor=self.tutor,
             title="Math Lesson",
             category="academic",
