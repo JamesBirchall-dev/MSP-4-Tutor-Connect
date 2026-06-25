@@ -1,11 +1,22 @@
-<h1>
-    {% if tutor %}Update Tutor{% else %}Create Tutor{% endif %}
-</h1>
+{% extends "base.html" %}
 
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">
-        {% if tutor %}Update{% else %}Create{% endif %}
-    </button>
-</form>
+{% block title %}
+    {% if tutor %}Update Tutor Profile{% else %}Create Tutor Profile{% endif %} | Tutor Connect
+{% endblock %}
+
+{% block content %}
+<!-- Tutor Form -->
+<div class="container">
+    <section class="form-card">
+        <h1>{% if tutor %}Update Tutor Profile{% else %}Create Tutor Profile{% endif %}</h1>
+        <p>
+            {% if tutor %}
+                Keep your tutor profile up to date so students can find the information they need.
+            {% else %}
+                Tell students about your teaching experience, location and expertise.
+            {% endif %}
+        </p>
+
+
+    </section>  
+</div>
