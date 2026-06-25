@@ -25,6 +25,31 @@
             <p>Update your requested lesson date, time, or notes.</p>
         {% endif %}
 
+        <!-- Form fields -->
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <p class="form-error">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">
+                    {{ field.label }}
+                </label>
+        
+                {{ field }}
+
+                {% if field.help_text %}
+                    <div class="helptext">
+                        {{ field.help_text }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+
     </section>
 </div>
 {% endblock %}
