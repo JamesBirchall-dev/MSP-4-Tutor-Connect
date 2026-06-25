@@ -571,3 +571,8 @@ select:focus {
 .confirmation-card > p {
     color: var(--color-muted);
 }
+
+/* Form button alignment styling ensures in checkout review proceed to checkout is same size as cancel button */
+.button-form {
+    display: inline-flex;
+}

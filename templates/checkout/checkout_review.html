@@ -17,12 +17,13 @@
                 <p><strong>Tutor:</strong> {{ booking.lesson_type.tutor.display_name }}</p>
                 <p><strong>Date:</strong> {{ booking.booking_date }}</p>
                 <p><strong>Time:</strong> {{ booking.booking_time }}</p>
-                <p><strong>Duration:</strong> {{ booking.lesson_type.duration }} minutes</p>
+                <p><strong>Duration:</strong> {{ booking.lesson_type.duration_minutes }} minutes</p>
                 <p><strong>Price:</strong> £{{ booking.lesson_type.price }}</p>
             </div>
             <!-- Button Row -->
         <div class="button-row">
             <form
+                class="button-form"
                 method="post"
                 action="{% url 'checkout:create_checkout_session' booking.pk %}"
             >
