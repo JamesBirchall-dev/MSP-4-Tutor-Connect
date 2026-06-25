@@ -560,3 +560,14 @@ select:focus {
     border-bottom: 1px solid var(--color-border);
     padding: 0.5rem;
 }
+
+/* CONFIRMATION PAGES STYLING */
+/* Confirmation card styling */
+.confirmation-card {
+    max-width: 700px;
+    margin: 0 auto;
+}
+/* Confirmation card font styling */
+.confirmation-card > p {
+    color: var(--color-muted);
+}

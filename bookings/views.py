@@ -99,7 +99,7 @@ def booking_delete(request, pk):
         booking.save()
         return redirect("bookings:booking_list")
 
-    return render(request, "bookings/confirm_cancel.html", {
+    return render(request, "bookings/booking_confirm_delete.html", {
         "booking": booking
     })
 
