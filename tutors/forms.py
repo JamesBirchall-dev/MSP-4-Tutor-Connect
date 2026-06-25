@@ -1,6 +1,5 @@
 from django import forms
-from .models import TutorProfile
-from models import LessonType
+from .models import TutorProfile, LessonType
 
 """
 FORMS FOR TUTORS APP
