@@ -6,6 +6,7 @@ from decimal import Decimal
 from .forms import TutorProfileForm
 from django.contrib.auth.decorators import login_required
 
+
 """
 TUTORS APP VIEWS
 
