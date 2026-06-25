@@ -16,4 +16,15 @@
             <p><strong>Time:</strong> {{ booking.booking_time }}</p>
         </div>
 
+        <form method="post">
+            {% csrf_token %}
+            <div class="button-row">
+                <button type="submit" class="btn btn-danger">Confirm Cancellation</button>
+                <a class="btn btn-outline" href="{% url 'bookings:booking_list' %}">
+                    Back to Bookings
+                </a>
+            </div>
+        </form>
+    </section>
+</div>
 {% endblock %}
