@@ -44,9 +44,18 @@
                 £{{ lesson.price }}
             </p>
 
-            <a class="btn btn-primary" href="{% url 'bookings:booking_create' lesson.pk %}">
+            {% if lesson.is_available %}
+            <a
+                class="btn btn-primary"
+                href="{% url 'bookings:booking_create' lesson.pk %}"
+            >
                 Book Lesson
             </a>
+        {% else %}
+            <p class="status-badge status-cancelled">
+                Unavailable
+            </p>
+        {% endif %}
         </article>
     {% empty %}
         <article class="card">
