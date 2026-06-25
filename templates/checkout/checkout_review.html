@@ -20,15 +20,32 @@
                 <p><strong>Duration:</strong> {{ booking.lesson_type.duration }} minutes</p>
                 <p><strong>Price:</strong> £{{ booking.lesson_type.price }}</p>
             </div>
-            
-    <!--Edit booking option before proceed to checkout-->
-<a href="{% url 'bookings:booking_update' booking.pk %}">Edit Booking</a>
+            <!-- Button Row -->
+        <div class="button-row">
+            <form
+                method="post"
+                action="{% url 'checkout:create_checkout_session' booking.pk %}"
+            >
+                {% csrf_token %}
+                <button class="btn btn-primary" type="submit">
+                    Proceed to Secure Checkout
+                </button>
+            </form>
 
-<!-- Proceed to checkout button-->
-<form method="POST" action="{% url 'checkout:create_checkout_session' booking.pk %}">
-        {% csrf_token %}
-        <button type="submit">Proceed to Checkout</button>
-    </form>
+            <a
+                class="btn btn-secondary"
+                href="{% url 'bookings:booking_update' booking.pk %}"
+            >
+                Edit Booking
+            </a>
 
-
+            <a
+                class="btn btn-outline"
+                href="{% url 'bookings:booking_list' %}"
+            >
+                Back to Bookings
+            </a>
+        </div>
+    </article>
+</div>
 {% endblock %}
