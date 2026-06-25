@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Tutor List{% endblock %}
 
@@ -19,6 +20,12 @@
                         class="tutor-card-image"
                         src="{{ tutor.image.url }}"
                         alt="{{ tutor.display_name }}"
+                    >
+                {% else %}
+                    <img
+                        class="tutor-card-image"
+                        src="{% static 'images/tutorconnect-tutor-profiledefault.webp' %}"
+                        alt="Default tutor profile image"
                     >
                 {% endif %}
                 <h2>{{ tutor.display_name }}</h2>
