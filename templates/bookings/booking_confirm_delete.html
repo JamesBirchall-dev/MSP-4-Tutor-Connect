@@ -1,8 +1,19 @@
-<h1>Cancel Booking</h1>
+{% extends 'base.html' %}
 
-<p>Are you sure you want to cancel this booking?</p>
+{% block title %} Cancel Booking | Tutor Connect {% endblock %}
+<!-- Confirmation card for booking cancellation -->
+{% block content %}
+<div class="container">
+    <section class="card confirmation-card">
+        <h1>Cancel Booking</h1>
+        <p>Are you sure you want to cancel this booking?</p>
 
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">Yes, cancel</button>
-</form>
+        <div class="booking-summary">
+            <!-- Booking summary content -->
+            <p><strong>Lesson:</strong> {{ booking.lesson_type.title }}</p>
+            <p><strong>Tutor:</strong> {{ booking.lesson_type.tutor.display_name }}</p>
+            <p><strong>Date:</strong> {{ booking.booking_date }}</p>
+            <p><strong>Time:</strong> {{ booking.booking_time }}</p>
+        </div>
+
+{% endblock %}
