@@ -20,12 +20,50 @@
             Add the lesson details students will see before booking.
         </p>
 
-
-        <!-- Form for creating or updating a lesson -->
+        <!-- Form for lesson creation or update -->
         <form method="post" novalidate>
             {% csrf_token %}
-            {% if form.non_field_errors %}
-                {% for error in form.non_field_errors %}
-                    <p class="form-error">{{ error }}</p>
-                {% endfor %}
-            {% endif %} 
+
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input id="title" name="title" type="text" value="{{ lesson.title|default:'' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <input id="subject" name="subject" type="text" value="{{ lesson.subject|default:'' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="skill_level">Skill level</label>
+                <input id="skill_level" name="skill_level" type="text" value="{{ lesson.skill_level|default:'' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="duration_minutes">Duration in minutes</label>
+                <input id="duration_minutes" name="duration_minutes" type="number" value="{{ lesson.duration_minutes|default:'' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input id="price" name="price" type="number" step="0.01" value="{{ lesson.price|default:'' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="5">{{ lesson.description|default:'' }}</textarea>
+            </div>
+
+            <div class="button-row">
+                <button class="btn btn-primary" type="submit">
+                    {% if lesson %}Update Lesson{% else %}Create Lesson{% endif %}
+                </button>
+
+                <a class="btn btn-outline" href="{% url 'tutors:lesson_list' tutor.pk %}">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </section>
+</div>
+{% endblock %}
