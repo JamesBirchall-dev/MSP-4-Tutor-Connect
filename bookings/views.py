@@ -23,6 +23,8 @@ def booking_create(request, lesson_pk):
             booking = form.save(commit=False)
             booking.student = request.user
             booking.lesson_type = lesson
+            booking.booking_date = lesson.lesson_date
+            booking.booking_time = lesson.lesson_time
             booking.save()
             return redirect('bookings:booking_list')
     else:
