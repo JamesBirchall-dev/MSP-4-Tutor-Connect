@@ -95,6 +95,9 @@ class TutorDetailViewTests(TestCase):
 
 
 class TutorCreateViewTests(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username="createuser")
+        self.client.force_login(self.user)
 
     def test_create_view_returns_200(self):
         # Test that the tutor create view returns a 200 status code.
@@ -140,10 +143,9 @@ class TutorCreateViewTests(TestCase):
             "is_active": True
         })
 
-        tutor = TutorProfile.objects.get(display_name="Redirect Tutor")
         self.assertRedirects(
             response,
-            reverse("tutors:tutor_detail", args=[tutor.pk])
+            reverse("dashboard"),
         )
 
 
@@ -152,6 +154,7 @@ class TutorUpdateViewTests(TestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(username="updateuser")
+        self.client.force_login(self.user)
 
         self.tutor = TutorProfile.objects.create(
             user=self.user,
@@ -212,7 +215,7 @@ class TutorUpdateViewTests(TestCase):
 
         self.assertRedirects(
             response,
-            reverse("tutors:tutor_detail", args=[self.tutor.pk]),
+            reverse("dashboard"),
         )
 
 
