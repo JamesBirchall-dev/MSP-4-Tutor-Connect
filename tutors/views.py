@@ -4,7 +4,7 @@ from .filters import LessonFilter
 from django.core.paginator import Paginator
 from .forms import TutorProfileForm, LessonTypeForm
 from django.contrib.auth.decorators import login_required
-
+from django.utils import timezone
 
 """
 TUTORS APP VIEWS
@@ -258,6 +258,7 @@ def all_lessons(request):
     queryset = LessonType.objects.select_related("tutor").filter(
         is_available=True,
         tutor__is_active=True,
+        lesson_date__gte=timezone.now().date()
     ).exclude(
         bookings__status__in=["pending", "confirmed"],
     )
