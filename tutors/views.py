@@ -39,16 +39,32 @@ def tutor_list(request):
 
 def tutor_detail(request, pk):
     """
-    Display details for a single tutor.
-
+    Displays detailed information for a specific tutor.
     Args:
         pk (int): Primary key of the tutor profile.
-
-    Template:
-        tutors/tutor_detail.html
+        Features:
+        - Shows upcoming lessons for the tutor.
+        Template:
+        - tutors/tutor_detail.html
     """
     tutor = get_object_or_404(TutorProfile, pk=pk, is_active=True)
-    return render(request, 'tutors/tutor_detail.html', {'tutor': tutor})
+
+    upcoming_lessons = LessonType.objects.filter(
+        tutor=tutor,
+        is_available=True,
+        lesson_date__gte=timezone.now().date()
+    ).exclude(
+        bookings__status__in=["pending", "confirmed"],
+    )[:3]
+
+    return render(
+        request,
+        "tutors/tutor_detail.html",
+        {
+            "tutor": tutor,
+            "upcoming_lessons": upcoming_lessons,
+        },
+    )
 
 
 @login_required
