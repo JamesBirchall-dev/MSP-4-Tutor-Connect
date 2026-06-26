@@ -12,6 +12,8 @@ app_name = 'tutors'
 urlpatterns = [
     path('', views.tutor_list,
          name='tutor_list'),
+    path("all/", views.all_lessons,
+         name="all_lessons"),
     path('<int:pk>/', views.tutor_detail,
          name='tutor_detail'),
     path("create/", views.tutor_create,
@@ -28,4 +30,6 @@ urlpatterns = [
          name="lesson_update"),
     path("<int:tutor_pk>/lessons/<int:lesson_pk>/delete/", views.lesson_delete,
          name="lesson_delete"),
+    path("all/", views.all_lessons,
+         name="all_lessons"),
 ]
