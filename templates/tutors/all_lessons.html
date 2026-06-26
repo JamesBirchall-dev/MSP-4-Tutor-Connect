@@ -12,6 +12,15 @@
 <!-- Filter Form -->
 <form class="filter-card" method="get">
     {{ filter.form.as_p }}
+    <div class="form-group">
+    <label for="sort">Sort by</label>
+    <select name="sort" id="sort">
+        <option value="date">Date soonest</option>
+        <option value="price_low">Price low to high</option>
+        <option value="price_high">Price high to low</option>
+        <option value="newest">Newest</option>
+    </select>
+    </div>
     <button class="btn btn-primary" type="submit">
         Filter
     </button>
