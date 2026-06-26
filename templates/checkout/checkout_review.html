@@ -8,7 +8,9 @@
         <article class="card checkout-review-card">
             <div class="page-header">
                 <h1>Review Your Booking</h1>
-                <p> check your lesson details before proceeding to checkout. If you need to make any changes, you can edit your booking before proceeding. </p>
+                <p>
+                    Check your fixed lesson details before proceeding to secure checkout.
+                    If the lesson is no longer suitable, return to your bookings and cancel it.
                 </p>
             </div>
 
@@ -32,13 +34,6 @@
                     Proceed to Secure Checkout
                 </button>
             </form>
-
-            <a
-                class="btn btn-secondary"
-                href="{% url 'bookings:booking_update' booking.pk %}"
-            >
-                Edit Booking
-            </a>
 
             <a
                 class="btn btn-outline"
