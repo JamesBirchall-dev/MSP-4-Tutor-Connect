@@ -50,14 +50,20 @@
         <!-- Button Row -->
         <div class="button-row">
             {% if booking.status == "pending" %}
-                <a
-                    class="btn btn-primary"
-                    href="{% url 'checkout:checkout_review' booking.pk %}"
-                >
-                    Continue to Checkout
-                </a>
+            <a
+                class="btn btn-primary"
+                href="{% url 'checkout:checkout_review' booking.pk %}"
+            >
+                Continue to Checkout
+            </a>
 
-            {% endif %}
+            <a
+                class="btn btn-danger"
+                href="{% url 'bookings:booking_delete' booking.pk %}"
+            >
+                Cancel Booking
+            </a>
+                {% endif %}
 
             <a
                 class="btn btn-outline"
