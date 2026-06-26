@@ -5,6 +5,7 @@ from django.core.paginator import Paginator
 from .forms import TutorProfileForm, LessonTypeForm
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django.contrib import messages
 
 """
 TUTORS APP VIEWS
@@ -103,6 +104,10 @@ def tutor_update(request, pk):
 
         if form.is_valid():
             form.save()
+            messages.success(
+                request,
+                "Tutor profile updated successfully."
+            )
             return redirect("dashboard")
     else:
         form = TutorProfileForm(instance=tutor)
@@ -203,7 +208,15 @@ def lesson_create(request, tutor_pk):
             lesson = form.save(commit=False)
             lesson.tutor = tutor
             lesson.save()
-            return redirect("tutors:lesson_list", tutor_pk=tutor.pk)
+            messages.success(
+                request,
+                "Lesson created successfully."
+            )
+
+            return redirect(
+                "tutors:lesson_list",
+                tutor_pk=tutor.pk,
+            )
     else:
         form = LessonTypeForm()
 
@@ -226,6 +239,10 @@ def lesson_update(request, tutor_pk, pk):
 
         if form.is_valid():
             form.save()
+            messages.success(
+                request,
+                "Lesson updated successfully."
+            )
             return redirect("tutors:lesson_list", tutor_pk=tutor.pk)
     else:
         form = LessonTypeForm(instance=lesson)
@@ -254,6 +271,10 @@ def lesson_delete(request, tutor_pk, lesson_pk):
 
     if request.method == 'POST':
         lesson.delete()
+        messages.success(
+            request,
+            "Lesson deleted successfully."
+        )
         return redirect('tutors:lesson_list', tutor_pk=tutor.pk)
 
     return render(
