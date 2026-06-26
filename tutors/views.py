@@ -256,11 +256,11 @@ def all_lessons(request):
     """
     queryset = LessonType.objects.select_related(
         "tutor"
-        ).filter(
-            is_available=True
-            tutor__is_active=True
-        )
-    
+    ).filter(
+            is_available=True,
+            tutor__is_active=True,
+    )
+
     lesson_filter = LessonFilter(request.GET, queryset=queryset)
 
     paginator = Paginator(lesson_filter.qs, 10)
@@ -272,5 +272,5 @@ def all_lessons(request):
         {
             "page_obj": page_obj,
             "filter": lesson_filter,
-        }
+        },
     )
