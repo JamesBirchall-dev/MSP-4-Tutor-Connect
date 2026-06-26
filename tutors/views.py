@@ -145,7 +145,10 @@ def lesson_list(request, tutor_pk):
     """
     tutor = get_object_or_404(TutorProfile, pk=tutor_pk)
 
-    queryset = LessonType.objects.select_related("tutor").filter(tutor=tutor)
+    queryset = LessonType.objects.select_related("tutor").filter(
+        tutor=tutor,
+        lesson_date__gte=timezone.now().date(),
+    )
 
     lesson_filter = LessonFilter(request.GET, queryset=queryset)
 
