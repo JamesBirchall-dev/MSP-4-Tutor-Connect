@@ -65,6 +65,22 @@
             <p>
                 {{ lesson.description|truncatewords:25 }}
             </p>
+            <!-- Book and view buttons -->
+            <div class="button-row">
+                <a
+                        class="btn btn-primary"
+                        href="{% url 'bookings:booking_create' lesson.pk %}"
+                    >
+                        Book Lesson
+                    </a>
+
+                    <a
+                        class="btn btn-outline"
+                        href="{% url 'tutors:tutor_detail' lesson.tutor.pk %}"
+                    >
+                        View Tutor
+                    </a>
+                </div>
         </article>
     {% endfor %}
 </div>
