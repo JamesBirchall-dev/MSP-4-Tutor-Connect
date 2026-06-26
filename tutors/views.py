@@ -240,3 +240,37 @@ def lesson_delete(request, tutor_pk, lesson_pk):
     return render(
         request, 'tutors/lesson_confirm_delete.html',
         {'tutor': tutor, 'lesson': lesson})
+
+
+def all_lessons(request):
+    """
+    Display all lessons across all tutors.
+
+    Features:
+    - Filtering via LessonFilter
+    - Pagination (10 per page)
+    - Optimized query using select_related
+
+    Template:
+        tutors/all_lessons.html
+    """
+    queryset = LessonType.objects.select_related(
+        "tutor"
+        ).filter(
+            is_available=True
+            tutor__is_active=True
+        )
+    
+    lesson_filter = LessonFilter(request.GET, queryset=queryset)
+
+    paginator = Paginator(lesson_filter.qs, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(
+        request, 'tutors/all_lessons.html',
+        {
+            "page_obj": page_obj,
+            "filter": lesson_filter,
+        }
+    )
