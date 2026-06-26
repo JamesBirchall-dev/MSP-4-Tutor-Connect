@@ -19,16 +19,25 @@ class LessonFilter(django_filters.FilterSet):
     - skill_level: Filter by skill level
     """
 
-    q = django_filters.CharFilter(method="filter_title")
+    q = django_filters.CharFilter(
+        method="filter_title",
+        label="Search",
+        )
 
-    subject = django_filters.CharFilter(
-        field_name="subject",
-        lookup_expr="iexact",
+    category = django_filters.ChoiceFilter(
+        field_name="category",
+        choices=LessonType.CATEGORY_CHOICES,
+        label="Category",
     )
 
-    skill_level = django_filters.CharFilter(
-        field_name="skill_level",
-        lookup_expr="iexact",
+    subject = django_filters.ChoiceFilter(
+        choices=LessonType.SUBJECT_CHOICES,
+        label="Subject",
+    )
+
+    skill_level = django_filters.ChoiceFilter(
+        choices=LessonType.SKILL_LEVEL_CHOICES,
+        label="Skill level",
     )
 
     class Meta:
@@ -37,7 +46,7 @@ class LessonFilter(django_filters.FilterSet):
         """
 
         model = LessonType
-        fields = ["q", "subject", "skill_level"]
+        fields = ["q", "category", "subject", "skill_level"]
 
     def filter_title(self, queryset, name, value):
         """
