@@ -68,10 +68,10 @@ Dashboard | Tutor Connect
     {% if tutor_profile %}
     <section class="card dashboard-lessons-card">
         <h2>My Upcoming Lessons</h2>
-
-        {% if upcoming_lessons %}
+ {% if upcoming_lessons %}
             <div class="grid three-column">
-        <article class="card lesson-mini-card">
+         {% for lesson in upcoming_lessons %}
+                <article class="card lesson-mini-card">
                     <h3>{{ lesson.title }}</h3>
 
                     <p>
