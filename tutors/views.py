@@ -248,8 +248,9 @@ def all_lessons(request):
 
     Features:
     - Filtering via LessonFilter
+    - Sorting by date, price, or newest
     - Pagination (10 per page)
-    - Optimized query using select_related
+    - Optimized query using select_relate
 
     Template:
         tutors/all_lessons.html
@@ -260,9 +261,20 @@ def all_lessons(request):
     ).exclude(
         bookings__status__in=["pending", "confirmed"],
     )
+
     lesson_filter = LessonFilter(request.GET, queryset=queryset)
 
-    paginator = Paginator(lesson_filter.qs, 10)
+    sort = request.GET.get("sort", "date")
+    if sort == "price_low":
+        lessons = lesson_filter.qs.order_by("price")
+    elif sort == "price_high":
+        lessons = lesson_filter.qs.order_by("-price")
+    elif sort == "newest":
+        lessons = lesson_filter.qs.order_by("-created_at")
+    else:
+        lessons = lesson_filter.qs.order_by("lesson_date", "lesson_time")
+
+    paginator = Paginator(lessons, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
