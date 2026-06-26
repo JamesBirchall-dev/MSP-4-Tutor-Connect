@@ -35,7 +35,7 @@ def dashboard(request):
 
     upcoming_lessons = LessonType.objects.filter(
         tutor=tutor_profile,
-        lesson_datee__gte=timezone.now().date(),
+        lesson_date__gte=timezone.now().date(),
         ).order_by(
             "lesson_date",
             "lesson_time",
