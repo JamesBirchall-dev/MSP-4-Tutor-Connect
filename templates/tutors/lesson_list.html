@@ -44,27 +44,57 @@
                 £{{ lesson.price }}
             </p>
 
-            {% if lesson.is_available %}
-            <a
-                class="btn btn-primary"
-                href="{% url 'bookings:booking_create' lesson.pk %}"
-            >
-                Book Lesson
-            </a>
-        {% else %}
-            <p class="status-badge status-cancelled">
-                Unavailable
-            </p>
-        {% endif %}
-        </article>
-    {% empty %}
-        <article class="card">
-            <p>No lessons found.</p>
-        </article>
-    {% endfor %}
+{% if lesson.bookings.exists %}
+    <p>
+        <strong>Status:</strong>
+        <span class="status-badge status-confirmed">
+            Booked
+        </span>
+    </p>
 
-</div>
-<!--Pagination-->
+    <p class="helptext">
+        This lesson cannot be edited or deleted because it has a booking.
+    </p>
+        {% elif lesson.is_available %}
+            <p>
+                <strong>Status:</strong>
+                <span class="status-badge status-pending">
+                    Available
+                </span>
+            </p>
+
+                <div class="button-row">
+                    <a
+                        class="btn btn-secondary"
+                        href="{% url 'tutors:lesson_update' tutor.pk lesson.pk %}"
+                    >
+                        Edit
+                    </a>
+
+                    <a
+                        class="btn btn-danger"
+                        href="{% url 'tutors:lesson_delete' tutor.pk lesson.pk %}"
+                    >
+                        Delete
+                    </a>
+                </div>
+            {% else %}
+                <p>
+                    <strong>Status:</strong>
+                    <span class="status-badge status-cancelled">
+                        Unavailable
+                    </span>
+                </p>
+        {% endif %}
+                </article>
+            {% empty %}
+                <article class="card">
+                    <p>No lessons found.</p>
+                </article>
+            {% endfor %}
+
+        </div>
+        <!--Pagination-->
 
     {% if page_obj.paginator.num_pages > 1 %}
         <nav class="pagination" aria-label="Lesson pagination">
