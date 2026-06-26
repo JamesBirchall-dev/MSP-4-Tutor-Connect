@@ -20,3 +20,51 @@
         Clear
     </a>
 </form>
+
+<!-- Lesson items will be rendered here -->
+
+<div class="grid two-column">
+    {% for lesson in page_obj %}
+        <article class="card lesson-card">
+            <h2>{{ lesson.title }}</h2>
+
+            <p>
+                <strong>Tutor:</strong>
+                {{ lesson.tutor.get_display_name }}
+            </p>
+            <p>
+                <strong>Category:</strong>
+                {{ lesson.get_category_display }}
+            </p>
+            <p>
+                <strong>Subject:</strong>
+                {{ lesson.get_subject_display }}
+            </p>
+                        <p>
+                <strong>Skill Level:</strong>
+                {{ lesson.get_skill_level_display }}
+            </p>
+                        <p>
+                <strong>Date:</strong>
+                {{ lesson.lesson_date }}
+            </p>
+                        <p>
+                <strong>Time:</strong>
+                {{ lesson.lesson_time }}
+            </p>
+                        <p>
+
+                <strong>Duration:</strong>
+                {{ lesson.duration_minutes }} minutes
+
+            </p>
+                        <p> 
+                <strong>Price:</strong>
+                £{{ lesson.price }}
+            </p>
+            <p>
+                {{ lesson.description|truncatewords:25 }}
+            </p>
+        </article>
+    {% endfor %}
+</div>
