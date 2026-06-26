@@ -1,10 +1,61 @@
-<h1>Delete Lesson</h1>
+{% extends "base.html" %}
 
-<p>Are you sure you want to delete "{{ lesson.title }}"?</p>
+{% block title %}Delete Lesson | Tutor Connect{% endblock %}
+<!-- Form for confirming lesson deletion -->
+{% block content %}
+<div class="container">
+    <section class="form-card">
+        <div class="page-header">
+            <h1>Delete Lesson</h1>
+            <p>
+                Are you sure you want to permanently delete this lesson?
+                This action cannot be undone.
+            </p>
+        </div>
 
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">Yes, delete</button>
-</form>
+        <article class="card">
+            <h2>{{ lesson.title }}</h2>
 
-<a href="{% url 'tutors:lesson_list' tutor.pk %}">Cancel</a>
+            <p>
+                <strong>Subject:</strong>
+                {{ lesson.get_subject_display }}
+            </p>
+
+            <p>
+                <strong>Date:</strong>
+                {{ lesson.lesson_date }}
+            </p>
+
+            <p>
+                <strong>Time:</strong>
+                {{ lesson.lesson_time }}
+            </p>
+
+            <p>
+                <strong>Price:</strong>
+                £{{ lesson.price }}
+            </p>
+        </article>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="button-row">
+                <button
+                    class="btn btn-danger"
+                    type="submit"
+                >
+                    Delete Lesson
+                </button>
+
+                <a
+                    class="btn btn-outline"
+                    href="{% url 'tutors:lesson_list' tutor.pk %}"
+                >
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </section>
+</div>
+{% endblock %}
