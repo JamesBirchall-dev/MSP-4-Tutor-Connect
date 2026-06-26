@@ -676,3 +676,24 @@ select:focus {
 .lesson-mini-card p {
     margin-bottom: 0.4rem;
 }
+
+/* DASHBOARD LESSONS CARD STYLING */
+
+.dashboard-lessons-card .button-row {
+    margin-top: 1.5rem;
+    justify-content: flex-start;
+}
+
+.dashboard-lessons-card .grid {
+    margin-bottom: 1.5rem;
+}
+
+.lesson-mini-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.lesson-mini-card .btn {
+    margin-top: auto;
+    align-self: flex-start;
+}
