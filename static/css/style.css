@@ -646,3 +646,10 @@ select:focus {
 .lesson-meta-compact span {
     line-height: 1.4;
 }
+
+.lesson-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.75rem 0;
+}

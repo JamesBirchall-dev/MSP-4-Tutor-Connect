@@ -26,37 +26,52 @@
 <div class="grid two-column">
     {% for lesson in page_obj %}
         <article class="card lesson-card">
-            <h2>{{ lesson.title }}</h2>
-            <p class="lesson-description">
-                {{ lesson.description|truncatewords:25 }}
-            </p>
+<h2>{{ lesson.title }}</h2>
 
-            <div class="lesson-meta-compact">
-                <span><strong>Tutor:</strong> {{ lesson.tutor.display_name }}</span>
-                <span><strong>Category:</strong> {{ lesson.get_category_display }}</span>
-                <span><strong>Subject:</strong> {{ lesson.get_subject_display }}</span>
-                <span><strong>Level:</strong> {{ lesson.get_skill_level_display }}</span>
-                <span><strong>Date:</strong> {{ lesson.lesson_date }}</span>
-                <span><strong>Time:</strong> {{ lesson.lesson_time }}</span>
-                <span><strong>Duration:</strong> {{ lesson.duration_minutes }} mins</span>
-                <span><strong>Price:</strong> £{{ lesson.price }}</span>
-            </div>
-            <!-- Book and view buttons -->
-            <div class="button-row">
-                <a
-                        class="btn btn-primary"
-                        href="{% url 'bookings:booking_create' lesson.pk %}"
-                    >
-                        Book Lesson
-                    </a>
+    <div class="lesson-badge-row">
+        <span class="lesson-badge">
+            {{ lesson.get_category_display }}
+        </span>
 
-                    <a
-                        class="btn btn-outline"
-                        href="{% url 'tutors:tutor_detail' lesson.tutor.pk %}"
-                    >
-                        View Tutor
-                    </a>
-                </div>
+        <span class="lesson-badge">
+            {{ lesson.get_subject_display }}
+        </span>
+
+        <span class="lesson-badge">
+            {{ lesson.get_skill_level_display }}
+        </span>
+    </div>
+
+    <p class="lesson-description">
+        {{ lesson.description|truncatewords:25 }}
+    </p>
+
+    <div class="lesson-meta-compact">
+        <span><strong>Tutor:</strong> {{ lesson.tutor.display_name }}</span>
+        <span><strong>Date:</strong> {{ lesson.lesson_date }}</span>
+        <span><strong>Time:</strong> {{ lesson.lesson_time }}</span>
+        <span><strong>Duration:</strong> {{ lesson.duration_minutes }} mins</span>
+    </div>
+
+    <p class="lesson-price">
+        £{{ lesson.price }}
+    </p>
+
+    <div class="button-row">
+        <a
+            class="btn btn-primary"
+            href="{% url 'bookings:booking_create' lesson.pk %}"
+        >
+            Book Lesson
+        </a>
+
+        <a
+            class="btn btn-outline"
+            href="{% url 'tutors:tutor_detail' lesson.tutor.pk %}"
+        >
+            View Tutor
+        </a>
+    </div>
             </article>
         {% empty %}
             <article class="card">
