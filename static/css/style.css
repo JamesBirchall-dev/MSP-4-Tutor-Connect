@@ -631,3 +631,18 @@ select:focus {
 .button-form {
     display: inline-flex;
 }
+
+/* ALL LESSONS / FILTER PAGE STYLING */
+.lesson-description {
+    margin-bottom: 1rem;
+}
+
+.lesson-meta-compact {
+    display: grid;
+    gap: 0.35rem;
+    margin-bottom: 1rem;
+}
+
+.lesson-meta-compact span {
+    line-height: 1.4;
+}

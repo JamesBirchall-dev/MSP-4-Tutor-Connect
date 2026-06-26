@@ -27,44 +27,20 @@
     {% for lesson in page_obj %}
         <article class="card lesson-card">
             <h2>{{ lesson.title }}</h2>
-
-            <p>
-                <strong>Tutor:</strong>
-                {{ lesson.tutor.get_display_name }}
-            </p>
-            <p>
-                <strong>Category:</strong>
-                {{ lesson.get_category_display }}
-            </p>
-            <p>
-                <strong>Subject:</strong>
-                {{ lesson.get_subject_display }}
-            </p>
-                        <p>
-                <strong>Skill Level:</strong>
-                {{ lesson.get_skill_level_display }}
-            </p>
-                        <p>
-                <strong>Date:</strong>
-                {{ lesson.lesson_date }}
-            </p>
-                        <p>
-                <strong>Time:</strong>
-                {{ lesson.lesson_time }}
-            </p>
-                        <p>
-
-                <strong>Duration:</strong>
-                {{ lesson.duration_minutes }} minutes
-
-            </p>
-                        <p> 
-                <strong>Price:</strong>
-                £{{ lesson.price }}
-            </p>
-            <p>
+            <p class="lesson-description">
                 {{ lesson.description|truncatewords:25 }}
             </p>
+
+            <div class="lesson-meta-compact">
+                <span><strong>Tutor:</strong> {{ lesson.tutor.display_name }}</span>
+                <span><strong>Category:</strong> {{ lesson.get_category_display }}</span>
+                <span><strong>Subject:</strong> {{ lesson.get_subject_display }}</span>
+                <span><strong>Level:</strong> {{ lesson.get_skill_level_display }}</span>
+                <span><strong>Date:</strong> {{ lesson.lesson_date }}</span>
+                <span><strong>Time:</strong> {{ lesson.lesson_time }}</span>
+                <span><strong>Duration:</strong> {{ lesson.duration_minutes }} mins</span>
+                <span><strong>Price:</strong> £{{ lesson.price }}</span>
+            </div>
             <!-- Book and view buttons -->
             <div class="button-row">
                 <a
