@@ -39,7 +39,6 @@
                 <!-- Buttons for booking actions -->
                 <div class="button-row">
                     <a href="{% url 'bookings:booking_detail' booking.pk %}" class="btn btn-primary">View Details</a>
-                    <a href="{% url 'bookings:booking_update' booking.pk %}" class="btn btn-secondary">Edit</a>
                     <a href="{% url 'bookings:booking_delete' booking.pk %}" class="btn btn-danger">Cancel</a>
                     <!-- Conditional button for checkout if the booking status is pending -->
                     {% if booking.status == 'pending' %}
