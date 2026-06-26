@@ -360,71 +360,159 @@ The following wireframes were created during the planning and design phase of th
 
 ## Features
 
-### Existing Features/Apps
-
-#### Tutors
-
-The **Tutors** feature allows users to browse tutor profiles and explore available lesson types using built-in search and filtering functionality. It serves as the core discovery layer of the platform, helping students find suitable tutors and lessons before booking.
+Tutor Connect is a full-stack tutoring marketplace that allows students to discover tutors, book scheduled lessons and securely complete payment through Stripe. The platform provides separate functionality for students and tutors while ensuring users can only access and manage their own content.
 
 ---
 
-###### Tutor Directory
+### Accounts
 
-- Displays a list of all active tutors
-- Each tutor has a public profile including:
-  - Display name
-  - Bio
-  - Experience level
-  - Location
-- Individual tutor detail pages provide deeper information and available lessons
+#### User Registration
+
+Users can create an account using the custom registration form. Registration validates user input and securely stores account credentials using Django's built-in authentication system.
+
+Once registration is complete the user is automatically logged in and redirected to their dashboard.
+
+Features include:
+
+- Secure password hashing
+-Automatic login after registration
+-Validation for duplicate usernames and email addresses
+-Success messaging following account creation
 
 ---
 
-###### Lesson Types per Tutor
+#### Authentication
 
-Each tutor can create multiple lesson types.
+Tutor Connect uses Django's authentication framework to manage user sessions.
+
+Authenticated users can:
+
+- Access their personal dashboard
+- Create bookings
+- Create tutor profiles
+- Manage lessons (if they are tutors)
+- Access payment checkout
+
+Unauthenticated users are redirected to the login page whenever attempting to access protected functionality.
+
+---
+
+#### Dashboard
+
+Each registered user has access to a personalised dashboard.
+
+Student users can:
+
+Browse tutors
+View all available lessons
+Access and manage their bookings
+
+Users with a Tutor Profile additionally gain access to tutor management features including:
+
+Edit tutor profile
+-View upcoming scheduled lessons
+-Create new lesson listings
+-Manage existing lessons
+
+The dashboard dynamically changes depending on whether the logged-in user has created a Tutor Profile.
+
+---
+
+### Tutor Profiles
+
+Users wishing to offer lessons can create a Tutor Profile.
+
+Each tutor profile contains:
+
+- Display name
+- Biography
+- Teaching experience
+- Location
+- Profile image
+- Active status
+
+If no profile image has been uploaded a default placeholder image is displayed.
+
+Tutor profiles are publicly viewable and include a summary of the tutor together with their upcoming available lessons.
+
+---
+
+### Lessons (Marketplace)
+
+The lesson system was redesigned during development to more closely reflect a real-world tutoring platform.
+
+Instead of allowing students to request arbitrary dates and times, tutors now create scheduled lesson slots which students can browse and book.
 
 Each lesson includes:
 
-- Title
-- Subject (e.g. Math, Science, English)
-- Skill level (Beginner, Intermediate, Advanced)
+- Lesson title
+- Subject category
+- Subject
+- Skill level
 - Description
 - Duration
 - Price
+- Scheduled date
+- Scheduled time
+- Availability status
 
-Lessons are displayed on a tutor-specific lesson list page.
-
----
-
-###### Search Functionality
-
-- Users can search lessons by title using keyword search
-- Case-insensitive matching ensures flexible search behavior
-- Example: searching `"math"` returns “Math Lesson”
+Lessons are automatically linked to the tutor who created them.
 
 ---
 
-###### Filtering System (django-filter)
+### Subject Categories
 
-Built using **django-filter** for clean and scalable filtering.
+Subjects are selected from predefined choices rather than free-text entry, providing consistent filtering and preventing duplicate spellings.
 
-Users can filter lessons by:
+Categories currently include:
 
-- Subject
-- Skill level
+- Academic Subjects
+- Languages
+- Music
+- Creative Arts
+- Technology
+- Study & Life Skills
 
-Filters can be combined with search queries for more precise results.
+Each category contains multiple predefined subjects allowing accurate searching and filtering.
+
+---
+
+### Browse All Lessons
+
+Students can browse lessons from every tutor through the marketplace.
+
+Features include:
+
+- Pagination
+- Subject filtering
+- Skill level filtering
+- Lesson title search
+- Sorting by:
+  - Date
+  - Lowest price
+  - Highest price
+  - Recently added
+
+Only lessons that are currently available are displayed.
+
+Past lessons are automatically hidden from the public lesson marketplace.
+
+Lessons with pending or confirmed bookings are also excluded to prevent double-booking.
 
 ---
 
-###### Pagination Support
+### Tutor Lesson Management
 
-- Lesson lists are paginated for performance and usability
-- Results are split into manageable pages
-- Prevents long scrolling when tutors have many lessons
+Tutors can:
 
----
+- Create lessons
+- Edit lessons
+- Delete lessons
+- View all lessons they have created
+
+Upcoming lessons are displayed on both the tutor dashboard and public tutor profile.
+
+Success messages are displayed following lesson creation, editing and deletion.
 
 ## Data Model
 
@@ -439,23 +527,118 @@ This structure supports the main user journeys in the application: registering o
 
 ---
 
-### Data Access Rules
+### Bookings
 
-- Lessons are always scoped to a specific tutor
-- Users cannot view lessons outside the selected tutor context
-- Only active tutor profiles are intended for public visibility
+Students can create bookings for available lessons.
+
+Each booking stores:
+
+- Student
+- Lesson
+- Booking date
+- Booking time
+- Notes
+- Booking status
+
+Booking statuses include:
+
+- Pending
+- Confirmed
+- Cancelled
+
+Students may:
+
+- View booking details
+- Update pending bookings
+- Cancel bookings
+
+Access controls ensure users can only manage their own bookings.
 
 ---
 
-## Technical Implementation
+### Checkout
 
-- Django class-based filtering via `FilterSet`
-- Queryset filtering layered on top of tutor-specific queryset
-- Django template rendering using:
-  - `{{ filter.form.as_p }}`
-  - Iteration over filtered/paginated results
-- Server-side pagination using Django `Paginator`
-- URL-driven filtering using GET parameters
+Tutor Connect integrates with Stripe Checkout to provide secure payment processing.
+
+The checkout flow consists of:
+
+Booking
+
+↓
+
+Booking Review
+
+↓
+
+Stripe Checkout
+
+↓
+
+Payment Confirmation
+
+Before payment users can review:
+
+- Tutor
+- Lesson
+- Date
+- Time
+- Duration
+- Price
+
+Successful payments automatically update the booking payment status through Stripe webhooks.
+
+---
+
+### Security
+
+Tutor Connect applies authentication and ownership checks throughout the application.
+
+Security measures include:
+
+- Login required decorators
+- Object ownership validation
+- Protection against editing other users' content
+- CSRF protection
+- Secure password hashing
+- Server-side form validation
+- Environment variables for secret configuration
+- Custom 403 and 500 error pages
+
+---
+
+### User Experience
+
+The application provides consistent feedback using Django's messaging framework.
+
+Examples include:
+
+- Account created successfully
+- Tutor profile updated
+- Lesson created
+- Lesson updated
+- Lesson deleted
+- Booking updated
+- Booking cancelled
+
+Custom placeholder images ensure tutor profiles remain visually consistent even when no image has been uploaded.
+
+---
+
+#### Responsive Design
+
+Tutor Connect has been designed with a mobile-first responsive layout.
+
+The interface adapts across desktop, tablet and mobile devices using CSS Grid and Flexbox layouts.
+
+Responsive components include:
+
+- Navigation
+- Dashboard
+- Tutor cards
+- Lesson marketplace
+- Booking pages
+- Forms
+- Checkout pages
 
 ---
 
