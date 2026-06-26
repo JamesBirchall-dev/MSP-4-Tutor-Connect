@@ -4,8 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from .forms import RegisterForm
-
-from tutors.models import TutorProfile
+from django.utils import timezone
+from tutors.models import TutorProfile, LessonType
 
 
 def register(request):
@@ -33,10 +33,19 @@ def dashboard(request):
         user=request.user
     ).first()
 
+    upcoming_lessons = LessonType.objects.filter(
+        tutor=tutor_profile,
+        lesson_datee__gte=timezone.now().date(),
+        ).order_by(
+            "lesson_date",
+            "lesson_time",
+        )[:3]
+
     return render(
         request,
         "accounts/dashboard.html",
         {
             "tutor_profile": tutor_profile,
+            "upcoming_lessons": upcoming_lessons,
         },
     )
