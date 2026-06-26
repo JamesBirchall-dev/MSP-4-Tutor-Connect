@@ -72,12 +72,18 @@
             View Tutor
         </a>
     </div>
-            </article>
+</article>
         {% empty %}
             <article class="card">
-                <p>No lessons found.</p>
-            </article>
-        {% endfor %}
+                <p>
+                No lessons matched your current filters. Try changing the category,
+                subject, or skill level.
+                </p>
+                <a class="btn btn-primary" href="{% url 'tutors:all_lessons' %}">
+                    Clear Filters
+                </a>
+             </article>
+{% endfor %}
     </div>
     <!--pagination-->
     {% if page_obj.has_other_pages %}
