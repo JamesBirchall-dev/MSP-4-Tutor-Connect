@@ -254,13 +254,12 @@ def all_lessons(request):
     Template:
         tutors/all_lessons.html
     """
-    queryset = LessonType.objects.select_related(
-        "tutor"
-    ).filter(
-            is_available=True,
-            tutor__is_active=True,
+    queryset = LessonType.objects.select_related("tutor").filter(
+        is_available=True,
+        tutor__is_active=True,
+    ).exclude(
+        bookings__status__in=["pending", "confirmed"],
     )
-
     lesson_filter = LessonFilter(request.GET, queryset=queryset)
 
     paginator = Paginator(lesson_filter.qs, 10)
