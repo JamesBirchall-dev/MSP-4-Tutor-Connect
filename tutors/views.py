@@ -234,6 +234,18 @@ def lesson_update(request, tutor_pk, pk):
     tutor = get_object_or_404(TutorProfile, pk=tutor_pk)
     lesson = get_object_or_404(LessonType, pk=pk, tutor=tutor)
 
+    if lesson.bookings.filter(
+        status__in=["pending", "confirmed"]
+    ).exists():
+        messages.error(
+            request,
+            "This lesson already has bookings and cannot be edited."
+        )
+        return redirect(
+            "tutors:lesson_list",
+            tutor_pk=tutor.pk,
+        )
+
     if request.method == "POST":
         form = LessonTypeForm(request.POST, instance=lesson)
 
@@ -268,6 +280,18 @@ def lesson_delete(request, tutor_pk, lesson_pk):
     """
     tutor = get_object_or_404(TutorProfile, pk=tutor_pk)
     lesson = get_object_or_404(LessonType, pk=lesson_pk, tutor=tutor)
+
+    if lesson.bookings.filter(
+        status__in=["pending", "confirmed"]
+    ).exists():
+        messages.error(
+            request,
+            "This lesson already has bookings and cannot be deleted."
+        )
+        return redirect(
+            "tutors:lesson_list",
+            tutor_pk=tutor.pk,
+        )
 
     if request.method == 'POST':
         lesson.delete()
