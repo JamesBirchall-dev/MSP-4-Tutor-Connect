@@ -73,14 +73,21 @@
                     class="btn btn-primary"
                     href="{% url 'bookings:booking_create' lesson.pk %}"
                 >
-                    Book Lesson
+                   Book Lesson
                 </a>
             </article>
         {% empty %}
             <p>No upcoming lessons currently available.</p>
         {% endfor %}
     </div>
-  </section>
+
+    <a
+        class="btn btn-outline"
+        href="{% url 'tutors:lesson_list' tutor.pk %}"
+    >
+        View All Lessons
+    </a>
+</section>
 
 </div>
   
