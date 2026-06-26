@@ -14,6 +14,15 @@
         {% for booking in bookings %}
             <article class="card booking-card">
                 <h2>{{ booking.lesson_type.title }}</h2>
+                <p>
+                    <strong>Category:</strong>
+                    {{ booking.lesson_type.get_category_display }}
+                </p>
+
+                <p>
+                    <strong>Subject:</strong>
+                    {{ booking.lesson_type.get_subject_display }}
+                </p>
 
                 <p>
                     <strong>Tutor:</strong>
@@ -38,26 +47,32 @@
                 </p>
                 <!-- Buttons for booking actions -->
                 <div class="button-row">
-                    <a 
-                        href="{% url 'bookings:booking_detail' booking.pk %}" class="btn btn-primary">
+
+                    <a
+                        class="btn btn-primary"
+                        href="{% url 'bookings:booking_detail' booking.pk %}"
+                    >
                         View Details
                     </a>
+
                     {% if booking.status == "pending" %}
-                    <a
-                        class="btn btn-danger"
-                        href="{% url 'bookings:booking_delete' booking.pk %}"
-                    >
-                        Cancel
-                    </a>
+
+                        <a
+                            class="btn btn-secondary"
+                            href="{% url 'checkout:checkout_review' booking.pk %}"
+                        >
+                            Checkout
+                        </a>
+
+                        <a
+                            class="btn btn-danger"
+                            href="{% url 'bookings:booking_delete' booking.pk %}"
+                        >
+                            Cancel
+                        </a>
+
                     {% endif %}
-                    <!-- Conditional button for checkout if the booking status is pending -->
-                    {% if booking.status == 'pending' %}
-                    <a 
-                        class="btn btn-primary" href="{% url 'checkout:checkout_review' booking.pk %}">
-                        Checkout
-                    </a>
-                    
-                    {% endif %}
+
                 </div>
             </article>
                 {% empty %}
