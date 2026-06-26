@@ -30,6 +30,4 @@ urlpatterns = [
          name="lesson_update"),
     path("<int:tutor_pk>/lessons/<int:lesson_pk>/delete/", views.lesson_delete,
          name="lesson_delete"),
-    path("all/", views.all_lessons,
-         name="all_lessons"),
 ]
