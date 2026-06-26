@@ -7,7 +7,9 @@
     <article  class="card booking-detail-card">
         <div class = "page-header">
             <h1>Booking Details</h1>
-            <p>Review your lesson booking information and payment status below.</p>
+            <p>
+                Review your confirmed lesson details and current booking status.
+            </p>
         </div>
 
         <div class="booking-summary">
@@ -55,12 +57,6 @@
                     Continue to Checkout
                 </a>
 
-                <a
-                    class="btn btn-secondary"
-                    href="{% url 'bookings:booking_update' booking.pk %}"
-                >
-                    Edit Booking
-                </a>
             {% endif %}
 
             <a
