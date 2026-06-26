@@ -70,43 +70,72 @@ Dashboard | Tutor Connect
         <h2>My Upcoming Lessons</h2>
 
         {% if upcoming_lessons %}
-            <div class="lesson-meta-compact">
-                {% for lesson in upcoming_lessons %}
-                    <div>
-                        <strong>{{ lesson.title }}</strong><br>
-                        {{ lesson.lesson_date }} at {{ lesson.lesson_time }}<br>
-                        {{ lesson.get_subject_display }} · £{{ lesson.price }}
+            <div class="grid three-column">
+        <article class="card lesson-mini-card">
+                    <h3>{{ lesson.title }}</h3>
+
+                    <p>
+                        <strong>Subject:</strong>
+                        {{ lesson.get_subject_display }}
+                    </p>
+
+                    <p>
+                        <strong>Date:</strong>
+                        {{ lesson.lesson_date }}
+                    </p>
+
+                    <p>
+                        <strong>Time:</strong>
+                        {{ lesson.lesson_time }}
+                    </p>
+
+                    <p>
+                        <strong>Duration:</strong>
+                        {{ lesson.duration_minutes }} mins
+                    </p>
+
+                    <p>
+                        <strong>Price:</strong>
+                        £{{ lesson.price }}
+                    </p>
+
+                    <a
+                        class="btn btn-outline"
+                        href="{% url 'tutors:lesson_update' tutor_profile.pk lesson.pk %}"
+                    >
+                        Edit
+                    </a>
+                </article>
+            {% endfor %}
+        </div>
+
+                    <div class="button-row">
+                        <a
+                            class="btn btn-secondary"
+                            href="{% url 'tutors:lesson_list' tutor_profile.pk %}"
+                        >
+                            Manage Lessons
+                        </a>
+
+                        <a
+                            class="btn btn-primary"
+                            href="{% url 'tutors:lesson_create' tutor_profile.pk %}"
+                        >
+                            Create Lesson
+                        </a>
                     </div>
-                {% endfor %}
-            </div>
+                {% else %}
+                    <p>You do not have any upcoming lessons yet.</p>
 
-            <div class="button-row">
-                <a
-                    class="btn btn-secondary"
-                    href="{% url 'tutors:lesson_list' tutor_profile.pk %}"
-                >
-                    Manage Lessons
-                </a>
-
-                <a
-                    class="btn btn-primary"
-                    href="{% url 'tutors:lesson_create' tutor_profile.pk %}"
-                >
-                    Create Lesson
-                </a>
-            </div>
-        {% else %}
-            <p>You do not have any upcoming lessons yet.</p>
-
-            <a
-                class="btn btn-primary"
-                href="{% url 'tutors:lesson_create' tutor_profile.pk %}"
-            >
-                Create Your First Lesson
-            </a>
+                    <a
+                        class="btn btn-primary"
+                        href="{% url 'tutors:lesson_create' tutor_profile.pk %}"
+                    >
+                        Create Your First Lesson
+                    </a>
+                {% endif %}
+            </section>
         {% endif %}
-    </section>
-{% endif %}
 
     <div class="grid three-column">
     <article class="card dashboard-card">
