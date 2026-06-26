@@ -636,20 +636,35 @@ select:focus {
 .lesson-description {
     margin-bottom: 1rem;
 }
-
+/* Lesson meta information compact styling */
 .lesson-meta-compact {
     display: grid;
     gap: 0.35rem;
     margin-bottom: 1rem;
 }
-
+/* Lesson meta information compact span styling */
 .lesson-meta-compact span {
     line-height: 1.4;
 }
-
+/* Lesson badge row styling */
 .lesson-badge-row {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    margin: 0.75rem 0;
+}
+/* Lesson badge styling */
+.lesson-badge {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background-color: var(--color-surface-alt);
+}
+/* Lesson price styling */
+.lesson-price {
+    font-size: 1.25rem;
+    font-weight: 700;
     margin: 0.75rem 0;
 }
