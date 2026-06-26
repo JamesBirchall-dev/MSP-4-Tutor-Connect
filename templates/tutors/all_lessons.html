@@ -9,4 +9,14 @@
         <h1>All Lessons</h1>
         <p>Browse available lessons from tutors across all subjects.</p>
     </div>
+<!-- Filter Form -->
+<form class="filter-card" method="get">
+    {{ filter.form.as_p }}
+    <button class="btn btn-primary" type="submit">
+        Filter
+    </button>
 
+    <a class="btn btn-outline" href="{% url 'tutors:all_lessons' %}">
+        Clear
+    </a>
+</form>
