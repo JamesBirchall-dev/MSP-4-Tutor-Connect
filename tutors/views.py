@@ -6,6 +6,8 @@ from .forms import TutorProfileForm, LessonTypeForm
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.contrib import messages
+from django.db.models import Exists, OuterRef
+from bookings.models import Booking
 
 """
 TUTORS APP VIEWS
@@ -169,6 +171,15 @@ def lesson_list(request, tutor_pk):
     queryset = LessonType.objects.select_related("tutor").filter(
         tutor=tutor,
         lesson_date__gte=timezone.now().date(),
+    )
+
+    booked_lessons = Booking.objects.filter(
+        lesson_type=OuterRef("pk"),
+        status__in=["pending", "confirmed"],
+    )
+
+    queryset = queryset.annotate(
+        has_booking=Exists(booked_lessons)
     )
 
     lesson_filter = LessonFilter(request.GET, queryset=queryset)

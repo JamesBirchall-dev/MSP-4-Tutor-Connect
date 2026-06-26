@@ -44,7 +44,7 @@
                 £{{ lesson.price }}
             </p>
 
-{% if lesson.bookings.exists %}
+{% if lesson.has_booking %}
     <p>
         <strong>Status:</strong>
         <span class="status-badge status-confirmed">
