@@ -46,11 +46,7 @@
                         <a class="btn btn-primary" href="{% url 'checkout:checkout_review' booking.pk %}">
                             Checkout
                         </a>
-                    {% endif %}
-                    {% if booking.status == 'pending' %}
-                        <a class="btn btn-primary" href="{% url 'checkout:checkout_review' booking.pk %}">
-                            Checkout
-                        </a>
+                    
                     {% endif %}
                 </div>
             </article>
