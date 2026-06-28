@@ -6,12 +6,25 @@
 <!-- Hero Section -->
 <section class="hero">
     <div class="container">
-        <h1>Find the right tutor for your next step.</h1>
-        <p>Browse trusted tutors, choose a lesson, and book securely online.</p>
+        <h1>Find trusted tutors and book lessons online.</h1>
+        <p>
+            Browse available lessons across academic subjects, languages,
+            music, creative skills and technology.
+        </p>
+
         <div class="button-row">
-            <a class="btn btn-primary" href="{% url 'tutors:tutor_list' %}">Browse Tutors</a>
+            <a class="btn btn-primary" href="{% url 'tutors:all_lessons' %}">
+                Browse Lessons
+            </a>
+
+            <a class="btn btn-outline" href="{% url 'tutors:tutor_list' %}">
+                Browse Tutors
+            </a>
+
             {% if not user.is_authenticated %}
-                <a class="btn btn-outline" href="{% url 'register' %}">Create Account</a>
+                <a class="btn btn-secondary" href="{% url 'register' %}">
+                    Create Account
+                </a>
             {% endif %}
         </div>
     </div>

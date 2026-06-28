@@ -514,17 +514,6 @@ Upcoming lessons are displayed on both the tutor dashboard and public tutor prof
 
 Success messages are displayed following lesson creation, editing and deletion.
 
-## Data Model
-
-The application uses Django's built-in 'User' model and four custom models:
-
--'TutorProfile'
--'LessonType'
--'Booking'
--'Payment'
-
-This structure supports the main user journeys in the application: registering or logging in, browsing tutors, viewing tutor details, creating and editing tutor information, booking lessons, managing bookings, and completing payments through Stripe.
-
 ---
 
 ### Bookings
@@ -663,6 +652,19 @@ The Tutors feature is covered by automated tests ensuring:
 4. User filters by `"Beginner"`
 5. User browses paginated results
 6. User selects a lesson to proceed to booking (future feature)
+
+## Data Model
+
+The application uses Django's built-in 'User' model and four custom models:
+
+-'TutorProfile'
+-'LessonType'
+-'Booking'
+-'Payment'
+
+This structure supports the main user journeys in the application: registering or logging in, browsing tutors, viewing tutor details, creating and editing tutor information, booking lessons, managing bookings, and completing payments through Stripe.
+
+---
 
 ## Data Tables
 
