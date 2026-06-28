@@ -136,4 +136,31 @@
         </article>
     </div>
 </section>
+<!--Tutor CTA-->
+<section class="container section">
+    <article class="card">
+        <h2>Want to offer lessons?</h2>
+        <p>
+            Create a tutor profile, publish scheduled lesson slots and connect
+            with students looking for support.
+        </p>
+
+                <div class="button-row">
+            {% if user.is_authenticated %}
+                <a class="btn btn-primary" href="{% url 'tutors:tutor_create' %}">
+                    Create Tutor Profile
+                </a>
+            {% else %}
+                <a class="btn btn-primary" href="{% url 'register' %}">
+                    Register as a Tutor
+                </a>
+            {% endif %}
+
+            <a class="btn btn-outline" href="{% url 'tutors:tutor_list' %}">
+                View Tutors
+            </a>
+        </div>
+    </article>
+</section>
 {% endblock %}
+
