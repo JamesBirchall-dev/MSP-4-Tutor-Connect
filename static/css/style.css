@@ -114,9 +114,15 @@ button:hover,
     color: var(--color-text);
     font-weight: 600;
 }
-/* Hover effect for navigation links */
-.site-nav a:hover {
+.site-nav a:hover,
+.site-nav a.active {
     color: var(--color-primary);
+    text-decoration: none;
+}
+
+.site-nav a.active {
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 0.25rem;
 }
 /*  Navigation call-to-action button styling */
 .nav-cta {
