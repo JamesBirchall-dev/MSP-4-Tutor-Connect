@@ -45,6 +45,13 @@ class TutorProfile(models.Model):
     experience = models.TextField()
     location = models.CharField(max_length=100)
 
+    contact_email = models.EmailField(blank=True)
+
+    lesson_delivery_info = models.TextField(
+        blank=True,
+        help_text="Add online lesson link details, contact instructions, or how students should prepare."
+    )
+
     image = models.ImageField(
         upload_to="tutor_profiles/",
         blank=True,
