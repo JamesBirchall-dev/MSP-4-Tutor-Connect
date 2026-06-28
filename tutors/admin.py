@@ -27,7 +27,14 @@ class TutorProfileAdmin(admin.ModelAdmin):
     """
 
     # Key profile info
-    list_display = ("display_name", "user", "is_active", "created_at")
+    list_display = (
+        "display_name",
+        "user",
+        "location",
+        "contact_email",
+        "is_active",
+        "created_at",
+    )
 
     # common filters used to manage active tutors
     list_filter = ("is_active", "location", "created_at")
@@ -40,6 +47,8 @@ class TutorProfileAdmin(admin.ModelAdmin):
         "bio",
         "experience",
         "location",
+        "contact_email",
+        "lesson_delivery_info",
     )
 
     # Display profiles alphabetically by display name
@@ -71,19 +80,23 @@ class LessonTypeAdmin(admin.ModelAdmin):
     list_display = (
         "title",
         "tutor",
+        "category",
         "subject",
         "skill_level",
+        "lesson_date",
+        "lesson_time",
         "duration_minutes",
         "price",
         "is_available",
-        "created_at",
     )
 
     # filters to manage lesson types
     list_filter = (
+        "category",
         "subject",
         "skill_level",
         "is_available",
+        "lesson_date",
         "created_at",
     )
     # Search by lesson details or tutor name.
@@ -94,7 +107,7 @@ class LessonTypeAdmin(admin.ModelAdmin):
     )
 
     # Present lessons alphabetically.
-    ordering = ("title",)
+    ordering = ("lesson_date", "lesson_time")
 
     # optimised tutor lookup to reduce database queries in the admin list view.
     list_select_related = ("tutor",)
