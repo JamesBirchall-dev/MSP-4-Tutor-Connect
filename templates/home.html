@@ -32,19 +32,76 @@
 
 <!-- Popular Lesson Types -->
 <section class="container section">
-    <h2>Popular lesson types</h2>
+    <h2>Find lessons by subject</h2>
+    <p>
+        Explore upcoming lessons from tutors across a range of subjects and skill levels.
+    </p>
+
     <div class="grid three-column">
-        <article class="card">
-            <h3>Beginner Guitar</h3>
-            <p>Start with chords, rhythm, and simple songs.</p>
+         <article class="card">
+            <h3>Academic Support</h3>
+            <p>Maths, English, Science and exam preparation lessons.</p>
+            <a
+                class="btn btn-secondary"
+                href="{% url 'tutors:all_lessons' %}?category=academic"
+            >
+                View Academic Lessons
+            </a>
         </article>
+
         <article class="card">
-            <h3>Acoustic Guitar</h3>
-            <p>Improve fingerpicking, strumming, and performance.</p>
+            <h3>Languages</h3>
+            <p>Build confidence in French, Spanish and other popular languages.</p>
+            <a
+                class="btn btn-secondary"
+                href="{% url 'tutors:all_lessons' %}?category=languages"
+            >
+                View Language Lessons
+            </a>
         </article>
+
+                <article class="card">
+            <h3>Music</h3>
+            <p>Book guitar, piano, vocals and music theory lessons.</p>
+            <a
+                class="btn btn-secondary"
+                href="{% url 'tutors:all_lessons' %}?category=music"
+            >
+                View Music Lessons
+            </a>
+        </article>
+
+                <article class="card">
+            <h3>Technology</h3>
+            <p>Learn coding, web development and digital skills.</p>
+            <a
+                class="btn btn-secondary"
+                href="{% url 'tutors:all_lessons' %}?category=technology"
+            >
+                View Technology Lessons
+            </a>
+        </article>
+
+                <article class="card">
+            <h3>Creative Arts</h3>
+            <p>Explore art, design, photography and creative development.</p>
+            <a
+                class="btn btn-secondary"
+                href="{% url 'tutors:all_lessons' %}?category=creative"
+            >
+                View Creative Lessons
+            </a>
+        </article>
+
         <article class="card">
-            <h3>Music Theory</h3>
-            <p>Understand scales, keys, harmony, and songwriting.</p>
+            <h3>Study Skills</h3>
+            <p>Improve revision planning, organisation and exam confidence.</p>
+            <a
+                class="btn btn-secondary"
+                href="{% url 'tutors:all_lessons' %}?category=skills"
+            >
+                View Study Skills
+            </a>
         </article>
     </div>
 </section>
