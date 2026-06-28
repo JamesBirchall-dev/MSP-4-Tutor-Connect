@@ -15,15 +15,6 @@ class PaymentAdmin(admin.ModelAdmin):
     list_display = (
         "booking",
         "amount",
-        "payment_date",
-        "status",
-        "created_at",
-    )
-
-    # Filters to manage payments by status and date
-    list_filter = (
-        "status",
-        "currency",
         "created_at",
     )
 
@@ -33,8 +24,6 @@ class PaymentAdmin(admin.ModelAdmin):
         "booking__student__username",
         "booking__student__email",
         "booking__lesson_type__title",
-        "stripe_checkout_session_id",
-        "stripe_payment_intent_id",
     )
 
     ordering = ("-created_at",)
