@@ -47,6 +47,36 @@
                 </p>
             {% endif %}
         </div>
+
+        {% if booking.status == "confirmed" %}
+        <section class="card lesson-arrangements-card">
+            <h2>Lesson Arrangements</h2>
+                <p>
+            Your booking has been confirmed. Please use the information below to
+            arrange or access your lesson.
+                </p>
+
+            {% if booking.lesson_type.tutor.contact_email %}
+                <p>
+                    <strong>Tutor Contact Email:</strong></strong>
+                    {{ booking.lesson_type.tutor.contact_email }}
+                </p>
+            {% endif %}
+
+            {% if booking.lesson_type.tutor.lesson_delivery_info %}
+                <p>
+                <strong>Lesson information:</strong><br>
+                {{ booking.lesson_type.tutor.lesson_delivery_info|linebreaks }}
+                </p>
+        {% else %}
+                <p>
+                    Your tutor will contact you using the email address associated
+                    with your Tutor Connect account before your lesson.
+                </p>
+        {% endif %}
+    </section>
+{% endif %}
+
         <!-- Button Row -->
         <div class="button-row">
             {% if booking.status == "pending" %}
