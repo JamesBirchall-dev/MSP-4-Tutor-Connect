@@ -28,6 +28,8 @@ class TutorProfileForm(forms.ModelForm):
             "location",
             "image",
             "is_active",
+            "contact_email",
+            "lesson_delivery_info",
         ]
         """
         Help tests for form fields to guide users

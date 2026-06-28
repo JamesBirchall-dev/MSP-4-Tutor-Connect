@@ -49,7 +49,7 @@ class TutorProfile(models.Model):
 
     lesson_delivery_info = models.TextField(
         blank=True,
-        help_text="Add online lesson link details, contact instructions, or how students should prepare."
+        help_text="Add online lesson link details and contact information."
     )
 
     image = models.ImageField(
