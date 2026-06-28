@@ -34,6 +34,7 @@
 </head>
 
 <body>
+    {% with current=request.resolver_match.url_name %}
     <!-- Site header and primary navigation -->
     <header class="site-header">
         <a class="site-logo" href="{% url 'home' %}">
@@ -47,13 +48,26 @@
 
 
         <nav class="site-nav" aria-label="Main navigation">
-            <a href="{% url 'home' %}">Home</a>
-            <a href="{% url 'tutors:tutor_list' %}">Tutors</a>
+            <a href="{% url 'home' %}" class="{% if current == 'home' %}active{% endif %}">
+                Home
+            </a>
+
+            <a href="{% url 'tutors:all_lessons' %}" class="{% if current == 'all_lessons' %}active{% endif %}">
+                Lessons
+            </a>
+
+            <a href="{% url 'tutors:tutor_list' %}" class="{% if current == 'tutor_list' %}active{% endif %}">
+                Tutors
+            </a>
 
 
             {% if user.is_authenticated %}
-                <a href="{% url 'dashboard' %}">Dashboard</a>
-                <a href="{% url "bookings:booking_list" %}">My Bookings</a>
+                <a href="{% url 'dashboard' %}" class="{% if current == 'dashboard' %}active{% endif %}">
+                    Dashboard
+                </a>
+                <a href="{% url "bookings:booking_list" %}" class="{% if current == 'booking_list' %}active{% endif %}">
+                    My Bookings
+                </a>
                 
                 
                 <form 
@@ -64,10 +78,15 @@
                     {% csrf_token %}
                     <button type="submit">Log out</button>
                 </form>
-            {% else %}
-                <a href="{% url 'login' %}">Log in</a>
-                <a class="nav-cta" href="{% url 'register' %}">Register</a>
-            {% endif %}
+                {% else %}
+                    <a href="{% url 'login' %}" class="{% if current == 'login' %}active{% endif %}">
+                        Log in
+                    </a>
+
+                    <a class="nav-cta {% if current == 'register' %}active{% endif %}" href="{% url 'register' %}">
+                        Register
+                    </a>
+                {% endif %}
         </nav>
     </header>
 
@@ -93,6 +112,8 @@
     <footer class="site-footer">
         <p>&copy; {% now "Y" %} Tutor Connect. All rights reserved.</p>
     </footer>
+
+    {% endwith %}
 </body>
 
 </html>
