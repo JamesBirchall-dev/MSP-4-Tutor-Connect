@@ -1,21 +1,30 @@
-{% extends "base.html" %} {% block title %}500 - Server Error | Tutor Connect{%
-endblock %} {% block content %}
+{% extends "base.html" %}
+
+{% block title %}500 - Server Error | Tutor Connect{% endblock %}
+
+{% block content %}
 <div class="container">
-  <section class="card text-center">
-    <h1>500 - Something Went Wrong</h1>
+    <section class="card text-center">
+        <h1>500 - Something Went Wrong</h1>
 
-    <p>Sorry, something unexpected happened while processing your request.</p>
+        <p>
+            Sorry, something unexpected happened while processing your request.
+        </p>
 
-    <p>
-      Please try again in a few moments. If the problem continues, contact the
-      site administrator.
-    </p>
+        <p>
+            Please try again in a few moments. If the problem continues,
+            contact the site administrator.
+        </p>
 
-    <div class="button-row">
-      <a class="btn btn-primary" href="{% url 'dashboard' %}"> Dashboard </a>
+        <div class="button-row">
+            <a class="btn btn-primary" href="{% url 'dashboard' %}">
+                Dashboard
+            </a>
 
-      <a class="btn btn-outline" href="{% url 'home' %}"> Return Home </a>
-    </div>
-  </section>
+            <a class="btn btn-outline" href="{% url 'home' %}">
+                Return Home
+            </a>
+        </div>
+    </section>
 </div>
 {% endblock %}

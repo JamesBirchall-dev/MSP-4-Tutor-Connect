@@ -1,84 +1,89 @@
-{% extends "base.html" %} {% block title %}My Bookings | Tutor Connect{%
-endblock %} {% block content %}
+{% extends "base.html" %}
+
+{% block title %}My Bookings | Tutor Connect{% endblock %}
+
+{% block content %}
 <!-- Main content for the booking list page -->
 <div class="container">
-  <div class="page-header">
-    <h1>My Bookings</h1>
-    <p>View and manage your upcoming tutoring sessions.</p>
-  </div>
-  <!-- Booking List -->
-  <div class="grid two-column">
-    {% for booking in bookings %}
-    <article class="card booking-card">
-      <h2>{{ booking.lesson_type.title }}</h2>
-      <p>
-        <strong>Category:</strong>
-        {{ booking.lesson_type.get_category_display }}
-      </p>
+    <div class="page-header">
+        <h1>My Bookings</h1>
+        <p>View and manage your upcoming tutoring sessions.</p>
+    </div>
+<!-- Booking List -->
+    <div class="grid two-column">
+        {% for booking in bookings %}
+            <article class="card booking-card">
+                <h2>{{ booking.lesson_type.title }}</h2>
+                <p>
+                    <strong>Category:</strong>
+                    {{ booking.lesson_type.get_category_display }}
+                </p>
 
-      <p>
-        <strong>Subject:</strong>
-        {{ booking.lesson_type.get_subject_display }}
-      </p>
+                <p>
+                    <strong>Subject:</strong>
+                    {{ booking.lesson_type.get_subject_display }}
+                </p>
 
-      <p>
-        <strong>Tutor:</strong>
-        {{ booking.lesson_type.tutor.display_name }}
-      </p>
+                <p>
+                    <strong>Tutor:</strong>
+                    {{ booking.lesson_type.tutor.display_name }}
+                </p>
 
-      <p>
-        <strong>Date:</strong>
-        {{ booking.booking_date }}
-      </p>
+                <p>
+                    <strong>Date:</strong>
+                    {{ booking.booking_date }}
+                </p>
 
-      <p>
-        <strong>Time:</strong>
-        {{ booking.booking_time }}
-      </p>
+                <p>
+                    <strong>Time:</strong>
+                    {{ booking.booking_time }}
+                </p>
 
-      <p>
-        <strong>Status:</strong>
-        <span class="status-badge status-{{ booking.status }}">
-          {{ booking.status|title }}
-        </span>
-      </p>
-      <!-- Buttons for booking actions -->
-      <div class="button-row">
-        <a
-          class="btn btn-primary"
-          href="{% url 'bookings:booking_detail' booking.pk %}"
-        >
-          View Details
-        </a>
+                <p>
+                    <strong>Status:</strong>
+                    <span class="status-badge status-{{ booking.status }}">
+                        {{ booking.status|title }}
+                    </span>
+                </p>
+                <!-- Buttons for booking actions -->
+                <div class="button-row">
 
-        {% if booking.status == "pending" %}
+                    <a
+                        class="btn btn-primary"
+                        href="{% url 'bookings:booking_detail' booking.pk %}"
+                    >
+                        View Details
+                    </a>
 
-        <a
-          class="btn btn-secondary"
-          href="{% url 'checkout:checkout_review' booking.pk %}"
-        >
-          Checkout
-        </a>
+                    {% if booking.status == "pending" %}
 
-        <a
-          class="btn btn-danger"
-          href="{% url 'bookings:booking_delete' booking.pk %}"
-        >
-          Cancel
-        </a>
+                        <a
+                            class="btn btn-secondary"
+                            href="{% url 'checkout:checkout_review' booking.pk %}"
+                        >
+                            Checkout
+                        </a>
 
-        {% endif %}
-      </div>
-    </article>
-    {% empty %}
-    <!-- Display a message if no bookings are available -->
-    <article class="card">
-      <p>No bookings yet.</p>
-      <a class="btn btn-primary" href="{% url 'tutors:tutor_list' %}">
-        Browse Tutors
-      </a>
-    </article>
-    {% endfor %}
-  </div>
+                        <a
+                            class="btn btn-danger"
+                            href="{% url 'bookings:booking_delete' booking.pk %}"
+                        >
+                            Cancel
+                        </a>
+
+                    {% endif %}
+
+                </div>
+            </article>
+                {% empty %}
+                <!-- Display a message if no bookings are available -->
+            <article class="card">
+                <p>No bookings yet.</p>
+                <a class="btn btn-primary" href="{% url 'tutors:tutor_list' %}">
+                    Browse Tutors
+                </a>
+            </article>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

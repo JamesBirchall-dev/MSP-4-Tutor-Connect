@@ -1,105 +1,124 @@
-{% extends "base.html" %} {% block title %}All Lessons | Tutor Connect{%
-endblock %} {% block content %}
+{% extends "base.html" %}
+
+{% block title %}All Lessons | Tutor Connect{% endblock %}
+
+{% block content %}
 <!-- All Lessons Content -->
 <div class="container">
-  <div class="page-header">
-    <h1>All Lessons</h1>
-    <p>Browse available lessons from tutors across all subjects.</p>
-  </div>
-  <!-- Filter Form -->
-  <form class="filter-card" method="get">
+    <div class="page-header">
+        <h1>All Lessons</h1>
+        <p>Browse available lessons from tutors across all subjects.</p>
+    </div>
+<!-- Filter Form -->
+<form class="filter-card" method="get">
     {{ filter.form.as_p }}
     <div class="form-group">
-      <label for="sort">Sort by</label>
-      <select name="sort" id="sort">
+    <label for="sort">Sort by</label>
+    <select name="sort" id="sort">
         <option value="date">Date soonest</option>
         <option value="price_low">Price low to high</option>
         <option value="price_high">Price high to low</option>
         <option value="newest">Newest</option>
-      </select>
+    </select>
     </div>
-    <button class="btn btn-primary" type="submit">Filter</button>
+    <button class="btn btn-primary" type="submit">
+        Filter
+    </button>
 
-    <a class="btn btn-outline" href="{% url 'tutors:all_lessons' %}"> Clear </a>
-  </form>
+    <a class="btn btn-outline" href="{% url 'tutors:all_lessons' %}">
+        Clear
+    </a>
+</form>
 
-  <!-- Lesson items will be rendered here -->
+<!-- Lesson items will be rendered here -->
 
-  <div class="grid two-column">
+<div class="grid two-column">
     {% for lesson in page_obj %}
-    <article class="card lesson-card">
-      <h2>{{ lesson.title }}</h2>
+        <article class="card lesson-card">
+<h2>{{ lesson.title }}</h2>
 
-      <div class="lesson-badge-row">
-        <span class="lesson-badge"> {{ lesson.get_category_display }} </span>
+    <div class="lesson-badge-row">
+        <span class="lesson-badge">
+            {{ lesson.get_category_display }}
+        </span>
 
-        <span class="lesson-badge"> {{ lesson.get_subject_display }} </span>
+        <span class="lesson-badge">
+            {{ lesson.get_subject_display }}
+        </span>
 
-        <span class="lesson-badge"> {{ lesson.get_skill_level_display }} </span>
-      </div>
+        <span class="lesson-badge">
+            {{ lesson.get_skill_level_display }}
+        </span>
+    </div>
 
-      <p class="lesson-description">
+    <p class="lesson-description">
         {{ lesson.description|truncatewords:25 }}
-      </p>
+    </p>
 
-      <div class="lesson-meta-compact">
+    <div class="lesson-meta-compact">
         <span><strong>Tutor:</strong> {{ lesson.tutor.display_name }}</span>
         <span><strong>Date:</strong> {{ lesson.lesson_date }}</span>
         <span><strong>Time:</strong> {{ lesson.lesson_time }}</span>
-        <span
-          ><strong>Duration:</strong> {{ lesson.duration_minutes }} mins</span
-        >
-      </div>
+        <span><strong>Duration:</strong> {{ lesson.duration_minutes }} mins</span>
+    </div>
 
-      <p class="lesson-price">£{{ lesson.price }}</p>
+    <p class="lesson-price">
+        £{{ lesson.price }}
+    </p>
 
-      <div class="button-row">
+    <div class="button-row">
         <a
-          class="btn btn-primary"
-          href="{% url 'bookings:booking_create' lesson.pk %}"
+            class="btn btn-primary"
+            href="{% url 'bookings:booking_create' lesson.pk %}"
         >
-          Book Lesson
+            Book Lesson
         </a>
 
         <a
-          class="btn btn-outline"
-          href="{% url 'tutors:tutor_detail' lesson.tutor.pk %}"
+            class="btn btn-outline"
+            href="{% url 'tutors:tutor_detail' lesson.tutor.pk %}"
         >
-          View Tutor
+            View Tutor
         </a>
-      </div>
-    </article>
-    {% empty %}
-    <article class="card">
-      <p>
-        No lessons matched your current filters. Try changing the category,
-        subject, or skill level.
-      </p>
-      <a class="btn btn-primary" href="{% url 'tutors:all_lessons' %}">
-        Clear Filters
-      </a>
-    </article>
-    {% endfor %}
-  </div>
-  <!--pagination-->
-  {% if page_obj.has_other_pages %}
-  <nav class="pagination" aria-label="Lesson pagination">
-    {% if page_obj.has_previous %}
-    <a class="btn btn-outline" href="?page={{ page_obj.previous_page_number }}">
-      Previous
-    </a>
-    {% endif %}
+    </div>
+</article>
+        {% empty %}
+            <article class="card">
+                <p>
+                No lessons matched your current filters. Try changing the category,
+                subject, or skill level.
+                </p>
+                <a class="btn btn-primary" href="{% url 'tutors:all_lessons' %}">
+                    Clear Filters
+                </a>
+             </article>
+{% endfor %}
+    </div>
+    <!--pagination-->
+    {% if page_obj.has_other_pages %}
+        <nav class="pagination" aria-label="Lesson pagination">
+            {% if page_obj.has_previous %}
+                <a
+                    class="btn btn-outline"
+                    href="?page={{ page_obj.previous_page_number }}"
+                >
+                    Previous
+                </a>
+            {% endif %}
 
-    <span>
-      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-    </span>
+            <span>
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
 
-    {% if page_obj.has_next %}
-    <a class="btn btn-outline" href="?page={{ page_obj.next_page_number }}">
-      Next
-    </a>
+            {% if page_obj.has_next %}
+                <a
+                    class="btn btn-outline"
+                    href="?page={{ page_obj.next_page_number }}"
+                >
+                    Next
+                </a>
+            {% endif %}
+        </nav>
     {% endif %}
-  </nav>
-  {% endif %}
 </div>
 {% endblock %}

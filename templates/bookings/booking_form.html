@@ -3,48 +3,75 @@
 <!-- Block for the page title -->
 {% block title %}
 <!-- same form for both update and create -->
-{% if booking %}Update Booking{% else %}Book Lesson{% endif %} | Tutor Connect
-{% endblock %} {% block content %}
+    {% if booking %}Update Booking{% else %}Book Lesson{% endif %} | Tutor Connect
+{% endblock %}
+
+{% block content %}
 <!-- Form for booking creation or update -->
 
 <div class="container">
-  <section class="form-card">
-    <h1>{% if booking %} Update Booking {% else %} Book Lesson {% endif %}</h1>
+    <section class="form-card">
 
-    <p>
-      {% if booking %} Update your booking notes before completing payment. The
-      lesson date and time are fixed when the lesson is created. {% else %}
-      Review the selected lesson and add any notes for your tutor before
-      confirming your booking. The lesson date and time are fixed. {% endif %}
-    </p>
+        <h1>
+            {% if booking %}
+                Update Booking
+            {% else %}
+                Book Lesson
+            {% endif %}
+        </h1>
 
-    <!-- Form fields -->
-    <form method="post" novalidate>
-      {% csrf_token %} {% if form.non_field_errors %} {% for error in
-      form.non_field_errors %}
-      <p class="form-error">{{ error }}</p>
-      {% endfor %} {% endif %} {% for field in form %}
-      <div class="form-group">
-        <label for="{{ field.id_for_label }}"> {{ field.label }} </label>
+        <p>
+            {% if booking %}
+                Update your booking notes before completing payment.
+                The lesson date and time are fixed when the lesson is created.
+            {% else %}
+                Review the selected lesson and add any notes for your tutor before confirming your booking.
+                The lesson date and time are fixed.
+            {% endif %}
+        </p>
 
-        {{ field }} {% if field.help_text %}
-        <div class="helptext">{{ field.help_text }}</div>
-        {% endif %} {% for error in field.errors %}
-        <p class="form-error">{{ error }}</p>
+        <!-- Form fields -->
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <p class="form-error">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">
+                    {{ field.label }}
+                </label>
+        
+                {{ field }}
+
+                {% if field.help_text %}
+                    <div class="helptext">
+                        {{ field.help_text }}
+                    </div>
+                {% endif %}
+                {% for error in field.errors %}
+                    <p class="form-error">{{ error }}</p>
+                {% endfor %}
+            </div>
         {% endfor %}
-      </div>
-      {% endfor %}
-      <!-- Form actions -->
-      <div class="form-actions button-row">
-        <button type="submit" class="btn btn-primary">
-          {% if booking %} Update Booking {% else %} Book Lesson {% endif %}
-        </button>
+            <!-- Form actions -->
+            <div class="form-actions button-row">
+                <button type="submit" class="btn btn-primary">
+                    {% if booking %}
+                        Update Booking
+                    {% else %}
+                        Book Lesson
+                    {% endif %}
+                </button>
 
-        <a class="btn btn-outline" href="{% url 'bookings:booking_list' %}">
-          Cancel
-        </a>
-      </div>
-    </form>
-  </section>
+                <a class="btn btn-outline" href="{% url 'bookings:booking_list' %}">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </section>
 </div>
 {% endblock %}
