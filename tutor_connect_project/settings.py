@@ -19,10 +19,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ---------------------------------------------------------------------
 # cloudinary configuration
 # ---------------------------------------------------------------------
+
 cloudinary_url = config("CLOUDINARY_URL", default="")
 
 if cloudinary_url:
     os.environ["CLOUDINARY_URL"] = cloudinary_url
+
+    import cloudinary
+    cloudinary.config(secure=True)
 
 # ---------------------------------------------------------------------
 # Security
@@ -200,8 +204,6 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Storage backends for static and media files.
-
-CLOUDINARY_URL = config("CLOUDINARY_URL", default="")
 
 STORAGES = {
     "default": {
