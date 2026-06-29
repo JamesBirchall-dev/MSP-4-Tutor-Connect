@@ -41,7 +41,8 @@ CSRF_COOKIE_SECURE = not DEBUG
 SECURE_SSL_REDIRECT = not DEBUG
 
 # http strict transport security settings for production
-SECURE_HSTS_SECONDS = 31536000 if not DEBUG else 0 # 1 year in production, 0 in development
+# 1 year in production, 0 in development
+SECURE_HSTS_SECONDS = 31536000 if not DEBUG else 0
 SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG
 SECURE_HSTS_PRELOAD = not DEBUG
 
