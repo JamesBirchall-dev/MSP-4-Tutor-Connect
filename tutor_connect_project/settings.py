@@ -66,6 +66,8 @@ PROJECT_APPS = [
     "bookings",
     "checkout",
     "django_filters",
+    "cloudinary_storage",
+    "cloudinary",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
@@ -190,8 +192,16 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 # Destination for collected static files in production.
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# Enables WhiteNoise to serve compressed, cache-friendly static assets.
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# Storage backends for static and media files.
+
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # ---------------------------------------------------------------------
 # Media files
