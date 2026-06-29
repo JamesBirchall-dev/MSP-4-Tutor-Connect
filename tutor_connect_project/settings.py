@@ -30,6 +30,21 @@ DEBUG = config("DEBUG", default=False, cast=bool)
 # Add your deployed domain here when moving beyond Heroku defaults.
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".herokuapp.com"]
 
+# Trusted origins for CSRF protection.
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.herokuapp.com",
+]
+
+# secure cookies and https settings for production
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
+SECURE_SSL_REDIRECT = not DEBUG
+
+# http strict transport security settings for production
+SECURE_HSTS_SECONDS = 31536000 if not DEBUG else 0 # 1 year in production, 0 in development
+SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG
+SECURE_HSTS_PRELOAD = not DEBUG
+
 
 # ---------------------------------------------------------------------
 # Applications
