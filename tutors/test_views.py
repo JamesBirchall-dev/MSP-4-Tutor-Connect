@@ -226,6 +226,8 @@ class TutorDeleteViewTests(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username="deleteuser")
 
+        self.client.force_login(self.user)
+
         self.tutor = TutorProfile.objects.create(
             user=self.user,
             display_name="Delete Tutor",
@@ -263,7 +265,6 @@ class LessonListViewTests(TestCase):
     # Tests for the lesson list view.
     def setUp(self):
         self.user = User.objects.create_user(username="lessonuser")
-
         self.tutor = TutorProfile.objects.create(
             user=self.user,
             display_name="Lesson Tutor",
@@ -342,6 +343,8 @@ class LessonUpdateViewTests(TestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(username="lessonuser")
+
+        self.client.force_login(self.user)
 
         self.tutor = TutorProfile.objects.create(
             user=self.user,
@@ -429,7 +432,7 @@ class LessonDeleteViewTests(TestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(username="lessonuser")
-
+        self.client.force_login(self.user)
         self.tutor = TutorProfile.objects.create(
             user=self.user,
             display_name="Lesson Tutor",

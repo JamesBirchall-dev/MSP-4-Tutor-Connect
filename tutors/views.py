@@ -50,8 +50,11 @@ def tutor_detail(request, pk):
         Template:
         - tutors/tutor_detail.html
     """
-    tutor = get_object_or_404(TutorProfile, pk=pk, is_active=True)
-
+    tutor = get_object_or_404(
+        TutorProfile,
+        pk=pk,
+        is_active=True,
+    )
     upcoming_lessons = LessonType.objects.filter(
         tutor=tutor,
         is_available=True,
@@ -93,9 +96,14 @@ def tutor_create(request):
     )
 
 
+@login_required
 def tutor_update(request, pk):
     """Update an existing tutor profile."""
-    tutor = get_object_or_404(TutorProfile, pk=pk)
+    tutor = get_object_or_404(
+        TutorProfile,
+        pk=pk,
+        user=request.user,
+    )
 
     if request.method == "POST":
         form = TutorProfileForm(
@@ -124,6 +132,7 @@ def tutor_update(request, pk):
     )
 
 
+@login_required
 def tutor_delete(request, pk):
     """
     Delete a tutor profile.
@@ -137,7 +146,11 @@ def tutor_delete(request, pk):
     Template:
         tutors/tutor_confirm_delete.html
     """
-    tutor = get_object_or_404(TutorProfile, pk=pk)
+    tutor = get_object_or_404(
+        TutorProfile,
+        pk=pk,
+        user=request.user,
+    )
 
     if request.method == 'POST':
         tutor.delete()
@@ -199,6 +212,7 @@ def lesson_list(request, tutor_pk):
     )
 
 
+@login_required
 def lesson_create(request, tutor_pk):
     """
     Create a new lesson type for a specific tutor.
@@ -210,7 +224,11 @@ def lesson_create(request, tutor_pk):
     - Converts numeric fields safely
     """
 
-    tutor = get_object_or_404(TutorProfile, pk=tutor_pk)
+    tutor = get_object_or_404(
+        TutorProfile,
+        pk=tutor_pk,
+        user=request.user,
+    )
 
     if request.method == "POST":
         form = LessonTypeForm(request.POST)
@@ -241,8 +259,13 @@ def lesson_create(request, tutor_pk):
     )
 
 
+@login_required
 def lesson_update(request, tutor_pk, pk):
-    tutor = get_object_or_404(TutorProfile, pk=tutor_pk)
+    tutor = get_object_or_404(
+        TutorProfile,
+        pk=tutor_pk,
+        user=request.user,
+    )
     lesson = get_object_or_404(LessonType, pk=pk, tutor=tutor)
 
     if lesson.bookings.filter(
@@ -281,6 +304,7 @@ def lesson_update(request, tutor_pk, pk):
     )
 
 
+@login_required
 def lesson_delete(request, tutor_pk, lesson_pk):
     """
     Delete a lesson belonging to a tutor.
@@ -289,7 +313,11 @@ def lesson_delete(request, tutor_pk, lesson_pk):
         tutor_pk (int): Tutor ID
         lesson_pk (int): Lesson ID
     """
-    tutor = get_object_or_404(TutorProfile, pk=tutor_pk)
+    tutor = get_object_or_404(
+        TutorProfile,
+        pk=tutor_pk,
+        user=request.user,
+    )
     lesson = get_object_or_404(LessonType, pk=lesson_pk, tutor=tutor)
 
     if lesson.bookings.filter(
