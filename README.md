@@ -26,7 +26,8 @@
   - [Validator Testing](#validator-testing)
   - [Bugs](#bugs)
 - [Deployment](#deployment)
-- [Security Features](#security-features)
+- [Admin](#admin)
+- [Security](#security)
 - [Credits](#credits)
   - [Code](#code)
   - [Content](#content)
@@ -208,47 +209,47 @@ The visual design is calm, modern, and easy to navigate. The colour palette uses
 ![Colours and Typography](https://github.com/JamesBirchall-dev/imagehost/blob/main/readme-design-styles-colorsandfonts.png?raw=true)
 
 Primary colour:
-# 1F6F5B
+'# 1F6F5B'
 Deep green
 Used for main buttons, navigation highlights, and important links.
 
 Secondary colour:
-# D97706
+'# D97706'
 Warm amber
 Used for accents, prices, icons, and selected states.
 
 Background:
-# FAFAF7
+'# FAFAF7'
 Warm off-white
 Used as the main page background.
 
 Surface:
-# FFFFFF
+'# FFFFFF'
 White
 Used for cards, forms, and content sections.
 
 Main text:
-# 1F2933
+'# 1F2933'
 Dark charcoal
 Used for headings and body text.
 
 Muted text:
-# 6B7280
+'# 6B7280'
 Grey
 Used for helper text, dates, descriptions, and secondary labels.
 
 Border:
-# E5E7EB
+'# E5E7EB'
 Light grey
 Used for form fields, cards, and dividers.
 
 Success:
-# 15803D
+'# 15803D'
 Green
 Used for successful bookings and payments.
 
 Error:
-# B91C1C
+'# B91C1C'
 Red
 Used for validation errors and failed payments.
 
@@ -378,22 +379,6 @@ Features include:
 -Automatic login after registration
 -Validation for duplicate usernames and email addresses
 -Success messaging following account creation
-
----
-
-#### Authentication
-
-Tutor Connect uses Django's authentication framework to manage user sessions.
-
-Authenticated users can:
-
-- Access their personal dashboard
-- Create bookings
-- Create tutor profiles
-- Manage lessons (if they are tutors)
-- Access payment checkout
-
-Unauthenticated users are redirected to the login page whenever attempting to access protected functionality.
 
 ---
 
@@ -578,7 +563,7 @@ Successful payments automatically update the booking payment status through Stri
 
 ---
 
-### Security
+### Security and checks
 
 Tutor Connect applies authentication and ownership checks throughout the application.
 
@@ -1614,7 +1599,9 @@ class TutorListViewTest(TestCase):
         self.assertTemplateUsed(response, "tutors/tutor_list.html")
 
 Results:
-# 1
+
+1.
+
 (.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.TutorListViewTest.test_tutor_list_status_code
 Found 1 test(s).
 Creating test database for alias 'default'...
@@ -1627,7 +1614,8 @@ Ran 1 test in 0.287s
 
 OK
 
-# 2
+2.
+
 (.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.TutorListViewTest.test_only_active_tutors_in_list
 Found 1 test(s).
 Creating test database for alias 'default'...
@@ -1641,7 +1629,8 @@ Ran 1 test in 0.310s
 OK
 Destroying test database for alias 'default'...
 
-# 3
+3.
+
 (.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.TutorListViewTest.test_correct_template_used  
 Found 1 test(s).
 Creating test database for alias 'default'...
@@ -1658,27 +1647,29 @@ Destroying test database for alias 'default'...
 </details>
 
 <details>
-<summary><strong> Tutor CRUD - Create - Test - active/inactive status return (TEST ONLY)  </summary>
+
+<summary><strong> Tutor CRUD - Create - Test - active/inactive status return (TEST ONLY)  </strong></summary>
+
 Tests:
 
-    def test_tutor_detail_status_code(self):
+'def test_tutor_detail_status_code(self):
         """Test that the tutor detail view returns
         a 200 status code for an active tutor."""
         response = self.client.get(reverse("tutors:tutor_detail",
                                            args=[self.active_tutor.pk]))
         self.assertEqual(response.status_code, 200)
 
-    def test_inactive_tutor_detail_returns_404(self):
+def test_inactive_tutor_detail_returns_404(self):
         """Test that the tutor detail view returns
         a 404 status code for an inactive tutor."""
         response = self.client.get(reverse("tutors:tutor_detail",
                                            args=[self.inactive_tutor.pk]))
         self.assertEqual(response.status_code, 404)
 
-    def test_correct_template_used(self):
+def test_correct_template_used(self):
         response = self.client.get(reverse("tutors:tutor_detail",
                                            args=[self.active_tutor.pk]))
-        self.assertTemplateUsed(response, "tutors/tutor_detail.html")
+        self.assertTemplateUsed(response, "tutors/tutor_detail.html")'
 
 Results:
 
@@ -1740,7 +1731,7 @@ Destroying test database for alias 'default'...
 
 test:
 
-    def test_create_view_shows_form_text(self):
+def test_create_view_shows_form_text(self):
         # Test that the tutor create view contains the form text.
         response = self.client.get(reverse("tutors:tutor_create"))
         self.assertEqual(response.status_code, 200)
@@ -1761,7 +1752,7 @@ OK
 Destroying test database for alias 'default'...
 (.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect>
 
-_PASS_
+PASS
 
 </details>
 
@@ -1812,7 +1803,7 @@ Ran 1 test in 0.232s
 FAILED (failures=1)
 Destroying test database for alias 'default'..
 
-_PASS - Expected as POST Handling not created_
+PASS - Expected as POST Handling not created_
 
 - Implemented Create Logic
 
@@ -1821,17 +1812,17 @@ def tutor_create(request): # This view is for creating a new tutor profile.
 if request.method == 'POST':
 user = get_object_or_404(User, id=request.POST["user"])
 
-        tutor = TutorProfile.objects.create(
-            user=user,
-            display_name=request.POST["display_name"],
-            bio=request.POST["bio"],
-            experience=request.POST["experience"],
-            location=request.POST["location"],
-            is_active=True,
-        )
-        return render(request, 'tutors/tutor_detail.html', {'tutor': tutor})
+tutor = TutorProfile.objects.create(
+        user=user,
+        display_name=request.POST["display_name"],
+        bio=request.POST["bio"],
+        experience=request.POST["experience"],
+        location=request.POST["location"],
+        is_active=True,
+    )
+    return render(request, 'tutors/tutor_detail.html', {'tutor': tutor})
 
-    return render(request, 'tutors/tutor_form.html')
+return render(request, 'tutors/tutor_form.html')
 
 Result:
 (.venv) PS C:\Users\User\Documents\vscode-projects\msp-4-tutor-connect> python manage.py test tutors.test_views.TutorCreateViewTests.test_create_tutor_post_creates_tutor  
@@ -1847,9 +1838,9 @@ Ran 1 test in 0.282s
 OK
 Destroying test database for alias 'default'...
 
-_PASS_
+PASS
 
-</detiails>
+</details>
 
 <details>
 <summary><strong> Tutor CRUD - Create - Implement Redirect </summary>
@@ -1860,17 +1851,17 @@ def tutor_create(request): # This view is for creating a new tutor profile.
 if request.method == 'POST':
 user = get_object_or_404(User, id=request.POST["user"])
 
-        tutor = TutorProfile.objects.create(
-            user=user,
-            display_name=request.POST["display_name"],
-            bio=request.POST["bio"],
-            experience=request.POST["experience"],
-            location=request.POST["location"],
-            is_active=True,
-        )
-        return redirect('tutors:tutor_detail', pk=tutor.pk)
+tutor = TutorProfile.objects.create(
+        user=user,
+        display_name=request.POST["display_name"],
+        bio=request.POST["bio"],
+        experience=request.POST["experience"],
+        location=request.POST["location"],
+        is_active=True,
+    )
+    return redirect('tutors:tutor_detail', pk=tutor.pk)
 
-    return render(request, 'tutors/tutor_form.html')
+return render(request, 'tutors/tutor_form.html')
 
 Test:
 
@@ -2170,7 +2161,7 @@ Destroying test database for alias 'default'...
 
 </details>
 <details>
-<summary><strong> Tutor - Lesson CRUD - Read - Test Lesson List returns 200</summary
+<summary><strong> Tutor - Lesson CRUD - Read - Test Lesson List returns 200</strong></summary>
 view:
 
 def lesson_list(request, tutor_pk): # This view lists all lesson types for a specific tutor.
@@ -2231,7 +2222,7 @@ _PASS_
 
 </details>
 <details>
-<summary><strong> Tutor - Lesson CRUD - Read - Test Lesson List uses correct template</summary>
+<summary><strong> Tutor - Lesson CRUD - Read - Test Lesson List uses correct template</strong></summary>
 
 Test:
 
@@ -2261,7 +2252,7 @@ _PASS_
 
 </details>
 <details>
-<summary><strong> Tutor - Lesson CRUD - Read - Test Lesson List displays Title</summary>
+<summary><strong> Tutor - Lesson CRUD - Read - Test Lesson List displays Title</strong></summary>
 
 Test:
 
@@ -2297,7 +2288,7 @@ Destroying test database for alias 'default'...
 </details>
 
 <details>
-<summary><strong> Tutor - Lesson CRUD - Update - Test that the lesson update view returns a 200 status code</summary>
+<summary><strong> Tutor - Lesson CRUD - Update - Test that the lesson update view returns a 200 status code</strong></summary>
 
 view:
 
@@ -2342,7 +2333,7 @@ _PASS_
 </details>
 
 <details>
-<summary><strong> Tutor - Lesson CRUD - Update - Test that the lesson update view contains form text</summary>
+<summary><strong> Tutor - Lesson CRUD - Update - Test that the lesson update view contains form text</strong></summary>
 
 test:
 def test_lesson_update_view_shows_form(self): # Test that the lesson update view contains the form text.
@@ -2369,7 +2360,7 @@ _PASS_
 </details>
 
 <details>
-<summary><strong> Tutor - Lesson CRUD - Update - Test posting to lesson updates object</summary>
+<summary><strong> Tutor - Lesson CRUD - Update - Test posting to lesson updates object</strong></summary>
 
 Test:
 
@@ -2412,7 +2403,7 @@ _PASS_
 </details>
 
 <details>
-<summary><strong> Tutor - Lesson CRUD - Update - Test update redirects</summary>
+<summary><strong> Tutor - Lesson CRUD - Update - Test update redirects</strong></summary>
 
 test:
 def test_lesson_update_redirects(self): # Test that posting to the lesson update # view redirects to the lesson list.
@@ -2447,7 +2438,7 @@ Destroying test database for alias 'default'...
 
 </details>
 <details>
-<summary><strong> Tutor - Lesson CRUD - Delete - Test delete view returns 200 status code</summary>
+<summary><strong> Tutor - Lesson CRUD - Delete - Test delete view returns 200 status code</strong></summary>
 
 Test:
 
@@ -2474,7 +2465,7 @@ _PASS_
 
 </details>
 <details>
-<summary><strong> Tutor - Search & Filter - test filter by title</summary>
+<summary><strong> Tutor - Search & Filter - test filter by title</strong></summary>
 
 Template:
 
@@ -2545,7 +2536,7 @@ _PASS_
 
 </details>
 <details>
-<summary><strong> Tutor - Search & Filter - Test subject and skill filters </summary>
+<summary><strong> Tutor - Search & Filter - Test subject and skill filters </strong></summary>
 
 Test:
 
@@ -2596,7 +2587,7 @@ _PASS_
 
 </details>
 <details>
-<summary><strong> Tutor - Search & Filter - Test Django configuration re-test filters-  </summary>
+<summary><strong> Tutor - Search & Filter - Test Django configuration re-test filters- </strong></summary>
 
 Updated template:
 
@@ -2723,7 +2714,7 @@ _PASS_
 
 </details>
 <details>
-<summary><strong> Bookings - Data Model - Test booking can be created with correct default status-  </summary>
+<summary><strong> Bookings - Data Model - Test booking can be created with correct default status-</strong></summary>
 
 ModeL:
 
@@ -2833,7 +2824,7 @@ _PASS_
 
 </details>
 <details>
-<summary><strong> Bookings - Data Form - Test booking form is valid with correct data-  </summary>
+<summary><strong> Bookings - Data Form - Test booking form is valid with correct data-</strong></summary>
 
 Form:
 class BookingForm(forms.ModelForm):
@@ -2891,7 +2882,7 @@ _PASS_
 
 </details>
 <details>
-<summary><strong> Bookings - Data Form - Test login required for booking  </summary>
+<summary><strong> Bookings - Data Form - Test login required for booking</strong></summary>
 
 test:
 
@@ -3011,7 +3002,7 @@ Destroying test database for alias 'default'
 
 </details>
 <details>
-<summary><strong> Bookings - Booking view tests -  page loads for logged in user </summary>
+<summary><strong> Bookings - Booking view tests -  page loads for logged in user</strong></summary>
 
 ''' Python test:
     def test_booking_page_loads_for_logged_in_user(self):
@@ -3042,7 +3033,7 @@ _PASS_
 </details>
 
 <details>
-<summary><strong> Bookings - Booking view tests -  user can delete/cancel booking </summary>
+<summary><strong> Bookings - Booking view tests -  user can delete/cancel booking</strong></summary>
 
 ''' Python test:def test_user_can_delete_booking(self):
 self.client.login(username="student", password="pass")
@@ -3078,7 +3069,7 @@ Destroying test database for alias 'default'...
 
 </details>
 <details>
-<summary><strong> Bookings - Booking update tests -  page loads correctly </summary>
+<summary><strong> Bookings - Booking update tests -  page loads correctly</strong></summary>
 
 ''' Python test
     def test_booking_update_page_loads(self):
@@ -3116,7 +3107,7 @@ Ran 1 test in 1.589s
 
 </details>
 <details>
-<summary><strong> Bookings - Booking Detail tests -  Requires login, user specific detail </summary>
+<summary><strong> Bookings - Booking Detail tests -  Requires login, user specific detail</strong></summary>
 View:
 
 @login_required
@@ -3218,7 +3209,7 @@ _PASS_
 
 </details>
 <details>
-<summary><strong> Bookings - Booking Update Test- Test booking can be updated </summary>
+<summary><strong> Bookings - Booking Update Test- Test booking can be updated</strong></summary>
 
     def test_booking_can_be_updated(self):
         """Test that a booking can be updated successfully."""
@@ -3278,7 +3269,7 @@ Outcome: PASS
 
 <details>
 
-<summary><strong> Checkout - Checkout Review Requires Login </summary>
+<summary><strong> Checkout - Checkout Review Requires Login</strong></summary>
 
 Test:
 
@@ -3327,9 +3318,166 @@ _Details about Stripe integration and payment flow._
 
 ---
 
-## Security Features
+## Admin
 
-_Security measures and best practices implemented._
+The Django admin interface was configured to make site management easier for superusers and staff users. Custom admin classes were added for the main project models so that records can be searched, filtered and reviewed efficiently.
+
+### Tutor Profile Admin
+
+The TutorProfile admin view allows staff users to manage tutor profiles from the Django admin panel.
+
+Configured features include:
+
+- Displaying key tutor information such as display name, linked user account, location, contact email, active status and creation date.
+- Filtering tutor profiles by active status, location and creation date.
+- Searching tutor profiles by display name, username, email address, biography, experience, location, contact email and lesson delivery information.
+-  Ordering profiles alphabetically by display name.
+- Making automatically generated timestamp fields read-only.
+
+This makes it easier for administrators to review tutor profiles, check whether tutors are active and locate specific tutors quickly.
+
+### Lesson Type Admin
+
+The LessonType admin view allows staff users to manage scheduled lesson slots.
+
+Configured features include:
+
+- Displaying lesson title, tutor, category, subject, skill level, lesson date, lesson time, duration, price and availability.
+- Filtering lessons by category, subject, skill level, availability, lesson date and creation date.
+- Searching lessons by title, description and tutor display name.
+- Ordering lessons by lesson date and lesson time.
+- Using list\_select\_related to optimise related tutor lookups.
+- Making automatically generated timestamp fields read-only.
+
+This provides administrators with a clear overview of scheduled lessons and helps manage lesson availability across the platform.
+
+### Booking Admin
+
+The Booking admin view allows staff users to review student bookings.
+
+Configured features include:
+
+- Displaying student, lesson, booking date, booking time, status and creation date.
+- Filtering bookings by status, booking date and creation date.
+- Searching by student username, student email, lesson title, tutor display name and booking notes.
+- Ordering bookings by booking date and booking time.
+- Using list\_select\_related to optimise related student, lesson and tutor lookups.
+- Making automatically generated timestamp fields read-only.
+
+This helps administrators review booking activity and investigate booking issues if required.
+
+### Payment Admin
+
+The Payment admin view allows staff users to review payment records associated with bookings.
+
+Configured features include:
+
+- Displaying the related booking, payment amount and creation date.
+- Searching by student username, student email and lesson title.
+- Ordering payment records by newest first.
+- Using list\_select\_related to optimise related booking, student and lesson lookups.
+- Making automatically generated timestamp fields read-only.
+
+Sensitive Stripe credentials are not displayed in the admin interface.
+
+---
+
+## Security
+
+Security was considered throughout the project to protect user data, restrict access to sensitive functionality and ensure production credentials are not exposed in the codebase.
+
+### Authentication
+
+Tutor Connect uses Django's build-in authentication system to manage user registration, login, logout and session handling.
+
+Protected views use Django's '@login_required' decorator to prevent unauthenticated users from accessing restricted pages.
+This is used for functionality such as:
+
+- Dashboard access
+- Tutor profile creation
+- Tutor profile editing
+- Tutor profile deletion
+- Lesson creation
+- Lesson editing
+- Lesson deletion
+- Booking creation
+- Booking management
+- Checkout access
+
+Unauthenticated users attempting to access protected pages are redirected to the login page.
+
+### Authorisation
+
+Authorisation rules were added to ensure users can only manage their own content.
+
+Tutor profile management is restricted by filtering profile objects against the logged-in user. This prevents users from editing or deleting tutor profiles that do not belong to them.
+
+Lesson management is also restricted to the owner of the tutor profile. Tutors can only create, edit or delete lessons attached to their own tutor profile.
+
+Booking management is restricted to the student who created the booking. Users cannot view, edit or cancel bookings belonging to another account.
+
+Checkout views are also protected so users can only review and pay for their own bookings.
+
+Where appropriate, object lookups include the logged-in user as part of the query. This prevents ID guessing from exposing or modifying another user's records.
+
+### Business Rule Protection
+
+Additional business logic was implemented to protect booking integrity.
+
+Lessons with pending or confirmed bookings cannot be edited or deleted by the tutor. This prevents a tutor from changing or removing a lesson after a student has booked it.
+
+Booked lessons are hidden from the public lesson marketplace to prevent double-booking.
+
+Past lessons are also hidden from public lesson listings.
+
+### CSRF Protection
+
+Django's CSRF middleware is enabled in the project settings.
+
+All forms that submit data using POST include the `{% csrf_token %}` template tag. This includes:
+
+- Registration forms
+- Login/logout forms
+- Tutor profile forms
+- Lesson creation and update forms
+- Delete confirmation forms
+- Booking forms
+- Checkout session form
+
+Delete actions are handled through POST requests rather than simple GET links, reducing the risk of accidental or malicious destructive actions.
+
+### Secret Keys and Credentials
+
+Sensitive values are not hard-coded in the project.
+
+The project uses environment variables for secret configuration, including:
+
+- `SECRET_KEY`
+- `DATABASE_URL`
+- `STRIPE_PUBLIC_KEY`
+- `STRIPE_SECRET_KEY`
+- `STRIPE_WEBHOOK_SECRET`
+- `DEBUG`
+
+The local `.env` file is excluded from version control using `.gitignore`.
+
+On Heroku, production values are stored using Config Vars. This keeps production credentials separate from the source code.
+
+### Production Security Settings
+
+Production security settings were added to strengthen deployment security.
+
+These include:
+
+- `DEBUG=False` in production.
+- `CSRF_TRUSTED_ORIGINS` configured for the Heroku deployment domain.
+- Secure session cookies enabled when not in debug mode.
+- Secure CSRF cookies enabled when not in debug mode.
+- HTTPS redirect enabled in production.
+- HTTP Strict Transport Security configured for production.
+- Allowed hosts restricted to local development domains and Heroku deployment domains.
+
+These settings help protect sessions, CSRF tokens and production traffic.
 
 ---
 
