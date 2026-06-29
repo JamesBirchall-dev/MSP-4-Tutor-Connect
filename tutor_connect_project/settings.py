@@ -6,7 +6,7 @@ For production, you should use environment variables
 """
 
 from pathlib import Path
-
+import os
 import dj_database_url
 from decouple import config
 
@@ -16,6 +16,13 @@ from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# ---------------------------------------------------------------------
+# cloudinary configuration
+# ---------------------------------------------------------------------
+cloudinary_url = config("CLOUDINARY_URL", default="")
+
+if cloudinary_url:
+    os.environ["CLOUDINARY_URL"] = cloudinary_url
 
 # ---------------------------------------------------------------------
 # Security
@@ -193,6 +200,8 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Storage backends for static and media files.
+
+CLOUDINARY_URL = config("CLOUDINARY_URL", default="")
 
 STORAGES = {
     "default": {
