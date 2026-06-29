@@ -5,15 +5,17 @@ content %}
 <div class="container">
   <section class="form-card">
     <h1>
-      {% if tutor %}Update Tutor Profile{% else %}Create Tutor Profile{% endif
-      %}
+      {% if tutor %} Update Tutor Profile {% else %} Create Tutor Profile {%
+      endif %}
     </h1>
+
     <p>
       {% if tutor %} Keep your tutor profile up to date so students can find the
       information they need before and after booking. {% else %} Tell students
       about your teaching experience, location, expertise and how confirmed
       lessons will be arranged. {% endif %}
     </p>
+
     <!-- Form -->
     <form method="post" enctype="multipart/form-data" novalidate>
       {% csrf_token %} {% if form.non_field_errors %} {% for error in
@@ -22,13 +24,10 @@ content %}
       {% endfor %} {% endif %} {% for field in form %}
       <div class="form-group">
         {% if field.field.widget.input_type == "checkbox" %}
-
         <label class="checkbox-label" for="{{ field.id_for_label }}">
           {{ field }} {{ field.label }}
         </label>
-
         {% else %}
-
         <label for="{{ field.id_for_label }}"> {{ field.label }} </label>
 
         {{ field }} {% endif %} {% if field.help_text %}
