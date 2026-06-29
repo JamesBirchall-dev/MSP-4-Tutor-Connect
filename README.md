@@ -58,124 +58,170 @@ The payment process is handled through Stripe. Before payment, users are shown a
 
 ### User Stories And Acceptance Criteria
 
-#### 1. Understand Site Purpose
+User Stories, Acceptance Criteria and Testing Outcomes
+======================================================
 
-**User Story:**  
+1\. Understand Site Purpose
+---------------------------
+
+### User Story
+
 As a first-time visitor, I want to understand the purpose of the website immediately so that I can decide whether it helps me find a tutor.
 
-**Acceptance Criteria:**
+### Acceptance Criteria
 
 - The homepage includes a short description of the service.
-- The homepage includes a visible call-to-action to browse tutors.
-- The main navigation is visible on the homepage.
+- The homepage includes a clear call-to-action to browse tutors and lessons.
+- The main navigation is visible and accessible.
 
----
+### Testing Outcome ✅ PASS
 
-#### 2. Browse Tutors Without An Account
+Manual testing confirmed that the homepage clearly communicates the purpose of Tutor Connect. Visitors can immediately browse tutors or lessons using the primary navigation and call-to-action buttons without creating an account.
 
-**User Story:**  
+* * * * *
+
+2\. Browse Tutors Without an Account
+
+------------------------------------
+
+### User Story
+
 As a visitor, I want to browse available tutors without creating an account so that I can compare lesson options before registering.
 
-**Acceptance Criteria:**
+### Acceptance Criteria
 
-- Anonymous users can access the tutor listing page.
-- Anonymous users can access individual tutor profile pages.
-- Tutor cards show key information such as tutor name, location, and short bio.
-- Anonymous users are prompted to log in or register before booking a lesson.
+-   Visitors can access the tutor listing page.
+-   Visitors can view individual tutor profiles.
+-   Tutor profiles display summary information and available lessons.
+-   Attempting to book a lesson redirects unauthenticated users to the login page.
 
----
+### Testing Outcome ✅ PASS
 
-#### 3. View Clear Tutor Information
+Testing confirmed that anonymous users can browse tutors, view tutor profiles and see available lessons. Selecting **Book Lesson** correctly redirects unauthenticated users to the login page before a booking can be created.
 
-**User Story:**  
-As a visitor, I want tutor information to be clearly presented so that I can quickly understand each tutor’s experience, lesson types, prices, and availability.
+* * * * *
 
-**Acceptance Criteria:**
+3\. View Clear Tutor Information
+--------------------------------
 
-- Each tutor profile displays the tutor’s name, bio, experience, and location or online availability.
-- Each tutor profile displays available lesson types.
-- Lesson information includes title, description, duration, skill level, and price.
-- Unavailable lessons are not shown as bookable.
+### User Story
 
----
+As a visitor, I want tutor information to be clearly presented so that I can quickly understand each tutor's experience, lesson availability and pricing.
 
-#### 4. Register For An Account
+### Acceptance Criteria
 
-**User Story:**  
-As a new user, I want to register for an account easily so that I can book lessons and manage my activity on the site.
+-   Tutor profiles display biography, experience and location.
+-   Available lessons are displayed on each tutor profile.
+-   Lesson information includes title, subject, skill level, duration, date, time and price.
+-   Lessons that are unavailable or already booked are not displayed as bookable.
 
-**Acceptance Criteria:**
+### Testing Outcome ✅ PASS
 
-- The registration page is accessible from the main navigation.
-- The registration form includes clear labels for each field.
-- The form displays validation errors if required information is missing or invalid.
-- A successful registration logs the user in or redirects them to the login page/dashboard.
-- Logged-in users are not encouraged to register again.
+Manual testing confirmed that tutor profiles clearly present tutor information alongside their next available lessons. Only future, available lessons are displayed, ensuring students cannot book unavailable lesson slots.
 
----
+* * * * *
 
-#### 5. Book A Lesson
+4\. Register for an Account
+---------------------------
 
-**User Story:**  
-As a logged-in student, I want to book a lesson through a simple form so that I can choose a suitable date and time without confusion.
+### User Story
 
-**Acceptance Criteria:**
+As a new user, I want to register for an account easily so that I can book lessons and manage my bookings.
 
-- Only logged-in users can access the booking form.
-- The booking form displays the selected lesson summary.
-- The user can select a booking date and time.
-- The form includes optional notes for the tutor.
-- The form validates required booking information.
-- After a successful booking, the user receives a confirmation message.
+### Acceptance Criteria
 
----
+-   Registration is available from the navigation menu.
+-   The registration form validates user input.
+-   Validation errors are displayed clearly.
+-   Successful registration redirects users appropriately.
+-   Logged-in users are presented with their dashboard instead of registration links.
 
-#### 6. Manage My Bookings
+### Testing Outcome ✅ PASS
 
-**User Story:**  
-As a logged-in student, I want to view, update, or cancel my bookings so that I stay in control of my lesson schedule.
+Registration was tested using both valid and invalid inputs. Required validation was enforced and successful registration redirected users into the authenticated area of the application.
 
-**Acceptance Criteria:**
+* * * * *
 
-- Logged-in users can view a list of their own bookings.
-- Users cannot view or manage bookings belonging to another user.
-- Users can update the date, time, or notes for their own pending bookings.
-- Users can cancel their own bookings.
-- The site asks for confirmation before cancelling a booking.
-- Booking changes are immediately reflected in the user interface.
+5\. Book a Lesson
+-----------------
 
----
+### User Story
 
-#### 7. Review Booking Before Payment
+As a logged-in student, I want to reserve an available lesson quickly so that I can secure my place with a tutor.
 
-**User Story:**  
-As a user making a payment, I want to review my booking details before paying so that I can confirm the tutor, lesson, date, time, and price are correct.
+### Acceptance Criteria
 
-**Acceptance Criteria:**
+-   Only authenticated users can access the booking form.
+-   The selected lesson details are displayed.
+-   Students can provide optional booking notes.
+-   Required validation is enforced.
+-   A successful booking creates a pending booking and displays a confirmation message.
 
-- The checkout page displays the lesson title, tutor name, date, time, duration, and total price.
-- The user can return to edit the booking before payment.
-- The payment button is clearly labelled.
-- Payment is handled through Stripe.
-- The user is redirected to a success or cancellation page after the payment process.
+### Testing Outcome ✅ PASS
 
----
+Authenticated users successfully created bookings from available lesson listings. The booking form displayed the selected lesson details, accepted optional notes and prevented invalid submissions. Successful bookings were stored with a pending status and confirmation feedback was displayed.
 
-#### 8. Receive Clear Feedback
+* * * * *
 
-**User Story:**  
-As a user, I want clear success, error, and cancellation messages so that I always understand the result of my actions, including bookings, updates, cancellations, and payments.
+6\. Manage My Bookings
+----------------------
 
-**Acceptance Criteria:**
+### User Story
 
-- The site displays a success message after creating, editing, or cancelling a booking.
-- The site displays a success message after a successful payment.
-- The site displays a clear cancellation message if payment is cancelled.
-- Form validation errors are displayed near the relevant form fields.
-- Error and success messages use clear, readable language.
-- Feedback messages are visible and styled consistently across the site.
+As a logged-in student, I want to manage my bookings so that I remain in control of my upcoming lessons.
 
----
+### Acceptance Criteria
+
+-   Users can view only their own bookings.
+-   Users can update booking notes before payment.
+-   Users can cancel their own bookings.
+-   Booking cancellation requires confirmation.
+-   Changes are immediately reflected within the booking list.
+-   Users cannot access or modify another user's bookings.
+
+### Testing Outcome ✅ PASS
+
+Testing confirmed that students can view, update and cancel only their own bookings. Booking updates are limited to editable booking information, while ownership checks prevent users from accessing bookings belonging to other accounts.
+
+* * * * *
+
+7\. Review Booking Before Payment
+---------------------------------
+
+### User Story
+
+As a student, I want to review my booking before completing payment so that I can confirm the lesson details are correct.
+
+### Acceptance Criteria
+
+-   The checkout review page displays the tutor, lesson, date, time, duration and total price.
+-   Users can return to their booking list before payment.
+-   Payment is initiated securely using Stripe Checkout.
+-   Users are redirected appropriately after successful or cancelled payments.
+
+### Testing Outcome ✅ PASS
+
+Manual testing confirmed that the checkout review page accurately displayed all booking information before payment. Stripe Checkout launched successfully and correctly returned users to either the payment success or cancellation flow.
+
+* * * * *
+
+8\. Receive Clear Feedback
+--------------------------
+
+### User Story
+
+As a user, I want clear feedback throughout the application so that I always understand the outcome of my actions.
+
+### Acceptance Criteria
+
+-   Success messages are displayed after creating, updating or cancelling records.
+-   Validation errors are displayed beside the relevant form fields.
+-   Payment success and cancellation messages are shown.
+-   Feedback messages are presented consistently throughout the application.
+
+### Testing Outcome ✅ PASS
+
+Throughout manual testing the application consistently displayed informative success, validation and error messages. Feedback remained consistent across tutor management, lesson management, bookings and the Stripe checkout process, improving usability and user confidence.
 
 ### Visual Design
 
