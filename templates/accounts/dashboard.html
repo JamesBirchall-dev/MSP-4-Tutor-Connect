@@ -1,175 +1,180 @@
-{% extends "base.html" %}
-{% load static %}
+{% extends "base.html" %} {% load static %}
 
 <!-- Inherit the common site layout from base.html -->
 
-{% block title %}
-Dashboard | Tutor Connect
-{% endblock %}
+{% block title %} Dashboard | Tutor Connect {% endblock %}
 <!-- Sets the page title displayed in the browser tab -->
 
 {% block content %}
 <!-- Main dashboard content begins -->
 
 <section class="container">
-    <!-- Main container for dashboard content -->
-    <div class="dashboard-header">
-        <!-- Header section for the dashboard -->
-        <h1>My Dashboard</h1>
-        <p>Welcome back, {{ user.username }}. Manage your learning journey from here!</p>
+  <!-- Main container for dashboard content -->
+  <div class="dashboard-header">
+    <!-- Header section for the dashboard -->
+    <h1>My Dashboard</h1>
+    <p>
+      Welcome back, {{ user.username }}. Manage your learning journey from here!
+    </p>
+  </div>
+
+  <article class="card dashboard-profile-card">
+    {% if tutor_profile %} {% if tutor_profile.image %}
+    <img
+      class="dashboard-profile-image"
+      src="{{ tutor_profile.image.url }}"
+      alt="{{ tutor_profile.display_name }}"
+    />
+    {% else %}
+    <img
+      class="dashboard-profile-image"
+      src="{% static 'images/tutorconnect-tutor-profiledefault.webp' %}"
+      alt="Default tutor profile image"
+    />
+    {% endif %}
+
+    <div class="dashboard-profile-content">
+      <h2>{{ tutor_profile.display_name }}</h2>
+      <p>{{ tutor_profile.location }}</p>
+      <p>{{ tutor_profile.bio|truncatewords:20 }}</p>
+
+      <a
+        class="btn btn-secondary"
+        href="{% url 'tutors:tutor_update' tutor_profile.pk %}"
+      >
+        Edit Tutor Profile
+      </a>
+    </div>
+    {% else %}
+    <img
+      class="dashboard-profile-image"
+      src="{% static 'images/tutorconnect-tutor-profiledefault.webp' %}"
+      alt="Default tutor profile image"
+    />
+
+    <div class="dashboard-profile-content">
+      <h2>{{ user.username }}</h2>
+      <p>You have not created a tutor profile yet.</p>
+
+      <a class="btn btn-secondary" href="{% url 'tutors:tutor_create' %}">
+        Create Tutor Profile
+      </a>
+    </div>
+    {% endif %}
+  </article>
+  <!-- Upcoming Lessons -->
+  {% if tutor_profile %}
+  <section class="card dashboard-lessons-card">
+    <h2>My Upcoming Lessons</h2>
+    {% if upcoming_lessons %}
+    <div class="grid three-column">
+      {% for lesson in upcoming_lessons %}
+      <article class="card lesson-mini-card">
+        <h3>{{ lesson.title }}</h3>
+
+        <p>
+          <strong>Subject:</strong>
+          {{ lesson.get_subject_display }}
+        </p>
+
+        <p>
+          <strong>Date:</strong>
+          {{ lesson.lesson_date }}
+        </p>
+
+        <p>
+          <strong>Time:</strong>
+          {{ lesson.lesson_time }}
+        </p>
+
+        <p>
+          <strong>Duration:</strong>
+          {{ lesson.duration_minutes }} mins
+        </p>
+
+        <p>
+          <strong>Price:</strong>
+          £{{ lesson.price }}
+        </p>
+
+        <a
+          class="btn btn-outline"
+          href="{% url 'tutors:lesson_update' tutor_profile.pk lesson.pk %}"
+        >
+          Edit
+        </a>
+      </article>
+      {% endfor %}
     </div>
 
-        <article class="card dashboard-profile-card">
-        {% if tutor_profile %}
-            {% if tutor_profile.image %}
-                <img
-                    class="dashboard-profile-image"
-                    src="{{ tutor_profile.image.url }}"
-                    alt="{{ tutor_profile.display_name }}"
-                >
-            {% else %}
-                <img
-                    class="dashboard-profile-image"
-                    src="{% static 'images/tutorconnect-tutor-profiledefault.webp' %}"
-                    alt="Default tutor profile image"
-                >
-            {% endif %}
+    <div class="button-row">
+      <a
+        class="btn btn-secondary"
+        href="{% url 'tutors:lesson_list' tutor_profile.pk %}"
+      >
+        Manage Lessons
+      </a>
 
-            <div class="dashboard-profile-content">
-                <h2>{{ tutor_profile.display_name }}</h2>
-                <p>{{ tutor_profile.location }}</p>
-                <p>{{ tutor_profile.bio|truncatewords:20 }}</p>
+      <a
+        class="btn btn-primary"
+        href="{% url 'tutors:lesson_create' tutor_profile.pk %}"
+      >
+        Create Lesson
+      </a>
+    </div>
+    {% else %}
+    <p>You do not have any upcoming lessons yet.</p>
 
-                <a
-                    class="btn btn-secondary"
-                    href="{% url 'tutors:tutor_update' tutor_profile.pk %}"
-                >
-                    Edit Tutor Profile
-                </a>
-            </div>
-        {% else %}
-            <img
-                class="dashboard-profile-image"
-                src="{% static 'images/tutorconnect-tutor-profiledefault.webp' %}"
-                alt="Default tutor profile image"
-            >
-
-            <div class="dashboard-profile-content">
-                <h2>{{ user.username }}</h2>
-                <p>You have not created a tutor profile yet.</p>
-
-                <a class="btn btn-secondary" href="{% url 'tutors:tutor_create' %}">
-                    Create Tutor Profile
-                </a>
-            </div>
-        {% endif %}
-    </article>
- <!-- Upcoming Lessons -->
-    {% if tutor_profile %}
-    <section class="card dashboard-lessons-card">
-        <h2>My Upcoming Lessons</h2>
- {% if upcoming_lessons %}
-            <div class="grid three-column">
-         {% for lesson in upcoming_lessons %}
-                <article class="card lesson-mini-card">
-                    <h3>{{ lesson.title }}</h3>
-
-                    <p>
-                        <strong>Subject:</strong>
-                        {{ lesson.get_subject_display }}
-                    </p>
-
-                    <p>
-                        <strong>Date:</strong>
-                        {{ lesson.lesson_date }}
-                    </p>
-
-                    <p>
-                        <strong>Time:</strong>
-                        {{ lesson.lesson_time }}
-                    </p>
-
-                    <p>
-                        <strong>Duration:</strong>
-                        {{ lesson.duration_minutes }} mins
-                    </p>
-
-                    <p>
-                        <strong>Price:</strong>
-                        £{{ lesson.price }}
-                    </p>
-
-                    <a
-                        class="btn btn-outline"
-                        href="{% url 'tutors:lesson_update' tutor_profile.pk lesson.pk %}"
-                    >
-                        Edit
-                    </a>
-                </article>
-            {% endfor %}
-        </div>
-
-                    <div class="button-row">
-                        <a
-                            class="btn btn-secondary"
-                            href="{% url 'tutors:lesson_list' tutor_profile.pk %}"
-                        >
-                            Manage Lessons
-                        </a>
-
-                        <a
-                            class="btn btn-primary"
-                            href="{% url 'tutors:lesson_create' tutor_profile.pk %}"
-                        >
-                            Create Lesson
-                        </a>
-                    </div>
-                {% else %}
-                    <p>You do not have any upcoming lessons yet.</p>
-
-                    <a
-                        class="btn btn-primary"
-                        href="{% url 'tutors:lesson_create' tutor_profile.pk %}"
-                    >
-                        Create Your First Lesson
-                    </a>
-                {% endif %}
-            </section>
-        {% endif %}
-
-    <div class="grid three-column">
-    <article class="card dashboard-card">
-        <h2>Find a Tutor</h2>
-        <p>Browse our list of qualified tutors and find the right one for your needs.</p>
-        <a class="btn btn-secondary" href="{% url 'tutors:tutor_list' %}">Browse Tutors</a>
-    </article>
-
-    <article class="card dashboard-card">
-        <h2>My Bookings</h2>
-        <p>View and manage your upcoming tutoring sessions.</p>
-        <a class="btn btn-secondary" href="{% url 'bookings:booking_list' %}">View Bookings</a>
-    </article>
-    {% if tutor_profile %}
-    <article class="card dashboard-card">
-    <h2>Create Lesson</h2>
-    <p>Add a new lesson for students to view and book.</p>
     <a
+      class="btn btn-primary"
+      href="{% url 'tutors:lesson_create' tutor_profile.pk %}"
+    >
+      Create Your First Lesson
+    </a>
+    {% endif %}
+  </section>
+  {% endif %}
+
+  <div class="grid three-column">
+    <article class="card dashboard-card">
+      <h2>Find a Tutor</h2>
+      <p>
+        Browse our list of qualified tutors and find the right one for your
+        needs.
+      </p>
+      <a class="btn btn-secondary" href="{% url 'tutors:tutor_list' %}"
+        >Browse Tutors</a
+      >
+    </article>
+
+    <article class="card dashboard-card">
+      <h2>My Bookings</h2>
+      <p>View and manage your upcoming tutoring sessions.</p>
+      <a class="btn btn-secondary" href="{% url 'bookings:booking_list' %}"
+        >View Bookings</a
+      >
+    </article>
+    {% if tutor_profile %}
+    <article class="card dashboard-card">
+      <h2>Create Lesson</h2>
+      <p>Add a new lesson for students to view and book.</p>
+      <a
         class="btn btn-secondary"
         href="{% url 'tutors:lesson_create' tutor_profile.pk %}"
-    >
+      >
         Create Lesson
-    </a>
+      </a>
     </article>
     {% endif %}
 
     <article class="card dashboard-card">
-        <h2>All Lessons</h2>
-        <p>Browse available lessons from all tutors.</p>
-        <a class="btn btn-secondary" href="{% url 'tutors:all_lessons' %}">
-            View Lessons
-        </a>
+      <h2>All Lessons</h2>
+      <p>Browse available lessons from all tutors.</p>
+      <a class="btn btn-secondary" href="{% url 'tutors:all_lessons' %}">
+        View Lessons
+      </a>
     </article>
-    </div>
+  </div>
 </section>
 
 {% endblock %}

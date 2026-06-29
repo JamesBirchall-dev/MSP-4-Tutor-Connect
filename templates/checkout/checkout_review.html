@@ -1,47 +1,48 @@
 {% extends "base.html" %}
 <!-- Review Booking -->
-{% block title %}Review Booking | Tutor Connect{% endblock %}
+{% block title %}Review Booking | Tutor Connect{% endblock %} {% block content
+%}
+<!-- Review Booking Header -->
+<div class="container">
+  <article class="card checkout-review-card">
+    <div class="page-header">
+      <h1>Review Your Booking</h1>
+      <p>
+        Check your fixed lesson details before proceeding to secure checkout. If
+        the lesson is no longer suitable, return to your bookings and cancel it.
+      </p>
+    </div>
 
-{% block content %}
-    <!-- Review Booking Header -->
-    <div class="container">
-        <article class="card checkout-review-card">
-            <div class="page-header">
-                <h1>Review Your Booking</h1>
-                <p>
-                    Check your fixed lesson details before proceeding to secure checkout.
-                    If the lesson is no longer suitable, return to your bookings and cancel it.
-                </p>
-            </div>
+    <div class="booking-summary">
+      <p><strong>Lesson:</strong> {{ booking.lesson_type.title }}</p>
+      <p>
+        <strong>Tutor:</strong> {{ booking.lesson_type.tutor.display_name }}
+      </p>
+      <p><strong>Date:</strong> {{ booking.booking_date }}</p>
+      <p><strong>Time:</strong> {{ booking.booking_time }}</p>
+      <p>
+        <strong>Duration:</strong> {{ booking.lesson_type.duration_minutes }}
+        minutes
+      </p>
+      <p><strong>Price:</strong> £{{ booking.lesson_type.price }}</p>
+    </div>
+    <!-- Button Row -->
+    <div class="button-row">
+      <form
+        class="button-form"
+        method="post"
+        action="{% url 'checkout:create_checkout_session' booking.pk %}"
+      >
+        {% csrf_token %}
+        <button class="btn btn-primary" type="submit">
+          Proceed to Secure Checkout
+        </button>
+      </form>
 
-            <div class="booking-summary">
-                <p><strong>Lesson:</strong> {{ booking.lesson_type.title }}</p>
-                <p><strong>Tutor:</strong> {{ booking.lesson_type.tutor.display_name }}</p>
-                <p><strong>Date:</strong> {{ booking.booking_date }}</p>
-                <p><strong>Time:</strong> {{ booking.booking_time }}</p>
-                <p><strong>Duration:</strong> {{ booking.lesson_type.duration_minutes }} minutes</p>
-                <p><strong>Price:</strong> £{{ booking.lesson_type.price }}</p>
-            </div>
-            <!-- Button Row -->
-        <div class="button-row">
-            <form
-                class="button-form"
-                method="post"
-                action="{% url 'checkout:create_checkout_session' booking.pk %}"
-            >
-                {% csrf_token %}
-                <button class="btn btn-primary" type="submit">
-                    Proceed to Secure Checkout
-                </button>
-            </form>
-
-            <a
-                class="btn btn-outline"
-                href="{% url 'bookings:booking_list' %}"
-            >
-                Back to Bookings
-            </a>
-        </div>
-    </article>
+      <a class="btn btn-outline" href="{% url 'bookings:booking_list' %}">
+        Back to Bookings
+      </a>
+    </div>
+  </article>
 </div>
 {% endblock %}

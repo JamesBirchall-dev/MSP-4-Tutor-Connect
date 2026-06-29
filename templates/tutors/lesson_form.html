@@ -1,80 +1,55 @@
 {% extends "base.html" %}
 <!-- Title block for the page -->
-{% block title %}
-    {% if lesson %}Update Lesson{% else %}Create Lesson{% endif %} | Tutor Connect
-{% endblock %}
-
-{% block content %}
+{% block title %} {% if lesson %}Update Lesson{% else %}Create Lesson{% endif %}
+| Tutor Connect {% endblock %} {% block content %}
 <div class="container">
-    <section class="form-card">
-        <h1>{% if lesson %}Update Lesson{% else %}Create Lesson{% endif %}
-        
-            {% if lesson %}
-                Update your lesson details.
-            {% else %}
-                Create a new lesson.
-            {% endif %}
-        </h1>
+  <section class="form-card">
+    <h1>
+      {% if lesson %}Update Lesson{% else %}Create Lesson{% endif %} {% if
+      lesson %} Update your lesson details. {% else %} Create a new lesson. {%
+      endif %}
+    </h1>
 
-        <p>
-            {% if lesson %}
-                Update the lesson slot students can book.
-            {% else %}
-                Create a fixed lesson slot for students to book.
-            {% endif %}
-        </p>
+    <p>
+      {% if lesson %} Update the lesson slot students can book. {% else %}
+      Create a fixed lesson slot for students to book. {% endif %}
+    </p>
 
-        <!-- Form for lesson creation or update -->
-        <form method="post" novalidate>
-            {% csrf_token %}
+    <!-- Form for lesson creation or update -->
+    <form method="post" novalidate>
+      {% csrf_token %} {% if form.non_field_errors %} {% for error in
+      form.non_field_errors %}
+      <p class="form-error">{{ error }}</p>
+      {% endfor %} {% endif %} {% for field in form %}
+      <div class="form-group">
+        {% if field.field.widget.input_type == "checkbox" %}
+        <label class="checkbox-label" for="{{ field.id_for_label }}">
+          {{ field }} {{ field.label }}
+        </label>
+        {% else %}
+        <label for="{{ field.id_for_label }}"> {{ field.label }} </label>
 
-            {% if form.non_field_errors %}
-                {% for error in form.non_field_errors %}
-                    <p class="form-error">{{ error }}</p>
-                {% endfor %}
-            {% endif %}
+        {{ field }} {% endif %} {% if field.help_text %}
+        <div class="helptext">{{ field.help_text }}</div>
+        {% endif %} {% for error in field.errors %}
+        <p class="form-error">{{ error }}</p>
+        {% endfor %}
+      </div>
+      {% endfor %}
 
-            {% for field in form %}
-                <div class="form-group">
-                    {% if field.field.widget.input_type == "checkbox" %}
-                        <label class="checkbox-label" for="{{ field.id_for_label }}">
-                            {{ field }}
-                            {{ field.label }}
-                        </label>
-                    {% else %}
-                        <label for="{{ field.id_for_label }}">
-                            {{ field.label }}
-                        </label>
+      <div class="button-row">
+        <button class="btn btn-primary" type="submit">
+          {% if lesson %} Update Lesson {% else %} Create Lesson {% endif %}
+        </button>
 
-                        {{ field }}
-                    {% endif %}
-
-                    {% if field.help_text %}
-                        <div class="helptext">
-                            {{ field.help_text }}
-                        </div>
-                    {% endif %}
-
-                    {% for error in field.errors %}
-                        <p class="form-error">{{ error }}</p>
-                    {% endfor %}
-                </div>
-            {% endfor %}
-
-            <div class="button-row">
-                <button class="btn btn-primary" type="submit">
-                    {% if lesson %}
-                        Update Lesson
-                    {% else %}
-                        Create Lesson
-                    {% endif %}
-                </button>
-
-                <a class="btn btn-outline" href="{% url 'tutors:lesson_list' tutor.pk %}">
-                    Cancel
-                </a>
-            </div>
-        </form>
-    </section>
+        <a
+          class="btn btn-outline"
+          href="{% url 'tutors:lesson_list' tutor.pk %}"
+        >
+          Cancel
+        </a>
+      </div>
+    </form>
+  </section>
 </div>
 {% endblock %}

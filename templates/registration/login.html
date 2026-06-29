@@ -1,61 +1,49 @@
 {% extends "base.html" %}
 <!-- Inherit the main layout from base.html -->
- 
-{% block title %}
-Log in | Tutor Connect
-{% endblock %}
+
+{% block title %} Log in | Tutor Connect {% endblock %}
 <!-- Sets the page title displayed in the browser tab -->
 
 {% block content %}
 <!-- Main page content starts here -->
 
 <section class="form-card">
-    <!-- Container used to limit page width and improve readability -->
+  <!-- Container used to limit page width and improve readability -->
 
-    <h1>Log in to your account</h1>
-    <p>Access your bookings, dashboard, and manage your profile.</p>
+  <h1>Log in to your account</h1>
+  <p>Access your bookings, dashboard, and manage your profile.</p>
 
-    <!-- Login form -->
-     <form method="POST" novalidate>
+  <!-- Login form -->
+  <form method="POST" novalidate>
+    <!-- CSRF token -->
+    {% csrf_token %}
 
-        <!-- CSRF token -->
-        {% csrf_token %}
+    <!-- Display form-wide validation errors -->
 
-        <!-- Display form-wide validation errors -->
-    
-        {% if form.non_field_errors %}
-            {% for error in form.non_field_errors %}
-                <p class="form-error">{{ error }}</p>
-            {% endfor %}
-        {% endif %}
+    {% if form.non_field_errors %} {% for error in form.non_field_errors %}
+    <p class="form-error">{{ error }}</p>
+    {% endfor %} {% endif %}
 
-        <!-- Username input -->    
-        <div class="form-group">
-            <label for="{{ form.username.id_for_label }}">
-                Username
-            </label>
-            {{ form.username }}
-        </div>
+    <!-- Username input -->
+    <div class="form-group">
+      <label for="{{ form.username.id_for_label }}"> Username </label>
+      {{ form.username }}
+    </div>
 
-        <!-- Password input field -->
-        <div class="form-group">
-            <label for="{{ form.password.id_for_label }}">
-                Password
-            </label>
-            {{ form.password }}
-        </div>
+    <!-- Password input field -->
+    <div class="form-group">
+      <label for="{{ form.password.id_for_label }}"> Password </label>
+      {{ form.password }}
+    </div>
 
-        <!-- Submit button to log the user in -->
-        <button class="btn btn-primary" type="submit">
-            Log In
-        </button>
-          </form>
-            <!-- Link to the registration page for new users -->
-    <p>
-        Need an account?
-        <a href="{% url 'register' %}">Register</a>.
-    </p>
-
+    <!-- Submit button to log the user in -->
+    <button class="btn btn-primary" type="submit">Log In</button>
+  </form>
+  <!-- Link to the registration page for new users -->
+  <p>
+    Need an account?
+    <a href="{% url 'register' %}">Register</a>.
+  </p>
 </section>
 
 {% endblock %}

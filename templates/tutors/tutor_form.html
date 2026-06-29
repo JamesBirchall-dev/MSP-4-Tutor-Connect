@@ -1,88 +1,61 @@
-{% extends "base.html" %}
-
-{% block title %}
-    {% if tutor %}Update Tutor Profile{% else %}Create Tutor Profile{% endif %} | Tutor Connect
-{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %} {% if tutor %}Update Tutor Profile{%
+else %}Create Tutor Profile{% endif %} | Tutor Connect {% endblock %} {% block
+content %}
 <!-- Tutor Form -->
 <div class="container">
-    <section class="form-card">
-        <h1>{% if tutor %}Update Tutor Profile{% else %}Create Tutor Profile{% endif %}</h1>
-        <p>
-            {% if tutor %}
-                Keep your tutor profile up to date so students can find the information they need before and after booking.
-            {% else %}
-                Tell students about your teaching experience, location, expertise and how confirmed lessons will be arranged.
-            {% endif %}
-        </p>
-        <!-- Form -->
-        <form method="post" enctype="multipart/form-data" novalidate>
-            {% csrf_token %}
-            {% if form.non_field_errors %}
-                {% for error in form.non_field_errors %}
-                    <p class="form-error">{{ error }}</p>
-                {% endfor %}
-            {% endif %}
-
-{% for field in form %}
-    <div class="form-group">
-
+  <section class="form-card">
+    <h1>
+      {% if tutor %}Update Tutor Profile{% else %}Create Tutor Profile{% endif
+      %}
+    </h1>
+    <p>
+      {% if tutor %} Keep your tutor profile up to date so students can find the
+      information they need before and after booking. {% else %} Tell students
+      about your teaching experience, location, expertise and how confirmed
+      lessons will be arranged. {% endif %}
+    </p>
+    <!-- Form -->
+    <form method="post" enctype="multipart/form-data" novalidate>
+      {% csrf_token %} {% if form.non_field_errors %} {% for error in
+      form.non_field_errors %}
+      <p class="form-error">{{ error }}</p>
+      {% endfor %} {% endif %} {% for field in form %}
+      <div class="form-group">
         {% if field.field.widget.input_type == "checkbox" %}
 
-            <label class="checkbox-label" for="{{ field.id_for_label }}">
-                {{ field }}
-                {{ field.label }}
-            </label>
+        <label class="checkbox-label" for="{{ field.id_for_label }}">
+          {{ field }} {{ field.label }}
+        </label>
 
         {% else %}
 
-            <label for="{{ field.id_for_label }}">
-                {{ field.label }}
-            </label>
+        <label for="{{ field.id_for_label }}"> {{ field.label }} </label>
 
-            {{ field }}
-
-        {% endif %}
-
-        {% if field.help_text %}
-            <div class="helptext">
-                {{ field.help_text }}
-            </div>
-        {% endif %}
-
-        {% for error in field.errors %}
-            <p class="form-error">{{ error }}</p>
+        {{ field }} {% endif %} {% if field.help_text %}
+        <div class="helptext">{{ field.help_text }}</div>
+        {% endif %} {% for error in field.errors %}
+        <p class="form-error">{{ error }}</p>
         {% endfor %}
+      </div>
+      {% endfor %}
 
-    </div>
-    {% endfor %}
-
-    <div class="button-row">
+      <div class="button-row">
         <button class="btn btn-primary" type="submit">
-            {% if tutor %}
-                Update Profile
-            {% else %}
-                Create Profile
-            {% endif %}
+          {% if tutor %} Update Profile {% else %} Create Profile {% endif %}
         </button>
 
-        <a class="btn btn-outline" href="{% url 'dashboard' %}">
-            Cancel
-        </a>
+        <a class="btn btn-outline" href="{% url 'dashboard' %}"> Cancel </a>
 
         {% if tutor %}
-            <a
-                class="btn btn-danger"
-                href="{% url 'tutors:tutor_delete' tutor.pk %}"
-            >
-                Delete Profile
-            </a>
+        <a
+          class="btn btn-danger"
+          href="{% url 'tutors:tutor_delete' tutor.pk %}"
+        >
+          Delete Profile
+        </a>
         {% endif %}
-    </div>
-
-        </form>
-
-    </section>
+      </div>
+    </form>
+  </section>
 </div>
 {% endblock %}

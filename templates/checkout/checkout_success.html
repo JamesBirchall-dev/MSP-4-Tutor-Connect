@@ -1,27 +1,25 @@
-{% extends "base.html" %}
-
-{% block title %} Payment Successful | Tutor Connect{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %} Payment Successful | Tutor Connect{%
+endblock %} {% block content %}
 <!-- Success Message -->
 <div class="container">
-    <section class="card confirmation-card success-card">
-        <h1>Payment Successful</h1>
+  <section class="card confirmation-card success-card">
+    <h1>Payment Successful</h1>
 
-        <p>
-            Thank you for your payment. Your booking has been confirmed. Please check your email for the booking confirmation and lesson details. You can also view your booking details in your account.
-        </p>
+    <p>
+      Thank you for your payment. Your booking has been confirmed. Please check
+      your email for the booking confirmation and lesson details. You can also
+      view your booking details in your account.
+    </p>
 
-    
-        <div class="button-row">
-            <a class="btn btn-primary" href="{% url 'bookings:booking_list' %}">
-                View My Bookings
-            </a>
+    <div class="button-row">
+      <a class="btn btn-primary" href="{% url 'bookings:booking_list' %}">
+        View My Bookings
+      </a>
 
-            <a class="btn btn-outline" href="{% url 'tutors:tutor_list' %}">
-                Browse More Tutors
-            </a>
-        </div>
-    </section>
+      <a class="btn btn-outline" href="{% url 'tutors:tutor_list' %}">
+        Browse More Tutors
+      </a>
+    </div>
+  </section>
 </div>
-{% endblock %}    
+{% endblock %}

@@ -81,7 +81,6 @@ Manual testing confirmed that the homepage clearly communicates the purpose of T
 * * * * *
 
 2\. Browse Tutors Without an Account
-
 ------------------------------------
 
 ### User Story
@@ -90,10 +89,10 @@ As a visitor, I want to browse available tutors without creating an account so t
 
 ### Acceptance Criteria
 
--   Visitors can access the tutor listing page.
--   Visitors can view individual tutor profiles.
--   Tutor profiles display summary information and available lessons.
--   Attempting to book a lesson redirects unauthenticated users to the login page.
+- Visitors can access the tutor listing page.
+- Visitors can view individual tutor profiles.
+- Tutor profiles display summary information and available lessons.
+- Attempting to book a lesson redirects unauthenticated users to the login page.
 
 ### Testing Outcome ✅ PASS
 
@@ -110,10 +109,10 @@ As a visitor, I want tutor information to be clearly presented so that I can qui
 
 ### Acceptance Criteria
 
--   Tutor profiles display biography, experience and location.
--   Available lessons are displayed on each tutor profile.
--   Lesson information includes title, subject, skill level, duration, date, time and price.
--   Lessons that are unavailable or already booked are not displayed as bookable.
+- Tutor profiles display biography, experience and location.
+- Available lessons are displayed on each tutor profile.
+- Lesson information includes title, subject, skill level, duration, date, time and price.
+- Lessons that are unavailable or already booked are not displayed as bookable.
 
 ### Testing Outcome ✅ PASS
 
@@ -130,11 +129,11 @@ As a new user, I want to register for an account easily so that I can book lesso
 
 ### Acceptance Criteria
 
--   Registration is available from the navigation menu.
--   The registration form validates user input.
--   Validation errors are displayed clearly.
--   Successful registration redirects users appropriately.
--   Logged-in users are presented with their dashboard instead of registration links.
+- Registration is available from the navigation menu.
+- The registration form validates user input.
+- Validation errors are displayed clearly.
+- Successful registration redirects users appropriately.
+- Logged-in users are presented with their dashboard instead of registration links.
 
 ### Testing Outcome ✅ PASS
 
@@ -151,11 +150,11 @@ As a logged-in student, I want to reserve an available lesson quickly so that I 
 
 ### Acceptance Criteria
 
--   Only authenticated users can access the booking form.
--   The selected lesson details are displayed.
--   Students can provide optional booking notes.
--   Required validation is enforced.
--   A successful booking creates a pending booking and displays a confirmation message.
+- Only authenticated users can access the booking form.
+- The selected lesson details are displayed.
+- Students can provide optional booking notes.
+- Required validation is enforced.
+- A successful booking creates a pending booking and displays a confirmation message.
 
 ### Testing Outcome ✅ PASS
 
@@ -172,12 +171,12 @@ As a logged-in student, I want to manage my bookings so that I remain in control
 
 ### Acceptance Criteria
 
--   Users can view only their own bookings.
--   Users can update booking notes before payment.
--   Users can cancel their own bookings.
--   Booking cancellation requires confirmation.
--   Changes are immediately reflected within the booking list.
--   Users cannot access or modify another user's bookings.
+- Users can view only their own bookings.
+- Users can update booking notes before payment.
+- Users can cancel their own bookings.
+- Booking cancellation requires confirmation.
+- Changes are immediately reflected within the booking list.
+- Users cannot access or modify another user's bookings.
 
 ### Testing Outcome ✅ PASS
 
@@ -194,10 +193,10 @@ As a student, I want to review my booking before completing payment so that I ca
 
 ### Acceptance Criteria
 
--   The checkout review page displays the tutor, lesson, date, time, duration and total price.
--   Users can return to their booking list before payment.
--   Payment is initiated securely using Stripe Checkout.
--   Users are redirected appropriately after successful or cancelled payments.
+- The checkout review page displays the tutor, lesson, date, time, duration and total price.
+- Users can return to their booking list before payment.
+- Payment is initiated securely using Stripe Checkout.
+- Users are redirected appropriately after successful or cancelled payments.
 
 ### Testing Outcome ✅ PASS
 
@@ -214,10 +213,10 @@ As a user, I want clear feedback throughout the application so that I always und
 
 ### Acceptance Criteria
 
--   Success messages are displayed after creating, updating or cancelling records.
--   Validation errors are displayed beside the relevant form fields.
--   Payment success and cancellation messages are shown.
--   Feedback messages are presented consistently throughout the application.
+- Success messages are displayed after creating, updating or cancelling records.
+- Validation errors are displayed beside the relevant form fields.
+- Payment success and cancellation messages are shown.
+- Feedback messages are presented consistently throughout the application.
 
 ### Testing Outcome ✅ PASS
 

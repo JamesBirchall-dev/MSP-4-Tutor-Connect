@@ -1,38 +1,36 @@
-{% extends "base.html" %}
-
-{% block title %}{{ tutor.display_name }} | Tutor Connect
-{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %}{{ tutor.display_name }} | Tutor
+Connect {% endblock %} {% block content %}
 
 <!-- Tutor Detail -->
 <div class="container">
   <article class="card tutor-detail">
-{% load static %}
-
-    {% if tutor.image %}
-        <img
-            class="tutor-detail-image"
-            src="{{ tutor.image.url }}"
-            alt="{{ tutor.display_name }}"
-        >
+    {% load static %} {% if tutor.image %}
+    <img
+      class="tutor-detail-image"
+      src="{{ tutor.image.url }}"
+      alt="{{ tutor.display_name }}"
+    />
     {% else %}
-        <img
-            class="tutor-detail-image"
-            src="{% static 'images/tutorconnect-tutor-profiledefault.webp' %}"
-            alt="Default tutor profile image"
-        >
+    <img
+      class="tutor-detail-image"
+      src="{% static 'images/tutorconnect-tutor-profiledefault.webp' %}"
+      alt="Default tutor profile image"
+    />
     {% endif %}
     <!-- Tutor Details -->
     <div class="tutor-detail-content">
       <h1>{{ tutor.display_name }}</h1>
-      <div class="tutor-bio">
-          {{ tutor.bio|linebreaks }}
-      </div>
+      <div class="tutor-bio">{{ tutor.bio|linebreaks }}</div>
 
       <div class="profile-meta">
-        <p><strong>Location:</strong> {{ tutor.location|default:"Not specified" }}</p>
-        <p><strong>Experience:</strong> {{ tutor.experience|default:"Not specified" }}</p>
+        <p>
+          <strong>Location:</strong> {{ tutor.location|default:"Not specified"
+          }}
+        </p>
+        <p>
+          <strong>Experience:</strong> {{ tutor.experience|default:"Not
+          specified" }}
+        </p>
       </div>
       <!-- Book Lesson Button -->
       <a class="btn btn-primary" href="{% url 'tutors:lesson_list' tutor.pk %}">
@@ -40,50 +38,47 @@
       </a>
     </div>
   </article>
- <!-- Upcoming Lessons -->
+  <!-- Upcoming Lessons -->
   <section class="card">
     <h2>Upcoming Lessons</h2>
     <div class="grid two-column">
-        {% for lesson in upcoming_lessons %}
-            <article class="lesson-card">
-                <h3>{{ lesson.title }}</h3>
+      {% for lesson in upcoming_lessons %}
+      <article class="lesson-card">
+        <h3>{{ lesson.title }}</h3>
 
-                <div class="lesson-badge-row">
-                    <span class="lesson-badge">
-                        {{ lesson.get_subject_display }}
-                    </span>
+        <div class="lesson-badge-row">
+          <span class="lesson-badge"> {{ lesson.get_subject_display }} </span>
 
-                    <span class="lesson-badge">
-                        {{ lesson.get_skill_level_display }}
-                    </span>
-                </div>
+          <span class="lesson-badge">
+            {{ lesson.get_skill_level_display }}
+          </span>
+        </div>
 
-                <p class="lesson-description">
-                    {{ lesson.description|truncatewords:20 }}
-                </p>
+        <p class="lesson-description">
+          {{ lesson.description|truncatewords:20 }}
+        </p>
 
-                <div class="lesson-meta-compact">
-                    <span><strong>Date:</strong> {{ lesson.lesson_date }}</span>
-                    <span><strong>Time:</strong> {{ lesson.lesson_time }}</span>
-                    <span><strong>Duration:</strong> {{ lesson.duration_minutes }} mins</span>
-                    <span><strong>Price:</strong> £{{ lesson.price }}</span>
-                </div>
+        <div class="lesson-meta-compact">
+          <span><strong>Date:</strong> {{ lesson.lesson_date }}</span>
+          <span><strong>Time:</strong> {{ lesson.lesson_time }}</span>
+          <span
+            ><strong>Duration:</strong> {{ lesson.duration_minutes }} mins</span
+          >
+          <span><strong>Price:</strong> £{{ lesson.price }}</span>
+        </div>
 
-                <a
-                    class="btn btn-primary"
-                    href="{% url 'bookings:booking_create' lesson.pk %}"
-                >
-                   Book Lesson
-                </a>
-            </article>
-        {% empty %}
-            <p>No upcoming lessons currently available.</p>
-        {% endfor %}
+        <a
+          class="btn btn-primary"
+          href="{% url 'bookings:booking_create' lesson.pk %}"
+        >
+          Book Lesson
+        </a>
+      </article>
+      {% empty %}
+      <p>No upcoming lessons currently available.</p>
+      {% endfor %}
     </div>
-
-</section>
-
+  </section>
 </div>
-  
-{% endblock %}
 
+{% endblock %}

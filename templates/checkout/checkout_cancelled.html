@@ -1,31 +1,26 @@
-{% extends "base.html" %}
-{% block title %} Payment Cancelled | Tutor Connect{% endblock %}
+{% extends "base.html" %} {% block title %} Payment Cancelled | Tutor Connect{%
+endblock %}
 <!-- Payment Cancelled -->
 {% block content %}
-    <div class="container">
-        <!-- Payment Cancelled  card class="cancelled-card" -->
-        <section class="card confirmation-card cancelled-card">
-            <h1>Payment Cancelled</h1>
-            <p>
-                Your payment was not successful. Your payment was cancelled before completion.
-                Your booking has not been confirmed and remains pending until payment is completed.
-            </p>
-        <!-- Button Row -->
-        <div class="button-row">
-            <a
-                class="btn btn-primary"
-                href="{% url 'bookings:booking_list' %}"
-            >
-                Return to My Bookings
-            </a>
+<div class="container">
+  <!-- Payment Cancelled  card class="cancelled-card" -->
+  <section class="card confirmation-card cancelled-card">
+    <h1>Payment Cancelled</h1>
+    <p>
+      Your payment was not successful. Your payment was cancelled before
+      completion. Your booking has not been confirmed and remains pending until
+      payment is completed.
+    </p>
+    <!-- Button Row -->
+    <div class="button-row">
+      <a class="btn btn-primary" href="{% url 'bookings:booking_list' %}">
+        Return to My Bookings
+      </a>
 
-            <a
-                class="btn btn-outline"
-                href="{% url 'tutors:tutor_list' %}"
-            >
-                Continue Browsing Tutors
-            </a>
-        </div>
-    </section>
+      <a class="btn btn-outline" href="{% url 'tutors:tutor_list' %}">
+        Continue Browsing Tutors
+      </a>
+    </div>
+  </section>
 </div>
 {% endblock %}
