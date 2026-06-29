@@ -47,6 +47,9 @@
                         {{ field.help_text }}
                     </div>
                 {% endif %}
+                {% for error in field.errors %}
+                    <p class="form-error">{{ error }}</p>
+                {% endfor %}
             </div>
         {% endfor %}
             <!-- Form actions -->
