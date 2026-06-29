@@ -6,7 +6,6 @@ For production, you should use environment variables
 """
 
 from pathlib import Path
-import os
 import dj_database_url
 from decouple import config
 
@@ -20,13 +19,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # cloudinary configuration
 # ---------------------------------------------------------------------
 
-cloudinary_url = config("CLOUDINARY_URL", default="")
-
-if cloudinary_url:
-    os.environ["CLOUDINARY_URL"] = cloudinary_url
-
-    import cloudinary
-    cloudinary.config(secure=True)
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": config("CLOUDINARY_CLOUD_NAME", default=""),
+    "API_KEY": config("CLOUDINARY_API_KEY", default=""),
+    "API_SECRET": config("CLOUDINARY_API_SECRET", default=""),
+}
 
 # ---------------------------------------------------------------------
 # Security
