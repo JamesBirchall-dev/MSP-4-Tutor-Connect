@@ -862,14 +862,496 @@ _List of main technologies, frameworks, and tools._
 ## Testing
 
 ### Manual Testing
-
-Deployed site: https://tutor-connect-app-d29eb88ae11b.herokuapp.com/
-
+Manual Testing
+Deployed site: Tutor Connect
 Testing Objectives
-
 The purpose of this test plan is to confirm that Tutor Connect works as expected for visitors, registered users, tutors and administrators. Testing covers navigation, authentication, tutor profiles, lesson browsing, bookings, checkout, security rules, responsive design and deployed functionality.
+Full manual testing evidence is also recorded in the manual testing spreadsheet.
+> Screenshots are placed inside expandable sections. Click each heading to expand the evidence, then click the image to open it at full size.
 
-(https://docs.google.com/spreadsheets/d/1yV4Q-z7LliR6oF6kmI3_soqIvGjXrnpuR0O7yH4ospU/edit?usp=sharing)
+#### Visitor Testing
+<details>
+<summary>Visitor Testing summary table</summary>
+<a href="https://github.com/user-attachments/assets/e25dafe1-1813-4491-9a8a-686ce89f7bf2">
+  <img src="https://github.com/user-attachments/assets/e25dafe1-1813-4491-9a8a-686ce89f7bf2" alt="Visitor Testing summary table" width="700">
+</a>
+</details>
+<details>
+<summary>Homepage</summary>
+<a href="https://github.com/user-attachments/assets/a80de12d-9a43-41e9-952b-f3de24e54aca">
+  <img src="https://github.com/user-attachments/assets/a80de12d-9a43-41e9-952b-f3de24e54aca" alt="Homepage" width="700">
+</a>
+</details>
+<details>
+<summary>Image</summary>
+<a href="https://github.com/user-attachments/assets/2e9cca0a-c6c6-4de9-8a3b-2415663d5210">
+  <img src="https://github.com/user-attachments/assets/2e9cca0a-c6c6-4de9-8a3b-2415663d5210" alt="Image" width="700">
+</a>
+</details>
+<details>
+<summary>Lessons:</summary>
+<a href="https://github.com/user-attachments/assets/615e38f9-042d-40b2-bdbc-a4e79e5c7a1b">
+  <img src="https://github.com/user-attachments/assets/615e38f9-042d-40b2-bdbc-a4e79e5c7a1b" alt="Lessons:" width="700">
+</a>
+</details>
+<details>
+<summary>Lessons filtered:</summary>
+<a href="https://github.com/user-attachments/assets/a3e27060-3d2b-4c11-bc30-13b2dd0eb362">
+  <img src="https://github.com/user-attachments/assets/a3e27060-3d2b-4c11-bc30-13b2dd0eb362" alt="Lessons filtered:" width="700">
+</a>
+</details>
+<details>
+<summary>Image (2)</summary>
+<a href="https://github.com/user-attachments/assets/97320ce4-5764-44af-a918-e697f8063f8f">
+  <img src="https://github.com/user-attachments/assets/97320ce4-5764-44af-a918-e697f8063f8f" alt="Image" width="700">
+</a>
+</details>
+<details>
+<summary>Attempt logged out booking</summary>
+<a href="https://github.com/user-attachments/assets/bb558c89-fe45-40fd-ba1f-30e637a907b1">
+  <img src="https://github.com/user-attachments/assets/bb558c89-fe45-40fd-ba1f-30e637a907b1" alt="Attempt logged out booking" width="700">
+</a>
+</details>
+<details>
+<summary>Tutors:</summary>
+<a href="https://github.com/user-attachments/assets/34e6cfa7-74e7-4430-9121-a49a11710d20">
+  <img src="https://github.com/user-attachments/assets/34e6cfa7-74e7-4430-9121-a49a11710d20" alt="Tutors:" width="700">
+</a>
+</details>
+<details>
+<summary>Image (3)</summary>
+<a href="https://github.com/user-attachments/assets/52b521fd-8a01-4107-bbe5-6efb96c2b3b0">
+  <img src="https://github.com/user-attachments/assets/52b521fd-8a01-4107-bbe5-6efb96c2b3b0" alt="Image" width="700">
+</a>
+</details>
+
+#### Account Testing
+<details>
+<summary>Image (4)</summary>
+<a href="https://github.com/user-attachments/assets/e712e45f-be78-4d5c-b541-71ff7001e8f6">
+  <img src="https://github.com/user-attachments/assets/e712e45f-be78-4d5c-b541-71ff7001e8f6" alt="Image" width="700">
+</a>
+</details>
+<details>
+<summary>Registration validation</summary>
+<a href="https://github.com/user-attachments/assets/cedb4921-5396-450d-95e3-46402e5c57cf">
+  <img src="https://github.com/user-attachments/assets/cedb4921-5396-450d-95e3-46402e5c57cf" alt="Registration validation" width="700">
+</a>
+</details>
+<details>
+<summary>Successful registration</summary>
+<a href="https://github.com/user-attachments/assets/39affca8-82c7-4c95-8d48-ff4b9a206fd7">
+  <img src="https://github.com/user-attachments/assets/39affca8-82c7-4c95-8d48-ff4b9a206fd7" alt="Successful registration" width="700">
+</a>
+</details>
+<details>
+<summary>Login validation</summary>
+<a href="https://github.com/user-attachments/assets/05f0afa6-97bd-4c29-9efc-4fc9fa554119">
+  <img src="https://github.com/user-attachments/assets/05f0afa6-97bd-4c29-9efc-4fc9fa554119" alt="Login validation" width="700">
+</a>
+</details>
+<details>
+<summary>Successful login</summary>
+<a href="https://github.com/user-attachments/assets/c490c155-f242-4bd1-9b93-958635663b43">
+  <img src="https://github.com/user-attachments/assets/c490c155-f242-4bd1-9b93-958635663b43" alt="Successful login" width="700">
+</a>
+</details>
+<details>
+<summary>Logout</summary>
+<a href="https://github.com/user-attachments/assets/1c0df439-4686-4dae-a094-06c970f99585">
+  <img src="https://github.com/user-attachments/assets/1c0df439-4686-4dae-a094-06c970f99585" alt="Logout" width="700">
+</a>
+</details>
+
+#### Tutor Profile Testing
+<details>
+<summary>Image (5)</summary>
+<a href="https://github.com/user-attachments/assets/7d701a3b-bb4e-4ca4-830c-664592c4223e">
+  <img src="https://github.com/user-attachments/assets/7d701a3b-bb4e-4ca4-830c-664592c4223e" alt="Image" width="700">
+</a>
+</details>
+<details>
+<summary>Create Tutor Profile:</summary>
+<a href="https://github.com/user-attachments/assets/338aca14-52e8-42a5-8f58-6f014e79f8ae">
+  <img src="https://github.com/user-attachments/assets/338aca14-52e8-42a5-8f58-6f014e79f8ae" alt="Create Tutor Profile:" width="700">
+</a>
+</details>
+<details>
+<summary>Image (6)</summary>
+<a href="https://github.com/user-attachments/assets/0bd42c1d-0e9c-458b-b719-d44af12c59ba">
+  <img src="https://github.com/user-attachments/assets/0bd42c1d-0e9c-458b-b719-d44af12c59ba" alt="Image" width="700">
+</a>
+</details>
+<details>
+<summary>Tutor profile validation</summary>
+<a href="https://github.com/user-attachments/assets/07ad3277-d540-4604-be18-7bffdcefa1c8">
+  <img src="https://github.com/user-attachments/assets/07ad3277-d540-4604-be18-7bffdcefa1c8" alt="Tutor profile validation" width="700">
+</a>
+</details>
+<details>
+<summary>Tutor profile update</summary>
+<a href="https://github.com/user-attachments/assets/514eada1-b39d-4054-857a-e7fba9ea5568">
+  <img src="https://github.com/user-attachments/assets/514eada1-b39d-4054-857a-e7fba9ea5568" alt="Tutor profile update" width="700">
+</a>
+</details>
+<details>
+<summary>Profile placeholder image</summary>
+<a href="https://github.com/user-attachments/assets/96130c74-1403-4910-b08c-ba58a425302a">
+  <img src="https://github.com/user-attachments/assets/96130c74-1403-4910-b08c-ba58a425302a" alt="Profile placeholder image" width="700">
+</a>
+</details>
+<details>
+<summary>Lesson and contact information displayed in confirmed bookings</summary>
+<a href="https://github.com/user-attachments/assets/454cf75b-74a2-4754-9d36-5de446bb05a4">
+  <img src="https://github.com/user-attachments/assets/454cf75b-74a2-4754-9d36-5de446bb05a4" alt="Lesson and contact information displayed in confirmed bookings" width="700">
+</a>
+</details>
+
+#### Dashboard Testing
+<details>
+<summary>Image (7)</summary>
+<a href="https://github.com/user-attachments/assets/0ac1ad29-4541-4502-98fa-c2b506883c76">
+  <img src="https://github.com/user-attachments/assets/0ac1ad29-4541-4502-98fa-c2b506883c76" alt="Image" width="700">
+</a>
+</details>
+<details>
+<summary>Student login landing page, shows create profile CTA:</summary>
+<a href="https://github.com/user-attachments/assets/c437ee1e-4b53-4630-be16-208193e68b47">
+  <img src="https://github.com/user-attachments/assets/c437ee1e-4b53-4630-be16-208193e68b47" alt="Student login landing page, shows create profile CTA:" width="700">
+</a>
+</details>
+<details>
+<summary>Tutor dashboard and upcoming lessons</summary>
+<a href="https://github.com/user-attachments/assets/dbf7227d-e648-4258-be87-4a6be30437da">
+  <img src="https://github.com/user-attachments/assets/dbf7227d-e648-4258-be87-4a6be30437da" alt="Tutor dashboard and upcoming lessons" width="700">
+</a>
+</details>
+
+#### Lesson Testing
+<details>
+<summary>Image (8)</summary>
+<a href="https://github.com/user-attachments/assets/359467ae-ce36-4494-bfcd-cde19eab956a">
+  <img src="https://github.com/user-attachments/assets/359467ae-ce36-4494-bfcd-cde19eab956a" alt="Image" width="700">
+</a>
+</details>
+<details>
+<summary>Create new lesson</summary>
+<a href="https://github.com/user-attachments/assets/f0a50ce6-766e-4152-9107-17093b32276f">
+  <img src="https://github.com/user-attachments/assets/f0a50ce6-766e-4152-9107-17093b32276f" alt="Create new lesson" width="700">
+</a>
+</details>
+<details>
+<summary>Edit lesson</summary>
+<a href="https://github.com/user-attachments/assets/ebf05c70-3ae1-4a2c-9ca7-790bcba05d3c">
+  <img src="https://github.com/user-attachments/assets/ebf05c70-3ae1-4a2c-9ca7-790bcba05d3c" alt="Edit lesson" width="700">
+</a>
+</details>
+<details>
+<summary>Image (9)</summary>
+<a href="https://github.com/user-attachments/assets/a1f5a570-23be-45d1-ac61-b260c1c556e8">
+  <img src="https://github.com/user-attachments/assets/a1f5a570-23be-45d1-ac61-b260c1c556e8" alt="Image" width="700">
+</a>
+</details>
+<details>
+<summary>Delete Lesson</summary>
+<a href="https://github.com/user-attachments/assets/a095177a-ebed-4e7f-ad09-ece9006dd907">
+  <img src="https://github.com/user-attachments/assets/a095177a-ebed-4e7f-ad09-ece9006dd907" alt="Delete Lesson" width="700">
+</a>
+</details>
+<details>
+<summary>Image (10)</summary>
+<a href="https://github.com/user-attachments/assets/54f794e0-49d8-49e1-a51d-59704351d976">
+  <img src="https://github.com/user-attachments/assets/54f794e0-49d8-49e1-a51d-59704351d976" alt="Image" width="700">
+</a>
+</details>
+<details>
+<summary>Lesson form validation</summary>
+<a href="https://github.com/user-attachments/assets/7404f7c2-0220-4fe7-b73a-1534afbcfc0c">
+  <img src="https://github.com/user-attachments/assets/7404f7c2-0220-4fe7-b73a-1534afbcfc0c" alt="Lesson form validation" width="700">
+</a>
+</details>
+<details>
+<summary>not available</summary>
+<a href="https://github.com/user-attachments/assets/1925a8c7-bd33-492e-b7ad-f8d7ecb07c6a">
+  <img src="https://github.com/user-attachments/assets/1925a8c7-bd33-492e-b7ad-f8d7ecb07c6a" alt="not available" width="700">
+</a>
+</details>
+<details>
+<summary>Edit Blocked</summary>
+<a href="https://github.com/user-attachments/assets/2d8b25a8-b338-4b3e-a7de-d91a07c9a5d7">
+  <img src="https://github.com/user-attachments/assets/2d8b25a8-b338-4b3e-a7de-d91a07c9a5d7" alt="Edit Blocked" width="700">
+</a>
+</details>
+<details>
+<summary>Unavailable lesson not shown in lesson filter</summary>
+<a href="https://github.com/user-attachments/assets/b33c0463-7d2e-4eb1-aded-cf1ea59c0477">
+  <img src="https://github.com/user-attachments/assets/b33c0463-7d2e-4eb1-aded-cf1ea59c0477" alt="Unavailable lesson not shown in lesson filter" width="700">
+</a>
+</details>
+<details>
+<summary>Update to past date</summary>
+<a href="https://github.com/user-attachments/assets/0ec36a1e-2ed0-4cfc-bb21-f83ed842a750">
+  <img src="https://github.com/user-attachments/assets/0ec36a1e-2ed0-4cfc-bb21-f83ed842a750" alt="Update to past date" width="700">
+</a>
+</details>
+<details>
+<summary>Pagination showing and working for 10 or more lessons</summary>
+<a href="https://github.com/user-attachments/assets/e68961c2-95b3-473b-8019-b004861ba4f7">
+  <img src="https://github.com/user-attachments/assets/e68961c2-95b3-473b-8019-b004861ba4f7" alt="Pagination showing and working for 10 or more lessons" width="700">
+</a>
+</details>
+<details>
+<summary>Image (11)</summary>
+<a href="https://github.com/user-attachments/assets/cce75a57-aab9-4ad7-b78f-d97ebf6fd665">
+  <img src="https://github.com/user-attachments/assets/cce75a57-aab9-4ad7-b78f-d97ebf6fd665" alt="Image" width="700">
+</a>
+</details>
+
+#### Booking Test
+<details>
+<summary>Booking Testing summary table</summary>
+<a href="https://github.com/user-attachments/assets/cef804c6-e636-4b9b-9f9b-d1fa4cf7056d">
+  <img src="https://github.com/user-attachments/assets/cef804c6-e636-4b9b-9f9b-d1fa4cf7056d" alt="Booking Testing summary table" width="700">
+</a>
+</details>
+<details>
+<summary>Book a lesson</summary>
+<a href="https://github.com/user-attachments/assets/8e5841bc-8f14-40ad-868a-dc90f5d09f2d">
+  <img src="https://github.com/user-attachments/assets/8e5841bc-8f14-40ad-868a-dc90f5d09f2d" alt="Book a lesson" width="700">
+</a>
+</details>
+Issue: Obsolete text as booking is fixed slot.
+<details>
+<summary>Bookings shown for user in dashboard</summary>
+<a href="https://github.com/user-attachments/assets/a3a5ac16-cee7-4a34-b05d-cd8bbf7e0fb8">
+  <img src="https://github.com/user-attachments/assets/a3a5ac16-cee7-4a34-b05d-cd8bbf7e0fb8" alt="Bookings shown for user in dashboard" width="700">
+</a>
+</details>
+<details>
+<summary>View booking details</summary>
+<a href="https://github.com/user-attachments/assets/9746262a-f8f4-448c-83aa-2618da197cd1">
+  <img src="https://github.com/user-attachments/assets/9746262a-f8f4-448c-83aa-2618da197cd1" alt="View booking details" width="700">
+</a>
+</details>
+<details>
+<summary>Cancel booking</summary>
+<a href="https://github.com/user-attachments/assets/6102480a-ed77-4ff6-886c-7b3c7f70eda5">
+  <img src="https://github.com/user-attachments/assets/6102480a-ed77-4ff6-886c-7b3c7f70eda5" alt="Cancel booking" width="700">
+</a>
+</details>
+<details>
+<summary>Attempt to access another user&#x27;s booking</summary>
+<a href="https://github.com/user-attachments/assets/2878041e-7321-4a34-91a6-810bded25601">
+  <img src="https://github.com/user-attachments/assets/2878041e-7321-4a34-91a6-810bded25601" alt="Attempt to access another user&#x27;s booking" width="700">
+</a>
+</details>
+
+#### Checkout Test
+<details>
+<summary>Checkout review displays correct booking information</summary>
+<a href="https://github.com/user-attachments/assets/af4a8c2b-2099-46c5-8f10-353950eb9dba">
+  <img src="https://github.com/user-attachments/assets/af4a8c2b-2099-46c5-8f10-353950eb9dba" alt="Checkout review displays correct booking information" width="700">
+</a>
+</details>
+<details>
+<summary>Redirect to Stripe Checkout</summary>
+<a href="https://github.com/user-attachments/assets/7bc2da55-cfef-4b1c-8cf6-0841449168fc">
+  <img src="https://github.com/user-attachments/assets/7bc2da55-cfef-4b1c-8cf6-0841449168fc" alt="Redirect to Stripe Checkout" width="700">
+</a>
+</details>
+<details>
+<summary>Payment success page</summary>
+<a href="https://github.com/user-attachments/assets/31816c73-748e-4ae5-8c01-25029aac350c">
+  <img src="https://github.com/user-attachments/assets/31816c73-748e-4ae5-8c01-25029aac350c" alt="Payment success page" width="700">
+</a>
+</details>
+<details>
+<summary>Booking status confirmed after payment</summary>
+<a href="https://github.com/user-attachments/assets/77913c73-b042-44da-89c6-4d79ef6206aa">
+  <img src="https://github.com/user-attachments/assets/77913c73-b042-44da-89c6-4d79ef6206aa" alt="Booking status confirmed after payment" width="700">
+</a>
+</details>
+<details>
+<summary>Payment cancelled</summary>
+<a href="https://github.com/user-attachments/assets/a06397f7-08ae-4b8d-a617-52124f3a1868">
+  <img src="https://github.com/user-attachments/assets/a06397f7-08ae-4b8d-a617-52124f3a1868" alt="Payment cancelled" width="700">
+</a>
+</details>
+<details>
+<summary>Attempt to access another user&#x27;s checkout</summary>
+<a href="https://github.com/user-attachments/assets/cdd3d994-756b-456e-b4bf-4659d111ae74">
+  <img src="https://github.com/user-attachments/assets/cdd3d994-756b-456e-b4bf-4659d111ae74" alt="Attempt to access another user&#x27;s checkout" width="700">
+</a>
+</details>
+
+#### Admin Testing
+<details>
+<summary>Admin Testing summary table</summary>
+<a href="https://github.com/user-attachments/assets/45758f6a-fc4e-4edd-a07a-f5ab2214f8de">
+  <img src="https://github.com/user-attachments/assets/45758f6a-fc4e-4edd-a07a-f5ab2214f8de" alt="Admin Testing summary table" width="700">
+</a>
+</details>
+<details>
+<summary>Admin dashboard loads</summary>
+<a href="https://github.com/user-attachments/assets/bf38b05f-4740-45bb-99c3-094b5d00e896">
+  <img src="https://github.com/user-attachments/assets/bf38b05f-4740-45bb-99c3-094b5d00e896" alt="Admin dashboard loads" width="700">
+</a>
+</details>
+<details>
+<summary>Tutor profile search and filter</summary>
+<a href="https://github.com/user-attachments/assets/a0187d67-841e-439a-b727-dd311d2bb327">
+  <img src="https://github.com/user-attachments/assets/a0187d67-841e-439a-b727-dd311d2bb327" alt="Tutor profile search and filter" width="700">
+</a>
+</details>
+<details>
+<summary>Lesson type search and filter</summary>
+<a href="https://github.com/user-attachments/assets/eaf8ec69-26ac-439e-afd7-21e9a4661f71">
+  <img src="https://github.com/user-attachments/assets/eaf8ec69-26ac-439e-afd7-21e9a4661f71" alt="Lesson type search and filter" width="700">
+</a>
+</details>
+<details>
+<summary>Booking admin review</summary>
+<a href="https://github.com/user-attachments/assets/c5f0ada0-4fc2-4579-8583-54d79f081e8b">
+  <img src="https://github.com/user-attachments/assets/c5f0ada0-4fc2-4579-8583-54d79f081e8b" alt="Booking admin review" width="700">
+</a>
+</details>
+<details>
+<summary>Payment admin shows records without secrets</summary>
+<a href="https://github.com/user-attachments/assets/914f22cf-d293-472b-a789-03661696274d">
+  <img src="https://github.com/user-attachments/assets/914f22cf-d293-472b-a789-03661696274d" alt="Payment admin shows records without secrets" width="700">
+</a>
+</details>
+
+Security Testing
+<details>
+<summary>Image (12)</summary>
+<a href="https://github.com/user-attachments/assets/829ba659-531e-4084-be31-1c1859750142">
+  <img src="https://github.com/user-attachments/assets/829ba659-531e-4084-be31-1c1859750142" alt="Image" width="700">
+</a>
+</details>
+<details>
+<summary>Secret keys not shown in repository</summary>
+<a href="https://github.com/user-attachments/assets/f99c0bec-fb08-49a7-b030-3c2c57d7da11">
+  <img src="https://github.com/user-attachments/assets/f99c0bec-fb08-49a7-b030-3c2c57d7da11" alt="Secret keys not shown in repository" width="700">
+</a>
+</details>
+
+Fixes
+https://github.com/JamesBirchall-dev/MSP-4-Tutor-Connect/issues/49
+Issue 1:
+<details>
+<summary>CSRF error on logout</summary>
+<a href="https://github.com/user-attachments/assets/224ec610-5f43-4b14-a336-dd516d9356d6">
+  <img src="https://github.com/user-attachments/assets/224ec610-5f43-4b14-a336-dd516d9356d6" alt="CSRF error on logout" width="700">
+</a>
+</details>
+
+Issue:
+Sometimes when logging out from dashboard this error page flags.
+
+Troubleshooting:
+<details>
+<summary>Check post form in base.html to make sure csrf is called - OK</summary>
+<a href="https://github.com/user-attachments/assets/dc307a5d-e612-42fd-86ec-04e11b7cdc5a">
+  <img src="https://github.com/user-attachments/assets/dc307a5d-e612-42fd-86ec-04e11b7cdc5a" alt="Check post form in base.html to make sure csrf is called - OK" width="700">
+</a>
+</details>
+
+Resolution:
+Likely caused with copying direct link, multiple sessions.
+<details>
+<summary>Cleared cache and tested again - PASS</summary>
+<a href="https://github.com/user-attachments/assets/5338b582-c836-4f62-a0c0-342744df1918">
+  <img src="https://github.com/user-attachments/assets/5338b582-c836-4f62-a0c0-342744df1918" alt="Cleared cache and tested again - PASS" width="700">
+</a>
+</details>
+
+Issue 2:
+
+Issue:
+Unable to update image in deployed, returns a 500 error page.
+
+Cause of issue:
+Cloudinary required configuration for third-party image management.
+
+Resolution:
+Cloudinary configured in Django settings and Heroku Config Vars.
+Cloudinary credentials added locally via `.env` and in Heroku Config Vars.
+
+Issue 3:
+<details>
+<summary>Subject and category lists not in alphabetical order</summary>
+<a href="https://github.com/user-attachments/assets/189fa2a1-53b8-4a1e-b0ae-0265c544b43f">
+  <img src="https://github.com/user-attachments/assets/189fa2a1-53b8-4a1e-b0ae-0265c544b43f" alt="Subject and category lists not in alphabetical order" width="700">
+</a>
+</details>
+<details>
+<summary>Image (13)</summary>
+<a href="https://github.com/user-attachments/assets/3c4168ca-08e6-4fbc-baaf-37262bb30223">
+  <img src="https://github.com/user-attachments/assets/3c4168ca-08e6-4fbc-baaf-37262bb30223" alt="Image" width="700">
+</a>
+</details>
+Resolution: Updated model choice lists into alphabetical order.
+<details>
+<summary>Resolution: Updated model choice lists into alphabetical order.</summary>
+<a href="https://github.com/user-attachments/assets/fd9c5961-2202-4afb-890b-8738dfc1fa83">
+  <img src="https://github.com/user-attachments/assets/fd9c5961-2202-4afb-890b-8738dfc1fa83" alt="Resolution: Updated model choice lists into alphabetical order." width="700">
+</a>
+</details>
+<details>
+<summary>Local test: PASS</summary>
+<a href="https://github.com/user-attachments/assets/b91f6e68-2312-4840-ac92-56b29615f09d">
+  <img src="https://github.com/user-attachments/assets/b91f6e68-2312-4840-ac92-56b29615f09d" alt="Local test: PASS" width="700">
+</a>
+</details>
+<details>
+<summary>Image (14)</summary>
+<a href="https://github.com/user-attachments/assets/b414ed05-12b7-4788-9f2b-174c40012176">
+  <img src="https://github.com/user-attachments/assets/b414ed05-12b7-4788-9f2b-174c40012176" alt="Image" width="700">
+</a>
+</details>
+<details>
+<summary>Deployed test: PASS</summary>
+<a href="https://github.com/user-attachments/assets/4977c464-184b-4159-8c2f-e76c676c40be">
+  <img src="https://github.com/user-attachments/assets/4977c464-184b-4159-8c2f-e76c676c40be" alt="Deployed test: PASS" width="700">
+</a>
+</details>
+<details>
+<summary>Image (15)</summary>
+<a href="https://github.com/user-attachments/assets/35e92cf8-9c73-4005-9f06-6b9d6d1098cc">
+  <img src="https://github.com/user-attachments/assets/35e92cf8-9c73-4005-9f06-6b9d6d1098cc" alt="Image" width="700">
+</a>
+</details>
+
+Issue 4:
+Text displayed supports time and date editing which is now obsolete.
+
+Resolution:
+Remove text from template.
+<details>
+<summary>Deployed test with corrected text</summary>
+<a href="https://github.com/user-attachments/assets/33834538-e9c7-4c9c-888b-607a464971ba">
+  <img src="https://github.com/user-attachments/assets/33834538-e9c7-4c9c-888b-607a464971ba" alt="Deployed test with corrected text" width="700">
+</a>
+</details>
+
+Issue:
+<details>
+<summary>Badly positioned, duplicate CTA to all lessons:</summary>
+<a href="https://github.com/user-attachments/assets/4e802792-b41b-4e33-bd0f-d71f8fff9e3d">
+  <img src="https://github.com/user-attachments/assets/4e802792-b41b-4e33-bd0f-d71f8fff9e3d" alt="Badly positioned, duplicate CTA to all lessons:" width="700">
+</a>
+</details>
+
+Resolution:
+Remove 2nd CTA from template.
+<details>
+<summary>Deployed fix</summary>
+<a href="https://github.com/user-attachments/assets/1ad64a05-d958-4c99-aef1-99a11609eb84">
+  <img src="https://github.com/user-attachments/assets/1ad64a05-d958-4c99-aef1-99a11609eb84" alt="Deployed fix" width="700">
+</a>
+</details>
+
 
 ### Automated Testing
 
