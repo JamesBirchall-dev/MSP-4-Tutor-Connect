@@ -3830,16 +3830,599 @@ Destroying test database for alias 'default'...
 
 Outcome: PASS
 
+</details>
 
-### Validator Testing
 
-_Automated validation and tools used._
 
-### Bugs
+### Validator, Console and Lighthouse Testing
+HTML validation was completed using the W3C HTML Validator.
+Console testing was completed using Chrome Developer Tools on both desktop and mobile viewport simulations. Lighthouse audits were also completed using Chrome Developer Tools.
+Validation, console and Lighthouse screenshots were tracked through the GitHub Project task linked below:
+https://github.com/users/JamesBirchall-dev/projects/7/views/1?pane=issue&itemId=194254342&issue=JamesBirchall-dev%7CMSP-4-Tutor-Connect%7C45
 
-_Known issues and how they were addressed._
+Summary:
+All tested HTML pages passed validation.
+All tested pages passed console checks with no unexpected JavaScript errors.
+Lighthouse scores were generally in the 90s. Any reduced performance scores were caused by third-party services such as Cloudinary, Google Fonts or Heroku response times rather than application code.
 
----
+
+<details>
+<summary><strong>Homepage</strong></summary>
+Validation note: The homepage initially returned a section warning. The outer CTA container was changed from a `section` to a `div` because it was used for layout rather than as a standalone semantic section. The page was then revalidated successfully.
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/6e4750ab-7ae8-48b4-95cd-296de60aba29">
+    <img src="https://github.com/user-attachments/assets/6e4750ab-7ae8-48b4-95cd-296de60aba29" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/481f9f81-95e0-4ae5-bfd9-87ca12432c90">
+    <img src="https://github.com/user-attachments/assets/481f9f81-95e0-4ae5-bfd9-87ca12432c90" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/8551640c-fb53-426f-a803-3147e9767b4f">
+    <img src="https://github.com/user-attachments/assets/8551640c-fb53-426f-a803-3147e9767b4f" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>HTML Validation Passed</summary>
+<a href="https://github.com/user-attachments/assets/5c102397-7736-4b8c-9fc8-199e78c023a6">
+    <img src="https://github.com/user-attachments/assets/5c102397-7736-4b8c-9fc8-199e78c023a6" alt="HTML Validation Passed" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/08e729c4-bf3c-47c3-8474-485e229f35f7">
+    <img src="https://github.com/user-attachments/assets/08e729c4-bf3c-47c3-8474-485e229f35f7" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/db426308-ef66-4b8c-a973-434a7cc7412c">
+    <img src="https://github.com/user-attachments/assets/db426308-ef66-4b8c-a973-434a7cc7412c" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Browse Tutors</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/5c4eecde-1549-454d-96fb-f7d680c51c51">
+    <img src="https://github.com/user-attachments/assets/5c4eecde-1549-454d-96fb-f7d680c51c51" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/1ff13686-b434-4a7d-bb76-dc0e8c272973">
+    <img src="https://github.com/user-attachments/assets/1ff13686-b434-4a7d-bb76-dc0e8c272973" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/8b69b36c-8023-4b0a-8159-68a6756e418a">
+    <img src="https://github.com/user-attachments/assets/8b69b36c-8023-4b0a-8159-68a6756e418a" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/fe85259d-d454-4394-881f-8f11f4acc1cb">
+    <img src="https://github.com/user-attachments/assets/fe85259d-d454-4394-881f-8f11f4acc1cb" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/fcf05b75-c8d2-4998-8a33-2076ac673de5">
+    <img src="https://github.com/user-attachments/assets/fcf05b75-c8d2-4998-8a33-2076ac673de5" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Tutor Detail</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/16c7b80a-a2cd-4825-80e7-9fb15525f8fa">
+    <img src="https://github.com/user-attachments/assets/16c7b80a-a2cd-4825-80e7-9fb15525f8fa" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/c2c0761c-3f9a-440f-9a02-43e1ba34ce65">
+    <img src="https://github.com/user-attachments/assets/c2c0761c-3f9a-440f-9a02-43e1ba34ce65" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/1d0c68ab-e746-46b7-84ae-f7c8422e27ac">
+    <img src="https://github.com/user-attachments/assets/1d0c68ab-e746-46b7-84ae-f7c8422e27ac" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/ecf0ba38-d861-4427-a176-0ddd74de697d">
+    <img src="https://github.com/user-attachments/assets/ecf0ba38-d861-4427-a176-0ddd74de697d" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/f27dfd14-558b-4aeb-996f-0e471fa46d33">
+    <img src="https://github.com/user-attachments/assets/f27dfd14-558b-4aeb-996f-0e471fa46d33" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Browse Lessons</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/3b68acab-1931-4480-b76a-4ed35a296d94">
+    <img src="https://github.com/user-attachments/assets/3b68acab-1931-4480-b76a-4ed35a296d94" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/7782e5fa-cc8c-41af-9b5e-0b0bb00adef5">
+    <img src="https://github.com/user-attachments/assets/7782e5fa-cc8c-41af-9b5e-0b0bb00adef5" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/a079b8fd-7346-4541-9b80-69ddf11d4b01">
+    <img src="https://github.com/user-attachments/assets/a079b8fd-7346-4541-9b80-69ddf11d4b01" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/b5d9a2da-cbab-4113-9e51-459013e444c6">
+    <img src="https://github.com/user-attachments/assets/b5d9a2da-cbab-4113-9e51-459013e444c6" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/d37b981f-6fe7-4e80-874e-15bdad64d3f7">
+    <img src="https://github.com/user-attachments/assets/d37b981f-6fe7-4e80-874e-15bdad64d3f7" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Register</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/423c6588-855e-4b85-b619-cb909bafa9d9">
+    <img src="https://github.com/user-attachments/assets/423c6588-855e-4b85-b619-cb909bafa9d9" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/47678ab2-9a18-44ca-964a-f4a402aa08a8">
+    <img src="https://github.com/user-attachments/assets/47678ab2-9a18-44ca-964a-f4a402aa08a8" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/edbdef6f-6a50-4e85-9bb7-270099fb871d">
+    <img src="https://github.com/user-attachments/assets/edbdef6f-6a50-4e85-9bb7-270099fb871d" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/8438e200-87f9-42b6-a27f-2bc466a9ea33">
+    <img src="https://github.com/user-attachments/assets/8438e200-87f9-42b6-a27f-2bc466a9ea33" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/35066a70-3bc3-484b-82c1-1dcb6d4d2ec8">
+    <img src="https://github.com/user-attachments/assets/35066a70-3bc3-484b-82c1-1dcb6d4d2ec8" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Login</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/da538f4c-346a-4c40-b364-f2c7be42a696">
+    <img src="https://github.com/user-attachments/assets/da538f4c-346a-4c40-b364-f2c7be42a696" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/d518b18a-61cf-4907-a1f9-b32c117921b1">
+    <img src="https://github.com/user-attachments/assets/d518b18a-61cf-4907-a1f9-b32c117921b1" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/dae04b68-e5f4-459e-9c17-12fcbb553de5">
+    <img src="https://github.com/user-attachments/assets/dae04b68-e5f4-459e-9c17-12fcbb553de5" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/fe1e4f0b-e245-455c-b5b0-cfcd0d358921">
+    <img src="https://github.com/user-attachments/assets/fe1e4f0b-e245-455c-b5b0-cfcd0d358921" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/b256d6d1-f6e3-4a8b-acc4-30c885cfa109">
+    <img src="https://github.com/user-attachments/assets/b256d6d1-f6e3-4a8b-acc4-30c885cfa109" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Student - Dashboard</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/aefcdd65-021b-4148-8a8e-253453a15f1e">
+    <img src="https://github.com/user-attachments/assets/aefcdd65-021b-4148-8a8e-253453a15f1e" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/cd9db9c8-0684-4247-8d80-8f87d3d4cd80">
+    <img src="https://github.com/user-attachments/assets/cd9db9c8-0684-4247-8d80-8f87d3d4cd80" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/bda1828b-1406-4bdf-a0ee-4e629aa36e59">
+    <img src="https://github.com/user-attachments/assets/bda1828b-1406-4bdf-a0ee-4e629aa36e59" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/e44742be-62eb-4668-9cea-0edb3f3375ca">
+    <img src="https://github.com/user-attachments/assets/e44742be-62eb-4668-9cea-0edb3f3375ca" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/548b6343-f217-4dcd-a119-df699cc8fdc9">
+    <img src="https://github.com/user-attachments/assets/548b6343-f217-4dcd-a119-df699cc8fdc9" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Student - Booking List</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/8649af99-dea6-45c6-8b18-950bbe2bcef2">
+    <img src="https://github.com/user-attachments/assets/8649af99-dea6-45c6-8b18-950bbe2bcef2" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/140bb917-fa0d-4f3a-9a32-908dd65f0db4">
+    <img src="https://github.com/user-attachments/assets/140bb917-fa0d-4f3a-9a32-908dd65f0db4" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/5f391f30-3bb8-4dba-9fe1-396efe802e9d">
+    <img src="https://github.com/user-attachments/assets/5f391f30-3bb8-4dba-9fe1-396efe802e9d" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/566ba88a-e331-4843-8591-fec6dfe051d8">
+    <img src="https://github.com/user-attachments/assets/566ba88a-e331-4843-8591-fec6dfe051d8" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop </summary>
+<a href="https://github.com/user-attachments/assets/bfc5a426-8c03-4119-bee2-98c8954afa5c">
+    <img src="https://github.com/user-attachments/assets/bfc5a426-8c03-4119-bee2-98c8954afa5c" alt="Lighthouse Desktop " width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Student - Booking Detail</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/085d7a54-cd42-4e9b-8818-5485a6b8444f">
+    <img src="https://github.com/user-attachments/assets/085d7a54-cd42-4e9b-8818-5485a6b8444f" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/46682c06-8342-42ef-8754-741e74f60f4e">
+    <img src="https://github.com/user-attachments/assets/46682c06-8342-42ef-8754-741e74f60f4e" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/e4a367a8-5f87-4f77-bf70-6f49c668a1cd">
+    <img src="https://github.com/user-attachments/assets/e4a367a8-5f87-4f77-bf70-6f49c668a1cd" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/5ef3e606-3dca-4b3a-8835-0716828aa249">
+    <img src="https://github.com/user-attachments/assets/5ef3e606-3dca-4b3a-8835-0716828aa249" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/1c710d5f-17af-4663-ac2d-bcc73b26422d">
+    <img src="https://github.com/user-attachments/assets/1c710d5f-17af-4663-ac2d-bcc73b26422d" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Student - Booking Form</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/2154ce36-37d7-4a72-bdaf-8edf03dba850">
+    <img src="https://github.com/user-attachments/assets/2154ce36-37d7-4a72-bdaf-8edf03dba850" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/929d8f86-9fa5-4230-ba41-d482fd8e449f">
+    <img src="https://github.com/user-attachments/assets/929d8f86-9fa5-4230-ba41-d482fd8e449f" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/2cb80669-a87c-4006-89df-96f9c86cb456">
+    <img src="https://github.com/user-attachments/assets/2cb80669-a87c-4006-89df-96f9c86cb456" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/7a650e35-9b23-498d-8a3c-29a0c84de5d9">
+    <img src="https://github.com/user-attachments/assets/7a650e35-9b23-498d-8a3c-29a0c84de5d9" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/8d4f09ee-13a9-4eea-a0eb-8c7ef28e960c">
+    <img src="https://github.com/user-attachments/assets/8d4f09ee-13a9-4eea-a0eb-8c7ef28e960c" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Student - Checkout Review</strong></summary>
+Evidence to be added.
+</details>
+<details>
+<summary><strong>Student - Checkout Success</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/1afe25f8-7003-460e-bf00-a5c3170f452e">
+    <img src="https://github.com/user-attachments/assets/1afe25f8-7003-460e-bf00-a5c3170f452e" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/5c1ddf82-d50d-446d-801f-d0131cc0976c">
+    <img src="https://github.com/user-attachments/assets/5c1ddf82-d50d-446d-801f-d0131cc0976c" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/e4291080-581b-4b09-a7a6-aeb7cf17d611">
+    <img src="https://github.com/user-attachments/assets/e4291080-581b-4b09-a7a6-aeb7cf17d611" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/12af25e9-f225-400d-b36f-84d436b48ffe">
+    <img src="https://github.com/user-attachments/assets/12af25e9-f225-400d-b36f-84d436b48ffe" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/17f91050-1c98-4ac5-a90f-b0b2787f8cf6">
+    <img src="https://github.com/user-attachments/assets/17f91050-1c98-4ac5-a90f-b0b2787f8cf6" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Student - Checkout Cancelled</strong></summary>
+Evidence to be added.
+</details>
+<details>
+<summary><strong>Tutor - Dashboard</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/f63b3823-d5e8-4d38-a91f-12b9aa8ab4b5">
+    <img src="https://github.com/user-attachments/assets/f63b3823-d5e8-4d38-a91f-12b9aa8ab4b5" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/6d5b80c7-996c-4deb-85e8-938d7bb136ee">
+    <img src="https://github.com/user-attachments/assets/6d5b80c7-996c-4deb-85e8-938d7bb136ee" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/f1f92b67-8357-4b95-a802-92bd3bdc1f89">
+    <img src="https://github.com/user-attachments/assets/f1f92b67-8357-4b95-a802-92bd3bdc1f89" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/dd6a0fa4-389d-4fab-9425-e23ab851fadf">
+    <img src="https://github.com/user-attachments/assets/dd6a0fa4-389d-4fab-9425-e23ab851fadf" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/cc1073a3-e49e-41f7-a429-2c3a482920e5">
+    <img src="https://github.com/user-attachments/assets/cc1073a3-e49e-41f7-a429-2c3a482920e5" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Tutor - Create Tutor Profile</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/f3bb910a-535d-4c50-8262-e1f941917c3d">
+    <img src="https://github.com/user-attachments/assets/f3bb910a-535d-4c50-8262-e1f941917c3d" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/f169f344-f5ba-4a7f-a127-ac4e3eb78db2">
+    <img src="https://github.com/user-attachments/assets/f169f344-f5ba-4a7f-a127-ac4e3eb78db2" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/357fd107-08c2-451c-ac45-72b867ad27bb">
+    <img src="https://github.com/user-attachments/assets/357fd107-08c2-451c-ac45-72b867ad27bb" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/cb1b8989-e84d-440e-9cf9-67dde9fbdee7">
+    <img src="https://github.com/user-attachments/assets/cb1b8989-e84d-440e-9cf9-67dde9fbdee7" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/532542fb-4d25-462c-be2b-f4ebd5284b8a">
+    <img src="https://github.com/user-attachments/assets/532542fb-4d25-462c-be2b-f4ebd5284b8a" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Tutor - Edit Tutor Profile</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/d421103d-112f-4559-b2ce-bb660923d185">
+    <img src="https://github.com/user-attachments/assets/d421103d-112f-4559-b2ce-bb660923d185" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/09f5fe53-8fc5-4a2a-9287-aba10bf54d89">
+    <img src="https://github.com/user-attachments/assets/09f5fe53-8fc5-4a2a-9287-aba10bf54d89" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/f1702979-6487-4459-b0cf-5618c58fa7ff">
+    <img src="https://github.com/user-attachments/assets/f1702979-6487-4459-b0cf-5618c58fa7ff" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/0fb90b75-d19a-4b2c-8893-09ac739a9241">
+    <img src="https://github.com/user-attachments/assets/0fb90b75-d19a-4b2c-8893-09ac739a9241" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/60c3958a-49d1-41eb-b51a-4e53272ce387">
+    <img src="https://github.com/user-attachments/assets/60c3958a-49d1-41eb-b51a-4e53272ce387" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Tutor - Tutor Lessons</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/be96ef7f-0ae4-4811-9a69-d01672178c99">
+    <img src="https://github.com/user-attachments/assets/be96ef7f-0ae4-4811-9a69-d01672178c99" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/4b9f77d7-abda-4dd8-8a22-47f9eb65b0fd">
+    <img src="https://github.com/user-attachments/assets/4b9f77d7-abda-4dd8-8a22-47f9eb65b0fd" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/1a3bd618-8fc1-42c6-afc8-8263cee4db7c">
+    <img src="https://github.com/user-attachments/assets/1a3bd618-8fc1-42c6-afc8-8263cee4db7c" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/dad3f22e-f9bd-4739-85a9-31efbfcd3d9e">
+    <img src="https://github.com/user-attachments/assets/dad3f22e-f9bd-4739-85a9-31efbfcd3d9e" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/f144aa41-94cc-46f7-b1ee-867c30e67a85">
+    <img src="https://github.com/user-attachments/assets/f144aa41-94cc-46f7-b1ee-867c30e67a85" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Tutor - Edit Lesson</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/9d012a45-f451-4c09-b6d9-0e0c854a9f47">
+    <img src="https://github.com/user-attachments/assets/9d012a45-f451-4c09-b6d9-0e0c854a9f47" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/78997c80-d00a-45ba-b22e-791b32759004">
+    <img src="https://github.com/user-attachments/assets/78997c80-d00a-45ba-b22e-791b32759004" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/9f16ac7c-2504-406f-ad9e-e3b5bee24569">
+    <img src="https://github.com/user-attachments/assets/9f16ac7c-2504-406f-ad9e-e3b5bee24569" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/9b2e3fe4-8aa6-4d84-bc64-c5d9cda4d00b">
+    <img src="https://github.com/user-attachments/assets/9b2e3fe4-8aa6-4d84-bc64-c5d9cda4d00b" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/d3dcee43-270a-4776-946f-746afe7ad04b">
+    <img src="https://github.com/user-attachments/assets/d3dcee43-270a-4776-946f-746afe7ad04b" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Tutor - Delete Lesson</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/d4f6d2c5-466a-49bf-b83c-7eb8544f119c">
+    <img src="https://github.com/user-attachments/assets/d4f6d2c5-466a-49bf-b83c-7eb8544f119c" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/7a3ac0cd-8f2d-4411-b70f-6e7bc710a783">
+    <img src="https://github.com/user-attachments/assets/7a3ac0cd-8f2d-4411-b70f-6e7bc710a783" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/490afc36-948a-49ae-bfb6-2e0097fa7608">
+    <img src="https://github.com/user-attachments/assets/490afc36-948a-49ae-bfb6-2e0097fa7608" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/7e5712c9-77a9-4b7e-bab7-c349f1fd7368">
+    <img src="https://github.com/user-attachments/assets/7e5712c9-77a9-4b7e-bab7-c349f1fd7368" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/08d97cc5-3eaa-4982-b43c-fc3b80270214">
+    <img src="https://github.com/user-attachments/assets/08d97cc5-3eaa-4982-b43c-fc3b80270214" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+</details>
+
 
 ## Deployment
 
