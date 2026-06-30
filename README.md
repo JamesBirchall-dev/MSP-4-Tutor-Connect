@@ -414,6 +414,21 @@ Tutor Connect is a full-stack tutoring marketplace that allows students to disco
 
 #### User Registration
 
+Users can create a Tutor Connect account using a simple registration form with field validation. Once registered, users can log in to access their personalised dashboard and booking features.
+
+<details>
+<summary><strong>View Feature Screenshots</strong></summary>
+
+#### Desktop
+
+<img width="1913" height="941" alt="User Registration - Desktop" src="https://github.com/user-attachments/assets/57888823-c950-47e8-9b82-f0535c77dd3a" />
+
+#### Mobile
+
+<img width="569" height="945" alt="User Registration - Mobile" src="https://github.com/user-attachments/assets/fe9a76c5-6b2e-451f-b35d-bea24511820a" />
+
+</details>
+
 Users can create an account using the custom registration form. Registration validates user input and securely stores account credentials using Django's built-in authentication system.
 
 Once registration is complete the user is automatically logged in and redirected to their dashboard.
@@ -428,6 +443,21 @@ Features include:
 ---
 
 #### Dashboard
+
+Authenticated users are presented with a personalised dashboard that provides quick access to relevant actions based on their account, including tutor profile management, lesson management and bookings.
+
+<details>
+<summary><strong>View Feature Screenshots</strong></summary>
+
+#### Desktop
+
+<img width="1902" height="946" alt="Dashboard - Desktop" src="https://github.com/user-attachments/assets/2c19b03a-a921-4133-9ea9-42a97d8c5341" />
+
+#### Mobile
+
+<img width="600" height="943" alt="Dashboard - Mobile" src="https://github.com/user-attachments/assets/b0b41e0e-84e4-4207-bd3f-c9c41c9574b2" />
+
+</details>
 
 Each registered user has access to a personalised dashboard.
 
@@ -450,6 +480,21 @@ The dashboard dynamically changes depending on whether the logged-in user has cr
 
 ### Tutor Profiles
 
+Tutors can create a detailed public profile including biography, teaching experience, location, contact information and profile image to help students choose the right tutor.
+
+<details>
+<summary><strong>View Feature Screenshots</strong></summary>
+
+#### Desktop
+
+<img width="1891" height="941" alt="Tutor Profile - Desktop" src="https://github.com/user-attachments/assets/2b0665f1-27bf-4e84-ba8b-7ad1737b67ba" />
+
+#### Mobile
+
+<img width="576" height="943" alt="Tutor Profile - Mobile" src="https://github.com/user-attachments/assets/3f47481e-e60d-4cc4-a1ec-4d4340234202" />
+
+</details>
+
 Users wishing to offer lessons can create a Tutor Profile.
 
 Each tutor profile contains:
@@ -468,6 +513,21 @@ Tutor profiles are publicly viewable and include a summary of the tutor together
 ---
 
 ### Lessons (Marketplace)
+
+Each tutor profile displays scheduled lesson slots with subject, skill level, date, duration and pricing, allowing students to book directly from available lessons.
+
+<details>
+<summary><strong>View Feature Screenshots</strong></summary>
+
+#### Desktop
+
+<img width="1906" height="940" alt="Tutor Lessons - Desktop" src="https://github.com/user-attachments/assets/477cd0d8-b193-4fcf-9f2d-2fb54a0b9840" />
+
+#### Mobile
+
+<img width="510" height="967" alt="Tutor Lessons - Mobile" src="https://github.com/user-attachments/assets/83025cca-6bd5-4f07-a35b-173a06bef392" />
+
+</details>
 
 The lesson system was redesigned during development to more closely reflect a real-world tutoring platform.
 
@@ -492,6 +552,21 @@ Lessons are automatically linked to the tutor who created them.
 
 ### Subject Categories
 
+The homepage provides quick access to lesson categories, allowing visitors to browse lessons by subject area before creating an account.
+
+<details>
+<summary><strong>View Feature Screenshots</strong></summary>
+
+#### Desktop
+
+<img width="1902" height="941" alt="Subject Categories - Desktop" src="https://github.com/user-attachments/assets/d82a6ac1-837a-420a-87f3-4f78f0dfd73a" />
+
+#### Mobile
+
+<img width="617" height="939" alt="Subject Categories - Mobile" src="https://github.com/user-attachments/assets/532e4f12-cf25-43c1-a827-cabccd42547d" />
+
+</details>
+
 Subjects are selected from predefined choices rather than free-text entry, providing consistent filtering and preventing duplicate spellings.
 
 Categories currently include:
@@ -507,7 +582,22 @@ Each category contains multiple predefined subjects allowing accurate searching 
 
 ---
 
-### Browse All Lessons
+### Browse Lessons
+
+Students can browse all upcoming lessons using search, category, subject and skill level filters to quickly find suitable lessons.
+
+<details>
+<summary><strong>View Feature Screenshots</strong></summary>
+
+#### Desktop
+
+<img width="1898" height="939" alt="Browse Lessons - Desktop" src="https://github.com/user-attachments/assets/04c9cc7a-bb9d-4e6a-95ab-17f658dd2ced" />
+
+#### Mobile
+
+<img width="602" height="923" alt="Browse Lessons - Mobile" src="https://github.com/user-attachments/assets/1f0ac5aa-f3c5-42da-bb37-f951eb697a14" />
+
+</details>
 
 Students can browse lessons from every tutor through the marketplace.
 
@@ -533,6 +623,21 @@ Lessons with pending or confirmed bookings are also excluded to prevent double-b
 
 ### Tutor Lesson Management
 
+Tutors can create, edit and manage lesson slots from their dashboard. Booked lessons are protected from modification to preserve booking integrity.
+
+<details>
+<summary><strong>View Feature Screenshots</strong></summary>
+
+#### Desktop
+
+<img width="1901" height="943" alt="Tutor Lesson Management - Desktop" src="https://github.com/user-attachments/assets/9b77031e-eb42-4bb6-9ad4-4360548f3f73" />
+
+#### Mobile
+
+<img width="456" height="940" alt="Tutor Lesson Management - Mobile" src="https://github.com/user-attachments/assets/8eb9c3cb-0f73-4773-8318-e30453c05953" />
+
+</details>
+
 Tutors can:
 
 - Create lessons
@@ -547,6 +652,25 @@ Success messages are displayed following lesson creation, editing and deletion.
 ---
 
 ### Bookings
+
+Students can create bookings, review lesson details, update pending bookings and view confirmed bookings with tutor contact information once payment has been completed.
+
+<details>
+<summary><strong>View Feature Screenshots</strong></summary>
+
+#### Booking List
+
+<img width="1919" height="941" alt="Booking List" src="https://github.com/user-attachments/assets/903bd91b-7f23-4a52-be9c-b4aca1d20204" />
+
+#### Booking Details
+
+<img width="556" height="930" alt="Booking Details" src="https://github.com/user-attachments/assets/10fb4800-c44d-4c1a-ba6c-1a3de39b8b23" />
+
+#### Mobile
+
+<img width="441" height="912" alt="Bookings - Mobile" src="https://github.com/user-attachments/assets/89eac5f1-72fd-474b-b58d-5d7cacbb11a1" />
+
+</details>
 
 Students can create bookings for available lessons.
 
@@ -575,7 +699,26 @@ Access controls ensure users can only manage their own bookings.
 
 ---
 
-### Checkout
+### Secure Checkout & Payments
+
+Tutor Connect integrates Stripe Checkout to securely process lesson payments. Before payment, users can review their booking details and are redirected to confirmation or cancellation pages depending on the payment outcome.
+
+<details>
+<summary><strong>View Feature Screenshots</strong></summary>
+
+#### Booking Review
+
+<img width="1900" height="939" alt="Booking Review" src="https://github.com/user-attachments/assets/2e4ca004-034a-4fc3-81ed-238a9a422177" />
+
+#### Stripe Checkout
+
+<img width="1917" height="941" alt="Stripe Checkout" src="https://github.com/user-attachments/assets/59f2d604-cf9e-49b0-bad4-702992cb7fb6" />
+
+#### Payment Confirmation
+
+<img width="1913" height="945" alt="Payment Confirmation" src="https://github.com/user-attachments/assets/6b12473e-c1a7-40ef-8728-c003a8dce24f" />
+
+</details>
 
 Tutor Connect integrates with Stripe Checkout to provide secure payment processing.
 
@@ -4422,6 +4565,21 @@ Evidence to be added.
 </a>
 </details>
 </details>
+
+### CSS Validation:
+
+<details>
+<summary><strong>CSS Validation - style.css</strong></summary>
+
+<img
+    width="1065"
+    height="797"
+    alt="W3C CSS Validation Results"
+    src="https://github.com/user-attachments/assets/48e68c12-8bec-4a47-bdcc-6e7b6f904fab"
+/>
+
+</details>
+
 
 
 ## Deployment
