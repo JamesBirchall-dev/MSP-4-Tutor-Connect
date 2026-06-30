@@ -2,36 +2,84 @@
 
 ![logo transparent](https://github.com/JamesBirchall-dev/imagehost/blob/main/readme-logo-transparent.png?raw=true)
 
-## Table of Contents
+# Table of Contents
 
-- [MSP-4-Tutor-Connect](#msp-4-tutor-connect)
 - [Project Overview](#project-overview)
 - [User Journey](#user-journey)
 - [Live Site](#live-site)
 - [Repository](#repository)
+
 - [UX](#ux)
-  - [User Stories And Acceptance Criteria](#user-stories-and-acceptance-criteria)
+  - [User Stories and Acceptance Criteria](#user-stories-and-acceptance-criteria)
+  - [Visual Design](#visual-design)
+    - [Overall Concept](#overall-concept)
+    - [Logo and Favicon](#logo-and-favicon)
+    - [Colors and Typography](#colors-and-typography)
   - [Wireframes](#wireframes)
+
 - [Features](#features)
-  - [Existing Features](#existing-features)
-  - [Future Features](#future-features)
+  - [Accounts](#accounts)
+    - [User Registration](#user-registration)
+    - [Dashboard](#dashboard)
+  - [Tutor Profiles](#tutor-profiles)
+  - [Lessons (Marketplace)](#lessons-marketplace)
+  - [Subject Categories](#subject-categories)
+  - [Browse Lessons](#browse-lessons)
+  - [Tutor Lesson Management](#tutor-lesson-management)
+  - [Bookings](#bookings)
+  - [Secure Checkout & Payments](#secure-checkout--payments)
+  - [Security and Checks](#security-and-checks)
+  - [User Experience](#user-experience)
+  - [Responsive Design](#responsive-design)
+
 - [Data Model](#data-model)
-  - [Data Tables](#data-tables)
-  - [Relationships](#relationships)
-  - [Entity Relationship Diagram](#entity-relationship-diagram)
+  - [User](#user)
+  - [TutorProfile](#tutorprofile)
+  - [LessonType](#lessontype)
+  - [Booking](#booking)
+  - [Payment](#payment)
+- [Data Tables](#data-tables)
+  - [User](#user-1)
+  - [TutorProfile](#tutorprofile-1)
+  - [LessonType](#lessontype-1)
+  - [Booking](#booking-1)
+  - [Payment](#payment-1)
+- [Relationships](#relationships)
+- [Entity Relationship Diagram](#entity-relationship-diagram)
+
 - [Project Management](#project-management)
+
 - [Technologies Used](#technologies-used)
+  - [Dependencies](#dependencies)
+
 - [Testing](#testing)
   - [Manual Testing](#manual-testing)
+    - [Visitor Testing](#visitor-testing)
+    - [Account Testing](#account-testing)
+    - [Tutor Profile Testing](#tutor-profile-testing)
+    - [Dashboard Testing](#dashboard-testing)
+    - [Lesson Testing](#lesson-testing)
+    - [Booking Test](#booking-test)
+    - [Checkout Test](#checkout-test)
+    - [Admin Testing](#admin-testing)
   - [Validator Testing](#validator-testing)
-  - [Bugs](#bugs)
+  - [Lighthouse Testing](#lighthouse-testing)
+  - [Automated Testing](#automated-testing)
+  - [Known Bugs](#known-bugs)
+
 - [Deployment](#deployment)
-- [Admin](#admin)
+  - [Heroku Deployment](#heroku-deployment)
+  - [Local Installation](#local-installation)
+  - [Stripe Configuration](#stripe-configuration)
+  - [Build Process](#build-process)
+
 - [Security](#security)
+
 - [Credits](#credits)
-  - [Code](#code)
   - [Content](#content)
   - [Media](#media)
+  - [Documentation](#documentation)
+
 - [Acknowledgements](#acknowledgements)
 
 ## Project Overview
@@ -52,7 +100,11 @@ The payment process is handled through Stripe. Before payment, users are shown a
 
 ## Live Site
 
+https://tutor-connect-app-d29eb88ae11b.herokuapp.com/
+
 ## Repository
+
+https://github.com/JamesBirchall-dev/MSP-4-Tutor-Connect
 
 ## UX
 
@@ -64,17 +116,17 @@ User Stories, Acceptance Criteria and Testing Outcomes
 1\. Understand Site Purpose
 ---------------------------
 
-### User Story
+#### User Story
 
 As a first-time visitor, I want to understand the purpose of the website immediately so that I can decide whether it helps me find a tutor.
 
-### Acceptance Criteria
+##### Acceptance Criteria
 
 - The homepage includes a short description of the service.
 - The homepage includes a clear call-to-action to browse tutors and lessons.
 - The main navigation is visible and accessible.
 
-### Testing Outcome ✅ PASS
+##### Testing Outcome ✅ PASS
 
 Manual testing confirmed that the homepage clearly communicates the purpose of Tutor Connect. Visitors can immediately browse tutors or lessons using the primary navigation and call-to-action buttons without creating an account.
 
@@ -83,18 +135,18 @@ Manual testing confirmed that the homepage clearly communicates the purpose of T
 2\. Browse Tutors Without an Account
 ------------------------------------
 
-### User Story
+#### User Story
 
 As a visitor, I want to browse available tutors without creating an account so that I can compare lesson options before registering.
 
-### Acceptance Criteria
+##### Acceptance Criteria
 
 - Visitors can access the tutor listing page.
 - Visitors can view individual tutor profiles.
 - Tutor profiles display summary information and available lessons.
 - Attempting to book a lesson redirects unauthenticated users to the login page.
 
-### Testing Outcome ✅ PASS
+##### Testing Outcome ✅ PASS
 
 Testing confirmed that anonymous users can browse tutors, view tutor profiles and see available lessons. Selecting **Book Lesson** correctly redirects unauthenticated users to the login page before a booking can be created.
 
@@ -103,18 +155,18 @@ Testing confirmed that anonymous users can browse tutors, view tutor profiles an
 3\. View Clear Tutor Information
 --------------------------------
 
-### User Story
+#### User Story
 
 As a visitor, I want tutor information to be clearly presented so that I can quickly understand each tutor's experience, lesson availability and pricing.
 
-### Acceptance Criteria
+##### Acceptance Criteria
 
 - Tutor profiles display biography, experience and location.
 - Available lessons are displayed on each tutor profile.
 - Lesson information includes title, subject, skill level, duration, date, time and price.
 - Lessons that are unavailable or already booked are not displayed as bookable.
 
-### Testing Outcome ✅ PASS
+##### Testing Outcome ✅ PASS
 
 Manual testing confirmed that tutor profiles clearly present tutor information alongside their next available lessons. Only future, available lessons are displayed, ensuring students cannot book unavailable lesson slots.
 
@@ -123,11 +175,11 @@ Manual testing confirmed that tutor profiles clearly present tutor information a
 4\. Register for an Account
 ---------------------------
 
-### User Story
+#### User Story
 
 As a new user, I want to register for an account easily so that I can book lessons and manage my bookings.
 
-### Acceptance Criteria
+##### Acceptance Criteria
 
 - Registration is available from the navigation menu.
 - The registration form validates user input.
@@ -135,7 +187,7 @@ As a new user, I want to register for an account easily so that I can book lesso
 - Successful registration redirects users appropriately.
 - Logged-in users are presented with their dashboard instead of registration links.
 
-### Testing Outcome ✅ PASS
+##### Testing Outcome ✅ PASS
 
 Registration was tested using both valid and invalid inputs. Required validation was enforced and successful registration redirected users into the authenticated area of the application.
 
@@ -144,11 +196,11 @@ Registration was tested using both valid and invalid inputs. Required validation
 5\. Book a Lesson
 -----------------
 
-### User Story
+#### User Story
 
 As a logged-in student, I want to reserve an available lesson quickly so that I can secure my place with a tutor.
 
-### Acceptance Criteria
+##### Acceptance Criteria
 
 - Only authenticated users can access the booking form.
 - The selected lesson details are displayed.
@@ -156,7 +208,7 @@ As a logged-in student, I want to reserve an available lesson quickly so that I 
 - Required validation is enforced.
 - A successful booking creates a pending booking and displays a confirmation message.
 
-### Testing Outcome ✅ PASS
+##### Testing Outcome ✅ PASS
 
 Authenticated users successfully created bookings from available lesson listings. The booking form displayed the selected lesson details, accepted optional notes and prevented invalid submissions. Successful bookings were stored with a pending status and confirmation feedback was displayed.
 
@@ -165,11 +217,11 @@ Authenticated users successfully created bookings from available lesson listings
 6\. Manage My Bookings
 ----------------------
 
-### User Story
+#### User Story
 
 As a logged-in student, I want to manage my bookings so that I remain in control of my upcoming lessons.
 
-### Acceptance Criteria
+##### Acceptance Criteria
 
 - Users can view only their own bookings.
 - Users can update booking notes before payment.
@@ -178,7 +230,7 @@ As a logged-in student, I want to manage my bookings so that I remain in control
 - Changes are immediately reflected within the booking list.
 - Users cannot access or modify another user's bookings.
 
-### Testing Outcome ✅ PASS
+##### Testing Outcome ✅ PASS
 
 Testing confirmed that students can view, update and cancel only their own bookings. Booking updates are limited to editable booking information, while ownership checks prevent users from accessing bookings belonging to other accounts.
 
@@ -187,18 +239,18 @@ Testing confirmed that students can view, update and cancel only their own booki
 7\. Review Booking Before Payment
 ---------------------------------
 
-### User Story
+#### User Story
 
 As a student, I want to review my booking before completing payment so that I can confirm the lesson details are correct.
 
-### Acceptance Criteria
+##### Acceptance Criteria
 
 - The checkout review page displays the tutor, lesson, date, time, duration and total price.
 - Users can return to their booking list before payment.
 - Payment is initiated securely using Stripe Checkout.
 - Users are redirected appropriately after successful or cancelled payments.
 
-### Testing Outcome ✅ PASS
+##### Testing Outcome ✅ PASS
 
 Manual testing confirmed that the checkout review page accurately displayed all booking information before payment. Stripe Checkout launched successfully and correctly returned users to either the payment success or cancellation flow.
 
@@ -207,18 +259,18 @@ Manual testing confirmed that the checkout review page accurately displayed all 
 8\. Receive Clear Feedback
 --------------------------
 
-### User Story
+#### User Story
 
 As a user, I want clear feedback throughout the application so that I always understand the outcome of my actions.
 
-### Acceptance Criteria
+##### Acceptance Criteria
 
 - Success messages are displayed after creating, updating or cancelling records.
 - Validation errors are displayed beside the relevant form fields.
 - Payment success and cancellation messages are shown.
 - Feedback messages are presented consistently throughout the application.
 
-### Testing Outcome ✅ PASS
+##### Testing Outcome ✅ PASS
 
 Throughout manual testing the application consistently displayed informative success, validation and error messages. Feedback remained consistent across tutor management, lesson management, bookings and the Stripe checkout process, improving usability and user confidence.
 
@@ -802,29 +854,7 @@ Responsive components include:
 - Forms
 - Checkout pages
 
----
-
-## Testing Coverage
-
-The Tutors feature is covered by automated tests ensuring:
-
-- Tutor lesson list loads successfully
-- Correct template rendering
-- Search returns expected lesson results
-- Subject filtering works correctly
-- Skill level filtering works correctly
-- Filtered querysets correctly update displayed results
-
----
-
-## Example User Flow
-
-1. User visits a tutor profile
-2. User navigates to **“View Lessons”**
-3. User searches for `"Math"`
-4. User filters by `"Beginner"`
-5. User browses paginated results
-6. User selects a lesson to proceed to booking (future feature)
+--
 
 ## Data Model
 
@@ -834,7 +864,7 @@ The project uses Django's built-in User model to manage authentication and user 
 
 A user may act as both a student and a tutor.
 
----
+--
 
 ### TutorProfile
 
@@ -851,7 +881,7 @@ Each tutor profile contains:
 
 A TutorProfile has a one-to-one relationship with User.
 
----
+--
 
 ### LessonType
 
@@ -873,7 +903,7 @@ A tutor may create multiple lesson slots.
 
 Booked lessons are protected from modification.
 
----
+--
 
 ### Booking
 
@@ -891,7 +921,7 @@ A booking belongs to one student and references one lesson slot.
 
 Ownership checks ensure students can only access their own bookings.
 
----
+--
 
 ### Payment
 
@@ -905,7 +935,7 @@ Each payment records:
 
 Separating payment information from bookings keeps payment processing independent of booking management.
 
----
+--
 
 ## Data Tables
 
@@ -1096,28 +1126,50 @@ updated_at
 
 (<https://github.com/users/JamesBirchall-dev/projects/7>)
 
----
+--
 
 ## Technologies Used
 
 ### Dependencies
 
-Django Main web framework
-gunicorn Production server for Heroku
-whitenoise Serves static files on Heroku
-dj-database-url Reads Heroku DATABASE_URL easily
-psycopg2-binary PostgreSQL database adapter
-stripe Stripe payment integration
-python-decouple Environment variable handling
-coverage Test coverage reporting
+| Package                       | Purpose                                                                                                            | Documentation                                                                                                       |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| **Django**                    | Main Python web framework used to build the application, handle routing, templates, ORM, authentication and forms. | [Django Documentation](https://docs.djangoproject.com/?utm_source=chatgpt.com)                                      |
+| **Stripe**                    | Secure online payment processing for lesson bookings and checkout.                                                 | [Stripe Python Documentation](https://stripe.com/docs/api/python?utm_source=chatgpt.com)                            |
+| **Cloudinary**                | Cloud-based storage and delivery of tutor profile images.                                                          | [Cloudinary Documentation](https://cloudinary.com/documentation?utm_source=chatgpt.com)                             |
+| **django-cloudinary-storage** | Integrates Cloudinary with Django's media storage system.                                                          | [django-cloudinary-storage Documentation](https://django-cloudinary-storage.readthedocs.io/?utm_source=chatgpt.com) |
+| **django-filter**             | Provides filtering functionality for lesson and tutor listings.                                                    | [django-filter Documentation](https://django-filter.readthedocs.io/?utm_source=chatgpt.com)                         |
+| **dj-database-url**           | Parses database connection URLs for Heroku deployment.                                                             | [dj-database-url Documentation](https://pypi.org/project/dj-database-url/?utm_source=chatgpt.com)                   |
+| **gunicorn**                  | Production WSGI web server used to run the application on Heroku.                                                  | [Gunicorn Documentation](https://docs.gunicorn.org/?utm_source=chatgpt.com)                                         |
+| **psycopg2-binary**           | PostgreSQL database adapter used by Django.                                                                        | [psycopg Documentation](https://www.psycopg.org/docs/?utm_source=chatgpt.com)                                       |
+| **python-decouple**           | Stores sensitive configuration such as API keys and secret settings in environment variables.                      | [python-decouple Documentation](https://pypi.org/project/python-decouple/?utm_source=chatgpt.com)                   |
+| **WhiteNoise**                | Serves static files efficiently in production.                                                                     | [WhiteNoise Documentation](https://whitenoise.readthedocs.io/?utm_source=chatgpt.com)                               |
+| **Pillow**                    | Image processing library used for uploaded profile images.                                                         | [Pillow Documentation](https://pillow.readthedocs.io/?utm_source=chatgpt.com)                                       |
+| **Coverage**                  | Measures Python test coverage during automated testing.                                                            | [Coverage.py Documentation](https://coverage.readthedocs.io/?utm_source=chatgpt.com)                                |
 
-_List of main technologies, frameworks, and tools._
+Supporting Packages
 
----
+| Package                       | Purpose                                                                                                            | Documentation                                                                                                       |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| **Django**                    | Main Python web framework used to build the application, handle routing, templates, ORM, authentication and forms. | [Django Documentation](https://docs.djangoproject.com/?utm_source=chatgpt.com)                                      |
+| **Stripe**                    | Secure online payment processing for lesson bookings and checkout.                                                 | [Stripe Python Documentation](https://stripe.com/docs/api/python?utm_source=chatgpt.com)                            |
+| **Cloudinary**                | Cloud-based storage and delivery of tutor profile images.                                                          | [Cloudinary Documentation](https://cloudinary.com/documentation?utm_source=chatgpt.com)                             |
+| **django-cloudinary-storage** | Integrates Cloudinary with Django's media storage system.                                                          | [django-cloudinary-storage Documentation](https://django-cloudinary-storage.readthedocs.io/?utm_source=chatgpt.com) |
+| **django-filter**             | Provides filtering functionality for lesson and tutor listings.                                                    | [django-filter Documentation](https://django-filter.readthedocs.io/?utm_source=chatgpt.com)                         |
+| **dj-database-url**           | Parses database connection URLs for Heroku deployment.                                                             | [dj-database-url Documentation](https://pypi.org/project/dj-database-url/?utm_source=chatgpt.com)                   |
+| **gunicorn**                  | Production WSGI web server used to run the application on Heroku.                                                  | [Gunicorn Documentation](https://docs.gunicorn.org/?utm_source=chatgpt.com)                                         |
+| **psycopg2-binary**           | PostgreSQL database adapter used by Django.                                                                        | [psycopg Documentation](https://www.psycopg.org/docs/?utm_source=chatgpt.com)                                       |
+| **python-decouple**           | Stores sensitive configuration such as API keys and secret settings in environment variables.                      | [python-decouple Documentation](https://pypi.org/project/python-decouple/?utm_source=chatgpt.com)                   |
+| **WhiteNoise**                | Serves static files efficiently in production.                                                                     | [WhiteNoise Documentation](https://whitenoise.readthedocs.io/?utm_source=chatgpt.com)                               |
+| **Pillow**                    | Image processing library used for uploaded profile images.                                                         | [Pillow Documentation](https://pillow.readthedocs.io/?utm_source=chatgpt.com)                                       |
+| **Coverage**                  | Measures Python test coverage during automated testing.                                                            | [Coverage.py Documentation](https://coverage.readthedocs.io/?utm_source=chatgpt.com)                                |
+
+--
 
 ## Testing
 
 ### Manual Testing
+
 Manual Testing
 Deployed site: Tutor Connect
 Testing Objectives
@@ -1126,6 +1178,7 @@ Full manual testing evidence is also recorded in the manual testing spreadsheet.
 > Screenshots are placed inside expandable sections. Click each heading to expand the evidence, then click the image to open it at full size.
 
 #### Visitor Testing
+
 <details>
 <summary>Visitor Testing summary table</summary>
 <a href="https://github.com/user-attachments/assets/e25dafe1-1813-4491-9a8a-686ce89f7bf2">
@@ -1182,6 +1235,7 @@ Full manual testing evidence is also recorded in the manual testing spreadsheet.
 </details>
 
 #### Account Testing
+
 <details>
 <summary>Image (4)</summary>
 <a href="https://github.com/user-attachments/assets/e712e45f-be78-4d5c-b541-71ff7001e8f6">
@@ -1220,6 +1274,7 @@ Full manual testing evidence is also recorded in the manual testing spreadsheet.
 </details>
 
 #### Tutor Profile Testing
+
 <details>
 <summary>Image (5)</summary>
 <a href="https://github.com/user-attachments/assets/7d701a3b-bb4e-4ca4-830c-664592c4223e">
@@ -1264,6 +1319,7 @@ Full manual testing evidence is also recorded in the manual testing spreadsheet.
 </details>
 
 #### Dashboard Testing
+
 <details>
 <summary>Image (7)</summary>
 <a href="https://github.com/user-attachments/assets/0ac1ad29-4541-4502-98fa-c2b506883c76">
@@ -1284,6 +1340,7 @@ Full manual testing evidence is also recorded in the manual testing spreadsheet.
 </details>
 
 #### Lesson Testing
+
 <details>
 <summary>Image (8)</summary>
 <a href="https://github.com/user-attachments/assets/359467ae-ce36-4494-bfcd-cde19eab956a">
@@ -1364,6 +1421,7 @@ Full manual testing evidence is also recorded in the manual testing spreadsheet.
 </details>
 
 #### Booking Test
+
 <details>
 <summary>Booking Testing summary table</summary>
 <a href="https://github.com/user-attachments/assets/cef804c6-e636-4b9b-9f9b-d1fa4cf7056d">
@@ -1403,6 +1461,7 @@ Issue: Obsolete text as booking is fixed slot.
 </details>
 
 #### Checkout Test
+
 <details>
 <summary>Checkout review displays correct booking information</summary>
 <a href="https://github.com/user-attachments/assets/af4a8c2b-2099-46c5-8f10-353950eb9dba">
@@ -1441,6 +1500,7 @@ Issue: Obsolete text as booking is fixed slot.
 </details>
 
 #### Admin Testing
+
 <details>
 <summary>Admin Testing summary table</summary>
 <a href="https://github.com/user-attachments/assets/45758f6a-fc4e-4edd-a07a-f5ab2214f8de">
@@ -1478,7 +1538,8 @@ Issue: Obsolete text as booking is fixed slot.
 </a>
 </details>
 
-Security Testing
+#### Security Testing
+
 <details>
 <summary>Image (12)</summary>
 <a href="https://github.com/user-attachments/assets/829ba659-531e-4084-be31-1c1859750142">
@@ -1502,7 +1563,7 @@ Issue 1:
 </a>
 </details>
 
-Issue:
+##### Issue 1
 Sometimes when logging out from dashboard this error page flags.
 
 Troubleshooting:
@@ -1522,7 +1583,7 @@ Likely caused with copying direct link, multiple sessions.
 </a>
 </details>
 
-Issue 2:
+##### Issue 2
 
 Issue:
 Unable to update image in deployed, returns a 500 error page.
@@ -1534,7 +1595,8 @@ Resolution:
 Cloudinary configured in Django settings and Heroku Config Vars.
 Cloudinary credentials added locally via `.env` and in Heroku Config Vars.
 
-Issue 3:
+##### Issue 3
+
 <details>
 <summary>Subject and category lists not in alphabetical order</summary>
 <a href="https://github.com/user-attachments/assets/189fa2a1-53b8-4a1e-b0ae-0265c544b43f">
@@ -1579,7 +1641,7 @@ Resolution: Updated model choice lists into alphabetical order.
 </a>
 </details>
 
-Issue 4:
+##### Issue 4
 Text displayed supports time and date editing which is now obsolete.
 
 Resolution:
@@ -1608,8 +1670,32 @@ Remove 2nd CTA from template.
 </a>
 </details>
 
-
 ### Automated Testing
+
+Automated testing was used throughout the project to check that the main Django application logic worked as expected after each feature update or refactor.
+
+The test suite was run locally using:
+
+python manage.py test
+
+Before deployment, the project was also checked with:
+
+python manage.py check
+
+Automated tests were written for the main application areas, including:
+
+page views returning the expected response status;
+correct templates being rendered;
+authentication and access restrictions;
+tutor profile functionality;
+lesson listing, filtering and search behaviour;
+booking creation, ownership and management;
+checkout review, success and cancellation views;
+model behaviour and expected data relationships.
+
+Testing was especially important during the lesson-slot refactor, where the booking flow changed from user-selected booking dates and times to tutor-created scheduled lesson slots. After each significant change, the test suite was re-run to confirm that existing functionality still worked correctly.
+
+Where automated tests identified issues, fixes were made and the tests were re-run until passing. This helped confirm that the final deployed application matched the expected behaviour and reduced the risk of regressions during the final validation stage.
 
 #### Feature - Accounts
 
@@ -4647,6 +4733,7 @@ Evidence to be added.
 />
 
 </details>
+
 
 ## Build Phases
 
