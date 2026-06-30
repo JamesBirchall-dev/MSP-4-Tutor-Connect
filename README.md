@@ -4580,11 +4580,174 @@ Evidence to be added.
 
 </details>
 
+## Build Phases
 
+Development followed an iterative Agile workflow using GitHub Projects, user stories and feature branches.
+
+### Phase 1 — Project Setup
+
+- Django project configuration
+- User authentication
+- Base template
+- Navigation
+- Initial deployment
+
+Branch:
+
+```
+feature-project-setup
+```
+
+---
+
+### Phase 2 — Tutor Profiles
+
+- Tutor profile model
+- Tutor CRUD functionality
+- Profile images
+- Tutor listing
+- Tutor detail pages
+
+Branch:
+
+```
+feature-tutor-profiles
+```
+
+---
+
+### Phase 3 — Lesson Management
+
+- Lesson model
+- Lesson CRUD
+- Public lesson marketplace
+- Search
+- Filtering
+- Pagination
+
+Branch:
+
+```
+feature-lessons
+```
+
+---
+
+### Phase 4 — Booking System
+
+- Student bookings
+- Booking ownership
+- Booking management
+- Dashboard integration
+
+Branch:
+
+```
+feature-bookings
+```
+
+---
+
+### Phase 5 — Stripe Checkout
+
+- Checkout review
+- Stripe Checkout Session
+- Payment confirmation
+- Booking status updates
+
+Branch:
+
+```
+feature-stripe-checkout
+```
+
+---
+
+### Phase 6 — Refactoring
+
+This phase focused on improving application architecture without changing the user-facing functionality.
+
+Completed work included:
+
+- Refactoring booking flow to use tutor-created lesson slots
+- Improved dashboard layouts
+- Updated permission handling
+- Removal of redundant views
+- Model and view simplification
+- Code quality improvements
+- Cloudinary media integration
+- UX improvements
+- Accessibility improvements
+
+Branches:
+
+```
+features/lesson-slot-refactor
+testing-validation
+```
+
+---
+
+### Phase 7 — Testing & Validation
+
+Final project preparation included:
+
+- Automated testing
+- Manual testing
+- HTML validation
+- CSS validation
+- Accessibility testing
+- Lighthouse optimisation
+- Cross-browser testing
+- Responsive testing
+- Documentation
+
+Branch:
+
+```
+testing-validation
+```
 
 ## Deployment
 
-_Deployment instructions and environment details._
+Tutor Connect is deployed using **Heroku** with **Cloudinary** for media storage and **WhiteNoise** for serving static files.
+
+### Deploying to Heroku
+
+1. Fork or clone this repository.
+2. Create a new Heroku application.
+3. In the **Settings** tab, add the required Config Vars:
+
+| Variable | Description |
+|----------|-------------|
+| `SECRET_KEY` | Django secret key |
+| `DATABASE_URL` | PostgreSQL database URL |
+| `DEBUG` | Set to `False` in production |
+| `CLOUDINARY_URL` | Cloudinary API URL |
+| `STRIPE_PUBLIC_KEY` | Stripe publishable key |
+| `STRIPE_SECRET_KEY` | Stripe secret key |
+| `STRIPE_WEBHOOK_SECRET` | Stripe webhook signing secret |
+
+4. Connect the Heroku app to the GitHub repository.
+5. Enable automatic deploys (optional) or deploy manually from the desired branch.
+6. Ensure the project includes:
+
+- `Procfile`
+- `requirements.txt`
+- `runtime.txt`
+
+7. Deploy the application.
+
+After deployment run:
+
+```bash
+python manage.py migrate
+```
+
+Static files are automatically collected during deployment via WhiteNoise.
+
+Media uploads are stored externally using Cloudinary.
+
 
 ---
 
