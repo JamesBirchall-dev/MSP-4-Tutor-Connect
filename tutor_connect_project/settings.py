@@ -6,7 +6,6 @@ For production, you should use environment variables
 """
 
 from pathlib import Path
-
 import dj_database_url
 from decouple import config
 
@@ -16,6 +15,15 @@ from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# ---------------------------------------------------------------------
+# cloudinary configuration
+# ---------------------------------------------------------------------
+
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": config("CLOUDINARY_CLOUD_NAME", default=""),
+    "API_KEY": config("CLOUDINARY_API_KEY", default=""),
+    "API_SECRET": config("CLOUDINARY_API_SECRET", default=""),
+}
 
 # ---------------------------------------------------------------------
 # Security
@@ -66,6 +74,8 @@ PROJECT_APPS = [
     "bookings",
     "checkout",
     "django_filters",
+    "cloudinary_storage",
+    "cloudinary",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
@@ -190,8 +200,16 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 # Destination for collected static files in production.
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# Enables WhiteNoise to serve compressed, cache-friendly static assets.
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# Storage backends for static and media files.
+
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # ---------------------------------------------------------------------
 # Media files

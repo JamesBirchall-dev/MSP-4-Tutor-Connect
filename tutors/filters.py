@@ -26,12 +26,18 @@ class LessonFilter(django_filters.FilterSet):
 
     category = django_filters.ChoiceFilter(
         field_name="category",
-        choices=LessonType.CATEGORY_CHOICES,
+        choices=sorted(
+            LessonType.CATEGORY_CHOICES,
+            key=lambda choice: choice[1]
+        ),
         label="Category",
     )
 
     subject = django_filters.ChoiceFilter(
-        choices=LessonType.SUBJECT_CHOICES,
+        choices=sorted(
+            LessonType.SUBJECT_CHOICES,
+            key=lambda choice: choice[1]
+        ),
         label="Subject",
     )
 

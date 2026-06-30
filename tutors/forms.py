@@ -54,25 +54,21 @@ class TutorProfileForm(forms.ModelForm):
             ),
         }
 
-        widgets = {
-            """
-            Widgets for form fields for placeholder
-            text and input styling.
-            """
-
-            "display_name": forms.TextInput(attrs={
-                "placeholder": "Jane Smith",
-            }),
-            "location": forms.TextInput(attrs={
+    # Widgets for form fields for placeholder text and input styling.
+    widgets = {
+        "display_name": forms.TextInput(attrs={
+            "placeholder": "Jane Smith",
+        }),
+        "location": forms.TextInput(attrs={
                 "placeholder": "London, UK or Online",
             }),
-            "bio": forms.Textarea(attrs={
+        "bio": forms.Textarea(attrs={
                 "rows": 5,
                 "placeholder": (
                     "Introduce yourself and describe your teaching style."
                 ),
             }),
-            "experience": forms.Textarea(attrs={
+        "experience": forms.Textarea(attrs={
                 "rows": 5,
                 "placeholder": (
                     "Grade 8 Guitar, BA Music, 8 years teaching experience..."

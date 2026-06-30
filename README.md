@@ -2,36 +2,84 @@
 
 ![logo transparent](https://github.com/JamesBirchall-dev/imagehost/blob/main/readme-logo-transparent.png?raw=true)
 
-## Table of Contents
+# Table of Contents
 
-- [MSP-4-Tutor-Connect](#msp-4-tutor-connect)
 - [Project Overview](#project-overview)
 - [User Journey](#user-journey)
 - [Live Site](#live-site)
 - [Repository](#repository)
+
 - [UX](#ux)
-  - [User Stories And Acceptance Criteria](#user-stories-and-acceptance-criteria)
+  - [User Stories and Acceptance Criteria](#user-stories-and-acceptance-criteria)
+  - [Visual Design](#visual-design)
+    - [Overall Concept](#overall-concept)
+    - [Logo and Favicon](#logo-and-favicon)
+    - [Colors and Typography](#colors-and-typography)
   - [Wireframes](#wireframes)
+
 - [Features](#features)
-  - [Existing Features](#existing-features)
-  - [Future Features](#future-features)
+  - [Accounts](#accounts)
+    - [User Registration](#user-registration)
+    - [Dashboard](#dashboard)
+  - [Tutor Profiles](#tutor-profiles)
+  - [Lessons (Marketplace)](#lessons-marketplace)
+  - [Subject Categories](#subject-categories)
+  - [Browse Lessons](#browse-lessons)
+  - [Tutor Lesson Management](#tutor-lesson-management)
+  - [Bookings](#bookings)
+  - [Secure Checkout & Payments](#secure-checkout--payments)
+  - [Security and Checks](#security-and-checks)
+  - [User Experience](#user-experience)
+  - [Responsive Design](#responsive-design)
+
 - [Data Model](#data-model)
-  - [Data Tables](#data-tables)
-  - [Relationships](#relationships)
-  - [Entity Relationship Diagram](#entity-relationship-diagram)
+  - [User](#user)
+  - [TutorProfile](#tutorprofile)
+  - [LessonType](#lessontype)
+  - [Booking](#booking)
+  - [Payment](#payment)
+- [Data Tables](#data-tables)
+  - [User](#user-1)
+  - [TutorProfile](#tutorprofile-1)
+  - [LessonType](#lessontype-1)
+  - [Booking](#booking-1)
+  - [Payment](#payment-1)
+- [Relationships](#relationships)
+- [Entity Relationship Diagram](#entity-relationship-diagram)
+
 - [Project Management](#project-management)
+
 - [Technologies Used](#technologies-used)
+  - [Dependencies](#dependencies)
+
 - [Testing](#testing)
   - [Manual Testing](#manual-testing)
+    - [Visitor Testing](#visitor-testing)
+    - [Account Testing](#account-testing)
+    - [Tutor Profile Testing](#tutor-profile-testing)
+    - [Dashboard Testing](#dashboard-testing)
+    - [Lesson Testing](#lesson-testing)
+    - [Booking Test](#booking-test)
+    - [Checkout Test](#checkout-test)
+    - [Admin Testing](#admin-testing)
   - [Validator Testing](#validator-testing)
-  - [Bugs](#bugs)
+  - [Lighthouse Testing](#lighthouse-testing)
+  - [Automated Testing](#automated-testing)
+  - [Known Bugs](#known-bugs)
+
 - [Deployment](#deployment)
-- [Admin](#admin)
+  - [Heroku Deployment](#heroku-deployment)
+  - [Local Installation](#local-installation)
+  - [Stripe Configuration](#stripe-configuration)
+  - [Build Process](#build-process)
+
 - [Security](#security)
+
 - [Credits](#credits)
-  - [Code](#code)
   - [Content](#content)
   - [Media](#media)
+  - [Documentation](#documentation)
+
 - [Acknowledgements](#acknowledgements)
 
 ## Project Overview
@@ -52,130 +100,179 @@ The payment process is handled through Stripe. Before payment, users are shown a
 
 ## Live Site
 
+https://tutor-connect-app-d29eb88ae11b.herokuapp.com/
+
 ## Repository
+
+https://github.com/JamesBirchall-dev/MSP-4-Tutor-Connect
 
 ## UX
 
 ### User Stories And Acceptance Criteria
 
-#### 1. Understand Site Purpose
+User Stories, Acceptance Criteria and Testing Outcomes
+======================================================
 
-**User Story:**  
+1\. Understand Site Purpose
+---------------------------
+
+#### User Story
+
 As a first-time visitor, I want to understand the purpose of the website immediately so that I can decide whether it helps me find a tutor.
 
-**Acceptance Criteria:**
+##### Acceptance Criteria
 
 - The homepage includes a short description of the service.
-- The homepage includes a visible call-to-action to browse tutors.
-- The main navigation is visible on the homepage.
+- The homepage includes a clear call-to-action to browse tutors and lessons.
+- The main navigation is visible and accessible.
 
----
+##### Testing Outcome ✅ PASS
 
-#### 2. Browse Tutors Without An Account
+Manual testing confirmed that the homepage clearly communicates the purpose of Tutor Connect. Visitors can immediately browse tutors or lessons using the primary navigation and call-to-action buttons without creating an account.
 
-**User Story:**  
+* * * * *
+
+2\. Browse Tutors Without an Account
+------------------------------------
+
+#### User Story
+
 As a visitor, I want to browse available tutors without creating an account so that I can compare lesson options before registering.
 
-**Acceptance Criteria:**
+##### Acceptance Criteria
 
-- Anonymous users can access the tutor listing page.
-- Anonymous users can access individual tutor profile pages.
-- Tutor cards show key information such as tutor name, location, and short bio.
-- Anonymous users are prompted to log in or register before booking a lesson.
+- Visitors can access the tutor listing page.
+- Visitors can view individual tutor profiles.
+- Tutor profiles display summary information and available lessons.
+- Attempting to book a lesson redirects unauthenticated users to the login page.
 
----
+##### Testing Outcome ✅ PASS
 
-#### 3. View Clear Tutor Information
+Testing confirmed that anonymous users can browse tutors, view tutor profiles and see available lessons. Selecting **Book Lesson** correctly redirects unauthenticated users to the login page before a booking can be created.
 
-**User Story:**  
-As a visitor, I want tutor information to be clearly presented so that I can quickly understand each tutor’s experience, lesson types, prices, and availability.
+* * * * *
 
-**Acceptance Criteria:**
+3\. View Clear Tutor Information
+--------------------------------
 
-- Each tutor profile displays the tutor’s name, bio, experience, and location or online availability.
-- Each tutor profile displays available lesson types.
-- Lesson information includes title, description, duration, skill level, and price.
-- Unavailable lessons are not shown as bookable.
+#### User Story
 
----
+As a visitor, I want tutor information to be clearly presented so that I can quickly understand each tutor's experience, lesson availability and pricing.
 
-#### 4. Register For An Account
+##### Acceptance Criteria
 
-**User Story:**  
-As a new user, I want to register for an account easily so that I can book lessons and manage my activity on the site.
+- Tutor profiles display biography, experience and location.
+- Available lessons are displayed on each tutor profile.
+- Lesson information includes title, subject, skill level, duration, date, time and price.
+- Lessons that are unavailable or already booked are not displayed as bookable.
 
-**Acceptance Criteria:**
+##### Testing Outcome ✅ PASS
 
-- The registration page is accessible from the main navigation.
-- The registration form includes clear labels for each field.
-- The form displays validation errors if required information is missing or invalid.
-- A successful registration logs the user in or redirects them to the login page/dashboard.
-- Logged-in users are not encouraged to register again.
+Manual testing confirmed that tutor profiles clearly present tutor information alongside their next available lessons. Only future, available lessons are displayed, ensuring students cannot book unavailable lesson slots.
 
----
+* * * * *
 
-#### 5. Book A Lesson
+4\. Register for an Account
+---------------------------
 
-**User Story:**  
-As a logged-in student, I want to book a lesson through a simple form so that I can choose a suitable date and time without confusion.
+#### User Story
 
-**Acceptance Criteria:**
+As a new user, I want to register for an account easily so that I can book lessons and manage my bookings.
 
-- Only logged-in users can access the booking form.
-- The booking form displays the selected lesson summary.
-- The user can select a booking date and time.
-- The form includes optional notes for the tutor.
-- The form validates required booking information.
-- After a successful booking, the user receives a confirmation message.
+##### Acceptance Criteria
 
----
+- Registration is available from the navigation menu.
+- The registration form validates user input.
+- Validation errors are displayed clearly.
+- Successful registration redirects users appropriately.
+- Logged-in users are presented with their dashboard instead of registration links.
 
-#### 6. Manage My Bookings
+##### Testing Outcome ✅ PASS
 
-**User Story:**  
-As a logged-in student, I want to view, update, or cancel my bookings so that I stay in control of my lesson schedule.
+Registration was tested using both valid and invalid inputs. Required validation was enforced and successful registration redirected users into the authenticated area of the application.
 
-**Acceptance Criteria:**
+* * * * *
 
-- Logged-in users can view a list of their own bookings.
-- Users cannot view or manage bookings belonging to another user.
-- Users can update the date, time, or notes for their own pending bookings.
+5\. Book a Lesson
+-----------------
+
+#### User Story
+
+As a logged-in student, I want to reserve an available lesson quickly so that I can secure my place with a tutor.
+
+##### Acceptance Criteria
+
+- Only authenticated users can access the booking form.
+- The selected lesson details are displayed.
+- Students can provide optional booking notes.
+- Required validation is enforced.
+- A successful booking creates a pending booking and displays a confirmation message.
+
+##### Testing Outcome ✅ PASS
+
+Authenticated users successfully created bookings from available lesson listings. The booking form displayed the selected lesson details, accepted optional notes and prevented invalid submissions. Successful bookings were stored with a pending status and confirmation feedback was displayed.
+
+* * * * *
+
+6\. Manage My Bookings
+----------------------
+
+#### User Story
+
+As a logged-in student, I want to manage my bookings so that I remain in control of my upcoming lessons.
+
+##### Acceptance Criteria
+
+- Users can view only their own bookings.
+- Users can update booking notes before payment.
 - Users can cancel their own bookings.
-- The site asks for confirmation before cancelling a booking.
-- Booking changes are immediately reflected in the user interface.
+- Booking cancellation requires confirmation.
+- Changes are immediately reflected within the booking list.
+- Users cannot access or modify another user's bookings.
 
----
+##### Testing Outcome ✅ PASS
 
-#### 7. Review Booking Before Payment
+Testing confirmed that students can view, update and cancel only their own bookings. Booking updates are limited to editable booking information, while ownership checks prevent users from accessing bookings belonging to other accounts.
 
-**User Story:**  
-As a user making a payment, I want to review my booking details before paying so that I can confirm the tutor, lesson, date, time, and price are correct.
+* * * * *
 
-**Acceptance Criteria:**
+7\. Review Booking Before Payment
+---------------------------------
 
-- The checkout page displays the lesson title, tutor name, date, time, duration, and total price.
-- The user can return to edit the booking before payment.
-- The payment button is clearly labelled.
-- Payment is handled through Stripe.
-- The user is redirected to a success or cancellation page after the payment process.
+#### User Story
 
----
+As a student, I want to review my booking before completing payment so that I can confirm the lesson details are correct.
 
-#### 8. Receive Clear Feedback
+##### Acceptance Criteria
 
-**User Story:**  
-As a user, I want clear success, error, and cancellation messages so that I always understand the result of my actions, including bookings, updates, cancellations, and payments.
+- The checkout review page displays the tutor, lesson, date, time, duration and total price.
+- Users can return to their booking list before payment.
+- Payment is initiated securely using Stripe Checkout.
+- Users are redirected appropriately after successful or cancelled payments.
 
-**Acceptance Criteria:**
+##### Testing Outcome ✅ PASS
 
-- The site displays a success message after creating, editing, or cancelling a booking.
-- The site displays a success message after a successful payment.
-- The site displays a clear cancellation message if payment is cancelled.
-- Form validation errors are displayed near the relevant form fields.
-- Error and success messages use clear, readable language.
-- Feedback messages are visible and styled consistently across the site.
+Manual testing confirmed that the checkout review page accurately displayed all booking information before payment. Stripe Checkout launched successfully and correctly returned users to either the payment success or cancellation flow.
 
----
+* * * * *
+
+8\. Receive Clear Feedback
+--------------------------
+
+#### User Story
+
+As a user, I want clear feedback throughout the application so that I always understand the outcome of my actions.
+
+##### Acceptance Criteria
+
+- Success messages are displayed after creating, updating or cancelling records.
+- Validation errors are displayed beside the relevant form fields.
+- Payment success and cancellation messages are shown.
+- Feedback messages are presented consistently throughout the application.
+
+##### Testing Outcome ✅ PASS
+
+Throughout manual testing the application consistently displayed informative success, validation and error messages. Feedback remained consistent across tutor management, lesson management, bookings and the Stripe checkout process, improving usability and user confidence.
 
 ### Visual Design
 
@@ -369,6 +466,21 @@ Tutor Connect is a full-stack tutoring marketplace that allows students to disco
 
 #### User Registration
 
+Users can create a Tutor Connect account using a simple registration form with field validation. Once registered, users can log in to access their personalised dashboard and booking features.
+
+<details>
+<summary><strong>View Feature Screenshots</strong></summary>
+
+#### Desktop
+
+<img width="1913" height="941" alt="User Registration - Desktop" src="https://github.com/user-attachments/assets/57888823-c950-47e8-9b82-f0535c77dd3a" />
+
+#### Mobile
+
+<img width="569" height="945" alt="User Registration - Mobile" src="https://github.com/user-attachments/assets/fe9a76c5-6b2e-451f-b35d-bea24511820a" />
+
+</details>
+
 Users can create an account using the custom registration form. Registration validates user input and securely stores account credentials using Django's built-in authentication system.
 
 Once registration is complete the user is automatically logged in and redirected to their dashboard.
@@ -383,6 +495,21 @@ Features include:
 ---
 
 #### Dashboard
+
+Authenticated users are presented with a personalised dashboard that provides quick access to relevant actions based on their account, including tutor profile management, lesson management and bookings.
+
+<details>
+<summary><strong>View Feature Screenshots</strong></summary>
+
+#### Desktop
+
+<img width="1902" height="946" alt="Dashboard - Desktop" src="https://github.com/user-attachments/assets/2c19b03a-a921-4133-9ea9-42a97d8c5341" />
+
+#### Mobile
+
+<img width="600" height="943" alt="Dashboard - Mobile" src="https://github.com/user-attachments/assets/b0b41e0e-84e4-4207-bd3f-c9c41c9574b2" />
+
+</details>
 
 Each registered user has access to a personalised dashboard.
 
@@ -405,6 +532,21 @@ The dashboard dynamically changes depending on whether the logged-in user has cr
 
 ### Tutor Profiles
 
+Tutors can create a detailed public profile including biography, teaching experience, location, contact information and profile image to help students choose the right tutor.
+
+<details>
+<summary><strong>View Feature Screenshots</strong></summary>
+
+#### Desktop
+
+<img width="1891" height="941" alt="Tutor Profile - Desktop" src="https://github.com/user-attachments/assets/2b0665f1-27bf-4e84-ba8b-7ad1737b67ba" />
+
+#### Mobile
+
+<img width="576" height="943" alt="Tutor Profile - Mobile" src="https://github.com/user-attachments/assets/3f47481e-e60d-4cc4-a1ec-4d4340234202" />
+
+</details>
+
 Users wishing to offer lessons can create a Tutor Profile.
 
 Each tutor profile contains:
@@ -423,6 +565,21 @@ Tutor profiles are publicly viewable and include a summary of the tutor together
 ---
 
 ### Lessons (Marketplace)
+
+Each tutor profile displays scheduled lesson slots with subject, skill level, date, duration and pricing, allowing students to book directly from available lessons.
+
+<details>
+<summary><strong>View Feature Screenshots</strong></summary>
+
+#### Desktop
+
+<img width="1906" height="940" alt="Tutor Lessons - Desktop" src="https://github.com/user-attachments/assets/477cd0d8-b193-4fcf-9f2d-2fb54a0b9840" />
+
+#### Mobile
+
+<img width="510" height="967" alt="Tutor Lessons - Mobile" src="https://github.com/user-attachments/assets/83025cca-6bd5-4f07-a35b-173a06bef392" />
+
+</details>
 
 The lesson system was redesigned during development to more closely reflect a real-world tutoring platform.
 
@@ -447,6 +604,21 @@ Lessons are automatically linked to the tutor who created them.
 
 ### Subject Categories
 
+The homepage provides quick access to lesson categories, allowing visitors to browse lessons by subject area before creating an account.
+
+<details>
+<summary><strong>View Feature Screenshots</strong></summary>
+
+#### Desktop
+
+<img width="1902" height="941" alt="Subject Categories - Desktop" src="https://github.com/user-attachments/assets/d82a6ac1-837a-420a-87f3-4f78f0dfd73a" />
+
+#### Mobile
+
+<img width="617" height="939" alt="Subject Categories - Mobile" src="https://github.com/user-attachments/assets/532e4f12-cf25-43c1-a827-cabccd42547d" />
+
+</details>
+
 Subjects are selected from predefined choices rather than free-text entry, providing consistent filtering and preventing duplicate spellings.
 
 Categories currently include:
@@ -462,7 +634,22 @@ Each category contains multiple predefined subjects allowing accurate searching 
 
 ---
 
-### Browse All Lessons
+### Browse Lessons
+
+Students can browse all upcoming lessons using search, category, subject and skill level filters to quickly find suitable lessons.
+
+<details>
+<summary><strong>View Feature Screenshots</strong></summary>
+
+#### Desktop
+
+<img width="1898" height="939" alt="Browse Lessons - Desktop" src="https://github.com/user-attachments/assets/04c9cc7a-bb9d-4e6a-95ab-17f658dd2ced" />
+
+#### Mobile
+
+<img width="602" height="923" alt="Browse Lessons - Mobile" src="https://github.com/user-attachments/assets/1f0ac5aa-f3c5-42da-bb37-f951eb697a14" />
+
+</details>
 
 Students can browse lessons from every tutor through the marketplace.
 
@@ -488,6 +675,21 @@ Lessons with pending or confirmed bookings are also excluded to prevent double-b
 
 ### Tutor Lesson Management
 
+Tutors can create, edit and manage lesson slots from their dashboard. Booked lessons are protected from modification to preserve booking integrity.
+
+<details>
+<summary><strong>View Feature Screenshots</strong></summary>
+
+#### Desktop
+
+<img width="1901" height="943" alt="Tutor Lesson Management - Desktop" src="https://github.com/user-attachments/assets/9b77031e-eb42-4bb6-9ad4-4360548f3f73" />
+
+#### Mobile
+
+<img width="456" height="940" alt="Tutor Lesson Management - Mobile" src="https://github.com/user-attachments/assets/8eb9c3cb-0f73-4773-8318-e30453c05953" />
+
+</details>
+
 Tutors can:
 
 - Create lessons
@@ -502,6 +704,25 @@ Success messages are displayed following lesson creation, editing and deletion.
 ---
 
 ### Bookings
+
+Students can create bookings, review lesson details, update pending bookings and view confirmed bookings with tutor contact information once payment has been completed.
+
+<details>
+<summary><strong>View Feature Screenshots</strong></summary>
+
+#### Booking List
+
+<img width="1919" height="941" alt="Booking List" src="https://github.com/user-attachments/assets/903bd91b-7f23-4a52-be9c-b4aca1d20204" />
+
+#### Booking Details
+
+<img width="556" height="930" alt="Booking Details" src="https://github.com/user-attachments/assets/10fb4800-c44d-4c1a-ba6c-1a3de39b8b23" />
+
+#### Mobile
+
+<img width="441" height="912" alt="Bookings - Mobile" src="https://github.com/user-attachments/assets/89eac5f1-72fd-474b-b58d-5d7cacbb11a1" />
+
+</details>
 
 Students can create bookings for available lessons.
 
@@ -530,7 +751,26 @@ Access controls ensure users can only manage their own bookings.
 
 ---
 
-### Checkout
+### Secure Checkout & Payments
+
+Tutor Connect integrates Stripe Checkout to securely process lesson payments. Before payment, users can review their booking details and are redirected to confirmation or cancellation pages depending on the payment outcome.
+
+<details>
+<summary><strong>View Feature Screenshots</strong></summary>
+
+#### Booking Review
+
+<img width="1900" height="939" alt="Booking Review" src="https://github.com/user-attachments/assets/2e4ca004-034a-4fc3-81ed-238a9a422177" />
+
+#### Stripe Checkout
+
+<img width="1917" height="941" alt="Stripe Checkout" src="https://github.com/user-attachments/assets/59f2d604-cf9e-49b0-bad4-702992cb7fb6" />
+
+#### Payment Confirmation
+
+<img width="1913" height="945" alt="Payment Confirmation" src="https://github.com/user-attachments/assets/6b12473e-c1a7-40ef-8728-c003a8dce24f" />
+
+</details>
 
 Tutor Connect integrates with Stripe Checkout to provide secure payment processing.
 
@@ -614,42 +854,88 @@ Responsive components include:
 - Forms
 - Checkout pages
 
----
-
-## Testing Coverage
-
-The Tutors feature is covered by automated tests ensuring:
-
-- Tutor lesson list loads successfully
-- Correct template rendering
-- Search returns expected lesson results
-- Subject filtering works correctly
-- Skill level filtering works correctly
-- Filtered querysets correctly update displayed results
-
----
-
-## Example User Flow
-
-1. User visits a tutor profile
-2. User navigates to **“View Lessons”**
-3. User searches for `"Math"`
-4. User filters by `"Beginner"`
-5. User browses paginated results
-6. User selects a lesson to proceed to booking (future feature)
+--
 
 ## Data Model
 
-The application uses Django's built-in 'User' model and four custom models:
+### User
 
--'TutorProfile'
--'LessonType'
--'Booking'
--'Payment'
+The project uses Django's built-in User model to manage authentication and user accounts.
 
-This structure supports the main user journeys in the application: registering or logging in, browsing tutors, viewing tutor details, creating and editing tutor information, booking lessons, managing bookings, and completing payments through Stripe.
+A user may act as both a student and a tutor.
 
----
+--
+
+### TutorProfile
+
+Stores additional tutor-specific information that extends the Django User model.
+
+Each tutor profile contains:
+
+- biography
+- teaching experience
+- location
+- profile image
+- contact email
+- lesson delivery information
+
+A TutorProfile has a one-to-one relationship with User.
+
+--
+
+### LessonType
+
+Represents an individual lesson slot created by a tutor.
+
+Each lesson stores:
+
+- subject
+- category
+- title
+- description
+- lesson date
+- lesson time
+- duration
+- skill level
+- price
+
+A tutor may create multiple lesson slots.
+
+Booked lessons are protected from modification.
+
+--
+
+### Booking
+
+Represents a student's reservation for a specific lesson slot.
+
+Each booking stores:
+
+- student
+- lesson
+- booking notes
+- booking status
+- timestamps
+
+A booking belongs to one student and references one lesson slot.
+
+Ownership checks ensure students can only access their own bookings.
+
+--
+
+### Payment
+
+Stores Stripe payment information linked to a booking.
+
+Each payment records:
+
+- Stripe Checkout Session ID
+- payment status
+- payment timestamp
+
+Separating payment information from bookings keeps payment processing independent of booking management.
+
+--
 
 ## Data Tables
 
@@ -840,30 +1126,576 @@ updated_at
 
 (<https://github.com/users/JamesBirchall-dev/projects/7>)
 
----
+--
 
 ## Technologies Used
 
 ### Dependencies
 
-Django Main web framework
-gunicorn Production server for Heroku
-whitenoise Serves static files on Heroku
-dj-database-url Reads Heroku DATABASE_URL easily
-psycopg2-binary PostgreSQL database adapter
-stripe Stripe payment integration
-python-decouple Environment variable handling
-coverage Test coverage reporting
+| Package                       | Purpose                                                                                                            | Documentation                                                                                                       |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| **Django**                    | Main Python web framework used to build the application, handle routing, templates, ORM, authentication and forms. | [Django Documentation](https://docs.djangoproject.com/?utm_source=chatgpt.com)                                      |
+| **Stripe**                    | Secure online payment processing for lesson bookings and checkout.                                                 | [Stripe Python Documentation](https://stripe.com/docs/api/python?utm_source=chatgpt.com)                            |
+| **Cloudinary**                | Cloud-based storage and delivery of tutor profile images.                                                          | [Cloudinary Documentation](https://cloudinary.com/documentation?utm_source=chatgpt.com)                             |
+| **django-cloudinary-storage** | Integrates Cloudinary with Django's media storage system.                                                          | [django-cloudinary-storage Documentation](https://django-cloudinary-storage.readthedocs.io/?utm_source=chatgpt.com) |
+| **django-filter**             | Provides filtering functionality for lesson and tutor listings.                                                    | [django-filter Documentation](https://django-filter.readthedocs.io/?utm_source=chatgpt.com)                         |
+| **dj-database-url**           | Parses database connection URLs for Heroku deployment.                                                             | [dj-database-url Documentation](https://pypi.org/project/dj-database-url/?utm_source=chatgpt.com)                   |
+| **gunicorn**                  | Production WSGI web server used to run the application on Heroku.                                                  | [Gunicorn Documentation](https://docs.gunicorn.org/?utm_source=chatgpt.com)                                         |
+| **psycopg2-binary**           | PostgreSQL database adapter used by Django.                                                                        | [psycopg Documentation](https://www.psycopg.org/docs/?utm_source=chatgpt.com)                                       |
+| **python-decouple**           | Stores sensitive configuration such as API keys and secret settings in environment variables.                      | [python-decouple Documentation](https://pypi.org/project/python-decouple/?utm_source=chatgpt.com)                   |
+| **WhiteNoise**                | Serves static files efficiently in production.                                                                     | [WhiteNoise Documentation](https://whitenoise.readthedocs.io/?utm_source=chatgpt.com)                               |
+| **Pillow**                    | Image processing library used for uploaded profile images.                                                         | [Pillow Documentation](https://pillow.readthedocs.io/?utm_source=chatgpt.com)                                       |
+| **Coverage**                  | Measures Python test coverage during automated testing.                                                            | [Coverage.py Documentation](https://coverage.readthedocs.io/?utm_source=chatgpt.com)                                |
 
-_List of main technologies, frameworks, and tools._
+Supporting Packages
 
----
+| Package                       | Purpose                                                                                                            | Documentation                                                                                                       |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| **Django**                    | Main Python web framework used to build the application, handle routing, templates, ORM, authentication and forms. | [Django Documentation](https://docs.djangoproject.com/?utm_source=chatgpt.com)                                      |
+| **Stripe**                    | Secure online payment processing for lesson bookings and checkout.                                                 | [Stripe Python Documentation](https://stripe.com/docs/api/python?utm_source=chatgpt.com)                            |
+| **Cloudinary**                | Cloud-based storage and delivery of tutor profile images.                                                          | [Cloudinary Documentation](https://cloudinary.com/documentation?utm_source=chatgpt.com)                             |
+| **django-cloudinary-storage** | Integrates Cloudinary with Django's media storage system.                                                          | [django-cloudinary-storage Documentation](https://django-cloudinary-storage.readthedocs.io/?utm_source=chatgpt.com) |
+| **django-filter**             | Provides filtering functionality for lesson and tutor listings.                                                    | [django-filter Documentation](https://django-filter.readthedocs.io/?utm_source=chatgpt.com)                         |
+| **dj-database-url**           | Parses database connection URLs for Heroku deployment.                                                             | [dj-database-url Documentation](https://pypi.org/project/dj-database-url/?utm_source=chatgpt.com)                   |
+| **gunicorn**                  | Production WSGI web server used to run the application on Heroku.                                                  | [Gunicorn Documentation](https://docs.gunicorn.org/?utm_source=chatgpt.com)                                         |
+| **psycopg2-binary**           | PostgreSQL database adapter used by Django.                                                                        | [psycopg Documentation](https://www.psycopg.org/docs/?utm_source=chatgpt.com)                                       |
+| **python-decouple**           | Stores sensitive configuration such as API keys and secret settings in environment variables.                      | [python-decouple Documentation](https://pypi.org/project/python-decouple/?utm_source=chatgpt.com)                   |
+| **WhiteNoise**                | Serves static files efficiently in production.                                                                     | [WhiteNoise Documentation](https://whitenoise.readthedocs.io/?utm_source=chatgpt.com)                               |
+| **Pillow**                    | Image processing library used for uploaded profile images.                                                         | [Pillow Documentation](https://pillow.readthedocs.io/?utm_source=chatgpt.com)                                       |
+| **Coverage**                  | Measures Python test coverage during automated testing.                                                            | [Coverage.py Documentation](https://coverage.readthedocs.io/?utm_source=chatgpt.com)                                |
+
+--
 
 ## Testing
 
 ### Manual Testing
 
+Manual Testing
+Deployed site: Tutor Connect
+Testing Objectives
+The purpose of this test plan is to confirm that Tutor Connect works as expected for visitors, registered users, tutors and administrators. Testing covers navigation, authentication, tutor profiles, lesson browsing, bookings, checkout, security rules, responsive design and deployed functionality.
+Full manual testing evidence is also recorded in the manual testing spreadsheet.
+> Screenshots are placed inside expandable sections. Click each heading to expand the evidence, then click the image to open it at full size.
+
+#### Visitor Testing
+
+<details>
+<summary>Visitor Testing summary table</summary>
+<a href="https://github.com/user-attachments/assets/e25dafe1-1813-4491-9a8a-686ce89f7bf2">
+  <img src="https://github.com/user-attachments/assets/e25dafe1-1813-4491-9a8a-686ce89f7bf2" alt="Visitor Testing summary table" width="700">
+</a>
+</details>
+<details>
+<summary>Homepage</summary>
+<a href="https://github.com/user-attachments/assets/a80de12d-9a43-41e9-952b-f3de24e54aca">
+  <img src="https://github.com/user-attachments/assets/a80de12d-9a43-41e9-952b-f3de24e54aca" alt="Homepage" width="700">
+</a>
+</details>
+<details>
+<summary>Image</summary>
+<a href="https://github.com/user-attachments/assets/2e9cca0a-c6c6-4de9-8a3b-2415663d5210">
+  <img src="https://github.com/user-attachments/assets/2e9cca0a-c6c6-4de9-8a3b-2415663d5210" alt="Image" width="700">
+</a>
+</details>
+<details>
+<summary>Lessons:</summary>
+<a href="https://github.com/user-attachments/assets/615e38f9-042d-40b2-bdbc-a4e79e5c7a1b">
+  <img src="https://github.com/user-attachments/assets/615e38f9-042d-40b2-bdbc-a4e79e5c7a1b" alt="Lessons:" width="700">
+</a>
+</details>
+<details>
+<summary>Lessons filtered:</summary>
+<a href="https://github.com/user-attachments/assets/a3e27060-3d2b-4c11-bc30-13b2dd0eb362">
+  <img src="https://github.com/user-attachments/assets/a3e27060-3d2b-4c11-bc30-13b2dd0eb362" alt="Lessons filtered:" width="700">
+</a>
+</details>
+<details>
+<summary>Image (2)</summary>
+<a href="https://github.com/user-attachments/assets/97320ce4-5764-44af-a918-e697f8063f8f">
+  <img src="https://github.com/user-attachments/assets/97320ce4-5764-44af-a918-e697f8063f8f" alt="Image" width="700">
+</a>
+</details>
+<details>
+<summary>Attempt logged out booking</summary>
+<a href="https://github.com/user-attachments/assets/bb558c89-fe45-40fd-ba1f-30e637a907b1">
+  <img src="https://github.com/user-attachments/assets/bb558c89-fe45-40fd-ba1f-30e637a907b1" alt="Attempt logged out booking" width="700">
+</a>
+</details>
+<details>
+<summary>Tutors:</summary>
+<a href="https://github.com/user-attachments/assets/34e6cfa7-74e7-4430-9121-a49a11710d20">
+  <img src="https://github.com/user-attachments/assets/34e6cfa7-74e7-4430-9121-a49a11710d20" alt="Tutors:" width="700">
+</a>
+</details>
+<details>
+<summary>Image (3)</summary>
+<a href="https://github.com/user-attachments/assets/52b521fd-8a01-4107-bbe5-6efb96c2b3b0">
+  <img src="https://github.com/user-attachments/assets/52b521fd-8a01-4107-bbe5-6efb96c2b3b0" alt="Image" width="700">
+</a>
+</details>
+
+#### Account Testing
+
+<details>
+<summary>Image (4)</summary>
+<a href="https://github.com/user-attachments/assets/e712e45f-be78-4d5c-b541-71ff7001e8f6">
+  <img src="https://github.com/user-attachments/assets/e712e45f-be78-4d5c-b541-71ff7001e8f6" alt="Image" width="700">
+</a>
+</details>
+<details>
+<summary>Registration validation</summary>
+<a href="https://github.com/user-attachments/assets/cedb4921-5396-450d-95e3-46402e5c57cf">
+  <img src="https://github.com/user-attachments/assets/cedb4921-5396-450d-95e3-46402e5c57cf" alt="Registration validation" width="700">
+</a>
+</details>
+<details>
+<summary>Successful registration</summary>
+<a href="https://github.com/user-attachments/assets/39affca8-82c7-4c95-8d48-ff4b9a206fd7">
+  <img src="https://github.com/user-attachments/assets/39affca8-82c7-4c95-8d48-ff4b9a206fd7" alt="Successful registration" width="700">
+</a>
+</details>
+<details>
+<summary>Login validation</summary>
+<a href="https://github.com/user-attachments/assets/05f0afa6-97bd-4c29-9efc-4fc9fa554119">
+  <img src="https://github.com/user-attachments/assets/05f0afa6-97bd-4c29-9efc-4fc9fa554119" alt="Login validation" width="700">
+</a>
+</details>
+<details>
+<summary>Successful login</summary>
+<a href="https://github.com/user-attachments/assets/c490c155-f242-4bd1-9b93-958635663b43">
+  <img src="https://github.com/user-attachments/assets/c490c155-f242-4bd1-9b93-958635663b43" alt="Successful login" width="700">
+</a>
+</details>
+<details>
+<summary>Logout</summary>
+<a href="https://github.com/user-attachments/assets/1c0df439-4686-4dae-a094-06c970f99585">
+  <img src="https://github.com/user-attachments/assets/1c0df439-4686-4dae-a094-06c970f99585" alt="Logout" width="700">
+</a>
+</details>
+
+#### Tutor Profile Testing
+
+<details>
+<summary>Image (5)</summary>
+<a href="https://github.com/user-attachments/assets/7d701a3b-bb4e-4ca4-830c-664592c4223e">
+  <img src="https://github.com/user-attachments/assets/7d701a3b-bb4e-4ca4-830c-664592c4223e" alt="Image" width="700">
+</a>
+</details>
+<details>
+<summary>Create Tutor Profile:</summary>
+<a href="https://github.com/user-attachments/assets/338aca14-52e8-42a5-8f58-6f014e79f8ae">
+  <img src="https://github.com/user-attachments/assets/338aca14-52e8-42a5-8f58-6f014e79f8ae" alt="Create Tutor Profile:" width="700">
+</a>
+</details>
+<details>
+<summary>Image (6)</summary>
+<a href="https://github.com/user-attachments/assets/0bd42c1d-0e9c-458b-b719-d44af12c59ba">
+  <img src="https://github.com/user-attachments/assets/0bd42c1d-0e9c-458b-b719-d44af12c59ba" alt="Image" width="700">
+</a>
+</details>
+<details>
+<summary>Tutor profile validation</summary>
+<a href="https://github.com/user-attachments/assets/07ad3277-d540-4604-be18-7bffdcefa1c8">
+  <img src="https://github.com/user-attachments/assets/07ad3277-d540-4604-be18-7bffdcefa1c8" alt="Tutor profile validation" width="700">
+</a>
+</details>
+<details>
+<summary>Tutor profile update</summary>
+<a href="https://github.com/user-attachments/assets/514eada1-b39d-4054-857a-e7fba9ea5568">
+  <img src="https://github.com/user-attachments/assets/514eada1-b39d-4054-857a-e7fba9ea5568" alt="Tutor profile update" width="700">
+</a>
+</details>
+<details>
+<summary>Profile placeholder image</summary>
+<a href="https://github.com/user-attachments/assets/96130c74-1403-4910-b08c-ba58a425302a">
+  <img src="https://github.com/user-attachments/assets/96130c74-1403-4910-b08c-ba58a425302a" alt="Profile placeholder image" width="700">
+</a>
+</details>
+<details>
+<summary>Lesson and contact information displayed in confirmed bookings</summary>
+<a href="https://github.com/user-attachments/assets/454cf75b-74a2-4754-9d36-5de446bb05a4">
+  <img src="https://github.com/user-attachments/assets/454cf75b-74a2-4754-9d36-5de446bb05a4" alt="Lesson and contact information displayed in confirmed bookings" width="700">
+</a>
+</details>
+
+#### Dashboard Testing
+
+<details>
+<summary>Image (7)</summary>
+<a href="https://github.com/user-attachments/assets/0ac1ad29-4541-4502-98fa-c2b506883c76">
+  <img src="https://github.com/user-attachments/assets/0ac1ad29-4541-4502-98fa-c2b506883c76" alt="Image" width="700">
+</a>
+</details>
+<details>
+<summary>Student login landing page, shows create profile CTA:</summary>
+<a href="https://github.com/user-attachments/assets/c437ee1e-4b53-4630-be16-208193e68b47">
+  <img src="https://github.com/user-attachments/assets/c437ee1e-4b53-4630-be16-208193e68b47" alt="Student login landing page, shows create profile CTA:" width="700">
+</a>
+</details>
+<details>
+<summary>Tutor dashboard and upcoming lessons</summary>
+<a href="https://github.com/user-attachments/assets/dbf7227d-e648-4258-be87-4a6be30437da">
+  <img src="https://github.com/user-attachments/assets/dbf7227d-e648-4258-be87-4a6be30437da" alt="Tutor dashboard and upcoming lessons" width="700">
+</a>
+</details>
+
+#### Lesson Testing
+
+<details>
+<summary>Image (8)</summary>
+<a href="https://github.com/user-attachments/assets/359467ae-ce36-4494-bfcd-cde19eab956a">
+  <img src="https://github.com/user-attachments/assets/359467ae-ce36-4494-bfcd-cde19eab956a" alt="Image" width="700">
+</a>
+</details>
+<details>
+<summary>Create new lesson</summary>
+<a href="https://github.com/user-attachments/assets/f0a50ce6-766e-4152-9107-17093b32276f">
+  <img src="https://github.com/user-attachments/assets/f0a50ce6-766e-4152-9107-17093b32276f" alt="Create new lesson" width="700">
+</a>
+</details>
+<details>
+<summary>Edit lesson</summary>
+<a href="https://github.com/user-attachments/assets/ebf05c70-3ae1-4a2c-9ca7-790bcba05d3c">
+  <img src="https://github.com/user-attachments/assets/ebf05c70-3ae1-4a2c-9ca7-790bcba05d3c" alt="Edit lesson" width="700">
+</a>
+</details>
+<details>
+<summary>Image (9)</summary>
+<a href="https://github.com/user-attachments/assets/a1f5a570-23be-45d1-ac61-b260c1c556e8">
+  <img src="https://github.com/user-attachments/assets/a1f5a570-23be-45d1-ac61-b260c1c556e8" alt="Image" width="700">
+</a>
+</details>
+<details>
+<summary>Delete Lesson</summary>
+<a href="https://github.com/user-attachments/assets/a095177a-ebed-4e7f-ad09-ece9006dd907">
+  <img src="https://github.com/user-attachments/assets/a095177a-ebed-4e7f-ad09-ece9006dd907" alt="Delete Lesson" width="700">
+</a>
+</details>
+<details>
+<summary>Image (10)</summary>
+<a href="https://github.com/user-attachments/assets/54f794e0-49d8-49e1-a51d-59704351d976">
+  <img src="https://github.com/user-attachments/assets/54f794e0-49d8-49e1-a51d-59704351d976" alt="Image" width="700">
+</a>
+</details>
+<details>
+<summary>Lesson form validation</summary>
+<a href="https://github.com/user-attachments/assets/7404f7c2-0220-4fe7-b73a-1534afbcfc0c">
+  <img src="https://github.com/user-attachments/assets/7404f7c2-0220-4fe7-b73a-1534afbcfc0c" alt="Lesson form validation" width="700">
+</a>
+</details>
+<details>
+<summary>not available</summary>
+<a href="https://github.com/user-attachments/assets/1925a8c7-bd33-492e-b7ad-f8d7ecb07c6a">
+  <img src="https://github.com/user-attachments/assets/1925a8c7-bd33-492e-b7ad-f8d7ecb07c6a" alt="not available" width="700">
+</a>
+</details>
+<details>
+<summary>Edit Blocked</summary>
+<a href="https://github.com/user-attachments/assets/2d8b25a8-b338-4b3e-a7de-d91a07c9a5d7">
+  <img src="https://github.com/user-attachments/assets/2d8b25a8-b338-4b3e-a7de-d91a07c9a5d7" alt="Edit Blocked" width="700">
+</a>
+</details>
+<details>
+<summary>Unavailable lesson not shown in lesson filter</summary>
+<a href="https://github.com/user-attachments/assets/b33c0463-7d2e-4eb1-aded-cf1ea59c0477">
+  <img src="https://github.com/user-attachments/assets/b33c0463-7d2e-4eb1-aded-cf1ea59c0477" alt="Unavailable lesson not shown in lesson filter" width="700">
+</a>
+</details>
+<details>
+<summary>Update to past date</summary>
+<a href="https://github.com/user-attachments/assets/0ec36a1e-2ed0-4cfc-bb21-f83ed842a750">
+  <img src="https://github.com/user-attachments/assets/0ec36a1e-2ed0-4cfc-bb21-f83ed842a750" alt="Update to past date" width="700">
+</a>
+</details>
+<details>
+<summary>Pagination showing and working for 10 or more lessons</summary>
+<a href="https://github.com/user-attachments/assets/e68961c2-95b3-473b-8019-b004861ba4f7">
+  <img src="https://github.com/user-attachments/assets/e68961c2-95b3-473b-8019-b004861ba4f7" alt="Pagination showing and working for 10 or more lessons" width="700">
+</a>
+</details>
+<details>
+<summary>Image (11)</summary>
+<a href="https://github.com/user-attachments/assets/cce75a57-aab9-4ad7-b78f-d97ebf6fd665">
+  <img src="https://github.com/user-attachments/assets/cce75a57-aab9-4ad7-b78f-d97ebf6fd665" alt="Image" width="700">
+</a>
+</details>
+
+#### Booking Test
+
+<details>
+<summary>Booking Testing summary table</summary>
+<a href="https://github.com/user-attachments/assets/cef804c6-e636-4b9b-9f9b-d1fa4cf7056d">
+  <img src="https://github.com/user-attachments/assets/cef804c6-e636-4b9b-9f9b-d1fa4cf7056d" alt="Booking Testing summary table" width="700">
+</a>
+</details>
+<details>
+<summary>Book a lesson</summary>
+<a href="https://github.com/user-attachments/assets/8e5841bc-8f14-40ad-868a-dc90f5d09f2d">
+  <img src="https://github.com/user-attachments/assets/8e5841bc-8f14-40ad-868a-dc90f5d09f2d" alt="Book a lesson" width="700">
+</a>
+</details>
+Issue: Obsolete text as booking is fixed slot.
+<details>
+<summary>Bookings shown for user in dashboard</summary>
+<a href="https://github.com/user-attachments/assets/a3a5ac16-cee7-4a34-b05d-cd8bbf7e0fb8">
+  <img src="https://github.com/user-attachments/assets/a3a5ac16-cee7-4a34-b05d-cd8bbf7e0fb8" alt="Bookings shown for user in dashboard" width="700">
+</a>
+</details>
+<details>
+<summary>View booking details</summary>
+<a href="https://github.com/user-attachments/assets/9746262a-f8f4-448c-83aa-2618da197cd1">
+  <img src="https://github.com/user-attachments/assets/9746262a-f8f4-448c-83aa-2618da197cd1" alt="View booking details" width="700">
+</a>
+</details>
+<details>
+<summary>Cancel booking</summary>
+<a href="https://github.com/user-attachments/assets/6102480a-ed77-4ff6-886c-7b3c7f70eda5">
+  <img src="https://github.com/user-attachments/assets/6102480a-ed77-4ff6-886c-7b3c7f70eda5" alt="Cancel booking" width="700">
+</a>
+</details>
+<details>
+<summary>Attempt to access another user&#x27;s booking</summary>
+<a href="https://github.com/user-attachments/assets/2878041e-7321-4a34-91a6-810bded25601">
+  <img src="https://github.com/user-attachments/assets/2878041e-7321-4a34-91a6-810bded25601" alt="Attempt to access another user&#x27;s booking" width="700">
+</a>
+</details>
+
+#### Checkout Test
+
+<details>
+<summary>Checkout review displays correct booking information</summary>
+<a href="https://github.com/user-attachments/assets/af4a8c2b-2099-46c5-8f10-353950eb9dba">
+  <img src="https://github.com/user-attachments/assets/af4a8c2b-2099-46c5-8f10-353950eb9dba" alt="Checkout review displays correct booking information" width="700">
+</a>
+</details>
+<details>
+<summary>Redirect to Stripe Checkout</summary>
+<a href="https://github.com/user-attachments/assets/7bc2da55-cfef-4b1c-8cf6-0841449168fc">
+  <img src="https://github.com/user-attachments/assets/7bc2da55-cfef-4b1c-8cf6-0841449168fc" alt="Redirect to Stripe Checkout" width="700">
+</a>
+</details>
+<details>
+<summary>Payment success page</summary>
+<a href="https://github.com/user-attachments/assets/31816c73-748e-4ae5-8c01-25029aac350c">
+  <img src="https://github.com/user-attachments/assets/31816c73-748e-4ae5-8c01-25029aac350c" alt="Payment success page" width="700">
+</a>
+</details>
+<details>
+<summary>Booking status confirmed after payment</summary>
+<a href="https://github.com/user-attachments/assets/77913c73-b042-44da-89c6-4d79ef6206aa">
+  <img src="https://github.com/user-attachments/assets/77913c73-b042-44da-89c6-4d79ef6206aa" alt="Booking status confirmed after payment" width="700">
+</a>
+</details>
+<details>
+<summary>Payment cancelled</summary>
+<a href="https://github.com/user-attachments/assets/a06397f7-08ae-4b8d-a617-52124f3a1868">
+  <img src="https://github.com/user-attachments/assets/a06397f7-08ae-4b8d-a617-52124f3a1868" alt="Payment cancelled" width="700">
+</a>
+</details>
+<details>
+<summary>Attempt to access another user&#x27;s checkout</summary>
+<a href="https://github.com/user-attachments/assets/cdd3d994-756b-456e-b4bf-4659d111ae74">
+  <img src="https://github.com/user-attachments/assets/cdd3d994-756b-456e-b4bf-4659d111ae74" alt="Attempt to access another user&#x27;s checkout" width="700">
+</a>
+</details>
+
+#### Admin Testing
+
+<details>
+<summary>Admin Testing summary table</summary>
+<a href="https://github.com/user-attachments/assets/45758f6a-fc4e-4edd-a07a-f5ab2214f8de">
+  <img src="https://github.com/user-attachments/assets/45758f6a-fc4e-4edd-a07a-f5ab2214f8de" alt="Admin Testing summary table" width="700">
+</a>
+</details>
+<details>
+<summary>Admin dashboard loads</summary>
+<a href="https://github.com/user-attachments/assets/bf38b05f-4740-45bb-99c3-094b5d00e896">
+  <img src="https://github.com/user-attachments/assets/bf38b05f-4740-45bb-99c3-094b5d00e896" alt="Admin dashboard loads" width="700">
+</a>
+</details>
+<details>
+<summary>Tutor profile search and filter</summary>
+<a href="https://github.com/user-attachments/assets/a0187d67-841e-439a-b727-dd311d2bb327">
+  <img src="https://github.com/user-attachments/assets/a0187d67-841e-439a-b727-dd311d2bb327" alt="Tutor profile search and filter" width="700">
+</a>
+</details>
+<details>
+<summary>Lesson type search and filter</summary>
+<a href="https://github.com/user-attachments/assets/eaf8ec69-26ac-439e-afd7-21e9a4661f71">
+  <img src="https://github.com/user-attachments/assets/eaf8ec69-26ac-439e-afd7-21e9a4661f71" alt="Lesson type search and filter" width="700">
+</a>
+</details>
+<details>
+<summary>Booking admin review</summary>
+<a href="https://github.com/user-attachments/assets/c5f0ada0-4fc2-4579-8583-54d79f081e8b">
+  <img src="https://github.com/user-attachments/assets/c5f0ada0-4fc2-4579-8583-54d79f081e8b" alt="Booking admin review" width="700">
+</a>
+</details>
+<details>
+<summary>Payment admin shows records without secrets</summary>
+<a href="https://github.com/user-attachments/assets/914f22cf-d293-472b-a789-03661696274d">
+  <img src="https://github.com/user-attachments/assets/914f22cf-d293-472b-a789-03661696274d" alt="Payment admin shows records without secrets" width="700">
+</a>
+</details>
+
+#### Security Testing
+
+<details>
+<summary>Image (12)</summary>
+<a href="https://github.com/user-attachments/assets/829ba659-531e-4084-be31-1c1859750142">
+  <img src="https://github.com/user-attachments/assets/829ba659-531e-4084-be31-1c1859750142" alt="Image" width="700">
+</a>
+</details>
+<details>
+<summary>Secret keys not shown in repository</summary>
+<a href="https://github.com/user-attachments/assets/f99c0bec-fb08-49a7-b030-3c2c57d7da11">
+  <img src="https://github.com/user-attachments/assets/f99c0bec-fb08-49a7-b030-3c2c57d7da11" alt="Secret keys not shown in repository" width="700">
+</a>
+</details>
+
+Fixes
+https://github.com/JamesBirchall-dev/MSP-4-Tutor-Connect/issues/49
+Issue 1:
+<details>
+<summary>CSRF error on logout</summary>
+<a href="https://github.com/user-attachments/assets/224ec610-5f43-4b14-a336-dd516d9356d6">
+  <img src="https://github.com/user-attachments/assets/224ec610-5f43-4b14-a336-dd516d9356d6" alt="CSRF error on logout" width="700">
+</a>
+</details>
+
+##### Issue 1
+Sometimes when logging out from dashboard this error page flags.
+
+Troubleshooting:
+<details>
+<summary>Check post form in base.html to make sure csrf is called - OK</summary>
+<a href="https://github.com/user-attachments/assets/dc307a5d-e612-42fd-86ec-04e11b7cdc5a">
+  <img src="https://github.com/user-attachments/assets/dc307a5d-e612-42fd-86ec-04e11b7cdc5a" alt="Check post form in base.html to make sure csrf is called - OK" width="700">
+</a>
+</details>
+
+Resolution:
+Likely caused with copying direct link, multiple sessions.
+<details>
+<summary>Cleared cache and tested again - PASS</summary>
+<a href="https://github.com/user-attachments/assets/5338b582-c836-4f62-a0c0-342744df1918">
+  <img src="https://github.com/user-attachments/assets/5338b582-c836-4f62-a0c0-342744df1918" alt="Cleared cache and tested again - PASS" width="700">
+</a>
+</details>
+
+##### Issue 2
+
+Issue:
+Unable to update image in deployed, returns a 500 error page.
+
+Cause of issue:
+Cloudinary required configuration for third-party image management.
+
+Resolution:
+Cloudinary configured in Django settings and Heroku Config Vars.
+Cloudinary credentials added locally via `.env` and in Heroku Config Vars.
+
+##### Issue 3
+
+<details>
+<summary>Subject and category lists not in alphabetical order</summary>
+<a href="https://github.com/user-attachments/assets/189fa2a1-53b8-4a1e-b0ae-0265c544b43f">
+  <img src="https://github.com/user-attachments/assets/189fa2a1-53b8-4a1e-b0ae-0265c544b43f" alt="Subject and category lists not in alphabetical order" width="700">
+</a>
+</details>
+<details>
+<summary>Image (13)</summary>
+<a href="https://github.com/user-attachments/assets/3c4168ca-08e6-4fbc-baaf-37262bb30223">
+  <img src="https://github.com/user-attachments/assets/3c4168ca-08e6-4fbc-baaf-37262bb30223" alt="Image" width="700">
+</a>
+</details>
+Resolution: Updated model choice lists into alphabetical order.
+<details>
+<summary>Resolution: Updated model choice lists into alphabetical order.</summary>
+<a href="https://github.com/user-attachments/assets/fd9c5961-2202-4afb-890b-8738dfc1fa83">
+  <img src="https://github.com/user-attachments/assets/fd9c5961-2202-4afb-890b-8738dfc1fa83" alt="Resolution: Updated model choice lists into alphabetical order." width="700">
+</a>
+</details>
+<details>
+<summary>Local test: PASS</summary>
+<a href="https://github.com/user-attachments/assets/b91f6e68-2312-4840-ac92-56b29615f09d">
+  <img src="https://github.com/user-attachments/assets/b91f6e68-2312-4840-ac92-56b29615f09d" alt="Local test: PASS" width="700">
+</a>
+</details>
+<details>
+<summary>Image (14)</summary>
+<a href="https://github.com/user-attachments/assets/b414ed05-12b7-4788-9f2b-174c40012176">
+  <img src="https://github.com/user-attachments/assets/b414ed05-12b7-4788-9f2b-174c40012176" alt="Image" width="700">
+</a>
+</details>
+<details>
+<summary>Deployed test: PASS</summary>
+<a href="https://github.com/user-attachments/assets/4977c464-184b-4159-8c2f-e76c676c40be">
+  <img src="https://github.com/user-attachments/assets/4977c464-184b-4159-8c2f-e76c676c40be" alt="Deployed test: PASS" width="700">
+</a>
+</details>
+<details>
+<summary>Image (15)</summary>
+<a href="https://github.com/user-attachments/assets/35e92cf8-9c73-4005-9f06-6b9d6d1098cc">
+  <img src="https://github.com/user-attachments/assets/35e92cf8-9c73-4005-9f06-6b9d6d1098cc" alt="Image" width="700">
+</a>
+</details>
+
+##### Issue 4
+Text displayed supports time and date editing which is now obsolete.
+
+Resolution:
+Remove text from template.
+<details>
+<summary>Deployed test with corrected text</summary>
+<a href="https://github.com/user-attachments/assets/33834538-e9c7-4c9c-888b-607a464971ba">
+  <img src="https://github.com/user-attachments/assets/33834538-e9c7-4c9c-888b-607a464971ba" alt="Deployed test with corrected text" width="700">
+</a>
+</details>
+
+Issue:
+<details>
+<summary>Badly positioned, duplicate CTA to all lessons:</summary>
+<a href="https://github.com/user-attachments/assets/4e802792-b41b-4e33-bd0f-d71f8fff9e3d">
+  <img src="https://github.com/user-attachments/assets/4e802792-b41b-4e33-bd0f-d71f8fff9e3d" alt="Badly positioned, duplicate CTA to all lessons:" width="700">
+</a>
+</details>
+
+Resolution:
+Remove 2nd CTA from template.
+<details>
+<summary>Deployed fix</summary>
+<a href="https://github.com/user-attachments/assets/1ad64a05-d958-4c99-aef1-99a11609eb84">
+  <img src="https://github.com/user-attachments/assets/1ad64a05-d958-4c99-aef1-99a11609eb84" alt="Deployed fix" width="700">
+</a>
+</details>
+
 ### Automated Testing
+
+Automated testing was used throughout the project to check that the main Django application logic worked as expected after each feature update or refactor.
+
+The test suite was run locally using:
+
+python manage.py test
+
+Before deployment, the project was also checked with:
+
+python manage.py check
+
+Automated tests were written for the main application areas, including:
+
+page views returning the expected response status;
+correct templates being rendered;
+authentication and access restrictions;
+tutor profile functionality;
+lesson listing, filtering and search behaviour;
+booking creation, ownership and management;
+checkout review, success and cancellation views;
+model behaviour and expected data relationships.
+
+Testing was especially important during the lesson-slot refactor, where the booking flow changed from user-selected booking dates and times to tutor-created scheduled lesson slots. After each significant change, the test suite was re-run to confirm that existing functionality still worked correctly.
+
+Where automated tests identified issues, fixes were made and the tests were re-run until passing. This helped confirm that the final deployed application matched the expected behaviour and reduced the risk of regressions during the final validation stage.
 
 #### Feature - Accounts
 
@@ -3295,26 +4127,826 @@ Destroying test database for alias 'default'...
 
 Outcome: PASS
 
+</details>
 
-### Validator Testing
 
-_Automated validation and tools used._
 
-### Bugs
+### Validator, Console and Lighthouse Testing
+HTML validation was completed using the W3C HTML Validator.
+Console testing was completed using Chrome Developer Tools on both desktop and mobile viewport simulations. Lighthouse audits were also completed using Chrome Developer Tools.
+Validation, console and Lighthouse screenshots were tracked through the GitHub Project task linked below:
+https://github.com/users/JamesBirchall-dev/projects/7/views/1?pane=issue&itemId=194254342&issue=JamesBirchall-dev%7CMSP-4-Tutor-Connect%7C45
 
-_Known issues and how they were addressed._
+Summary:
+All tested HTML pages passed validation.
+All tested pages passed console checks with no unexpected JavaScript errors.
+Lighthouse scores were generally in the 90s. Any reduced performance scores were caused by third-party services such as Cloudinary, Google Fonts or Heroku response times rather than application code.
+
+
+<details>
+<summary><strong>Homepage</strong></summary>
+Validation note: The homepage initially returned a section warning. The outer CTA container was changed from a `section` to a `div` because it was used for layout rather than as a standalone semantic section. The page was then revalidated successfully.
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/6e4750ab-7ae8-48b4-95cd-296de60aba29">
+    <img src="https://github.com/user-attachments/assets/6e4750ab-7ae8-48b4-95cd-296de60aba29" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/481f9f81-95e0-4ae5-bfd9-87ca12432c90">
+    <img src="https://github.com/user-attachments/assets/481f9f81-95e0-4ae5-bfd9-87ca12432c90" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/8551640c-fb53-426f-a803-3147e9767b4f">
+    <img src="https://github.com/user-attachments/assets/8551640c-fb53-426f-a803-3147e9767b4f" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>HTML Validation Passed</summary>
+<a href="https://github.com/user-attachments/assets/5c102397-7736-4b8c-9fc8-199e78c023a6">
+    <img src="https://github.com/user-attachments/assets/5c102397-7736-4b8c-9fc8-199e78c023a6" alt="HTML Validation Passed" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/08e729c4-bf3c-47c3-8474-485e229f35f7">
+    <img src="https://github.com/user-attachments/assets/08e729c4-bf3c-47c3-8474-485e229f35f7" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/db426308-ef66-4b8c-a973-434a7cc7412c">
+    <img src="https://github.com/user-attachments/assets/db426308-ef66-4b8c-a973-434a7cc7412c" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Browse Tutors</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/5c4eecde-1549-454d-96fb-f7d680c51c51">
+    <img src="https://github.com/user-attachments/assets/5c4eecde-1549-454d-96fb-f7d680c51c51" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/1ff13686-b434-4a7d-bb76-dc0e8c272973">
+    <img src="https://github.com/user-attachments/assets/1ff13686-b434-4a7d-bb76-dc0e8c272973" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/8b69b36c-8023-4b0a-8159-68a6756e418a">
+    <img src="https://github.com/user-attachments/assets/8b69b36c-8023-4b0a-8159-68a6756e418a" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/fe85259d-d454-4394-881f-8f11f4acc1cb">
+    <img src="https://github.com/user-attachments/assets/fe85259d-d454-4394-881f-8f11f4acc1cb" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/fcf05b75-c8d2-4998-8a33-2076ac673de5">
+    <img src="https://github.com/user-attachments/assets/fcf05b75-c8d2-4998-8a33-2076ac673de5" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Tutor Detail</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/16c7b80a-a2cd-4825-80e7-9fb15525f8fa">
+    <img src="https://github.com/user-attachments/assets/16c7b80a-a2cd-4825-80e7-9fb15525f8fa" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/c2c0761c-3f9a-440f-9a02-43e1ba34ce65">
+    <img src="https://github.com/user-attachments/assets/c2c0761c-3f9a-440f-9a02-43e1ba34ce65" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/1d0c68ab-e746-46b7-84ae-f7c8422e27ac">
+    <img src="https://github.com/user-attachments/assets/1d0c68ab-e746-46b7-84ae-f7c8422e27ac" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/ecf0ba38-d861-4427-a176-0ddd74de697d">
+    <img src="https://github.com/user-attachments/assets/ecf0ba38-d861-4427-a176-0ddd74de697d" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/f27dfd14-558b-4aeb-996f-0e471fa46d33">
+    <img src="https://github.com/user-attachments/assets/f27dfd14-558b-4aeb-996f-0e471fa46d33" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Browse Lessons</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/3b68acab-1931-4480-b76a-4ed35a296d94">
+    <img src="https://github.com/user-attachments/assets/3b68acab-1931-4480-b76a-4ed35a296d94" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/7782e5fa-cc8c-41af-9b5e-0b0bb00adef5">
+    <img src="https://github.com/user-attachments/assets/7782e5fa-cc8c-41af-9b5e-0b0bb00adef5" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/a079b8fd-7346-4541-9b80-69ddf11d4b01">
+    <img src="https://github.com/user-attachments/assets/a079b8fd-7346-4541-9b80-69ddf11d4b01" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/b5d9a2da-cbab-4113-9e51-459013e444c6">
+    <img src="https://github.com/user-attachments/assets/b5d9a2da-cbab-4113-9e51-459013e444c6" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/d37b981f-6fe7-4e80-874e-15bdad64d3f7">
+    <img src="https://github.com/user-attachments/assets/d37b981f-6fe7-4e80-874e-15bdad64d3f7" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Register</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/423c6588-855e-4b85-b619-cb909bafa9d9">
+    <img src="https://github.com/user-attachments/assets/423c6588-855e-4b85-b619-cb909bafa9d9" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/47678ab2-9a18-44ca-964a-f4a402aa08a8">
+    <img src="https://github.com/user-attachments/assets/47678ab2-9a18-44ca-964a-f4a402aa08a8" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/edbdef6f-6a50-4e85-9bb7-270099fb871d">
+    <img src="https://github.com/user-attachments/assets/edbdef6f-6a50-4e85-9bb7-270099fb871d" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/8438e200-87f9-42b6-a27f-2bc466a9ea33">
+    <img src="https://github.com/user-attachments/assets/8438e200-87f9-42b6-a27f-2bc466a9ea33" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/35066a70-3bc3-484b-82c1-1dcb6d4d2ec8">
+    <img src="https://github.com/user-attachments/assets/35066a70-3bc3-484b-82c1-1dcb6d4d2ec8" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Login</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/da538f4c-346a-4c40-b364-f2c7be42a696">
+    <img src="https://github.com/user-attachments/assets/da538f4c-346a-4c40-b364-f2c7be42a696" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/d518b18a-61cf-4907-a1f9-b32c117921b1">
+    <img src="https://github.com/user-attachments/assets/d518b18a-61cf-4907-a1f9-b32c117921b1" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/dae04b68-e5f4-459e-9c17-12fcbb553de5">
+    <img src="https://github.com/user-attachments/assets/dae04b68-e5f4-459e-9c17-12fcbb553de5" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/fe1e4f0b-e245-455c-b5b0-cfcd0d358921">
+    <img src="https://github.com/user-attachments/assets/fe1e4f0b-e245-455c-b5b0-cfcd0d358921" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/b256d6d1-f6e3-4a8b-acc4-30c885cfa109">
+    <img src="https://github.com/user-attachments/assets/b256d6d1-f6e3-4a8b-acc4-30c885cfa109" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Student - Dashboard</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/aefcdd65-021b-4148-8a8e-253453a15f1e">
+    <img src="https://github.com/user-attachments/assets/aefcdd65-021b-4148-8a8e-253453a15f1e" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/cd9db9c8-0684-4247-8d80-8f87d3d4cd80">
+    <img src="https://github.com/user-attachments/assets/cd9db9c8-0684-4247-8d80-8f87d3d4cd80" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/bda1828b-1406-4bdf-a0ee-4e629aa36e59">
+    <img src="https://github.com/user-attachments/assets/bda1828b-1406-4bdf-a0ee-4e629aa36e59" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/e44742be-62eb-4668-9cea-0edb3f3375ca">
+    <img src="https://github.com/user-attachments/assets/e44742be-62eb-4668-9cea-0edb3f3375ca" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/548b6343-f217-4dcd-a119-df699cc8fdc9">
+    <img src="https://github.com/user-attachments/assets/548b6343-f217-4dcd-a119-df699cc8fdc9" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Student - Booking List</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/8649af99-dea6-45c6-8b18-950bbe2bcef2">
+    <img src="https://github.com/user-attachments/assets/8649af99-dea6-45c6-8b18-950bbe2bcef2" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/140bb917-fa0d-4f3a-9a32-908dd65f0db4">
+    <img src="https://github.com/user-attachments/assets/140bb917-fa0d-4f3a-9a32-908dd65f0db4" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/5f391f30-3bb8-4dba-9fe1-396efe802e9d">
+    <img src="https://github.com/user-attachments/assets/5f391f30-3bb8-4dba-9fe1-396efe802e9d" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/566ba88a-e331-4843-8591-fec6dfe051d8">
+    <img src="https://github.com/user-attachments/assets/566ba88a-e331-4843-8591-fec6dfe051d8" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop </summary>
+<a href="https://github.com/user-attachments/assets/bfc5a426-8c03-4119-bee2-98c8954afa5c">
+    <img src="https://github.com/user-attachments/assets/bfc5a426-8c03-4119-bee2-98c8954afa5c" alt="Lighthouse Desktop " width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Student - Booking Detail</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/085d7a54-cd42-4e9b-8818-5485a6b8444f">
+    <img src="https://github.com/user-attachments/assets/085d7a54-cd42-4e9b-8818-5485a6b8444f" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/46682c06-8342-42ef-8754-741e74f60f4e">
+    <img src="https://github.com/user-attachments/assets/46682c06-8342-42ef-8754-741e74f60f4e" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/e4a367a8-5f87-4f77-bf70-6f49c668a1cd">
+    <img src="https://github.com/user-attachments/assets/e4a367a8-5f87-4f77-bf70-6f49c668a1cd" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/5ef3e606-3dca-4b3a-8835-0716828aa249">
+    <img src="https://github.com/user-attachments/assets/5ef3e606-3dca-4b3a-8835-0716828aa249" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/1c710d5f-17af-4663-ac2d-bcc73b26422d">
+    <img src="https://github.com/user-attachments/assets/1c710d5f-17af-4663-ac2d-bcc73b26422d" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Student - Booking Form</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/2154ce36-37d7-4a72-bdaf-8edf03dba850">
+    <img src="https://github.com/user-attachments/assets/2154ce36-37d7-4a72-bdaf-8edf03dba850" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/929d8f86-9fa5-4230-ba41-d482fd8e449f">
+    <img src="https://github.com/user-attachments/assets/929d8f86-9fa5-4230-ba41-d482fd8e449f" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/2cb80669-a87c-4006-89df-96f9c86cb456">
+    <img src="https://github.com/user-attachments/assets/2cb80669-a87c-4006-89df-96f9c86cb456" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/7a650e35-9b23-498d-8a3c-29a0c84de5d9">
+    <img src="https://github.com/user-attachments/assets/7a650e35-9b23-498d-8a3c-29a0c84de5d9" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/8d4f09ee-13a9-4eea-a0eb-8c7ef28e960c">
+    <img src="https://github.com/user-attachments/assets/8d4f09ee-13a9-4eea-a0eb-8c7ef28e960c" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Student - Checkout Review</strong></summary>
+Evidence to be added.
+</details>
+<details>
+<summary><strong>Student - Checkout Success</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/1afe25f8-7003-460e-bf00-a5c3170f452e">
+    <img src="https://github.com/user-attachments/assets/1afe25f8-7003-460e-bf00-a5c3170f452e" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/5c1ddf82-d50d-446d-801f-d0131cc0976c">
+    <img src="https://github.com/user-attachments/assets/5c1ddf82-d50d-446d-801f-d0131cc0976c" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/e4291080-581b-4b09-a7a6-aeb7cf17d611">
+    <img src="https://github.com/user-attachments/assets/e4291080-581b-4b09-a7a6-aeb7cf17d611" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/12af25e9-f225-400d-b36f-84d436b48ffe">
+    <img src="https://github.com/user-attachments/assets/12af25e9-f225-400d-b36f-84d436b48ffe" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/17f91050-1c98-4ac5-a90f-b0b2787f8cf6">
+    <img src="https://github.com/user-attachments/assets/17f91050-1c98-4ac5-a90f-b0b2787f8cf6" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Student - Checkout Cancelled</strong></summary>
+Evidence to be added.
+</details>
+<details>
+<summary><strong>Tutor - Dashboard</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/f63b3823-d5e8-4d38-a91f-12b9aa8ab4b5">
+    <img src="https://github.com/user-attachments/assets/f63b3823-d5e8-4d38-a91f-12b9aa8ab4b5" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/6d5b80c7-996c-4deb-85e8-938d7bb136ee">
+    <img src="https://github.com/user-attachments/assets/6d5b80c7-996c-4deb-85e8-938d7bb136ee" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/f1f92b67-8357-4b95-a802-92bd3bdc1f89">
+    <img src="https://github.com/user-attachments/assets/f1f92b67-8357-4b95-a802-92bd3bdc1f89" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/dd6a0fa4-389d-4fab-9425-e23ab851fadf">
+    <img src="https://github.com/user-attachments/assets/dd6a0fa4-389d-4fab-9425-e23ab851fadf" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/cc1073a3-e49e-41f7-a429-2c3a482920e5">
+    <img src="https://github.com/user-attachments/assets/cc1073a3-e49e-41f7-a429-2c3a482920e5" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Tutor - Create Tutor Profile</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/f3bb910a-535d-4c50-8262-e1f941917c3d">
+    <img src="https://github.com/user-attachments/assets/f3bb910a-535d-4c50-8262-e1f941917c3d" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/f169f344-f5ba-4a7f-a127-ac4e3eb78db2">
+    <img src="https://github.com/user-attachments/assets/f169f344-f5ba-4a7f-a127-ac4e3eb78db2" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/357fd107-08c2-451c-ac45-72b867ad27bb">
+    <img src="https://github.com/user-attachments/assets/357fd107-08c2-451c-ac45-72b867ad27bb" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/cb1b8989-e84d-440e-9cf9-67dde9fbdee7">
+    <img src="https://github.com/user-attachments/assets/cb1b8989-e84d-440e-9cf9-67dde9fbdee7" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/532542fb-4d25-462c-be2b-f4ebd5284b8a">
+    <img src="https://github.com/user-attachments/assets/532542fb-4d25-462c-be2b-f4ebd5284b8a" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Tutor - Edit Tutor Profile</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/d421103d-112f-4559-b2ce-bb660923d185">
+    <img src="https://github.com/user-attachments/assets/d421103d-112f-4559-b2ce-bb660923d185" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/09f5fe53-8fc5-4a2a-9287-aba10bf54d89">
+    <img src="https://github.com/user-attachments/assets/09f5fe53-8fc5-4a2a-9287-aba10bf54d89" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/f1702979-6487-4459-b0cf-5618c58fa7ff">
+    <img src="https://github.com/user-attachments/assets/f1702979-6487-4459-b0cf-5618c58fa7ff" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/0fb90b75-d19a-4b2c-8893-09ac739a9241">
+    <img src="https://github.com/user-attachments/assets/0fb90b75-d19a-4b2c-8893-09ac739a9241" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/60c3958a-49d1-41eb-b51a-4e53272ce387">
+    <img src="https://github.com/user-attachments/assets/60c3958a-49d1-41eb-b51a-4e53272ce387" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Tutor - Tutor Lessons</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/be96ef7f-0ae4-4811-9a69-d01672178c99">
+    <img src="https://github.com/user-attachments/assets/be96ef7f-0ae4-4811-9a69-d01672178c99" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/4b9f77d7-abda-4dd8-8a22-47f9eb65b0fd">
+    <img src="https://github.com/user-attachments/assets/4b9f77d7-abda-4dd8-8a22-47f9eb65b0fd" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/1a3bd618-8fc1-42c6-afc8-8263cee4db7c">
+    <img src="https://github.com/user-attachments/assets/1a3bd618-8fc1-42c6-afc8-8263cee4db7c" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/dad3f22e-f9bd-4739-85a9-31efbfcd3d9e">
+    <img src="https://github.com/user-attachments/assets/dad3f22e-f9bd-4739-85a9-31efbfcd3d9e" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/f144aa41-94cc-46f7-b1ee-867c30e67a85">
+    <img src="https://github.com/user-attachments/assets/f144aa41-94cc-46f7-b1ee-867c30e67a85" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Tutor - Edit Lesson</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/9d012a45-f451-4c09-b6d9-0e0c854a9f47">
+    <img src="https://github.com/user-attachments/assets/9d012a45-f451-4c09-b6d9-0e0c854a9f47" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/78997c80-d00a-45ba-b22e-791b32759004">
+    <img src="https://github.com/user-attachments/assets/78997c80-d00a-45ba-b22e-791b32759004" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/9f16ac7c-2504-406f-ad9e-e3b5bee24569">
+    <img src="https://github.com/user-attachments/assets/9f16ac7c-2504-406f-ad9e-e3b5bee24569" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/9b2e3fe4-8aa6-4d84-bc64-c5d9cda4d00b">
+    <img src="https://github.com/user-attachments/assets/9b2e3fe4-8aa6-4d84-bc64-c5d9cda4d00b" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/d3dcee43-270a-4776-946f-746afe7ad04b">
+    <img src="https://github.com/user-attachments/assets/d3dcee43-270a-4776-946f-746afe7ad04b" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+</details>
+<details>
+<summary><strong>Tutor - Delete Lesson</strong></summary>
+<details>
+<summary>HTML Validation</summary>
+<a href="https://github.com/user-attachments/assets/d4f6d2c5-466a-49bf-b83c-7eb8544f119c">
+    <img src="https://github.com/user-attachments/assets/d4f6d2c5-466a-49bf-b83c-7eb8544f119c" alt="HTML Validation" width="700">
+</a>
+</details>
+<details>
+<summary>Desktop Console</summary>
+<a href="https://github.com/user-attachments/assets/7a3ac0cd-8f2d-4411-b70f-6e7bc710a783">
+    <img src="https://github.com/user-attachments/assets/7a3ac0cd-8f2d-4411-b70f-6e7bc710a783" alt="Desktop Console" width="700">
+</a>
+</details>
+<details>
+<summary>Mobile Console</summary>
+<a href="https://github.com/user-attachments/assets/490afc36-948a-49ae-bfb6-2e0097fa7608">
+    <img src="https://github.com/user-attachments/assets/490afc36-948a-49ae-bfb6-2e0097fa7608" alt="Mobile Console" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Desktop</summary>
+<a href="https://github.com/user-attachments/assets/7e5712c9-77a9-4b7e-bab7-c349f1fd7368">
+    <img src="https://github.com/user-attachments/assets/7e5712c9-77a9-4b7e-bab7-c349f1fd7368" alt="Lighthouse Desktop" width="700">
+</a>
+</details>
+<details>
+<summary>Lighthouse Mobile</summary>
+<a href="https://github.com/user-attachments/assets/08d97cc5-3eaa-4982-b43c-fc3b80270214">
+    <img src="https://github.com/user-attachments/assets/08d97cc5-3eaa-4982-b43c-fc3b80270214" alt="Lighthouse Mobile" width="700">
+</a>
+</details>
+</details>
+
+### CSS Validation:
+
+<details>
+<summary><strong>CSS Validation - style.css</strong></summary>
+
+<img
+    width="1065"
+    height="797"
+    alt="W3C CSS Validation Results"
+    src="https://github.com/user-attachments/assets/48e68c12-8bec-4a47-bdcc-6e7b6f904fab"
+/>
+
+</details>
+
+
+## Build Phases
+
+Development followed an iterative Agile workflow using GitHub Projects, user stories and feature branches.
+
+### Phase 1 — Project Setup
+
+- Django project configuration
+- User authentication
+- Base template
+- Navigation
+- Initial deployment
+
+Branch:
+
+```
+feature-project-setup
+```
 
 ---
+
+### Phase 2 — Tutor Profiles
+
+- Tutor profile model
+- Tutor CRUD functionality
+- Profile images
+- Tutor listing
+- Tutor detail pages
+
+Branch:
+
+```
+feature-tutor-profiles
+```
+
+---
+
+### Phase 3 — Lesson Management
+
+- Lesson model
+- Lesson CRUD
+- Public lesson marketplace
+- Search
+- Filtering
+- Pagination
+
+Branch:
+
+```
+feature-lessons
+```
+
+---
+
+### Phase 4 — Booking System
+
+- Student bookings
+- Booking ownership
+- Booking management
+- Dashboard integration
+
+Branch:
+
+```
+feature-bookings
+```
+
+---
+
+### Phase 5 — Stripe Checkout
+
+- Checkout review
+- Stripe Checkout Session
+- Payment confirmation
+- Booking status updates
+
+Branch:
+
+```
+feature-stripe-checkout
+```
+
+---
+
+### Phase 6 — Refactoring
+
+This phase focused on improving application architecture without changing the user-facing functionality.
+
+Completed work included:
+
+- Refactoring booking flow to use tutor-created lesson slots
+- Improved dashboard layouts
+- Updated permission handling
+- Removal of redundant views
+- Model and view simplification
+- Code quality improvements
+- Cloudinary media integration
+- UX improvements
+- Accessibility improvements
+
+Branches:
+
+```
+features/lesson-slot-refactor
+testing-validation
+```
+
+---
+
+### Phase 7 — Testing & Validation
+
+Final project preparation included:
+
+- Automated testing
+- Manual testing
+- HTML validation
+- CSS validation
+- Accessibility testing
+- Lighthouse optimisation
+- Cross-browser testing
+- Responsive testing
+- Documentation
+
+Branch:
+
+```
+testing-validation
+```
 
 ## Deployment
 
-_Deployment instructions and environment details._
+Tutor Connect is deployed using **Heroku** with **Cloudinary** for media storage and **WhiteNoise** for serving static files.
+
+### Deploying to Heroku
+
+1. Fork or clone this repository.
+2. Create a new Heroku application.
+3. In the **Settings** tab, add the required Config Vars:
+
+| Variable | Description |
+|----------|-------------|
+| `SECRET_KEY` | Django secret key |
+| `DATABASE_URL` | PostgreSQL database URL |
+| `DEBUG` | Set to `False` in production |
+| `CLOUDINARY_URL` | Cloudinary API URL |
+| `STRIPE_PUBLIC_KEY` | Stripe publishable key |
+| `STRIPE_SECRET_KEY` | Stripe secret key |
+| `STRIPE_WEBHOOK_SECRET` | Stripe webhook signing secret |
+
+4. Connect the Heroku app to the GitHub repository.
+5. Enable automatic deploys (optional) or deploy manually from the desired branch.
+6. Ensure the project includes:
+
+- `Procfile`
+- `requirements.txt`
+- `runtime.txt`
+
+7. Deploy the application.
+
+After deployment run:
+
+```bash
+python manage.py migrate
+```
+
+Static files are automatically collected during deployment via WhiteNoise.
+
+Media uploads are stored externally using Cloudinary.
+
 
 ---
 
-## Stripe Payments
 
-_Details about Stripe integration and payment flow._
+## Stripe Configuration
+
+Tutor Connect uses **Stripe Checkout** to securely process lesson payments.
+
+Sensitive API keys are stored as environment variables and are never committed to the repository.
+
+### Stripe Setup
+
+1. Create a Stripe account.
+2. Obtain:
+
+- Publishable Key
+- Secret Key
+- Webhook Signing Secret
+
+3. Add the keys to the local `.env` file and the Heroku Config Vars.
+
+Required variables:
+
+```
+STRIPE_PUBLIC_KEY=
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+```
+
+Payments are processed using Stripe Checkout Sessions.
+
+After successful payment the user is redirected to a confirmation page.
+
+Cancelled payments return the user safely to the cancellation page where they may retry checkout.
+
+### Documentation
+
+Stripe API documentation:
+
+https://stripe.com/docs
+
+Stripe Checkout:
+
+https://stripe.com/docs/payments/checkout
 
 ---
 
@@ -3489,14 +5121,38 @@ _Attributions for code snippets or libraries._
 
 ### Content
 
-_Sources for written content or inspiration._
+- Tutor names, lesson descriptions and booking data were created solely for demonstration purposes.
+- All written content, user stories and project documentation were authored for this project.
 
 ### Media
 
-_Image, icon, and media attributions._
+- Tutor Connect logo and project graphics were created by the project author using Canva.
+- Default tutor profile placeholder image was created by the project author.
+- Favicon generated using Favicon.io.
 
 ---
 
-## Acknowledgements
+### Documentation
 
-_Special thanks and acknowledgements._
+The following documentation and resources were used throughout development:
+
+- [Django Documentation](https://docs.djangoproject.com/)
+- [Stripe Documentation](https://stripe.com/docs)
+- [Cloudinary Documentation](https://cloudinary.com/documentation)
+- [WhiteNoise Documentation](https://whitenoise.readthedocs.io/)
+- [django-filter Documentation](https://django-filter.readthedocs.io/)
+- [Python Documentation](https://docs.python.org/3/)
+- [Heroku Dev Center](https://devcenter.heroku.com/)
+- [MDN Web Docs](https://developer.mozilla.org/)
+- [W3C HTML Validator](https://validator.w3.org/)
+- [W3C CSS Validator](https://jigsaw.w3.org/css-validator/)
+- [WAVE Web Accessibility Evaluation Tool](https://wave.webaim.org/)
+- [Google Lighthouse Documentation](https://developer.chrome.com/docs/lighthouse/)
+
+---
+
+### Acknowledgements
+
+- Code Institute for the Full Stack Software Development Diploma learning materials.
+- The Code Institute Slack community for discussion and peer support.
+- My mentor for guidance, feedback and project reviews throughout development.
