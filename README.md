@@ -5034,14 +5034,38 @@ _Attributions for code snippets or libraries._
 
 ### Content
 
-_Sources for written content or inspiration._
+- Tutor names, lesson descriptions and booking data were created solely for demonstration purposes.
+- All written content, user stories and project documentation were authored for this project.
 
 ### Media
 
-_Image, icon, and media attributions._
+- Tutor Connect logo and project graphics were created by the project author using Canva.
+- Default tutor profile placeholder image was created by the project author.
+- Favicon generated using Favicon.io.
 
 ---
 
-## Acknowledgements
+### Documentation
 
-_Special thanks and acknowledgements._
+The following documentation and resources were used throughout development:
+
+- [Django Documentation](https://docs.djangoproject.com/)
+- [Stripe Documentation](https://stripe.com/docs)
+- [Cloudinary Documentation](https://cloudinary.com/documentation)
+- [WhiteNoise Documentation](https://whitenoise.readthedocs.io/)
+- [django-filter Documentation](https://django-filter.readthedocs.io/)
+- [Python Documentation](https://docs.python.org/3/)
+- [Heroku Dev Center](https://devcenter.heroku.com/)
+- [MDN Web Docs](https://developer.mozilla.org/)
+- [W3C HTML Validator](https://validator.w3.org/)
+- [W3C CSS Validator](https://jigsaw.w3.org/css-validator/)
+- [WAVE Web Accessibility Evaluation Tool](https://wave.webaim.org/)
+- [Google Lighthouse Documentation](https://developer.chrome.com/docs/lighthouse/)
+
+---
+
+### Acknowledgements
+
+- Code Institute for the Full Stack Software Development Diploma learning materials.
+- The Code Institute Slack community for discussion and peer support.
+- My mentor for guidance, feedback and project reviews throughout development.
