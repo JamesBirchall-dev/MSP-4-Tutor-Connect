@@ -828,14 +828,82 @@ The Tutors feature is covered by automated tests ensuring:
 
 ## Data Model
 
-The application uses Django's built-in 'User' model and four custom models:
+### User
 
--'TutorProfile'
--'LessonType'
--'Booking'
--'Payment'
+The project uses Django's built-in User model to manage authentication and user accounts.
 
-This structure supports the main user journeys in the application: registering or logging in, browsing tutors, viewing tutor details, creating and editing tutor information, booking lessons, managing bookings, and completing payments through Stripe.
+A user may act as both a student and a tutor.
+
+---
+
+### TutorProfile
+
+Stores additional tutor-specific information that extends the Django User model.
+
+Each tutor profile contains:
+
+- biography
+- teaching experience
+- location
+- profile image
+- contact email
+- lesson delivery information
+
+A TutorProfile has a one-to-one relationship with User.
+
+---
+
+### LessonType
+
+Represents an individual lesson slot created by a tutor.
+
+Each lesson stores:
+
+- subject
+- category
+- title
+- description
+- lesson date
+- lesson time
+- duration
+- skill level
+- price
+
+A tutor may create multiple lesson slots.
+
+Booked lessons are protected from modification.
+
+---
+
+### Booking
+
+Represents a student's reservation for a specific lesson slot.
+
+Each booking stores:
+
+- student
+- lesson
+- booking notes
+- booking status
+- timestamps
+
+A booking belongs to one student and references one lesson slot.
+
+Ownership checks ensure students can only access their own bookings.
+
+---
+
+### Payment
+
+Stores Stripe payment information linked to a booking.
+
+Each payment records:
+
+- Stripe Checkout Session ID
+- payment status
+- payment timestamp
+
+Separating payment information from bookings keeps payment processing independent of booking management.
 
 ---
 
@@ -4751,9 +4819,47 @@ Media uploads are stored externally using Cloudinary.
 
 ---
 
-## Stripe Payments
 
-_Details about Stripe integration and payment flow._
+## Stripe Configuration
+
+Tutor Connect uses **Stripe Checkout** to securely process lesson payments.
+
+Sensitive API keys are stored as environment variables and are never committed to the repository.
+
+### Stripe Setup
+
+1. Create a Stripe account.
+2. Obtain:
+
+- Publishable Key
+- Secret Key
+- Webhook Signing Secret
+
+3. Add the keys to the local `.env` file and the Heroku Config Vars.
+
+Required variables:
+
+```
+STRIPE_PUBLIC_KEY=
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+```
+
+Payments are processed using Stripe Checkout Sessions.
+
+After successful payment the user is redirected to a confirmation page.
+
+Cancelled payments return the user safely to the cancellation page where they may retry checkout.
+
+### Documentation
+
+Stripe API documentation:
+
+https://stripe.com/docs
+
+Stripe Checkout:
+
+https://stripe.com/docs/payments/checkout
 
 ---
 
